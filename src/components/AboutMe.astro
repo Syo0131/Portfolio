@@ -2,29 +2,26 @@
 import Hero from "./Hero.astro";
 ---
 
-<section id="sobre-mi" class="py-24 px-4">
-  <div
-    class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-12 items-center"
-  >
-    <div class="md:col-span-2 flex justify-center md:justify-start">
-      <img
-        src="/profile-pic.webp"
-        alt="Foto de [Tu Nombre]"
-        class="w-80 h-80 rounded-full object-cover border-4 border-shakespeare-500 shadow-lg"
-      />
-    </div>
-
-    <div class="md:col-span-3 text-left">
-      <h2 class="text-4xl font-bold mb-4 text-shakespeare-200">Sobre Mí</h2>
-      <p class="text-slate-300 mb-6 leading-relaxed">
-        ¡Hola! Soy un desarrollador web con una gran pasión por construir
-        soluciones creativas y eficientes. Me encanta transformar ideas
-        complejas en interfaces de usuario elegantes e intuitivas. Mi objetivo
-        es nunca dejar de aprender y mejorar mis habilidades.
-      </p>
-      <div class="flex flex-wrap gap-2">
-        <Hero />
-      </div>
+<section id="sobre-mi" class="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2
+      class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-shakespeare-200"
+    >
+      Sobre Mí
+    </h2>
+    <p
+      class="text-sm sm:text-base md:text-lg text-slate-300 mb-6 leading-relaxed max-w-2xl mx-auto"
+    >
+      ¡Hola! Soy un desarrollador web con una gran pasión por construir
+      soluciones creativas y eficientes. Me encanta transformar ideas complejas
+      en interfaces de usuario elegantes e <span class="font-bold">
+        <span class="text-shakespeare-500">Republi</span>ca Do<span
+          class="text-red-500">micana</span
+        ></span
+      > intuitivas. Mi objetivo es nunca dejar de aprender y mejorar mis habilidades.
+    </p>
+    <div class="flex justify-center gap-4">
+      <Hero />
     </div>
   </div>
 </section>
