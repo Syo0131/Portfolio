@@ -1,0 +1,136 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section id="proyectos" class="py-24 px-4">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-16 text-shakespeare-200">
+      Mi Trabajo
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <article
+        class="group relative rounded-xl overflow-hidden shadow-2xl h-[450px]"
+      >
+        <img
+          src="/projects/project-1.webp"
+          alt="Captura de pantalla del Proyecto 1"
+          class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
+        >
+        </div>
+
+        <div
+          class="relative h-full flex flex-col justify-end p-6 transition-all duration-300 transform group-hover:-translate-y-2"
+        >
+          <h3 class="text-2xl font-bold text-white mb-2">API E-commerce</h3>
+          <p class="text-sm font-semibold text-shakespeare-300">Backend</p>
+
+          <div
+            class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          >
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span
+                class="bg-shakespeare-800 text-shakespeare-200 text-xs font-semibold px-2.5 py-1 rounded-full"
+                >Java</span
+              >
+              <span
+                class="bg-shakespeare-800 text-shakespeare-200 text-xs font-semibold px-2.5 py-1 rounded-full"
+                >Spring Boot</span
+              >
+              <span
+                class="bg-shakespeare-800 text-shakespeare-200 text-xs font-semibold px-2.5 py-1 rounded-full"
+                >PostgreSQL</span
+              >
+            </div>
+            <p class="text-slate-300 text-sm mb-4">
+              API RESTful robusta para gestionar productos, usuarios y pedidos.
+            </p>
+            <div class="flex items-center gap-x-4">
+              <a
+                href="URL_DEMO"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-slate-200 hover:text-shakespeare-300"
+                title="Ver Documentación API"
+              >
+                <Icon name="mdi:external-link" class="size-6" />
+              </a>
+              <a
+                href="URL_CODIGO"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-slate-200 hover:text-shakespeare-300"
+                title="Código Fuente"
+              >
+                <Icon name="mdi:github" class="size-6" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article
+        class="group relative rounded-xl overflow-hidden shadow-2xl h-[450px]"
+      >
+        <img
+          src="/projects/project-2.webp"
+          alt="Captura de pantalla del Proyecto 2"
+          class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
+        >
+        </div>
+        <div
+          class="relative h-full flex flex-col justify-end p-6 transition-all duration-300 transform group-hover:-translate-y-2"
+        >
+          <h3 class="text-2xl font-bold text-white mb-2">
+            Portafolio Personal
+          </h3>
+          <p class="text-sm font-semibold text-shakespeare-300">Frontend</p>
+          <div
+            class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          >
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span
+                class="bg-shakespeare-800 text-shakespeare-200 text-xs font-semibold px-2.5 py-1 rounded-full"
+                >Astro</span
+              >
+              <span
+                class="bg-shakespeare-800 text-shakespeare-200 text-xs font-semibold px-2.5 py-1 rounded-full"
+                >Tailwind CSS</span
+              >
+            </div>
+            <p class="text-slate-300 text-sm mb-4">
+              Sitio web ultra rápido construido para mostrar mis habilidades y
+              proyectos.
+            </p>
+            <div class="flex items-center gap-x-4">
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-slate-200 hover:text-shakespeare-300"
+                title="Ver Demo"
+              >
+                <Icon name="mdi:external-link" class="size-6" />
+              </a>
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-slate-200 hover:text-shakespeare-300"
+                title="Código Fuente"
+              >
+                <Icon name="mdi:github" class="size-6" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
