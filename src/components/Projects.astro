@@ -15,9 +15,9 @@ import { Icon } from "astro-icon/components";
         class="group relative rounded-xl overflow-hidden shadow-2xl h-[350px] sm:h-[400px] md:h-[450px]"
       >
         <img
-          src="/img/yami.jpg"
+          src="/img/image.png"
           alt="Captura de pantalla del Proyecto 1"
-          class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+          class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
         />
         <div
           class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
@@ -25,15 +25,23 @@ import { Icon } from "astro-icon/components";
         </div>
 
         <div
-          class="relative h-full flex flex-col justify-end p-4 sm:p-6 transition-all duration-300 transform group-hover:-translate-y-2"
+          class="relative h-full flex flex-col justify-end p-4 sm:p-6 transition-all duration-700 ease-in-out group-hover:-translate-y-8"
         >
-          <h3 class="text-xl sm:text-2xl font-bold text-white mb-2">Spendly</h3>
-          <p class="text-xs sm:text-sm font-semibold text-shakespeare-300">
-            Backend
-          </p>
+          <div class="flex flex-col gap-2 items-start mb-2">
+            <span
+              class="bg-shakespeare-800 hover:bg-shakespeare-900 transition-colors text-white font-semibold py-2 px-4 sm:px-6 rounded-full text-sm sm:text-base"
+            >
+              Spendly
+            </span>
+            <span
+              class="bg-shakespeare-800 hover:bg-shakespeare-900 transition-colors text-white font-semibold py-2 px-4 sm:px-6 rounded-full text-xs sm:text-sm"
+            >
+              Full-Stack
+            </span>
+          </div>
 
           <div
-            class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            class="mt-4 max-h-0 group-hover:max-h-96 opacity-0 group-hover:opacity-100 transition-all duration-1000 ease-in-out overflow-hidden"
           >
             <div class="flex flex-wrap gap-2 mb-4">
               <span
@@ -49,12 +57,14 @@ import { Icon } from "astro-icon/components";
                 >PostgreSQL</span
               >
             </div>
-            <p class="text-slate-300 text-sm mb-4">
-              API RESTful robusta para gestionar productos, usuarios y pedidos.
+            <p class="text-white text-sm mb-4">
+              Una aplicación web moderna desarrollada con Spring Boot y
+              PostgreSQL para el control y seguimiento de gastos personales
+              mensuales con una interfaz elegante y funcional.
             </p>
             <div class="flex items-center gap-x-4">
               <a
-                href="URL_DEMO"
+                href="https://spendly-ip4d.onrender.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-slate-200 hover:text-shakespeare-300"
@@ -63,7 +73,7 @@ import { Icon } from "astro-icon/components";
                 <Icon name="mdi:external-link" class="size-6" />
               </a>
               <a
-                href="URL_CODIGO"
+                href="https://github.com/Syo0131/Spendly"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-slate-200 hover:text-shakespeare-300"
@@ -89,16 +99,22 @@ import { Icon } from "astro-icon/components";
         >
         </div>
         <div
-          class="relative h-full flex flex-col justify-end p-4 sm:p-6 transition-all duration-300 transform group-hover:-translate-y-2"
+          class="relative h-full flex flex-col justify-end p-4 sm:p-6 transition-all duration-700 ease-out group-hover:-translate-y-8"
         >
-          <h3 class="text-xl sm:text-2xl font-bold text-white mb-2">
-            Portafolio Personal
-          </h3>
-          <p class="text-xs sm:text-sm font-semibold text-shakespeare-300">
-            Frontend
-          </p>
+          <div class="flex flex-col gap-2 items-start mb-2">
+            <span
+              class="bg-shakespeare-800/50 hover:bg-shakespeare-700/50 transition-colors text-white font-semibold py-2 px-4 sm:px-6 rounded-full text-sm sm:text-base"
+            >
+              Portafolio Personal
+            </span>
+            <span
+              class="bg-shakespeare-800/50 hover:bg-shakespeare-700/50 transition-colors text-shakespeare-300 font-semibold py-2 px-4 sm:px-6 rounded-full text-xs sm:text-sm"
+            >
+              Frontend
+            </span>
+          </div>
           <div
-            class="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            class="mt-4 max-h-0 group-hover:max-h-96 opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out overflow-hidden"
           >
             <div class="flex flex-wrap gap-2 mb-4">
               <span
