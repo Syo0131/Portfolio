@@ -18,6 +18,17 @@ export default {
                     '950': '#073145',
                 },
             },
+            transitionTimingFunction: {
+                'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+                'smooth-in': 'cubic-bezier(0.32, 0, 0.67, 0)',
+                'smooth-out': 'cubic-bezier(0.33, 1, 0.68, 1)',
+                'smooth-in-out': 'cubic-bezier(0.65, 0, 0.35, 1)',
+            },
+            transitionDuration: {
+                '400': '400ms',
+                '600': '600ms',
+                '800': '800ms',
+            },
         },
     },
     plugins: [],
