@@ -34,6 +34,13 @@ const { title } = Astro.props;
 </html>
 
 <style is:global>
+  /* Scroll suave solo si el usuario no tiene preferencia de reducir movimiento */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   /* Agregamos algunos estilos globales básicos */
   body {
     font-family: system-ui, sans-serif;
