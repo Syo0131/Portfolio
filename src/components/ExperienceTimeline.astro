@@ -4,8 +4,9 @@ interface Props {
   company: string;
   period: string;
   alignment?: 'left' | 'right';
+  typecontrat?: string;
 }
-const { position, company, period, alignment = 'right' } = Astro.props;
+const { position, company, period, alignment = 'right', typecontrat } = Astro.props;
 
 const alignmentClasses =
   alignment === 'right'
@@ -31,5 +32,6 @@ const alignmentClasses =
     <time class="block text-xs sm:text-sm text-slate-400 mb-2">
       {period}
     </time>
+    <span class="block text-xs  sm:text-sm text-slate-400 mb-2">{typecontrat}</span>
   </div>
 </div>
