@@ -1,38 +1,160 @@
-<header
-  class="fixed top-0 left-0 right-0 z-50 flex justify-center py-2 sm:py-4 md:py-6 px-4"
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<aside
+  id="main-sidebar"
+  class="fixed right-2 sm:right-4 lg:right-6 xl:right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block"
 >
   <nav
-    class="flex items-center rounded-full bg-slate-900/50 px-3 sm:px-4 md:px-6 py-2 md:py-3 backdrop-blur-lg ring-1 ring-white/10 transition-all duration-300 ease-smooth-out hover:ring-shakespeare-500/30 hover:shadow-lg hover:shadow-shakespeare-500/10"
+    class="flex flex-col gap-1.5 sm:gap-2 rounded-full bg-slate-900/50 px-2.5 sm:px-3 py-3 sm:py-4 backdrop-blur-lg ring-1 ring-white/10 transition-all duration-300 ease-smooth-out hover:ring-shakespeare-500/30 hover:shadow-lg hover:shadow-shakespeare-500/10"
   >
     <a
       href="#sobre-mi"
-      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 px-2 sm:px-3 text-xs sm:text-sm md:text-base"
+      class="group relative flex items-center justify-center text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 p-2.5 sm:p-3 rounded-full hover:bg-shakespeare-500/10"
+      title="Inicio"
+    >
+      <Icon name="mdi:home" class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110" />
+      <span
+        class="absolute right-full mr-2 sm:mr-3 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-slate-900/90 backdrop-blur-md text-xs sm:text-sm font-medium rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ring-1 ring-white/10 shadow-lg"
+        >Inicio</span
+      >
+    </a>
+
+    <a
+      href="#experiencia"
+      class="group relative flex items-center justify-center text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 p-2.5 sm:p-3 rounded-full hover:bg-shakespeare-500/10"
+      title="Experiencia"
+    >
+      <Icon name="mdi:briefcase" class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110" />
+      <span
+        class="absolute right-full mr-2 sm:mr-3 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-slate-900/90 backdrop-blur-md text-xs sm:text-sm font-medium rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ring-1 ring-white/10 shadow-lg"
+        >Experiencia</span
+      >
+    </a>
+
+    <a
+      href="#proyectos"
+      class="group relative flex items-center justify-center text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 p-2.5 sm:p-3 rounded-full hover:bg-shakespeare-500/10"
+      title="Proyectos"
+    >
+      <Icon name="mdi:folder-multiple" class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110" />
+      <span
+        class="absolute right-full mr-2 sm:mr-3 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-slate-900/90 backdrop-blur-md text-xs sm:text-sm font-medium rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ring-1 ring-white/10 shadow-lg"
+        >Proyectos</span
+      >
+    </a>
+
+    <a
+      href="#skills"
+      class="group relative flex items-center justify-center text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 p-2.5 sm:p-3 rounded-full hover:bg-shakespeare-500/10"
+      title="Skills"
+    >
+      <Icon name="mdi:code-braces" class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110" />
+      <span
+        class="absolute right-full mr-2 sm:mr-3 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-slate-900/90 backdrop-blur-md text-xs sm:text-sm font-medium rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ring-1 ring-white/10 shadow-lg"
+        >Skills</span
+      >
+    </a>
+
+    <a
+      href="#contacto"
+      class="group relative flex items-center justify-center text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 p-2.5 sm:p-3 rounded-full hover:bg-shakespeare-500/10"
+      title="Contacto"
+    >
+      <Icon name="mdi:email" class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110" />
+      <span
+        class="absolute right-full mr-2 sm:mr-3 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-slate-900/90 backdrop-blur-md text-xs sm:text-sm font-medium rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ring-1 ring-white/10 shadow-lg"
+        >Contacto</span
+      >
+    </a>
+  </nav>
+</aside>
+
+<!-- Navbar móvil (arriba) para pantallas pequeñas y tablets -->
+<header
+  class="fixed top-0 left-0 right-0 z-50 flex justify-center py-3 sm:py-4 px-3 sm:px-4 lg:hidden"
+>
+  <nav
+    class="flex items-center gap-1.5 sm:gap-2 md:gap-3 rounded-full bg-slate-900/50 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 backdrop-blur-lg ring-1 ring-white/10 shadow-lg"
+  >
+    <a
+      href="#sobre-mi"
+      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
     >
       Inicio
     </a>
     <a
       href="#experiencia"
-      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 px-2 sm:px-3 text-xs sm:text-sm md:text-base"
+      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
     >
       Experiencia
     </a>
     <a
       href="#proyectos"
-      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 px-2 sm:px-3 text-xs sm:text-sm md:text-base"
+      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
     >
       Proyectos
     </a>
     <a
       href="#skills"
-      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 px-2 sm:px-3 text-xs sm:text-sm md:text-base"
+      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
     >
       Skills
     </a>
     <a
       href="#contacto"
-      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 px-2 sm:px-3 text-xs sm:text-sm md:text-base"
+      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
     >
       Contacto
     </a>
   </nav>
 </header>
+
+<script>
+  // Resaltar enlace activo según la sección visible
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('#main-sidebar a');
+
+  function highlightActiveSection() {
+    let currentSection = '';
+    const scrollPosition = window.scrollY + 250; // Offset para mejor detección
+
+    sections.forEach((section) => {
+      const sectionTop = (section as HTMLElement).offsetTop;
+      const sectionHeight = (section as HTMLElement).clientHeight;
+      const sectionBottom = sectionTop + sectionHeight;
+
+      // Detectar si estamos en esta sección
+      if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+        currentSection = section.getAttribute('id') || '';
+      }
+    });
+
+    // Si estamos cerca del final de la página, activar la última sección
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100) {
+      const lastSection = sections[sections.length - 1];
+      currentSection = lastSection.getAttribute('id') || '';
+    }
+
+    navLinks.forEach((link) => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${currentSection}`) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', highlightActiveSection, { passive: true });
+  highlightActiveSection();
+</script>
+
+<style>
+  #main-sidebar a.active {
+    @apply bg-shakespeare-500/20 text-shakespeare-300;
+  }
+  
+  #main-sidebar a.active svg {
+    @apply text-shakespeare-400 scale-110;
+  }
+</style>

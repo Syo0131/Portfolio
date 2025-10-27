@@ -3,19 +3,20 @@ import Links from './Links.astro';
 import OptimizedImage from './OptimizedImage.astro';
 import Highlight from './Highlight.astro';
 import SectionTitle from './SectionTitle.astro';
+import { Icon } from 'astro-icon/components';
 ---
 
-<section id="sobre-mi" class="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-5xl mx-auto">
+<section id="sobre-mi" class="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
     <SectionTitle>Sobre Mi</SectionTitle>
 
     <!-- Grid con foto y contenido -->
     <div
-      class="grid grid-cols-1 md:grid-cols-[300px_1fr] lg:grid-cols-[350px_1fr] gap-8 md:gap-12 lg:gap-16 items-center"
+      class="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center"
     >
-      <!-- Columna de la foto -->
-      <div class="flex justify-center">
-        <div class="relative group">
+      <!-- Columna de la foto CON BOTON -->
+      <div class="flex flex-col items-center gap-4 sm:gap-5 md:gap-6">
+        <div class="relative group w-full max-w-[280px] sm:max-w-[320px] md:max-w-none">
           <div
             class="relative transition-transform duration-500 ease-smooth-out group-hover:scale-[1.05]"
           >
@@ -24,7 +25,7 @@ import SectionTitle from './SectionTitle.astro';
               alt="Foto de perfil"
               width={700}
               height={700}
-              class="w-64 h-64 md:w-[300px] md:h-[300px] lg:w-[350px] lg:h-[350px] object-cover rounded-2xl shadow-2xl transition-shadow duration-500 ease-smooth-out group-hover:shadow-shakespeare-500/30"
+              class="w-full aspect-square object-cover rounded-2xl shadow-2xl transition-shadow duration-500 ease-smooth-out group-hover:shadow-shakespeare-500/30"
               loading="eager"
             />
             <!-- Borde con efecto glow -->
@@ -34,18 +35,31 @@ import SectionTitle from './SectionTitle.astro';
             </div>
           </div>
         </div>
+
+        <!-- Botón de descarga CV -->
+        <a
+          href="/cv.pdf"
+          download="Daybel_Diaz_CV.pdf"
+          class="group/btn flex items-center gap-2 bg-shakespeare-500 hover:bg-shakespeare-400 text-white font-semibold py-2.5 sm:py-3 px-5 sm:px-6 md:px-7 rounded-full transition-all duration-300 ease-smooth-out hover:scale-105 hover:shadow-lg hover:shadow-shakespeare-500/30 text-sm sm:text-base"
+        >
+          <Icon
+            name="mdi:download"
+            class="size-4 sm:size-5 group-hover/btn:animate-bounce"
+          />
+          Descargar CV
+        </a>
       </div>
 
       <!-- Columna del contenido -->
-      <div class="flex flex-col justify-center space-y-6 md:pt-1">
+      <div class="flex flex-col justify-center space-y-4 sm:space-y-5 md:space-y-6">
         <p
-          class="text-sm sm:text-base md:text-lg text-slate-300 leading-relaxed"
+          class="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 leading-relaxed"
         >
           ¡Hola! Soy Daybel Díaz, desarrollador de software apasionado por crear
           aplicaciones modernas, escalables y bien estructuradas.
         </p>
         <p
-          class="text-sm sm:text-base md:text-lg text-slate-300 leading-relaxed"
+          class="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 leading-relaxed"
         >
           Soy de la <span class="font-semibold"
             ><span class="text-shakespeare-500">Repúbli</span>ca Do<span
@@ -56,11 +70,11 @@ import SectionTitle from './SectionTitle.astro';
           > y <Highlight>Tailwind CSS</Highlight>, aplicando principios <Highlight
             >SOLID</Highlight
           > y el patrón <Highlight>MVC</Highlight> para mantener un código limpio
-          y escalable, siempre buscando mejorar mis habilidades y asumir
-          nuevos retos que potencien mi desarrollo profesional.
+          y escalable, siempre buscando mejorar mis habilidades y asumir nuevos retos
+          que potencien mi desarrollo profesional.
         </p>
 
-        <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
+        <div class="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-4 pt-2 sm:pt-4">
           <Links />
         </div>
       </div>
