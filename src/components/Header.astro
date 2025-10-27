@@ -14,7 +14,10 @@ import { Icon } from 'astro-icon/components';
       class="group relative flex items-center justify-center text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 p-2.5 sm:p-3 rounded-full hover:bg-shakespeare-500/10"
       title="Inicio"
     >
-      <Icon name="mdi:home" class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110" />
+      <Icon
+        name="mdi:home"
+        class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110"
+      />
       <span
         class="absolute right-full mr-2 sm:mr-3 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-slate-900/90 backdrop-blur-md text-xs sm:text-sm font-medium rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ring-1 ring-white/10 shadow-lg"
         >Inicio</span
@@ -26,7 +29,10 @@ import { Icon } from 'astro-icon/components';
       class="group relative flex items-center justify-center text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 p-2.5 sm:p-3 rounded-full hover:bg-shakespeare-500/10"
       title="Experiencia"
     >
-      <Icon name="mdi:briefcase" class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110" />
+      <Icon
+        name="mdi:briefcase"
+        class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110"
+      />
       <span
         class="absolute right-full mr-2 sm:mr-3 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-slate-900/90 backdrop-blur-md text-xs sm:text-sm font-medium rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ring-1 ring-white/10 shadow-lg"
         >Experiencia</span
@@ -38,7 +44,10 @@ import { Icon } from 'astro-icon/components';
       class="group relative flex items-center justify-center text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 p-2.5 sm:p-3 rounded-full hover:bg-shakespeare-500/10"
       title="Proyectos"
     >
-      <Icon name="mdi:folder-multiple" class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110" />
+      <Icon
+        name="mdi:folder-multiple"
+        class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110"
+      />
       <span
         class="absolute right-full mr-2 sm:mr-3 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-slate-900/90 backdrop-blur-md text-xs sm:text-sm font-medium rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ring-1 ring-white/10 shadow-lg"
         >Proyectos</span
@@ -50,7 +59,10 @@ import { Icon } from 'astro-icon/components';
       class="group relative flex items-center justify-center text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 p-2.5 sm:p-3 rounded-full hover:bg-shakespeare-500/10"
       title="Skills"
     >
-      <Icon name="mdi:code-braces" class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110" />
+      <Icon
+        name="mdi:code-braces"
+        class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110"
+      />
       <span
         class="absolute right-full mr-2 sm:mr-3 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-slate-900/90 backdrop-blur-md text-xs sm:text-sm font-medium rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ring-1 ring-white/10 shadow-lg"
         >Skills</span
@@ -62,7 +74,10 @@ import { Icon } from 'astro-icon/components';
       class="group relative flex items-center justify-center text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 p-2.5 sm:p-3 rounded-full hover:bg-shakespeare-500/10"
       title="Contacto"
     >
-      <Icon name="mdi:email" class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110" />
+      <Icon
+        name="mdi:email"
+        class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110"
+      />
       <span
         class="absolute right-full mr-2 sm:mr-3 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-slate-900/90 backdrop-blur-md text-xs sm:text-sm font-medium rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ring-1 ring-white/10 shadow-lg"
         >Contacto</span
@@ -132,7 +147,10 @@ import { Icon } from 'astro-icon/components';
     });
 
     // Si estamos cerca del final de la página, activar la última sección
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100) {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 100
+    ) {
       const lastSection = sections[sections.length - 1];
       currentSection = lastSection.getAttribute('id') || '';
     }
@@ -153,7 +171,7 @@ import { Icon } from 'astro-icon/components';
   #main-sidebar a.active {
     @apply bg-shakespeare-500/20 text-shakespeare-300;
   }
-  
+
   #main-sidebar a.active svg {
     @apply text-shakespeare-400 scale-110;
   }
