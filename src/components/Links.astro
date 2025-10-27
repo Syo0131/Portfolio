@@ -1,23 +1,22 @@
 ---
-// Aquí podrías importar iconos para tus enlaces si lo deseas en el futuro
-// Por ejemplo: import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
+interface Props {
+  name: string;
+  href: string;
+  icon?: string;
+  class?: string;
+}
+
+const { href, name, icon, class: className } = Astro.props;
 ---
 
-<div class="flex flex-wrap justify-center gap-3 sm:gap-4">
-  <a
-    href="https://github.com/Syo0131"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="bg-shakespeare-800/50 hover:bg-shakespeare-700/50 transition-all duration-300 ease-smooth-out hover:scale-110 hover:shadow-lg hover:shadow-shakespeare-500/20 text-white font-semibold py-2 px-4 sm:px-6 rounded-full flex items-center gap-x-2 text-sm sm:text-base"
-  >
-    GitHub
-  </a>
-  <a
-    href="https://linkedin.com/in/DaybelDiaz/"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="bg-shakespeare-800/50 hover:bg-shakespeare-700/50 transition-all duration-300 ease-smooth-out hover:scale-110 hover:shadow-lg hover:shadow-shakespeare-500/20 text-white font-semibold py-2 px-4 sm:px-6 rounded-full flex items-center gap-x-2 text-sm sm:text-base"
-  >
-    LinkedIn
-  </a>
-</div>
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={`Visitar ${name}`}
+  class={`bg-shakespeare-800/50 hover:bg-shakespeare-700/50 transition-all duration-300 ease-smooth-out hover:scale-110 hover:shadow-lg hover:shadow-shakespeare-500/20 text-white font-semibold py-2 px-4 sm:px-6 rounded-full flex items-center gap-x-2 text-sm sm:text-base ${className || ""}`}
+>
+  {icon && <Icon name={icon} class="w-5 h-5 flex-shrink-0" />}
+  <span>{name}</span>
+</a>

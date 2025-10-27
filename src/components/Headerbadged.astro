@@ -1,0 +1,25 @@
+---
+import { Icon } from 'astro-icon/components';
+interface Props {
+  href: string;
+  name: string;
+  icon: string;
+}
+
+const { href, name, icon } = Astro.props;
+---
+
+<a
+  href={href}
+  class="group relative flex items-center justify-center text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 p-2.5 sm:p-3 rounded-full hover:bg-shakespeare-500/10"
+  title="Inicio"
+>
+  <Icon
+    name={icon}
+    class="size-5 sm:size-6 transition-all duration-300 group-hover:scale-110"
+  />
+  <span
+    class="absolute right-full mr-2 sm:mr-3 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-slate-900/90 backdrop-blur-md text-xs sm:text-sm font-medium rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-all duration-300 whitespace-nowrap ring-1 ring-white/10 shadow-lg"
+    >{name}</span
+  >
+</a>
