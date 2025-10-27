@@ -2,18 +2,15 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
-// Importar directamente todas las imágenes disponibles
-import yamiImg from "../assets/yami.jpg";
-import imageImg from "../assets/image.png";
-import spendlyImg from "../assets/Spendly.png";
-
 interface Props {
-  src: "yami.jpg" | "image.png" | "Spendly.png";
+  src: string;
   alt: string;
   class?: string;
   width?: number;
   height?: number;
   loading?: "lazy" | "eager";
+  format?: "webp" | "avif" | "png" | "jpg";
+  quality?: number;
 }
 
 const {
@@ -23,22 +20,28 @@ const {
   width,
   height,
   loading = "lazy",
+  format = "webp",
+  quality = 85,
 } = Astro.props;
 
-// Mapeo de nombres a imágenes importadas
-const imageMap: Record<string, ImageMetadata> = {
-  "yami.jpg": yamiImg,
-  "image.png": imageImg,
-  "Spendly.png": spendlyImg,
-};
+// Importar dinámicamente la imagen desde assets
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/**/*.{png,jpg,jpeg,gif,webp,svg}"
+);
 
-const imageSrc = imageMap[src];
+// Construir la ruta completa
+const imagePath = `../assets/${src}`;
 
-if (!imageSrc) {
+// Obtener la imagen
+const imageModule = images[imagePath];
+
+if (!imageModule) {
   throw new Error(
-    `Image not found: ${src}. Available images: ${Object.keys(imageMap).join(", ")}`
+    `Image not found: ${src}. Make sure the image exists in src/assets/`
   );
 }
+
+const imageSrc = (await imageModule()).default;
 ---
 
 <Image
@@ -48,6 +51,6 @@ if (!imageSrc) {
   height={height || imageSrc.height}
   loading={loading}
   class={className}
-  format="webp"
-  quality={85}
+  format={format}
+  quality={quality}
 />
