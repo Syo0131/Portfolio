@@ -15,8 +15,15 @@ const { href, name, icon, class: className } = Astro.props;
   target="_blank"
   rel="noopener noreferrer"
   aria-label={`Visitar ${name}`}
-  class={`bg-shakespeare-800/50 hover:bg-shakespeare-700/50 transition-all duration-300 ease-smooth-out hover:scale-110 hover:shadow-lg hover:shadow-shakespeare-500/20 text-white font-semibold py-2 px-4 sm:px-6 rounded-full flex items-center gap-x-2 text-sm sm:text-base ${className || ""}`}
+  class={`group bg-shakespeare-800/50 hover:bg-shakespeare-700/50 backdrop-blur-sm transition-all duration-300 ease-smooth-out hover:scale-105 hover:shadow-lg hover:shadow-shakespeare-500/20 text-white font-semibold py-2.5 px-5 sm:px-7 rounded-full flex items-center gap-x-2.5 text-sm sm:text-base ${className || ""}`}
 >
-  {icon && <Icon name={icon} class="w-5 h-5 flex-shrink-0" />}
+  {
+    icon && (
+      <Icon
+        name={icon}
+        class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 transition-transform duration-300 ease-smooth-out group-hover:scale-110"
+      />
+    )
+  }
   <span>{name}</span>
 </a>

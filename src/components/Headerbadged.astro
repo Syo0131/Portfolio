@@ -12,7 +12,7 @@ const { href, name, icon } = Astro.props;
 <a
   href={href}
   class="group relative flex items-center justify-center text-slate-200 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 p-2.5 sm:p-3 rounded-full hover:bg-shakespeare-500/10"
-  title="Inicio"
+  title={name}
 >
   <Icon
     name={icon}
