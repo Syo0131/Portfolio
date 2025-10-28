@@ -1,19 +1,123 @@
 ---
-import SectionTitle from '../SectionTitle.astro';
+import SectionTitle from "../SectionTitle.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <section id="contacto" class="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-2xl mx-auto text-center">
-    <SectionTitle>¿Tienes algun proyecto en mente?</SectionTitle>
-    <p
-      class="text-sm sm:text-base text-slate-300 mb-8 sm:mb-12 max-w-lg mx-auto px-4"
+  <div class="max-w-2xl mx-auto">
+    <SectionTitle class="mb-6 sm:mb-8 md:mb-10"
+      >¿Tienes algún proyecto en mente?</SectionTitle
     >
-    </p>
-    <a
-      href="mailto:diazdaybelsamuel@gmail.com"
-      class="inline-block bg-shakespeare-500 text-white font-bold py-2 sm:py-3 px-6 sm:px-8 rounded-full hover:bg-shakespeare-400 transition-all duration-300 ease-smooth-out hover:scale-110 hover:shadow-xl hover:shadow-shakespeare-500/30 hover:-translate-y-1 text-base sm:text-lg"
+
+    <!-- Card del formulario -->
+    <div
+      class="bg-slate-900/30 backdrop-blur-sm border border-shakespeare-800/30 rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl shadow-shakespeare-500/5 hover:border-shakespeare-700/50 transition-all duration-300"
     >
-      ¡Contactame!👋
-    </a>
+      <p class="text-sm sm:text-base text-slate-300 mb-6 sm:mb-8 text-center">
+        Completa el formulario y te responderé lo antes posible.
+      </p>
+
+      <form id="contact-form" class="space-y-4 sm:space-y-6">
+        <div>
+          <label
+            for="name"
+            class="block text-sm font-semibold text-slate-300 mb-2"
+          >
+            Nombre
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="from_name"
+            required
+            class="w-full px-4 py-3 bg-slate-900/50 border border-shakespeare-800/50 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-shakespeare-500 focus:ring-2 focus:ring-shakespeare-500/20 transition-all"
+            placeholder="Tu nombre"
+          />
+        </div>
+
+        <div>
+          <label
+            for="email"
+            class="block text-sm font-semibold text-slate-300 mb-2"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="reply_to"
+            required
+            class="w-full px-4 py-3 bg-slate-900/50 border border-shakespeare-800/50 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-shakespeare-500 focus:ring-2 focus:ring-shakespeare-500/20 transition-all"
+            placeholder="tu@email.com"
+          />
+        </div>
+
+        <div>
+          <label
+            for="message"
+            class="block text-sm font-semibold text-slate-300 mb-2"
+          >
+            Mensaje
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows="5"
+            class="w-full px-4 py-3 bg-slate-900/50 border border-shakespeare-800/50 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-shakespeare-500 focus:ring-2 focus:ring-shakespeare-500/20 transition-all resize-none"
+            placeholder="Cuéntame sobre tu proyecto..."></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="group w-full bg-shakespeare-500 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full hover:bg-shakespeare-500/90 transition-all duration-300 ease-smooth-out hover:scale-[1.01] hover:shadow-xl hover:shadow-shakespeare-500/30 text-base sm:text-lg flex items-center justify-center gap-2"
+        >
+          <Icon
+            name="material-symbols:mail-rounded"
+            class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 transition-all duration-300 ease-smooth-out group-hover:scale-[1.01]"
+          />
+          <span>Enviar mensaje</span>
+        </button>
+
+        <p id="status-message" class="text-center text-sm"></p>
+      </form>
+    </div>
   </div>
 </section>
+
+<script>
+  import emailjs from "@emailjs/browser";
+
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const statusMessage = document.getElementById("status-message");
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (statusMessage) {
+      statusMessage.textContent = "Enviando...";
+      statusMessage.className = "text-center text-sm text-shakespeare-400";
+    }
+
+    try {
+      await emailjs.sendForm(
+        import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+        import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+        form,
+        import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
+      );
+
+      if (statusMessage) {
+        statusMessage.textContent = "¡Mensaje enviado con éxito! ✅";
+        statusMessage.className = "text-center text-sm text-green-400";
+      }
+      form.reset();
+    } catch (error) {
+      if (statusMessage) {
+        statusMessage.textContent = "Error al enviar. Intenta de nuevo. ❌";
+        statusMessage.className = "text-center text-sm text-red-400";
+      }
+      console.error("Error:", error);
+    }
+  });
+</script>
