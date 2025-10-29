@@ -1,35 +1,197 @@
 ---
 import ExperienceTimeline from "../ExperienceTimeline.astro";
 import SectionTitle from "../SectionTitle.astro";
+import type { Props as ExperienceProps } from "../ExperienceTimeline.astro";
+
+const experiencias: ExperienceProps[] = [
+  {
+    position: "Desarrollador Full-Stack",
+    company: "BitBox Caribe SRL",
+    period: "Junio 2025 - Presente",
+    alignment: "top",
+    alignmentMobile: "right",
+    typecontrat: "Jornada completa",
+  },
+  {
+    position: "Soporte HelpDesk",
+    company: "BitBox Caribe SRL",
+    period: "Marzo 2025 - Mayo 2025",
+    alignment: "bottom",
+    alignmentMobile: "left",
+    typecontrat: "Contrato de formación",
+  },
+  {
+    position: "Pasante en contabilidad y administración de empresa",
+    company: "Ayuntamiento de Santo Domingo Este",
+    period: "Enero 2022 - Junio 2022",
+    alignment: "top",
+    alignmentMobile: "right",
+    typecontrat: "Contrato de formación",
+  },
+
+  // ... puedes duplicar más para probar
+];
 ---
 
 <section id="experiencia" class="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
-  <SectionTitle>Experiencia</SectionTitle>
-  <div class="max-w-3xl mx-auto relative">
-    <div
-      class="absolute left-4 sm:left-1/2 top-0 h-full w-0.5 bg-shakespeare-800"
-    >
+  <div class="max-w-7xl mx-auto">
+    <SectionTitle>Experiencia</SectionTitle>
+
+    <!-- 📱 Versión móvil: Timeline vertical -->
+    <div class="md:hidden relative">
+      <!-- Línea vertical central -->
+      <div
+        class="absolute left-1/2 -translate-x-1/2 top-0 h-full w-0.5 bg-shakespeare-800/30"
+      >
+      </div>
+
+      <!-- Lista de experiencias móvil -->
+      <ul class="relative space-y-0">
+        {experiencias.map((exp) => <ExperienceTimeline {...exp} />)}
+      </ul>
     </div>
-    <ExperienceTimeline
-      position="Desarrollador Full-Stack"
-      company="BitBox Caribe SRL"
-      period="Junio 2025 - Presente"
-      alignment="right"
-      typecontrat="Jornada completa"
-    />
-    <ExperienceTimeline 
-    position="Soporte HelpDesk"
-    company="BitBox Caribe SRL"
-    period="Marzo 2025 - Mayo 2025"
-    alignment="left"
-    typecontrat="Contrato de formacion"
-    />
-    <ExperienceTimeline 
-    position="Pasante en contabilidad y administracion de empresa"
-    company="Ayuntamiento de Santo Domingo Este"
-    period="Enero 2022 - Junio 2022"
-    alignment="right"
-    typecontrat="Contrato de formacion"
-    />
+
+    <!-- 💻 Versión tablet/desktop: Timeline horizontal con scroll -->
+    <div class="hidden md:block relative">
+      <!-- Gradientes laterales para indicar más contenido -->
+      <div
+        class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none"
+      >
+      </div>
+      <div
+        class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none"
+      >
+      </div>
+
+      <!-- Contenedor de scroll -->
+      <div
+        id="scroll-container"
+        class="overflow-x-auto pb-6"
+        style="overflow-y: visible;"
+      >
+        <!-- Contenedor interno para extender la línea -->
+        <div class="relative px-8 min-w-max">
+          <!-- Línea horizontal continua -->
+          <div
+            class="absolute top-1/2 left-0 right-0 h-0.5 bg-shakespeare-800/30 -translate-y-1/2 w-full"
+            style="z-index: 0;"
+          >
+          </div>
+
+          <!-- Lista de experiencias desktop -->
+          <ul
+            class="relative flex items-center justify-start gap-12"
+            style="z-index: 1;"
+          >
+            {experiencias.map((exp) => <ExperienceTimeline {...exp} />)}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Indicador de scroll -->
+      <div id="scroll-indicator" class="text-center mt-6 hidden">
+        <p class="text-xs text-slate-500 animate-pulse">
+          ← Desliza para ver más experiencias →
+        </p>
+      </div>
+    </div>
   </div>
 </section>
+
+<style>
+  /* Contenedor de scroll */
+  #scroll-container {
+    scroll-behavior: smooth;
+    /* Forzar que la scrollbar ocupe espacio (no overlay) */
+    overflow-x: auto;
+  }
+
+  /* Scrollbar personalizada para Chrome, Safari, Edge - MÁS FINO */
+  #scroll-container::-webkit-scrollbar {
+    height: 8px;
+    /* Forzar que siempre se muestre cuando hay overflow */
+    -webkit-appearance: none;
+  }
+
+  #scroll-container::-webkit-scrollbar-track {
+    background: rgba(20, 46, 69, 0.4); /* shakespeare-900 con opacidad */
+    border-radius: 4px;
+    margin: 0 2rem;
+  }
+
+  #scroll-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      90deg,
+      #4a90e2 0%,
+      #6ba3d8 100%
+    ); /* shakespeare-500 a shakespeare-400 */
+    border-radius: 4px;
+    border: 1px solid rgba(46, 95, 142, 0.3); /* shakespeare-700 */
+    min-width: 40px;
+  }
+
+  #scroll-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+      90deg,
+      #6ba3d8 0%,
+      #20cef0 100%
+    ); /* shakespeare-400 a shakespeare-300 */
+    box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+  }
+
+  #scroll-container::-webkit-scrollbar-thumb:active {
+    background: #2e5f8e; /* shakespeare-700 */
+  }
+
+  /* Firefox - scrollbar visible cuando hay overflow */
+  #scroll-container {
+    scrollbar-width: thin; /* Thin para Firefox */
+    scrollbar-color: #4a90e2 rgba(20, 46, 69, 0.4); /* shakespeare-500 y shakespeare-900 */
+    scrollbar-gutter: stable;
+  }
+
+  /* Para sistemas con scrollbars overlay (macOS), forzar que sean visibles */
+  @media (hover: hover) {
+    #scroll-container::-webkit-scrollbar {
+      -webkit-appearance: none;
+    }
+
+    #scroll-container::-webkit-scrollbar:horizontal {
+      height: 8px;
+    }
+  }
+</style>
+
+<script>
+  // Detectar si hay scroll disponible y mostrar/ocultar el indicador
+  function checkScroll() {
+    const container = document.getElementById("scroll-container");
+    const indicator = document.getElementById("scroll-indicator");
+
+    if (container && indicator) {
+      // Verificar si el contenido es más ancho que el contenedor
+      const hasScroll = container.scrollWidth > container.clientWidth;
+
+      if (hasScroll) {
+        indicator.classList.remove("hidden");
+        // Forzar que el contenedor tenga scroll visible
+        container.style.overflowX = "auto";
+        // Agregar un padding extra para asegurar espacio para la scrollbar
+        container.style.paddingBottom = "1.5rem";
+      } else {
+        indicator.classList.add("hidden");
+        container.style.overflowX = "hidden";
+        container.style.paddingBottom = "1.5rem";
+      }
+    }
+  }
+
+  // Ejecutar al cargar la página
+  document.addEventListener("DOMContentLoaded", checkScroll);
+
+  // Ejecutar al redimensionar la ventana
+  window.addEventListener("resize", checkScroll);
+
+  // Ejecutar después de que las fuentes y contenido se carguen completamente
+  window.addEventListener("load", checkScroll);
+</script>

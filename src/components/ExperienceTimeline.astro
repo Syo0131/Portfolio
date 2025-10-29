@@ -1,37 +1,86 @@
 ---
-interface Props {
+export interface Props {
   position: string;
   company: string;
   period: string;
-  alignment?: 'left' | 'right';
+  alignment?: "top" | "bottom";
+  alignmentMobile?: "left" | "right";
   typecontrat?: string;
 }
-const { position, company, period, alignment = 'right', typecontrat } = Astro.props;
 
+const {
+  position,
+  company,
+  period,
+  alignment = "top",
+  alignmentMobile = "right",
+  typecontrat,
+} = Astro.props;
+
+// Clases para alineación horizontal (desktop/tablet)
 const alignmentClasses =
-  alignment === 'right'
-    ? 'sm:w-1/2 sm:pr-8 sm:text-right sm:ml-0'
-    : 'sm:w-1/2 sm:pl-8 sm:text-left sm:ml-auto';
+  alignment === "top"
+    ? "flex-col-reverse" // Contenido arriba, punto abajo
+    : "flex-col"; // Punto arriba, contenido abajo
+
+// Clases para alineación vertical (móvil) - izquierda/derecha
+const alignmentClassesMobile =
+  alignmentMobile === "right"
+    ? "w-1/2 pr-4 sm:pr-8 text-right ml-0"
+    : "w-1/2 pl-4 sm:pl-8 text-left ml-auto";
 ---
 
-<div class="relative mb-12 pl-8 sm:pl-0">
-  <!-- Punto en la línea de tiempo -->
+<!-- 🌐 Versión móvil (timeline vertical centrado) --><!-- Solo visible en pantallas < 768px -->
+<li class="relative md:hidden mb-12">
+  <!-- Punto central -->
   <div
-    class="absolute left-[13px] sm:left-1/2 sm:-translate-x-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-shakespeare-400 rounded-full ring-4 sm:ring-8 ring-slate-900"
+    class="absolute left-1/2 -translate-x-1/2 top-2 w-3 h-3 bg-shakespeare-400 rounded-full ring-4 ring-slate-900 z-10"
   >
   </div>
 
-  <!-- Contenido -->
-  <div class={alignmentClasses}>
-    <h3 class="text-lg sm:text-xl md:text-2xl font-semibold text-slate-100">
+  <!-- Contenedor de texto alineado -->
+  <div class={alignmentClassesMobile}>
+    <h3 class="text-lg sm:text-xl font-semibold text-slate-100 mb-2">
       {position}
     </h3>
-    <p class="text-base sm:text-lg font-semibold text-shakespeare-400">
+    <p class="text-base sm:text-lg font-semibold text-shakespeare-400 mb-1">
       {company}
     </p>
-    <time class="block text-xs sm:text-sm text-slate-400 mb-2">
-      {period}
-    </time>
-    <span class="block text-xs  sm:text-sm text-slate-400 mb-2">{typecontrat}</span>
+    <time class="block text-xs sm:text-sm text-slate-400 mb-2">{period}</time>
+    <span
+      class="inline-block text-xs sm:text-sm px-3 py-1 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30"
+    >
+      {typecontrat}
+    </span>
   </div>
-</div>
+</li>
+
+<!-- 💻 Versión tablet/desktop (timeline horizontal con scroll) -->
+<!-- Solo visible en pantallas ≥ 768px -->
+<li class="hidden md:flex relative flex-shrink-0 w-[300px] lg:w-[340px]">
+  <div class={`flex ${alignmentClasses} items-center gap-8 lg:gap-12 h-full`}>
+    <!-- Punto en la línea horizontal -->
+    <div
+      class="w-4 h-4 bg-shakespeare-400 rounded-full ring-4 ring-slate-900 z-10 flex-shrink-0"
+    >
+    </div>
+
+    <!-- Card de contenido -->
+    <div
+      class="bg-slate-900/30 backdrop-blur-sm border border-shakespeare-800/30 rounded-xl p-4 lg:p-5 hover:border-shakespeare-700/50 transition-all duration-300 hover:shadow-lg hover:shadow-shakespeare-500/10"
+    >
+      <h3 class="text-base lg:text-lg font-semibold text-slate-100 mb-2">
+        {position}
+      </h3>
+      <p class="text-sm lg:text-base font-semibold text-shakespeare-400 mb-1">
+        {company}
+      </p>
+      <time class="block text-xs lg:text-sm text-slate-400 mb-2">{period}</time>
+      <span
+        class="inline-block text-xs lg:text-sm px-3 py-1 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30"
+      >
+        {typecontrat}
+      </span>
+    </div>
+  </div>
+</li>
