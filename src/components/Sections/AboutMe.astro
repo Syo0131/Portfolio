@@ -11,8 +11,6 @@ import { Icon } from "astro-icon/components";
   class="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8"
 >
   <div class="max-w-7xl mx-auto">
-    <SectionTitle class="mb-6 sm:mb-8 md:mb-5">Sobre Mi</SectionTitle>
-
     <!-- Grid con foto y contenido -->
     <div
       class="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center"
@@ -26,11 +24,11 @@ import { Icon } from "astro-icon/components";
             class="relative transition-transform duration-500 ease-smooth-out group-hover:scale-[1.01]"
           >
             <OptimizedImage
-              src="yami.jpg"
+              src="profile.jpeg"
               alt="Foto de perfil"
               width={700}
               height={700}
-              class="w-full aspect-square object-cover rounded-2xl shadow-2xl transition-shadow duration-500 ease-smooth-out group-hover:shadow-shakespeare-500/30"
+              class="w-full max-h-[350px] sm:max-h-[400px] object-fill object-top rounded-2xl shadow-2xl transition-shadow duration-500 ease-smooth-out group-hover:shadow-shakespeare-500/30"
               loading="eager"
             />
             <!-- Borde con efecto glow -->
@@ -40,25 +38,16 @@ import { Icon } from "astro-icon/components";
             </div>
           </div>
         </div>
-
-        <!-- Botón de descarga CV -->
-        <a
-          href="/cv.pdf"
-          download="Daybel_Diaz_CV.pdf"
-          class="group/btn flex items-center gap-2 bg-shakespeare-500 hover:bg-shakespeare-400 text-white font-semibold py-2.5 sm:py-3 px-5 sm:px-6 md:px-7 rounded-full transition-all duration-300 ease-smooth-out hover:scale-105 hover:shadow-lg hover:shadow-shakespeare-500/30 text-sm sm:text-base"
-        >
-          <Icon
-            name="mdi:download"
-            class="size-4 sm:size-5 group-hover/btn:animate-bounce"
-          />
-          Descargar CV
-        </a>
       </div>
-
       <!-- Columna del contenido -->
       <div
         class="flex flex-col justify-center space-y-4 sm:space-y-5 md:space-y-6 max-w-2xl mx-auto md:mx-0"
       >
+        <h1
+          class="text-2xl sm:text-3xl md:text-4xl font-bold ml-[120px] mb- sm:mb-1 md:mb- text-shakespeare-200"
+        >
+          Sobre mí
+        </h1>
         <p
           class="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 leading-relaxed"
         >
@@ -75,10 +64,15 @@ import { Icon } from "astro-icon/components";
           class="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 leading-relaxed"
         >
           Actualmente formo parte de <Highlight>BitBox Caribe SRL</Highlight>,
-          donde desarrollo con <Highlight class="text-shakespeare-300">Java</Highlight><Highlight class="text-shakespeare-300">Spring Boot</Highlight> y <Highlight class="text-shakespeare-300">PostgreSQL</Highlight
+          donde desarrollo con <Highlight class="text-shakespeare-300"
+            >Java</Highlight
+          ><Highlight class="text-shakespeare-300">Spring Boot</Highlight> y <Highlight
+            class="text-shakespeare-300">PostgreSQL</Highlight
           >. Me enfoco en escribir código limpio y mantenible, aplicando
           principios <Highlight class="text-shakespeare-300">SOLID</Highlight>
-          y patrones de arquitectura como <Highlight class="text-shakespeare-300">MVC</Highlight>.
+          y patrones de arquitectura como <Highlight
+            class="text-shakespeare-300">MVC</Highlight
+          >.
         </p>
 
         <div
@@ -93,6 +87,12 @@ import { Icon } from "astro-icon/components";
             name="LinkedIn"
             href="https://linkedin.com/in/DaybelDiaz/"
             icon="mdi:linkedin"
+          />
+          <Links
+            name="Descargar cv"
+            href="/src/assets/Daybel_Diaz_CV_Java.pdf"
+            icon="material-symbols:download"
+            download ="Daybel_Diaz_CV.pdf"
           />
         </div>
       </div>
