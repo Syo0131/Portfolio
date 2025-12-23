@@ -5,20 +5,16 @@ import type { Props as ExperienceProps } from "../ExperienceTimeline.astro";
 
 const experiencias: ExperienceProps[] = [
   {
-    position: "Pasante en contabilidad y administración de empresa",
-    company: "Ayuntamiento de Santo Domingo Este",
-    period: "Enero 2022 - Junio 2022",
-    alignment: "top",
-    alignmentMobile: "right",
-    typecontrat: "Contrato de formación",
-  },
-  {
     position: "Soporte HelpDesk",
     company: "BitBox Caribe SRL",
     period: "Marzo 2025 - Mayo 2025",
     alignment: "bottom",
     alignmentMobile: "left",
     typecontrat: "Contrato de formación",
+    description: [
+      "Soporte a usuarios por mensaje y remotamente, resolución de incidencias técnicas.",
+      "Revisión de equipos y verificación de errores de hardware y software.",
+    ],
   },
   {
     position: "Java Analyst Developer",
@@ -27,6 +23,10 @@ const experiencias: ExperienceProps[] = [
     alignment: "top",
     alignmentMobile: "right",
     typecontrat: "Jornada completa",
+    description: [
+      "Desarrollo y mantenimiento de módulos Java para la gestión de usuarios y tarjetas de fidelidad.",
+      "Implementación de funcionalidades para el procesamiento de facturas electrónicas y conciliación de transacciones.",
+    ],
   },
 
   // ... puedes duplicar más para probar
@@ -80,7 +80,7 @@ const experiencias: ExperienceProps[] = [
 
           <!-- Lista de experiencias desktop -->
           <ul
-            class="relative flex items-center justify-start gap-12"
+            class="relative flex items-center justify-center gap-12"
             style="z-index: 1;"
           >
             {experiencias.map((exp) => <ExperienceTimeline {...exp} />)}

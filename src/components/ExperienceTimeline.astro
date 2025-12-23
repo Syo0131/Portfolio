@@ -6,6 +6,7 @@ export interface Props {
   alignment?: "top" | "bottom";
   alignmentMobile?: "left" | "right";
   typecontrat?: string;
+  description?: string[];
 }
 
 const {
@@ -15,6 +16,7 @@ const {
   alignment = "top",
   alignmentMobile = "right",
   typecontrat,
+  description,
 } = Astro.props;
 
 // Clases para alineación horizontal (desktop/tablet)
@@ -46,11 +48,14 @@ const alignmentClassesMobile =
     <p class="text-base sm:text-lg font-semibold text-shakespeare-400 mb-1">
       {company}
     </p>
-    <time class="block text-xs sm:text-sm text-slate-400 mb-2">{period}</time>
+    <time
+      class="inline-block text-xs sm:text-sm px-3 py-1 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30"
+      >{period}</time
+    >
     <span
       class="inline-block text-xs sm:text-sm px-3 py-1 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30"
     >
-      {typecontrat}
+      {description}
     </span>
   </div>
 </li>
@@ -75,11 +80,20 @@ const alignmentClassesMobile =
       <p class="text-sm lg:text-base font-semibold text-shakespeare-400 mb-1">
         {company}
       </p>
-      <time class="block text-xs lg:text-sm text-slate-400 mb-2">{period}</time>
+      {
+        description && description.length > 0 && (
+          <ul class="list-inside text-xs  lg:text-sm text-slate-300 mt-2 space-y-1">
+            {description.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        )
+      }
+
       <span
-        class="inline-block text-xs lg:text-sm px-3 py-1 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30"
+        class="inline-grid text-xs lg:text-sm px-3 py-1 mt-3 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30"
       >
-        {typecontrat}
+        {period}
       </span>
     </div>
   </div>
