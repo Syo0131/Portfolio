@@ -1,0 +1,90 @@
+---
+import Links from "../Links.astro";
+import OptimizedImage from "../OptimizedImage.astro";
+import Highlight from "../Highlight.astro";
+import Badge from "../Badge.astro";
+---
+
+<section
+  id="sobre-mi"
+  class="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8"
+>
+  <div class="max-w-7xl mx-auto">
+    <!-- Grid con foto y contenido -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center"
+    >
+      <!-- Columna de la foto CON BOTON -->
+      <div class="flex flex-col items-center gap-4 sm:gap-5 md:gap-6">
+        <div
+          class="relative group w-full max-w-[280px] sm:max-w-[320px] md:max-w-none"
+        >
+          <div
+            class="relative transition-transform duration-500 ease-smooth-out group-hover:scale-[1.01]"
+          >
+            <OptimizedImage
+              src="linkedin2.jpg"
+              alt="Foto de perfil"
+              width={700}
+              height={700}
+              class="w-full max-h-[350px] sm:max-h-[400px] object-fill object-top rounded-2xl shadow-2xl transition-shadow duration-500 ease-smooth-out group-hover:shadow-shakespeare-500/30"
+              loading="eager"
+            />
+            <!-- Borde con efecto glow -->
+            <div
+              class="absolute inset-0 rounded-2xl ring-2 ring-shakespeare-500/30 group-hover:ring-shakespeare-500/70 transition-all duration-500 ease-smooth-out group-hover:ring-4 pointer-events-none"
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Columna del contenido -->
+      <div
+        class="flex flex-col justify-center space-y-4 sm:space-y-5 md:space-y-6 max-w-2xl mx-auto md:mx-0"
+      >
+        <h1
+          class="text-2xl sm:text-3xl md:text-4xl font-bold ml-[20px] mb- sm:mb-1 md:mb- text-slate-300"
+        >
+          Hey, Soy Daybel Diaz
+        </h1>
+        <p
+          class="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 leading-relaxed max-w-xl"
+        >
+          +1 año de experiencia. <Highlight class="text-shakespeare-300"
+            >Desarrollador Java
+          </Highlight>de República Dominicana <OptimizedImage
+            src="do.svg"
+            alt="Bandera de República Dominicana"
+            width={24}
+            height={24}
+            class="inline-block ml-1"
+            loading="eager"
+          /> . Especializado en
+          crear soluciones escalables, desde la logica de negocio hasta la
+          integracion final.
+        </p>
+
+        <div
+          class="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-3 pt-2 sm:pt-4"
+        >
+          <Links
+            name="Github"
+            href="https://github.com/Syo0131"
+            icon="simple-icons:github"
+          />
+          <Links
+            name="LinkedIn"
+            href="https://linkedin.com/in/DaybelDiaz/"
+            icon="mdi:linkedin"
+          />
+          <Links
+            name="Descargar cv"
+            href="/Daybel_Diaz_Cv_Java.pdf"
+            icon="material-symbols:download"
+            download="DaybelDiaz_CV_Java.pdf"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

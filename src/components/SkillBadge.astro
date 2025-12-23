@@ -1,0 +1,23 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    hovercolor: string;
+    name: string;
+    icon: string;
+}
+
+const { hovercolor, name, icon } = Astro.props;
+---
+
+<div class="text-center group w-16 sm:w-20 md:w-24">
+  <Icon
+    name={icon}
+    class={`size-12 sm:size-14 md:size-16 mx-auto text-slate-300 ${hovercolor} transition-all duration-400 ease-smooth-out group-hover:scale-110 group-hover:-translate-y-2`}
+  />
+  <p
+    class={`mt-2 text-xs sm:text-sm transition-all duration-300 ease-smooth-out ${hovercolor} group-hover:font-semibold min-w-max mx-auto w-fit`}
+  >
+    {name}
+  </p>
+</div>
