@@ -6,57 +6,63 @@ import SideBar from "../Headerbadge.astro";
 <aside
   id="main-sidebar"
   class="fixed right-2 sm:right-4 lg:right-6 xl:right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block"
+  aria-label="Navegación lateral"
 >
   <nav
-    class="flex flex-col gap-1.5 sm:gap-2 rounded-full bg-slate-900/50 px-2.5 sm:px-3 py-3 sm:py-4 backdrop-blur-lg ring-1 ring-white/10 transition-all duration-300 ease-smooth-out hover:ring-shakespeare-500/30 hover:shadow-lg hover:shadow-shakespeare-500/10"
+    aria-label="Menú de escritorio"
+    class="flex flex-col gap-1.5 sm:gap-2 rounded-full bg-slate-900/80 px-2.5 sm:px-3 py-3 sm:py-4 backdrop-blur-lg ring-1 ring-white/20 transition-all duration-300 ease-smooth-out hover:ring-shakespeare-500/30 hover:shadow-lg hover:shadow-shakespeare-500/10"
   >
     <SideBar href="#sobre-mi" name="Inicio" icon="mdi:home" />
     <SideBar href="#experiencia" name="Experiencia" icon="mdi:briefcase" />
     <SideBar href="#proyectos" name="Proyectos" icon="mdi:folder-multiple" />
     <SideBar
       href="#skills"
-      name="Habilidades Tecnicas"
+      name="Habilidades Técnicas"
       icon="mdi:code-braces"
     />
     <SideBar href="#contacto" name="Contacto" icon="mdi:email" />
-    <!-- <SideBar href="#Certificaciones" name="Certificaciones" icon="mdi:medal"/> -->
   </nav>
 </aside>
 
-<!-- Navbar móvil (arriba) para pantallas pequeñas y tablets -->
 <header
   class="fixed top-0 left-0 right-0 z-50 flex justify-center py-3 sm:py-4 px-3 sm:px-4 lg:hidden"
 >
   <nav
-    class="flex items-center gap-1.5 sm:gap-2 md:gap-3 rounded-full bg-slate-900/50 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 backdrop-blur-lg ring-1 ring-white/10 shadow-lg"
+    aria-label="Navegación principal móvil"
+    class="flex items-center gap-1.5 sm:gap-2 md:gap-3 rounded-full bg-slate-900/90 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 backdrop-blur-lg ring-1 ring-white/20 shadow-lg"
   >
     <a
       href="#sobre-mi"
-      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      aria-label="Ir a Inicio"
+      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
     >
       Inicio
     </a>
     <a
       href="#experiencia"
-      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      aria-label="Ver Experiencia"
+      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
     >
       Experiencia
     </a>
     <a
       href="#proyectos"
-      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      aria-label="Ver Proyectos"
+      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
     >
       Proyectos
     </a>
     <a
       href="#skills"
-      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      aria-label="Ver Habilidades"
+      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
     >
       Habilidades
     </a>
     <a
       href="#contacto"
-      class="text-slate-200 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      aria-label="Ir a Contacto"
+      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
     >
       Contacto
     </a>
