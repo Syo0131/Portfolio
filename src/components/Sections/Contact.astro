@@ -3,31 +3,30 @@ import SectionTitle from "../SectionTitle.astro";
 import { Icon } from "astro-icon/components";
 ---
 
-<section id="contacto" class="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+<section
+  id="contacto"
+  class="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8"
+  aria-labelledby="contact-title"
+>
   <div class="max-w-2xl mx-auto">
-    <SectionTitle class="mb-6 sm:mb-8 md:mb-10"
-      >¿Tienes algún proyecto en mente?</SectionTitle
-    >
+    <SectionTitle class="mb-6 sm:mb-8 md:mb-10">
+      ¿Tienes algún proyecto en mente?
+    </SectionTitle>
 
-    <!-- Card del formulario -->
     <div
-      class="bg-slate-900/30 backdrop-blur-sm border border-shakespeare-800/30 rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl shadow-shakespeare-500/5 hover:border-shakespeare-700/50 transition-all duration-300"
+      class="bg-slate-900/80 backdrop-blur-sm border border-shakespeare-800/50 rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl"
     >
-      <p class="text-sm sm:text-base text-slate-300 mb-6 sm:mb-8 text-center">
+      <p class="text-base text-slate-200 mb-6 sm:mb-8 text-center">
         Completa el formulario y te responderé lo antes posible.
       </p>
 
       <form id="contact-form" class="space-y-4 sm:space-y-6">
-        <!-- Honeypot - Trampa invisible para bots -->
-        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+        <div style="display: none;" aria-hidden="true">
           <input type="text" name="website" tabindex="-1" autocomplete="off" />
         </div>
 
         <div>
-          <label
-            for="name"
-            class="block text-sm font-semibold text-slate-300 mb-2"
-          >
+          <label for="name" class="block text-sm font-bold text-slate-100 mb-2">
             Nombre
           </label>
           <input
@@ -37,7 +36,7 @@ import { Icon } from "astro-icon/components";
             required
             minlength="2"
             maxlength="100"
-            class="w-full px-4 py-3 bg-slate-900/50 border border-shakespeare-800/50 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-shakespeare-500 focus:ring-2 focus:ring-shakespeare-500/20 transition-all"
+            class="w-full px-4 py-3 bg-slate-950 border border-shakespeare-800/50 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-shakespeare-500/50 outline-none"
             placeholder="Tu nombre"
           />
         </div>
@@ -45,7 +44,7 @@ import { Icon } from "astro-icon/components";
         <div>
           <label
             for="email"
-            class="block text-sm font-semibold text-slate-300 mb-2"
+            class="block text-sm font-bold text-slate-100 mb-2"
           >
             Email
           </label>
@@ -54,7 +53,7 @@ import { Icon } from "astro-icon/components";
             id="email"
             name="reply_to"
             required
-            class="w-full px-4 py-3 bg-slate-900/50 border border-shakespeare-800/50 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-shakespeare-500 focus:ring-2 focus:ring-shakespeare-500/20 transition-all"
+            class="w-full px-4 py-3 bg-slate-950 border border-shakespeare-800/50 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-shakespeare-500/50 outline-none"
             placeholder="tu@email.com"
           />
         </div>
@@ -62,7 +61,7 @@ import { Icon } from "astro-icon/components";
         <div>
           <label
             for="message"
-            class="block text-sm font-semibold text-slate-300 mb-2"
+            class="block text-sm font-bold text-slate-100 mb-2"
           >
             Mensaje
           </label>
@@ -73,166 +72,31 @@ import { Icon } from "astro-icon/components";
             minlength="10"
             maxlength="1000"
             rows="5"
-            class="w-full px-4 py-3 bg-slate-900/50 border border-shakespeare-800/50 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-shakespeare-500 focus:ring-2 focus:ring-shakespeare-500/20 transition-all resize-none"
+            class="w-full px-4 py-3 bg-slate-950 border border-shakespeare-800/50 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-shakespeare-500/50 outline-none resize-none"
             placeholder="Cuéntame sobre tu proyecto..."></textarea>
         </div>
 
         <button
           type="submit"
           id="submit-btn"
-          class="group w-full bg-shakespeare-500 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full hover:bg-shakespeare-500/90 transition-all duration-300 ease-smooth-out hover:scale-[1.02] hover:shadow-xl hover:shadow-shakespeare-500/30 text-base sm:text-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          aria-live="polite"
+          class="group w-full bg-shakespeare-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full hover:bg-shakespeare-500 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
         >
           <Icon
             name="material-symbols:mail-rounded"
-            class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 transition-all duration-300 ease-smooth-out group-hover:scale-110 group-hover:rotate-6"
+            class="w-5 h-5 sm:w-6 sm:h-6"
+            aria-hidden="true"
           />
           <span id="btn-text">Enviar mensaje</span>
         </button>
 
-        <p id="status-message" class="text-center text-sm"></p>
+        <p
+          id="status-message"
+          class="text-center text-sm font-medium min-h-[20px]"
+          aria-live="assertive"
+        >
+        </p>
       </form>
     </div>
   </div>
 </section>
-
-<script>
-  import emailjs from "@emailjs/browser";
-
-  const form = document.getElementById("contact-form") as HTMLFormElement;
-  const statusMessage = document.getElementById("status-message");
-  const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
-  const btnText = document.getElementById("btn-text");
-
-  // Rate limiting
-  let lastSubmitTime = 0;
-  const RATE_LIMIT_MS = 60000; // 60 segundos
-
-  // Tracking de interacción humana
-  let formStartTime = 0;
-  let interactionCount = 0;
-
-  const formInputs = form?.querySelectorAll(
-    'input:not([type="hidden"]), textarea'
-  );
-  formInputs?.forEach((input) => {
-    input.addEventListener(
-      "focus",
-      () => {
-        if (formStartTime === 0) {
-          formStartTime = Date.now();
-        }
-        interactionCount++;
-      },
-      { once: true }
-    );
-  });
-
-  form?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    // 1. Verificar honeypot
-    const honeypot = form.querySelector(
-      'input[name="website"]'
-    ) as HTMLInputElement;
-    if (honeypot?.value) {
-      console.warn("Spam detected: honeypot filled");
-      if (statusMessage) {
-        statusMessage.textContent = "¡Mensaje enviado con éxito! ✅";
-        statusMessage.className = "text-center text-sm text-shakespeare-400";
-      }
-      form.reset();
-      return;
-    }
-
-    // 2. Verificar tiempo de llenado (anti-bots)
-    const timeTaken = Date.now() - formStartTime;
-    if (timeTaken < 3000) {
-      if (statusMessage) {
-        statusMessage.textContent =
-          "Por favor, tómate un momento para completar el formulario.";
-        statusMessage.className = "text-center text-sm text-yellow-400";
-      }
-      return;
-    }
-
-    // 3. Verificar interacciones (anti-bots)
-    if (interactionCount < 2) {
-      if (statusMessage) {
-        statusMessage.textContent = "Por favor, completa todos los campos.";
-        statusMessage.className = "text-center text-sm text-yellow-400";
-      }
-      return;
-    }
-
-    // 4. Rate limiting (ANTES de enviar)
-    const now = Date.now();
-    if (lastSubmitTime && now - lastSubmitTime < RATE_LIMIT_MS) {
-      const remainingSeconds = Math.ceil(
-        (RATE_LIMIT_MS - (now - lastSubmitTime)) / 1000
-      );
-      if (statusMessage) {
-        statusMessage.textContent = `Espera ${remainingSeconds} segundos antes de enviar otro mensaje.`;
-        statusMessage.className = "text-center text-sm text-yellow-400";
-      }
-      return;
-    }
-
-    // 5. Deshabilitar botón ANTES de enviar
-    if (submitBtn) {
-      submitBtn.disabled = true;
-    }
-    if (btnText) {
-      btnText.textContent = "Enviando...";
-    }
-    if (statusMessage) {
-      statusMessage.textContent = "Enviando tu mensaje...";
-      statusMessage.className = "text-center text-sm text-shakespeare-400";
-    }
-
-    try {
-      // 6. Enviar email
-      await emailjs.sendForm(
-        import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
-        import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
-        form,
-        import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
-      );
-
-      if (statusMessage) {
-        statusMessage.textContent =
-          "¡Mensaje enviado con éxito! Te responderé pronto. ✅";
-        statusMessage.className = "text-center text-sm text-shakespeare-400"; // 🎨 Color de tu paleta
-      }
-
-      // Actualizar último tiempo de envío
-      lastSubmitTime = Date.now();
-
-      // Resetear formulario
-      form.reset();
-      formStartTime = 0;
-      interactionCount = 0;
-
-      // Limpiar mensaje después de 5 segundos
-      setTimeout(() => {
-        if (statusMessage) {
-          statusMessage.textContent = "";
-        }
-      }, 5000);
-    } catch (error) {
-      if (statusMessage) {
-        statusMessage.textContent =
-          "Error al enviar el mensaje. Por favor, intenta de nuevo. ❌";
-        statusMessage.className = "text-center text-sm text-red-400";
-      }
-      console.error("Error sending email:", error);
-    } finally {
-      // 7. Rehabilitar botón SIEMPRE (en caso de éxito o error)
-      if (submitBtn) {
-        submitBtn.disabled = false;
-      }
-      if (btnText) {
-        btnText.textContent = "Enviar mensaje";
-      }
-    }
-  });
-</script>
