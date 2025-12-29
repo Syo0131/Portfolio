@@ -1,0 +1,76 @@
+---
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+  title: string;
+  issuer: string;
+  teacher?: string;
+  date: string;
+  link?: string;
+  icon?: string;
+  hovercolor?: string;
+  buttonText?: string;
+}
+
+const {
+  title,
+  issuer,
+  teacher,
+  date,
+  link,
+  icon,
+  hovercolor = "group-hover:text-shakespeare-400",
+  buttonText,
+} = Astro.props;
+---
+
+<div
+  class="group bg-slate-900/30 backdrop-blur-sm border border-shakespeare-800/30 rounded-xl p-4 hover:border-shakespeare-700/50 transition-all duration-300 hover:shadow-lg hover:shadow-shakespeare-500/10 w-full min-h-[280px] flex flex-col justify-between"
+>
+  {
+    icon && (
+      <Icon
+        name={icon}
+        class={`size-8 sm:size-10 mx-auto text-slate-300 ${hovercolor} transition-all duration-400 ease-smooth-out group-hover:scale-110 mb-3`}
+      />
+    )
+  }
+  <h3
+    class={`text-sm sm:text-base font-semibold text-slate-100 ${hovercolor} transition-all duration-300 group-hover:font-bold mb-1 line-clamp-2`}
+  >
+    {title}
+  </h3>
+  <p class="text-xs sm:text-sm text-slate-300 mb-1">
+    <strong>Emisor:</strong>
+    {issuer}
+  </p>
+  <p class="text-xs sm:text-sm text-slate-400">
+    <strong>Fecha:</strong>
+    {date}
+  </p>
+  {
+    teacher && (
+      <p class="text-xs sm:text-sm text-slate-400 mb-2">
+        <strong>Profesor:</strong> {teacher}
+      </p>
+    )
+  }
+  {
+    link ? (
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        class={`block w-full text-center text-xs sm:text-sm px-3 py-1 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30 ${hovercolor.replace("group-hover:", "hover:")} transition-all duration-300 hover:bg-shakespeare-500/30`}
+      >
+        {buttonText || "Ver Certificación"}
+      </a>
+    ) : (
+      <span
+        class={`block w-full text-center text-xs sm:text-sm px-3 py-1 bg-slate-600/20 text-slate-400 rounded-full border border-slate-600/30 cursor-not-allowed`}
+      >
+        {buttonText || "En curso"}
+      </span>
+    )
+  }
+</div>

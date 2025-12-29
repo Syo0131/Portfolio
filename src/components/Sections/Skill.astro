@@ -1,115 +1,104 @@
 ---
-import { Icon } from "astro-icon/components";
 import SectionTitle from "../SectionTitle.astro";
 import SkillBadge from "../SkillBadge.astro";
+import type { Props as SkillBadgeProps } from "../SkillBadge.astro";
+
+const skills: SkillBadgeProps[] = [
+  {
+    icon: "simple-icons:html5",
+    hovercolor: "group-hover:text-orange-500",
+    name: "HTML",
+  },
+  {
+    icon: "simple-icons:css3",
+    hovercolor: "group-hover:text-blue-500",
+    name: "CSS",
+  },
+  {
+    icon: "simple-icons:javascript",
+    hovercolor: "group-hover:text-yellow-400",
+    name: "JavaScript",
+  },
+  {
+    icon: "simple-icons:angular",
+    hovercolor: "group-hover:text-red-600",
+    name: "Angular",
+  },
+  {
+    icon: "simple-icons:tailwindcss",
+    hovercolor: "group-hover:text-sky-500",
+    name: "Tailwind CSS",
+  },
+  {
+    icon: "fontisto:java",
+    hovercolor: "group-hover:text-red-500",
+    name: "Java",
+  },
+  {
+    icon: "devicon-plain:csharp",
+    hovercolor: "group-hover:text-purple-600",
+    name: "C#",
+  },
+  {
+    icon: "simple-icons:springboot",
+    hovercolor: "group-hover:text-green-500",
+    name: "Spring Boot",
+  },
+  {
+    icon: "simple-icons:hibernate",
+    hovercolor: "group-hover:text-yellow-600",
+    name: "Hibernate",
+  },
+  {
+    icon: "simple-icons:postgresql",
+    hovercolor: "group-hover:text-blue-400",
+    name: "PostgreSQL",
+  },
+  {
+    icon: "simple-icons:git",
+    hovercolor: "group-hover:text-[#F05032]",
+    name: "Git",
+  },
+  {
+    icon: "simple-icons:github",
+    hovercolor: "group-hover:text-[#0969DA]",
+    name: "GitHub",
+  },
+  {
+    icon: "simple-icons:gitlab",
+    hovercolor: "group-hover:text-[#FC6D26]",
+    name: "GitLab",
+  },
+  {
+    icon: "simple-icons:docker",
+    hovercolor: "group-hover:text-blue-500",
+    name: "Docker",
+  },
+  {
+    icon: "simple-icons:postman",
+    hovercolor: "group-hover:text-orange-500",
+    name: "Postman",
+  },
+  {
+    icon: "devicon-plain:swagger",
+    hovercolor: "group-hover:text-green-500",
+    name: "Swagger",
+  }
+];
 ---
 
 <section id="skills" class="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
   <div class="max-w-6xl mx-auto">
     <SectionTitle>Habilidades Técnicas</SectionTitle>
-
-    <div class="mb-12 sm:mb-16">
-      <h3
-        class="text-xl sm:text-2xl font-semibold mb-6 sm:mb-8 text-center text-shakespeare-400"
-      >
-        Frontend
-      </h3>
-      <div
-        class="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-8 md:gap-x-12 gap-y-6 sm:gap-y-8"
-      >
-        <SkillBadge
-          icon="simple-icons:html5"
-          hovercolor="group-hover:text-orange-500"
-          name="HTML"
-        />
-        <SkillBadge
-          icon="simple-icons:css3"
-          hovercolor="group-hover:text-blue-500"
-          name="CSS"
-        />
-        <SkillBadge
-          icon="simple-icons:javascript"
-          hovercolor="group-hover:text-yellow-400"
-          name="JavaScript"
-        />
-        <SkillBadge
-          icon="simple-icons:tailwindcss"
-          hovercolor="group-hover:text-sky-500"
-          name="Tailwind CSS"
-        />
-        <SkillBadge
-          icon="simple-icons:angular"
-          hovercolor="group-hover:text-red-600"
-          name="Angular"
-        />
+    <div class="flex flex-col gap-y-6 sm:gap-y-8">
+      <div class="flex justify-center gap-x-6 sm:gap-x-8 md:gap-x-12">
+        {skills.slice(0, 5).map((skill) => <SkillBadge {...skill} />)}
       </div>
-    </div>
-
-    <div class="mb-12 sm:mb-16">
-      <h3
-        class="text-xl sm:text-2xl font-semibold mb-6 sm:mb-8 text-center text-shakespeare-400"
-      >
-        Backend
-      </h3>
-      <div
-        class="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-8 md:gap-x-12 gap-y-6 sm:gap-y-8"
-      >
-        <SkillBadge
-          icon="fontisto:java"
-          hovercolor="group-hover:text-red-500"
-          name="Java"
-        />
-        <SkillBadge
-          icon="simple-icons:springboot"
-          hovercolor="group-hover:text-green-500"
-          name="Spring Boot"
-        />
-        <SkillBadge
-          icon="simple-icons:hibernate"
-          hovercolor="group-hover:text-yellow-600"
-          name="Hibernate"
-        />
-        <SkillBadge
-          icon="simple-icons:postgresql"
-          hovercolor="group-hover:text-blue-400"
-          name="PostgreSQL"
-        />
+      <div class="flex justify-center gap-x-6 sm:gap-x-8 md:gap-x-12">
+        {skills.slice(5, 11).map((skill) => <SkillBadge {...skill} />)}
       </div>
-      <div class="text-center mt-12 sm:mt-16">
-        <h3
-          class="text-xl sm:text-2xl font-semibold mb-6 sm:mb-8 text-shakespeare-400"
-        >
-          Herramientas
-        </h3>
-        <div
-          class="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-8 md:gap-x-12 gap-y-6 sm:gap-y-8"
-        >
-          <SkillBadge
-            icon="simple-icons:git"
-            hovercolor="group-hover:text-[#F05032]"
-            name="Git"
-          />
-          <SkillBadge
-            icon="simple-icons:github"
-            hovercolor="group-hover:text-[#0969DA]"
-            name="GitHub"
-          />
-          <SkillBadge
-            icon="simple-icons:gitlab"
-            hovercolor="group-hover:text-[#FC6D26]"
-            name="GitLab"
-          />
-          <SkillBadge
-            icon="simple-icons:docker"
-            hovercolor="group-hover:text-blue-500"
-            name="Docker"
-          />
-          <SkillBadge
-            icon="simple-icons:postman"
-            hovercolor="group-hover:text-orange-500"
-            name="Postman"
-          />
-        </div>
+      <div class="flex justify-center gap-x-6 sm:gap-x-8 md:gap-x-12">
+        {skills.slice(11, 16).map((skill) => <SkillBadge {...skill} />)}
       </div>
     </div>
   </div>

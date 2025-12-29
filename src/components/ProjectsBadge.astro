@@ -16,7 +16,7 @@ interface Props {
 const { name, urlDemo, urlGit, srcImage, category, description, technologies } = Astro.props;
 ---
 
-<article
+<section
   class="group relative rounded-xl overflow-hidden shadow-lg h-[320px] sm:h-[380px] md:h-[420px] lg:h-[450px] xl:h-[480px] transition-all duration-[800ms] ease-smooth-out hover:shadow-xl cursor-pointer"
 >
   <OptimizedImage
@@ -36,7 +36,7 @@ const { name, urlDemo, urlGit, srcImage, category, description, technologies } =
   >
     <div class="flex flex-col gap-2 items-start mb-2 sm:mb-3">
       <span
-        class="bg-shakespeare-800 text-white font-semibold py-1.5 sm:py-2 px-3 sm:px-4 md:px-5 lg:px-6 rounded-full text-xs sm:text-sm md:text-base transition-colors duration-300"
+        class="bg-shakespeare-800 text-slate-200 font-semibold py-1.5 sm:py-2 px-3 sm:px-4 md:px-5 lg:px-6 rounded-full text-xs sm:text-sm md:text-base transition-colors duration-300"
       >
         {name}
       </span>
@@ -53,7 +53,7 @@ const { name, urlDemo, urlGit, srcImage, category, description, technologies } =
       <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
        {technologies.map((tech) => (
                  <span
-            class="bg-shakespeare-800 text-shakespeare-200 text-xs sm:text-sm font-semibold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full"
+            class="bg-shakespeare-800 text-slate-200 text-xs sm:text-sm font-semibold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full"
           >{tech}
           </span>
        ))}
@@ -64,25 +64,31 @@ const { name, urlDemo, urlGit, srcImage, category, description, technologies } =
         {description}
       </p>
       <div class="flex items-center gap-x-3 sm:gap-x-4">
-        <a
+        {urlDemo && (
+          <a
           href={urlDemo}
           target="_blank"
           rel="noopener noreferrer"
           class="text-slate-200 hover:text-shakespeare-300 transition-all duration-500 ease-smooth-out hover:scale-110"
-          title={name}
-        >
+          aria-label="Visitar demo el proyecto"
+          title="Visitar demo el proyecto"
+          >
           <Icon name="mdi:external-link" class="size-5 sm:size-6" />
         </a>
+        )}
+        {urlGit && (
         <a
           href={urlGit}
           target="_blank"
+          aria-label="Visitar el codigo fuente"
           rel="noopener noreferrer"
           class="text-slate-200 hover:text-shakespeare-300 transition-all duration-500 ease-smooth-out hover:scale-110"
           title="Código Fuente"
         >
           <Icon name="mdi:github" class="size-5 sm:size-6" />
         </a>
+        )}
       </div>
     </div>
   </div>
-</article>
+</section>

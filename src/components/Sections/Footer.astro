@@ -1,7 +1,58 @@
-<footer
-  class="text-center py-6 sm:py-8 mt-8 sm:mt-12 border-t border-shakespeare-800 px-4"
->
-  <p class="text-xs sm:text-sm text-slate-400">
-    En construccion
-  </p>
+---
+import { Icon } from "astro-icon/components";
+---
+
+<footer class="py-10 mt-20 border-t border-shakespeare-800/50 px-6">
+  <div
+    class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
+  >
+    <div class="flex flex-col items-center md:items-start gap-1">
+      <div class="flex items-center gap-2">
+        <span class="relative flex h-2 w-2">
+          <span
+            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+          ></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"
+          ></span>
+        </span>
+        <p class="text-sm font-bold text-slate-100 tracking-wide uppercase">
+          Daybel Diaz
+        </p>
+      </div>
+      <p class="text-xs text-slate-500 font-medium">
+        © {new Date().getFullYear()} • Disponible para nuevos proyectos
+      </p>
+    </div>
+    <nav class="flex items-center gap-4 sm:gap-8">
+      <a
+        href="https://linkedin.com/in/daybeldiaz"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn"
+        class="group flex items-center gap-2 text-slate-400 hover:text-shakespeare-400 transition-all duration-300 transform hover:-translate-y-1"
+      >
+        <Icon name="mdi:linkedin" class="size-6" />
+        <span class="text-xs font-medium hidden md:block">LinkedIn</span>
+      </a>
+
+      <a
+        href="https://github.com/Syo0131"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub"
+        class="group flex items-center gap-2 text-slate-400 hover:text-shakespeare-400 transition-all duration-300 transform hover:-translate-y-1"
+      >
+        <Icon name="mdi:github" class="size-6" />
+        <span class="text-xs font-medium hidden md:block">GitHub</span>
+      </a>
+
+      <a
+        href="#contacto"
+        class="group flex items-center gap-2 text-slate-400 hover:text-shakespeare-400 transition-all duration-300 transform hover:-translate-y-1"
+      >
+        <Icon name="material-symbols:mail-outline" class="size-6" />
+        <span class="text-xs font-medium hidden md:block">Email</span>
+      </a>
+    </nav>
+  </div>
 </footer>
