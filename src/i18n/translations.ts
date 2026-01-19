@@ -182,7 +182,7 @@ export const translations = {
     // Footer
     "footer.cta": "Ready to create something amazing together?",
     "footer.talk": "Let's talk",
-    "footer.role": "Java Developer • Dominican Republic",
+    "footer.role": "Java Analyst Developer • Dominican Republic",
     "footer.available": "Available for new projects",
     "footer.credit": "Designed and developed with",
     "footer.using": "using Astro & Tailwind CSS",
