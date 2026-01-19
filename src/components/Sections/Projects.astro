@@ -17,10 +17,12 @@ import ProjectsBadge from "../ProjectsBadge.astro";
     >
       <ProjectsBadge
         name="Spendly"
+        nameKey="projects.spendly.name"
         description="Una aplicación web moderna desarrollada con Spring Boot y PostgreSQL para el control y seguimiento de gastos personales mensuales con una interfaz elegante y funcional."
         descriptionKey="projects.spendly.description"
         technologies={["Java", "Spring Boot", "PostgreSQL"]}
         category="Full-Stack"
+        categoryKey="projects.spendly.category"
         srcImage="image.png"
         urlDemo="https://frontend.daybeldiaz.dev/"
         urlGit="https://github.com/Syo0131/Spendly"
@@ -28,10 +30,19 @@ import ProjectsBadge from "../ProjectsBadge.astro";
 
       <ProjectsBadge
         name="El Pensum API"
+        nameKey="projects.elpensum.name"
         description="API RESTful construida con Spring Boot que proporciona acceso a datos académicos, incluyendo carreras, cursos y planes de estudio, facilitando la integración con aplicaciones educativas."
-        descriptionKey="projects.portfolio.description"
-        technologies={["Spring Boot", "Spring Security", "PostgreSQL", "Docker", "Swagger", "Spring Data JPA"]}
-        category="Frontend"
+        descriptionKey="projects.elpensum.description"
+        technologies={[
+          "Spring Boot",
+          "Spring Security",
+          "PostgreSQL",
+          "Docker",
+          "Swagger",
+          "Spring Data JPA",
+        ]}
+        category="Backend"
+        categoryKey="projects.elpensum.category"
         srcImage="elpensumAPI.png"
         urlDemo="https://backend.elpensum.com/swagger-ui/index.html"
         urlGit="https://github.com/Elpensum"

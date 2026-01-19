@@ -1,14 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <rect width="128" height="128" fill="#0f172a" rx="24"/>
-  
-  <text 
-    x="64" 
-    y="90" 
-    font-family="system-ui, -apple-system, sans-serif" 
-    font-size="68" 
-    font-weight="800" 
-    fill="#4a90e2" 
-    text-anchor="middle"
-    letter-spacing="-3"
-  >DD</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" fill="#0f172a" rx="24"/><text x="64" y="90" fill="#4a90e2" font-family="system-ui, -apple-system, sans-serif" font-size="68" font-weight="800" letter-spacing="-3" text-anchor="middle">DD</text></svg>

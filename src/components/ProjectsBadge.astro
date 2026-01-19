@@ -4,9 +4,11 @@ import OptimizedImage from "./OptimizedImage.astro";
 
 interface Props {
   name: string;
+  nameKey?: string;
   description: string;
   descriptionKey?: string;
   category: string;
+  categoryKey?: string;
   technologies: string[];
   urlDemo: string;
   urlGit: string;
@@ -15,10 +17,12 @@ interface Props {
 
 const {
   name,
+  nameKey,
   urlDemo,
   urlGit,
   srcImage,
   category,
+  categoryKey,
   description,
   descriptionKey,
   technologies,
@@ -46,11 +50,13 @@ const {
     <div class="flex flex-col gap-2 items-start mb-2 sm:mb-3">
       <span
         class="bg-shakespeare-800 text-slate-200 font-semibold py-1.5 sm:py-2 px-3 sm:px-4 md:px-5 lg:px-6 rounded-full text-xs sm:text-sm md:text-base transition-colors duration-300"
+        data-i18n={nameKey}
       >
         {name}
       </span>
       <span
         class="bg-shakespeare-800 text-shakespeare-300 font-semibold py-1.5 sm:py-2 px-3 sm:px-4 md:px-5 lg:px-6 rounded-full text-xs sm:text-sm transition-colors duration-300"
+        data-i18n={categoryKey}
       >
         {category}
       </span>

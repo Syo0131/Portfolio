@@ -49,10 +49,10 @@ export const translations = {
     "projects.spendly.description":
       "Una aplicación web moderna desarrollada con Spring Boot y PostgreSQL para el control y seguimiento de gastos personales mensuales con una interfaz elegante y funcional.",
     "projects.spendly.category": "Full-Stack",
-    "projects.portfolio.name": "Portafolio Personal",
-    "projects.portfolio.description":
-      "Sitio web ultra rápido construido con Astro para mostrar mis habilidades y proyectos.",
-    "projects.portfolio.category": "Frontend",
+    "projects.elpensum.name": "El Pensum API",
+    "projects.elpensum.description":
+      "API RESTful construida con Spring Boot que proporciona acceso a datos académicos, incluyendo carreras, cursos y planes de estudio, facilitando la integración con aplicaciones educativas.",
+    "projects.elpensum.category": "Backend",
 
     // Skills
     "skills.title": "Habilidades Técnicas",
@@ -140,10 +140,10 @@ export const translations = {
     "projects.spendly.description":
       "A modern web application developed with Spring Boot and PostgreSQL for tracking and managing monthly personal expenses with an elegant and functional interface.",
     "projects.spendly.category": "Full-Stack",
-    "projects.portfolio.name": "Personal Portfolio",
-    "projects.portfolio.description":
-      "Ultra-fast website built with Astro to showcase my skills and projects.",
-    "projects.portfolio.category": "Frontend",
+    "projects.elpensum.name": "El Pensum API",
+    "projects.elpensum.description":
+      "RESTful API built with Spring Boot that provides access to academic data, including careers, courses and curricula, facilitating integration with educational applications.",
+    "projects.elpensum.category": "Backend",
 
     // Skills
     "skills.title": "Technical Skills",
