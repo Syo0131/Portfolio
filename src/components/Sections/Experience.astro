@@ -6,8 +6,10 @@ import type { Props as ExperienceProps } from "../ExperienceTimeline.astro";
 const experiencias: ExperienceProps[] = [
   {
     position: "Soporte HelpDesk",
+    positionKey: "experience.helpdesk.position",
     company: "BitBox Caribe SRL",
     period: "Marzo 2025 - Mayo 2025",
+    periodKey: "experience.helpdesk.period",
     alignment: "bottom",
     alignmentMobile: "left",
     typecontrat: "Contrato de formación",
@@ -15,11 +17,14 @@ const experiencias: ExperienceProps[] = [
       "Soporte a usuarios por mensaje y remotamente, resolución de incidencias técnicas.",
       "Revisión de equipos y verificación de errores de hardware y software.",
     ],
+    descriptionKeys: ["experience.helpdesk.desc1", "experience.helpdesk.desc2"],
   },
   {
     position: "Java Analyst Developer",
+    positionKey: "experience.java.position",
     company: "BitBox Caribe SRL",
     period: "Junio 2025 - Presente",
+    periodKey: "experience.java.period",
     alignment: "top",
     alignmentMobile: "right",
     typecontrat: "Jornada completa",
@@ -27,15 +32,17 @@ const experiencias: ExperienceProps[] = [
       "Desarrollo y mantenimiento de módulos Java para la gestión de usuarios y tarjetas de fidelidad.",
       "Implementación de funcionalidades para el procesamiento de facturas electrónicas y conciliación de transacciones.",
     ],
+    descriptionKeys: ["experience.java.desc1", "experience.java.desc2"],
   },
-
-  // ... puedes duplicar más para probar
 ];
 ---
 
-<section id="experiencia" class="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+<section
+  id="experiencia"
+  class="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 animate-on-scroll"
+>
   <div class="max-w-7xl mx-auto">
-    <SectionTitle>Experiencia</SectionTitle>
+    <SectionTitle titleKey="experience.title">Experiencia</SectionTitle>
 
     <!-- 📱 Versión móvil: Timeline vertical -->
     <div class="md:hidden relative">
@@ -53,16 +60,6 @@ const experiencias: ExperienceProps[] = [
 
     <!-- 💻 Versión tablet/desktop: Timeline horizontal con scroll -->
     <div class="hidden md:block relative">
-      <!-- Gradientes laterales para indicar más contenido -->
-      <div
-        class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none"
-      >
-      </div>
-      <div
-        class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none"
-      >
-      </div>
-
       <!-- Contenedor de scroll -->
       <div
         id="scroll-container"

@@ -3,9 +3,11 @@ import { Icon } from "astro-icon/components";
 
 export interface Props {
   title: string;
+  titleKey?: string;
   issuer: string;
   teacher?: string;
   date: string;
+  dateKey?: string;
   link?: string;
   icon?: string;
   hovercolor?: string;
@@ -14,63 +16,150 @@ export interface Props {
 
 const {
   title,
+  titleKey,
   issuer,
   teacher,
   date,
+  dateKey,
   link,
   icon,
   hovercolor = "group-hover:text-shakespeare-400",
   buttonText,
 } = Astro.props;
+
+const isInProgress = !link;
 ---
 
 <div
-  class="group bg-slate-900/30 backdrop-blur-sm border border-shakespeare-800/30 rounded-xl p-4 hover:border-shakespeare-700/50 transition-all duration-300 hover:shadow-lg hover:shadow-shakespeare-500/10 w-full min-h-[280px] flex flex-col justify-between"
+  class="cert-card group relative bg-gradient-to-br from-slate-900/60 to-slate-900/30 backdrop-blur-md border border-shakespeare-800/30 rounded-2xl p-5 sm:p-6 hover:border-shakespeare-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-shakespeare-500/20 w-full min-h-[300px] flex flex-col overflow-hidden hover:-translate-y-2"
 >
+  {/* Decorative gradient orb */}
+  <div
+    class="absolute -top-10 -right-10 w-32 h-32 bg-shakespeare-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+  >
+  </div>
+
+  {/* Status badge */}
+  <div class="absolute top-4 right-4">
+    {
+      isInProgress ? (
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">
+          <span class="relative flex h-1.5 w-1.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75" />
+            <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-yellow-400" />
+          </span>
+          <span data-i18n="certifications.inProgress">En curso</span>
+        </span>
+      ) : (
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-400 border border-green-500/30">
+          <Icon name="mdi:check-circle" class="size-3" />
+          <span data-i18n="certifications.completed">Completado</span>
+        </span>
+      )
+    }
+  </div>
+
+  {/* Icon */}
   {
     icon && (
-      <Icon
-        name={icon}
-        class={`size-8 sm:size-10 mx-auto text-slate-300 ${hovercolor} transition-all duration-400 ease-smooth-out group-hover:scale-110 mb-3`}
-      />
+      <div class="mb-4 mt-2">
+        <div class="w-14 h-14 rounded-xl bg-shakespeare-500/10 border border-shakespeare-500/20 flex items-center justify-center group-hover:bg-shakespeare-500/20 group-hover:border-shakespeare-500/40 transition-all duration-300 group-hover:scale-110">
+          <Icon
+            name={icon}
+            class={`size-7 text-slate-300 ${hovercolor} transition-all duration-400 ease-smooth-out`}
+          />
+        </div>
+      </div>
     )
   }
-  <h3
-    class={`text-sm sm:text-base font-semibold text-slate-100 ${hovercolor} transition-all duration-300 group-hover:font-bold mb-1 line-clamp-2`}
-  >
-    {title}
-  </h3>
-  <p class="text-xs sm:text-sm text-slate-300 mb-1">
-    <strong>Emisor:</strong>
-    {issuer}
-  </p>
-  <p class="text-xs sm:text-sm text-slate-400">
-    <strong>Fecha:</strong>
-    {date}
-  </p>
-  {
-    teacher && (
-      <p class="text-xs sm:text-sm text-slate-400 mb-2">
-        <strong>Profesor:</strong> {teacher}
-      </p>
-    )
-  }
-  {
-    link ? (
-      <a
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-        class={`block w-full text-center text-xs sm:text-sm px-3 py-1 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30 ${hovercolor.replace("group-hover:", "hover:")} transition-all duration-300 hover:bg-shakespeare-500/30`}
-      >
-        {buttonText || "Ver Certificación"}
-      </a>
-    ) : (
-      <span
-        class={`block w-full text-center text-xs sm:text-sm px-3 py-1 bg-slate-600/20 text-slate-400 rounded-full border border-slate-600/30 cursor-not-allowed`}
-      >
-        {buttonText || "En curso"}
-      </span>
-    )
-  }
+
+  {/* Content */}
+  <div class="flex-1 flex flex-col">
+    <h3
+      class={`text-base sm:text-lg font-bold text-slate-100 ${hovercolor} transition-all duration-300 mb-3 line-clamp-2 leading-tight`}
+      data-i18n={titleKey}
+    >
+      {title}
+    </h3>
+
+    <div class="space-y-2 mb-4">
+      <div class="flex items-center gap-2 text-sm text-slate-300">
+        <Icon
+          name="mdi:school"
+          class="size-4 text-shakespeare-500 flex-shrink-0"
+        />
+        <span>{issuer}</span>
+      </div>
+
+      <div class="flex items-center gap-2 text-sm text-slate-400">
+        <Icon
+          name="mdi:calendar"
+          class="size-4 text-shakespeare-500/70 flex-shrink-0"
+        />
+        <span data-i18n={dateKey}>{date}</span>
+      </div>
+
+      {
+        teacher && (
+          <div class="flex items-center gap-2 text-sm text-slate-400">
+            <Icon
+              name="mdi:account"
+              class="size-4 text-shakespeare-500/70 flex-shrink-0"
+            />
+            <span>{teacher}</span>
+          </div>
+        )
+      }
+    </div>
+  </div>
+
+  {/* Action button */}
+  <div class="mt-auto pt-3 border-t border-shakespeare-800/30">
+    {
+      link ? (
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center gap-2 w-full text-sm font-medium px-4 py-2.5 bg-shakespeare-500/20 text-shakespeare-300 rounded-xl border border-shakespeare-500/30 hover:bg-shakespeare-500/30 hover:text-shakespeare-200 hover:border-shakespeare-500/50 transition-all duration-300 group/btn"
+        >
+          <Icon
+            name="mdi:certificate"
+            class="size-4 group-hover/btn:scale-110 transition-transform duration-300"
+          />
+          <span data-i18n="certifications.viewCert">
+            {buttonText || "Ver Certificación"}
+          </span>
+          <Icon
+            name="mdi:arrow-top-right"
+            class="size-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300"
+          />
+        </a>
+      ) : (
+        <div class="flex items-center justify-center gap-2 w-full text-sm font-medium px-4 py-2.5 bg-slate-700/30 text-slate-500 rounded-xl border border-slate-600/30 cursor-not-allowed">
+          <Icon name="mdi:progress-clock" class="size-4 animate-pulse" />
+          <span data-i18n="certifications.comingSoon">
+            {buttonText || "Próximamente"}
+          </span>
+        </div>
+      )
+    }
+  </div>
 </div>
+
+<style>
+  .cert-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

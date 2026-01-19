@@ -2,57 +2,143 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<footer class="py-10 mt-20 border-t border-shakespeare-800/50 px-6">
+<footer class="relative mt-20 overflow-hidden">
+  <!-- Gradiente decorativo superior -->
   <div
-    class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
+    class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-shakespeare-500/50 to-transparent"
   >
-    <div class="flex flex-col items-center md:items-start gap-1">
-      <div class="flex items-center gap-2">
-        <span class="relative flex h-2 w-2">
-          <span
-            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
-          ></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"
-          ></span>
-        </span>
-        <p class="text-sm font-bold text-slate-100 tracking-wide uppercase">
-          Daybel Diaz
-        </p>
-      </div>
-      <p class="text-xs text-slate-500 font-medium">
-        © {new Date().getFullYear()} • Disponible para nuevos proyectos
-      </p>
-    </div>
-    <nav class="flex items-center gap-4 sm:gap-8">
-      <a
-        href="https://linkedin.com/in/daybeldiaz"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="LinkedIn"
-        class="group flex items-center gap-2 text-slate-400 hover:text-shakespeare-400 transition-all duration-300 transform hover:-translate-y-1"
-      >
-        <Icon name="mdi:linkedin" class="size-6" />
-        <span class="text-xs font-medium hidden md:block">LinkedIn</span>
-      </a>
-
-      <a
-        href="https://github.com/Syo0131"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="GitHub"
-        class="group flex items-center gap-2 text-slate-400 hover:text-shakespeare-400 transition-all duration-300 transform hover:-translate-y-1"
-      >
-        <Icon name="mdi:github" class="size-6" />
-        <span class="text-xs font-medium hidden md:block">GitHub</span>
-      </a>
-
-      <a
-        href="#contacto"
-        class="group flex items-center gap-2 text-slate-400 hover:text-shakespeare-400 transition-all duration-300 transform hover:-translate-y-1"
-      >
-        <Icon name="material-symbols:mail-outline" class="size-6" />
-        <span class="text-xs font-medium hidden md:block">Email</span>
-      </a>
-    </nav>
   </div>
+
+  <!-- Orbe decorativo -->
+  <div
+    class="absolute -bottom-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-shakespeare-500/5 rounded-full blur-[100px] pointer-events-none"
+  >
+  </div>
+
+  <div class="relative py-12 px-6">
+    <div class="max-w-7xl mx-auto">
+      <!-- Sección superior con mensaje -->
+      <div class="text-center mb-10">
+        <p
+          class="text-lg sm:text-xl text-slate-300 font-light mb-2"
+          data-i18n="footer.cta"
+        >
+          ¿Listo para crear algo increíble juntos?
+        </p>
+        <a
+          href="#contacto"
+          class="inline-flex items-center gap-2 text-shakespeare-400 hover:text-shakespeare-300 transition-all duration-300 group"
+        >
+          <span class="font-medium" data-i18n="footer.talk">Hablemos</span>
+          <Icon
+            name="mdi:arrow-right"
+            class="size-5 group-hover:translate-x-1 transition-transform duration-300"
+          />
+        </a>
+      </div>
+
+      <!-- Separador con gradiente -->
+      <div
+        class="w-full h-px bg-gradient-to-r from-transparent via-shakespeare-800/50 to-transparent mb-8"
+      >
+      </div>
+
+      <!-- Contenido principal del footer -->
+      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+        <!-- Info personal -->
+        <div class="flex flex-col items-center md:items-start gap-2">
+          <div class="flex items-center gap-3">
+            <span class="relative flex h-2.5 w-2.5">
+              <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+              ></span>
+              <span
+                class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"
+              ></span>
+            </span>
+            <p class="text-base font-bold text-slate-100 tracking-wide">
+              Daybel Diaz
+            </p>
+          </div>
+          <p class="text-sm text-slate-400" data-i18n="footer.role">
+            Desarrollador Java • República Dominicana
+          </p>
+          <p class="text-xs text-slate-500">
+            © {new Date().getFullYear()} • <span data-i18n="footer.available"
+              >Disponible para nuevos proyectos</span
+            >
+          </p>
+        </div>
+
+        <!-- Links sociales -->
+        <nav class="flex items-center gap-3 sm:gap-4">
+          <a
+            href="https://linkedin.com/in/daybeldiaz"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            class="group flex items-center justify-center w-11 h-11 rounded-full bg-slate-800/50 hover:bg-shakespeare-500/20 border border-slate-700/50 hover:border-shakespeare-500/50 text-slate-400 hover:text-shakespeare-400 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-shakespeare-500/20"
+          >
+            <Icon name="mdi:linkedin" class="size-5" />
+          </a>
+
+          <a
+            href="https://github.com/Syo0131"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            class="group flex items-center justify-center w-11 h-11 rounded-full bg-slate-800/50 hover:bg-shakespeare-500/20 border border-slate-700/50 hover:border-shakespeare-500/50 text-slate-400 hover:text-shakespeare-400 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-shakespeare-500/20"
+          >
+            <Icon name="mdi:github" class="size-5" />
+          </a>
+
+          <a
+            href="mailto:daybeldiaz@email.com"
+            aria-label="Email"
+            class="group flex items-center justify-center w-11 h-11 rounded-full bg-slate-800/50 hover:bg-shakespeare-500/20 border border-slate-700/50 hover:border-shakespeare-500/50 text-slate-400 hover:text-shakespeare-400 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-shakespeare-500/20"
+          >
+            <Icon name="material-symbols:mail-outline" class="size-5" />
+          </a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón Back to Top -->
+  <button
+    id="back-to-top"
+    aria-label="Volver arriba"
+    class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-shakespeare-600 hover:bg-shakespeare-500 text-white shadow-lg shadow-shakespeare-500/30 flex items-center justify-center opacity-0 invisible translate-y-4 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-shakespeare-500/40"
+  >
+    <Icon name="mdi:chevron-up" class="size-6" />
+  </button>
 </footer>
+
+<script>
+  // Back to Top functionality
+  const backToTopButton = document.getElementById("back-to-top");
+
+  function toggleBackToTop() {
+    if (window.scrollY > 400) {
+      backToTopButton?.classList.remove(
+        "opacity-0",
+        "invisible",
+        "translate-y-4",
+      );
+      backToTopButton?.classList.add("opacity-100", "visible", "translate-y-0");
+    } else {
+      backToTopButton?.classList.add("opacity-0", "invisible", "translate-y-4");
+      backToTopButton?.classList.remove(
+        "opacity-100",
+        "visible",
+        "translate-y-0",
+      );
+    }
+  }
+
+  window.addEventListener("scroll", toggleBackToTop);
+
+  backToTopButton?.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>

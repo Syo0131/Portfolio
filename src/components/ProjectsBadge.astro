@@ -1,11 +1,11 @@
 ---
-import { Icon } from 'astro-icon/components';
-import OptimizedImage from './OptimizedImage.astro';
-
+import { Icon } from "astro-icon/components";
+import OptimizedImage from "./OptimizedImage.astro";
 
 interface Props {
   name: string;
   description: string;
+  descriptionKey?: string;
   category: string;
   technologies: string[];
   urlDemo: string;
@@ -13,7 +13,16 @@ interface Props {
   srcImage: string;
 }
 
-const { name, urlDemo, urlGit, srcImage, category, description, technologies } = Astro.props;
+const {
+  name,
+  urlDemo,
+  urlGit,
+  srcImage,
+  category,
+  description,
+  descriptionKey,
+  technologies,
+} = Astro.props;
 ---
 
 <section
@@ -43,7 +52,7 @@ const { name, urlDemo, urlGit, srcImage, category, description, technologies } =
       <span
         class="bg-shakespeare-800 text-shakespeare-300 font-semibold py-1.5 sm:py-2 px-3 sm:px-4 md:px-5 lg:px-6 rounded-full text-xs sm:text-sm transition-colors duration-300"
       >
-       {category}
+        {category}
       </span>
     </div>
 
@@ -51,43 +60,49 @@ const { name, urlDemo, urlGit, srcImage, category, description, technologies } =
       class="mt-3 sm:mt-4 max-h-0 group-hover:max-h-96 opacity-0 group-hover:opacity-100 transition-all duration-[1000ms] ease-smooth-out overflow-hidden"
     >
       <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
-       {technologies.map((tech) => (
-                 <span
-            class="bg-shakespeare-800 text-slate-200 text-xs sm:text-sm font-semibold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full"
-          >{tech}
-          </span>
-       ))}
+        {
+          technologies.map((tech) => (
+            <span class="bg-shakespeare-800 text-slate-200 text-xs sm:text-sm font-semibold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full">
+              {tech}
+            </span>
+          ))
+        }
       </div>
       <p
         class="text-white text-xs sm:text-sm md:text-base mb-3 sm:mb-4 leading-relaxed"
+        data-i18n={descriptionKey}
       >
         {description}
       </p>
       <div class="flex items-center gap-x-3 sm:gap-x-4">
-        {urlDemo && (
-          <a
-          href={urlDemo}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-slate-200 hover:text-shakespeare-300 transition-all duration-500 ease-smooth-out hover:scale-110"
-          aria-label="Visitar demo el proyecto"
-          title="Visitar demo el proyecto"
-          >
-          <Icon name="mdi:external-link" class="size-5 sm:size-6" />
-        </a>
-        )}
-        {urlGit && (
-        <a
-          href={urlGit}
-          target="_blank"
-          aria-label="Visitar el codigo fuente"
-          rel="noopener noreferrer"
-          class="text-slate-200 hover:text-shakespeare-300 transition-all duration-500 ease-smooth-out hover:scale-110"
-          title="Código Fuente"
-        >
-          <Icon name="mdi:github" class="size-5 sm:size-6" />
-        </a>
-        )}
+        {
+          urlDemo && (
+            <a
+              href={urlDemo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-slate-200 hover:text-shakespeare-300 transition-all duration-500 ease-smooth-out hover:scale-110"
+              aria-label="Visitar demo el proyecto"
+              title="Visitar demo el proyecto"
+            >
+              <Icon name="mdi:external-link" class="size-5 sm:size-6" />
+            </a>
+          )
+        }
+        {
+          urlGit && (
+            <a
+              href={urlGit}
+              target="_blank"
+              aria-label="Visitar el codigo fuente"
+              rel="noopener noreferrer"
+              class="text-slate-200 hover:text-shakespeare-300 transition-all duration-500 ease-smooth-out hover:scale-110"
+              title="Código Fuente"
+            >
+              <Icon name="mdi:github" class="size-5 sm:size-6" />
+            </a>
+          )
+        }
       </div>
     </div>
   </div>

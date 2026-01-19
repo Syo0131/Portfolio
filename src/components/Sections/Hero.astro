@@ -7,7 +7,7 @@ import Badge from "../Badge.astro";
 
 <section
   id="sobre-mi"
-  class="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8"
+  class="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8 animate-on-scroll"
   aria-labelledby="hero-title"
 >
   <div class="max-w-7xl mx-auto">
@@ -43,17 +43,18 @@ import Badge from "../Badge.astro";
         <h1
           id="hero-title"
           class="text-2xl sm:text-3xl md:text-4xl font-bold ml-[20px] text-slate-100"
+          data-i18n="hero.greeting"
         >
           Hey, Soy Daybel Diaz
         </h1>
         <p
           class="text-sm sm:text-base md:text-lg lg:text-xl text-slate-200 leading-relaxed max-w-xl"
         >
-          +1 año de experiencia.
+          <span data-i18n="hero.experience">+1 año de experiencia.</span>
           <Highlight class="text-shakespeare-300 font-semibold">
-            Desarrollador Java
+            <span data-i18n="hero.role">Desarrollador Java</span>
           </Highlight>
-          de República Dominicana
+          <span data-i18n="hero.location">de República Dominicana</span>
           <OptimizedImage
             src="do.svg"
             alt="Bandera de República Dominicana"
@@ -61,8 +62,10 @@ import Badge from "../Badge.astro";
             height={24}
             class="inline-block ml-1 align-baseline"
             aria-hidden="true"
-          />. Especializado en crear soluciones escalables, desde la lógica de
-          negocio hasta la integración final.
+          />. <span data-i18n="hero.description"
+            >Especializado en crear soluciones escalables, desde la lógica de
+            negocio hasta la integración final.</span
+          >
         </p>
 
         <div
@@ -82,6 +85,7 @@ import Badge from "../Badge.astro";
           />
           <Links
             name="Descargar CV"
+            nameKey="hero.downloadCv"
             href="/Daybel_Diaz_Cv_Java.pdf"
             icon="material-symbols:download"
             download="DaybelDiaz_CV_Java.pdf"

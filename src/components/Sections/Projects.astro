@@ -2,12 +2,15 @@
 import SectionTitle from "../SectionTitle.astro";
 import ProjectsBadge from "../ProjectsBadge.astro";
 ---
+
 <section
   id="proyectos"
-  class="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8"
+  class="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8 animate-on-scroll"
 >
   <div class="max-w-7xl mx-auto">
-    <SectionTitle class="mb-12 sm:mb-16 lg:mb-20">Proyectos</SectionTitle>
+    <SectionTitle class="mb-12 sm:mb-16 lg:mb-20" titleKey="projects.title"
+      >Proyectos</SectionTitle
+    >
 
     <div
       class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 xl:gap-12"
@@ -15,21 +18,23 @@ import ProjectsBadge from "../ProjectsBadge.astro";
       <ProjectsBadge
         name="Spendly"
         description="Una aplicación web moderna desarrollada con Spring Boot y PostgreSQL para el control y seguimiento de gastos personales mensuales con una interfaz elegante y funcional."
+        descriptionKey="projects.spendly.description"
         technologies={["Java", "Spring Boot", "PostgreSQL"]}
         category="Full-Stack"
         srcImage="image.png"
-        urlDemo="https://spendly.dokploy.spendly.dedyn.io/"
+        urlDemo="https://frontend.daybeldiaz.dev/"
         urlGit="https://github.com/Syo0131/Spendly"
       />
 
       <ProjectsBadge
-        name="Portafolio Personal"
-        description="Sitio web ultra rápido construido con Astro para mostrar mis habilidades y proyectos."
-        technologies={["Astro", "Tailwind CSS"]}
+        name="El Pensum API"
+        description="API RESTful construida con Spring Boot que proporciona acceso a datos académicos, incluyendo carreras, cursos y planes de estudio, facilitando la integración con aplicaciones educativas."
+        descriptionKey="projects.portfolio.description"
+        technologies={["Spring Boot", "Spring Security", "PostgreSQL", "Docker", "Swagger", "Spring Data JPA"]}
         category="Frontend"
-        srcImage="yami.jpg"
-        urlDemo="https://daybeldiaz.dev/"
-        urlGit="https://github.com/Syo0131/Portafolio"
+        srcImage="elpensumAPI.png"
+        urlDemo="https://backend.elpensum.com/swagger-ui/index.html"
+        urlGit="https://github.com/Elpensum"
       />
     </div>
   </div>

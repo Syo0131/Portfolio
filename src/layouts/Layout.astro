@@ -67,7 +67,7 @@ const { title } = Astro.props;
     <main
       class="text-shakespeare-300 pt-14 sm:pt-16 md:pt-18 lg:pt-0 relative z-0"
     >
-    <SpeedInsights />
+      <SpeedInsights />
       <Analytics />
       <slot />
     </main>
@@ -200,4 +200,108 @@ const { title } = Astro.props;
     width: 100%;
     margin: 0 auto;
   }
+
+  /* Scroll animations */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+  }
+
+  .animate-on-scroll.animate-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-on-scroll.animate-delay-100 {
+    transition-delay: 100ms;
+  }
+  .animate-on-scroll.animate-delay-200 {
+    transition-delay: 200ms;
+  }
+  .animate-on-scroll.animate-delay-300 {
+    transition-delay: 300ms;
+  }
+  .animate-on-scroll.animate-delay-400 {
+    transition-delay: 400ms;
+  }
+
+  /* Fade in from left */
+  .animate-fade-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+  }
+
+  .animate-fade-left.animate-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Fade in from right */
+  .animate-fade-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+  }
+
+  .animate-fade-right.animate-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Scale animation */
+  .animate-scale {
+    opacity: 0;
+    transform: scale(0.95);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+  }
+
+  .animate-scale.animate-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
 </style>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px 0px -50px 0px",
+    threshold: 0.1,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animate-visible");
+        // Optionally unobserve after animation
+        // observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all elements with animation classes
+  document.addEventListener("DOMContentLoaded", () => {
+    const animatedElements = document.querySelectorAll(
+      ".animate-on-scroll, .animate-fade-left, .animate-fade-right, .animate-scale",
+    );
+    animatedElements.forEach((el) => observer.observe(el));
+  });
+
+  // Also run on page load for Astro's view transitions
+  document.addEventListener("astro:page-load", () => {
+    const animatedElements = document.querySelectorAll(
+      ".animate-on-scroll, .animate-fade-left, .animate-fade-right, .animate-scale",
+    );
+    animatedElements.forEach((el) => observer.observe(el));
+  });
+</script>

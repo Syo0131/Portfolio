@@ -1,36 +1,43 @@
 ---
-
 import CertificationsBadge from "../CertificationsBadge.astro";
 import SectionTitle from "../SectionTitle.astro";
 
 const certification = [
   {
     title: "Spring Framework 6 & Spring Boot 3 desde cero a experto",
+    titleKey: "certifications.spring.title",
     issuer: "Udemy",
     date: "Octubre 2025",
+    dateKey: "certifications.spring.date",
     teacher: "Andrés Guzmán",
     link: "https://udemy-certificate.s3.amazonaws.com/image/UC-9ab6ccbc-2fb0-4647-9ec7-514aa80407a0.jpg",
     icon: "simple-icons:spring",
   },
   {
     title: "Java avanzado: reactividad, concurrencia y patrones",
+    titleKey: "certifications.java.title",
     issuer: "Devtalles",
     date: "Cursando",
+    dateKey: "certifications.java.date",
     teacher: "Gabriel Chaldú",
     icon: "fontisto:java",
-    },
+  },
   {
     title: "Python para principiantes - Aprende desde cero",
+    titleKey: "certifications.python.title",
     issuer: "Udemy",
     date: "Mayo 2024",
+    dateKey: "certifications.python.date",
     teacher: "Juan Restituyo",
     icon: "fontisto:python",
     link: "https://udemy-certificate.s3.amazonaws.com/image/UC-665ee2db-9e28-4a5e-8290-f4ffe10ea564.jpg",
   },
   {
-    title: "Intruduccion a la programacion con C#",
+    title: "Introducción a la programación con C#",
+    titleKey: "certifications.csharp.title",
     issuer: "Udemy",
     date: "Diciembre 2025",
+    dateKey: "certifications.csharp.date",
     teacher: "Juan Restituyo",
     icon: "devicon-plain:csharp",
     link: "https://udemy-certificate.s3.amazonaws.com/image/UC-2aa988ce-56bf-42a6-9d72-5304fc064cbb.jpg",
@@ -38,9 +45,11 @@ const certification = [
 ];
 ---
 
-<section>
+<section class="animate-on-scroll">
   <div class="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-    <SectionTitle class="mb-6 sm:mb-8 md:mb-10">Certificaciones</SectionTitle>
+    <SectionTitle class="mb-6 sm:mb-8 md:mb-10" titleKey="certifications.title"
+      >Certificaciones</SectionTitle
+    >
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       {
         certification.map((cert) => (

@@ -1,7 +1,15 @@
 ---
 import { Icon } from "astro-icon/components";
 import SideBar from "../Headerbadge.astro";
+import LanguageToggle from "../LanguageToggle.astro";
 ---
+
+<!-- Language Toggle - Fixed top right, aligned with sidebar center -->
+<div
+  class="fixed top-4 right-[0.5rem] sm:right-[1rem] lg:right-[1.5rem] xl:right-[2rem] z-[60]"
+>
+  <LanguageToggle />
+</div>
 
 <aside
   id="main-sidebar"
@@ -12,15 +20,36 @@ import SideBar from "../Headerbadge.astro";
     aria-label="Menú de escritorio"
     class="flex flex-col gap-1.5 sm:gap-2 rounded-full bg-slate-900/80 px-2.5 sm:px-3 py-3 sm:py-4 backdrop-blur-lg ring-1 ring-white/20 transition-all duration-300 ease-smooth-out hover:ring-shakespeare-500/30 hover:shadow-lg hover:shadow-shakespeare-500/10"
   >
-    <SideBar href="#sobre-mi" name="Inicio" icon="mdi:home" />
-    <SideBar href="#experiencia" name="Experiencia" icon="mdi:briefcase" />
-    <SideBar href="#proyectos" name="Proyectos" icon="mdi:folder-multiple" />
+    <SideBar
+      href="#sobre-mi"
+      name="Inicio"
+      nameKey="nav.home"
+      icon="mdi:home"
+    />
+    <SideBar
+      href="#experiencia"
+      name="Experiencia"
+      nameKey="nav.experience"
+      icon="mdi:briefcase"
+    />
+    <SideBar
+      href="#proyectos"
+      name="Proyectos"
+      nameKey="nav.projects"
+      icon="mdi:folder-multiple"
+    />
     <SideBar
       href="#skills"
-      name="Habilidades Técnicas"
+      name="Habilidades"
+      nameKey="nav.skills"
       icon="mdi:code-braces"
     />
-    <SideBar href="#contacto" name="Contacto" icon="mdi:email" />
+    <SideBar
+      href="#contacto"
+      name="Contacto"
+      nameKey="nav.contact"
+      icon="mdi:email"
+    />
   </nav>
 </aside>
 
@@ -35,6 +64,7 @@ import SideBar from "../Headerbadge.astro";
       href="#sobre-mi"
       aria-label="Ir a Inicio"
       class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      data-i18n="nav.home"
     >
       Inicio
     </a>
@@ -42,6 +72,7 @@ import SideBar from "../Headerbadge.astro";
       href="#experiencia"
       aria-label="Ver Experiencia"
       class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      data-i18n="nav.experience"
     >
       Experiencia
     </a>
@@ -49,6 +80,7 @@ import SideBar from "../Headerbadge.astro";
       href="#proyectos"
       aria-label="Ver Proyectos"
       class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      data-i18n="nav.projects"
     >
       Proyectos
     </a>
@@ -56,6 +88,7 @@ import SideBar from "../Headerbadge.astro";
       href="#skills"
       aria-label="Ver Habilidades"
       class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      data-i18n="nav.skills"
     >
       Habilidades
     </a>
@@ -63,6 +96,7 @@ import SideBar from "../Headerbadge.astro";
       href="#contacto"
       aria-label="Ir a Contacto"
       class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      data-i18n="nav.contact"
     >
       Contacto
     </a>

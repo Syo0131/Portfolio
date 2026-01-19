@@ -2,13 +2,14 @@
 import { Icon } from "astro-icon/components";
 interface Props {
   name: string;
+  nameKey?: string;
   href: string;
   icon?: string;
   class?: string;
   download?: string;
 }
 
-const { href, name, icon, class: className, download } = Astro.props;
+const { href, name, nameKey, icon, class: className, download } = Astro.props;
 ---
 
 <a
@@ -27,6 +28,5 @@ const { href, name, icon, class: className, download } = Astro.props;
       />
     )
   }
-  <span>{name}</span>
+  <span data-i18n={nameKey}>{name}</span>
 </a>
-

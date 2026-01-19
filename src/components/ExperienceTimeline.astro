@@ -1,22 +1,28 @@
 ---
 export interface Props {
   position: string;
+  positionKey?: string;
   company: string;
   period: string;
+  periodKey?: string;
   alignment?: "top" | "bottom";
   alignmentMobile?: "left" | "right";
   typecontrat?: string;
   description?: string[];
+  descriptionKeys?: string[];
 }
 
 const {
   position,
+  positionKey,
   company,
   period,
+  periodKey,
   alignment = "top",
   alignmentMobile = "right",
   typecontrat,
   description,
+  descriptionKeys,
 } = Astro.props;
 
 // Clases para alineación horizontal (desktop/tablet)
@@ -42,7 +48,10 @@ const alignmentClassesMobile =
 
   <!-- Contenedor de texto alineado -->
   <div class={alignmentClassesMobile}>
-    <h3 class="text-lg sm:text-xl font-semibold text-slate-100 mb-2">
+    <h3
+      class="text-lg sm:text-xl font-semibold text-slate-100 mb-2"
+      data-i18n={positionKey}
+    >
       {position}
     </h3>
     <p class="text-base sm:text-lg font-semibold text-shakespeare-400 mb-1">
@@ -50,7 +59,7 @@ const alignmentClassesMobile =
     </p>
     <time
       class="inline-block text-xs sm:text-sm px-3 py-1 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30"
-      >{period}</time
+      data-i18n={periodKey}>{period}</time
     >
     <span
       class="inline-block text-xs sm:text-sm px-3 py-1 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30"
@@ -74,7 +83,10 @@ const alignmentClassesMobile =
     <div
       class="bg-slate-900/30 backdrop-blur-sm border border-shakespeare-800/30 rounded-xl p-4 lg:p-5 hover:border-shakespeare-700/50 transition-all duration-300 hover:shadow-lg hover:shadow-shakespeare-500/10"
     >
-      <h3 class="text-base lg:text-lg font-semibold text-slate-100 mb-2">
+      <h3
+        class="text-base lg:text-lg font-semibold text-slate-100 mb-2"
+        data-i18n={positionKey}
+      >
         {position}
       </h3>
       <p class="text-sm lg:text-base font-semibold text-shakespeare-400 mb-1">
@@ -82,9 +94,9 @@ const alignmentClassesMobile =
       </p>
       {
         description && description.length > 0 && (
-          <ul class="list-inside text-xs  lg:text-sm text-slate-300 mt-2 space-y-1">
-            {description.map((item) => (
-              <li>{item}</li>
+          <ul class="list-inside text-xs lg:text-sm text-slate-300 mt-2 space-y-1">
+            {description.map((item, index) => (
+              <li data-i18n={descriptionKeys?.[index]}>{item}</li>
             ))}
           </ul>
         )
@@ -92,6 +104,7 @@ const alignmentClassesMobile =
 
       <span
         class="inline-grid text-xs lg:text-sm px-3 py-1 mt-3 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30"
+        data-i18n={periodKey}
       >
         {period}
       </span>
