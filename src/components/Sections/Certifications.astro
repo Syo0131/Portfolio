@@ -62,11 +62,14 @@ const certification = [
     >
 
     <!-- Certifications Grid with improved spacing -->
-    <div id="certifications-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+    <div
+      id="certifications-grid"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+    >
       {
         certification.map((cert, index) => (
           <div
-            class={`flex justify-center cert-item ${index >= 6 ? 'hidden' : ''}`}
+            class={`flex justify-center cert-item ${index >= 6 ? "hidden" : ""}`}
             data-cert-item
             style={`animation-delay: ${index * 100}ms`}
           >
@@ -77,68 +80,89 @@ const certification = [
     </div>
 
     <!-- Show More Button (only visible if more than 6 certifications) -->
-    {certification.length > 6 && (
-      <div class="flex justify-center mt-8 sm:mt-12">
-        <button
-          id="show-more-btn"
-          class="group flex items-center gap-2 px-6 py-3 bg-shakespeare-500/20 text-shakespeare-300 rounded-xl border border-shakespeare-500/30 hover:bg-shakespeare-500/30 hover:text-shakespeare-200 hover:border-shakespeare-500/50 transition-all duration-300 font-medium"
-        >
-          <span id="btn-text" data-i18n="certifications.showMore">Ver más certificaciones</span>
-          <svg id="btn-icon" class="w-5 h-5 transition-transform duration-300 group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </button>
-      </div>
-    )}
+    {
+      certification.length > 6 && (
+        <div class="flex justify-center mt-8 sm:mt-12">
+          <button
+            id="show-more-btn"
+            class="group flex items-center gap-2 px-6 py-3 bg-shakespeare-500/20 text-shakespeare-300 rounded-xl border border-shakespeare-500/30 hover:bg-shakespeare-500/30 hover:text-shakespeare-200 hover:border-shakespeare-500/50 transition-all duration-300 font-medium"
+          >
+            <span id="btn-text" data-i18n="certifications.showMore">
+              Ver más certificaciones
+            </span>
+            <svg
+              id="btn-icon"
+              class="w-5 h-5 transition-transform duration-300 group-hover:translate-y-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+        </div>
+      )
+    }
   </div>
 </section>
 
 <script>
   function initShowMore() {
-    const showMoreBtn = document.getElementById('show-more-btn');
-    const btnText = document.getElementById('btn-text');
-    const btnIcon = document.getElementById('btn-icon');
-    const certItems = document.querySelectorAll('[data-cert-item]');
-    
+    const showMoreBtn = document.getElementById("show-more-btn");
+    const btnText = document.getElementById("btn-text");
+    const btnIcon = document.getElementById("btn-icon");
+    const certItems = document.querySelectorAll("[data-cert-item]");
+
     let isExpanded = false;
 
-    showMoreBtn?.addEventListener('click', () => {
+    showMoreBtn?.addEventListener("click", () => {
       isExpanded = !isExpanded;
-      
+
       certItems.forEach((item, index) => {
         if (index >= 6) {
           if (isExpanded) {
-            item.classList.remove('hidden');
+            item.classList.remove("hidden");
           } else {
-            item.classList.add('hidden');
+            item.classList.add("hidden");
           }
         }
       });
 
       // Update button text and icon
-      const currentLang = localStorage.getItem('lang') || 'es';
+      const currentLang = localStorage.getItem("lang") || "es";
       if (btnText) {
-        btnText.textContent = isExpanded 
-          ? (currentLang === 'es' ? 'Ver menos' : 'Show less')
-          : (currentLang === 'es' ? 'Ver más certificaciones' : 'Show more certifications');
+        btnText.textContent = isExpanded
+          ? currentLang === "es"
+            ? "Ver menos"
+            : "Show less"
+          : currentLang === "es"
+            ? "Ver más certificaciones"
+            : "Show more certifications";
       }
-      
+
       if (btnIcon) {
-        btnIcon.style.transform = isExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
+        btnIcon.style.transform = isExpanded
+          ? "rotate(180deg)"
+          : "rotate(0deg)";
       }
 
       // Smooth scroll to certifications if collapsing
       if (!isExpanded) {
-        document.getElementById('certifications-grid')?.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start' 
+        document.getElementById("certifications-grid")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
         });
       }
     });
   }
 
-  document.addEventListener('DOMContentLoaded', initShowMore);
-  document.addEventListener('astro:page-load', initShowMore);
+  document.addEventListener("DOMContentLoaded", initShowMore);
+  document.addEventListener("astro:page-load", initShowMore);
 </script>
 
 <style>
