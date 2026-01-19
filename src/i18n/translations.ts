@@ -66,6 +66,8 @@ export const translations = {
     "certifications.inProgress": "En curso",
     "certifications.completed": "Completado",
     "certifications.comingSoon": "Próximamente",
+    "certifications.showMore": "Ver más certificaciones",
+    "certifications.showLess": "Ver menos",
     "certifications.spring.title":
       "Spring Framework 6 & Spring Boot 3 desde cero a experto",
     "certifications.spring.date": "Octubre 2025",
@@ -77,6 +79,8 @@ export const translations = {
     "certifications.python.date": "Mayo 2024",
     "certifications.csharp.title": "Introducción a la programación con C#",
     "certifications.csharp.date": "Diciembre 2025",
+    "certifications.solid.title": "Principios SOLID y Clean Code",
+    "certifications.solid.date": "Enero 2026",
 
     // Contact
     "contact.title": "¿Tienes algún proyecto en mente?",
@@ -157,6 +161,8 @@ export const translations = {
     "certifications.inProgress": "In progress",
     "certifications.completed": "Completed",
     "certifications.comingSoon": "Coming soon",
+    "certifications.showMore": "Show more certifications",
+    "certifications.showLess": "Show less",
     "certifications.spring.title":
       "Spring Framework 6 & Spring Boot 3 from zero to expert",
     "certifications.spring.date": "October 2025",
@@ -167,6 +173,8 @@ export const translations = {
     "certifications.python.date": "May 2024",
     "certifications.csharp.title": "Introduction to programming with C#",
     "certifications.csharp.date": "December 2025",
+    "certifications.solid.title": "SOLID Principles and Clean Code",
+    "certifications.solid.date": "January 2026",
 
     // Contact
     "contact.title": "Have a project in mind?",

@@ -42,22 +42,119 @@ const certification = [
     icon: "devicon-plain:csharp",
     link: "https://udemy-certificate.s3.amazonaws.com/image/UC-2aa988ce-56bf-42a6-9d72-5304fc064cbb.jpg",
   },
+  {
+    title: "Principios SOLID y Clean Code",
+    titleKey: "certifications.solid.title",
+    issuer: "Udemy",
+    date: "Enero 2026",
+    dateKey: "certifications.solid.date",
+    teacher: "Fernando Herrera",
+    icon: "mdi:cube-outline",
+    link: "",
+  },
 ];
 ---
 
 <section class="animate-on-scroll">
-  <div class="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-    <SectionTitle class="mb-6 sm:mb-8 md:mb-10" titleKey="certifications.title"
+  <div class="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <SectionTitle class="mb-8 sm:mb-12 md:mb-16" titleKey="certifications.title"
       >Certificaciones</SectionTitle
     >
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+    <!-- Certifications Grid with improved spacing -->
+    <div id="certifications-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       {
-        certification.map((cert) => (
-          <div class="flex justify-center">
+        certification.map((cert, index) => (
+          <div
+            class={`flex justify-center cert-item ${index >= 6 ? 'hidden' : ''}`}
+            data-cert-item
+            style={`animation-delay: ${index * 100}ms`}
+          >
             <CertificationsBadge {...cert} />
           </div>
         ))
       }
     </div>
+
+    <!-- Show More Button (only visible if more than 6 certifications) -->
+    {certification.length > 6 && (
+      <div class="flex justify-center mt-8 sm:mt-12">
+        <button
+          id="show-more-btn"
+          class="group flex items-center gap-2 px-6 py-3 bg-shakespeare-500/20 text-shakespeare-300 rounded-xl border border-shakespeare-500/30 hover:bg-shakespeare-500/30 hover:text-shakespeare-200 hover:border-shakespeare-500/50 transition-all duration-300 font-medium"
+        >
+          <span id="btn-text" data-i18n="certifications.showMore">Ver más certificaciones</span>
+          <svg id="btn-icon" class="w-5 h-5 transition-transform duration-300 group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+      </div>
+    )}
   </div>
 </section>
+
+<script>
+  function initShowMore() {
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const btnText = document.getElementById('btn-text');
+    const btnIcon = document.getElementById('btn-icon');
+    const certItems = document.querySelectorAll('[data-cert-item]');
+    
+    let isExpanded = false;
+
+    showMoreBtn?.addEventListener('click', () => {
+      isExpanded = !isExpanded;
+      
+      certItems.forEach((item, index) => {
+        if (index >= 6) {
+          if (isExpanded) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        }
+      });
+
+      // Update button text and icon
+      const currentLang = localStorage.getItem('lang') || 'es';
+      if (btnText) {
+        btnText.textContent = isExpanded 
+          ? (currentLang === 'es' ? 'Ver menos' : 'Show less')
+          : (currentLang === 'es' ? 'Ver más certificaciones' : 'Show more certifications');
+      }
+      
+      if (btnIcon) {
+        btnIcon.style.transform = isExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
+      }
+
+      // Smooth scroll to certifications if collapsing
+      if (!isExpanded) {
+        document.getElementById('certifications-grid')?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initShowMore);
+  document.addEventListener('astro:page-load', initShowMore);
+</script>
+
+<style>
+  .cert-item {
+    animation: fadeInScale 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+</style>
