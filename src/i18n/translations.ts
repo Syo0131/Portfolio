@@ -31,7 +31,7 @@ export const translations = {
     "experience.helpdesk.period": "Marzo 2025 - Mayo 2025",
     "experience.helpdesk.type": "Contrato de formación",
     "experience.helpdesk.desc1":
-      "Soporte a usuarios por mensaje y remotamente, resolución de incidencias técnicas.",
+      "Brindé soporte a usuarios por mensaje y remotamente, resolución de incidencias técnicas.",
     "experience.helpdesk.desc2":
       "Revisión de equipos y verificación de errores de hardware y software.",
     "experience.java.position": "Java Analyst Developer",
@@ -126,7 +126,7 @@ export const translations = {
     "experience.helpdesk.period": "March 2025 - May 2025",
     "experience.helpdesk.type": "Training contract",
     "experience.helpdesk.desc1":
-      "User support via messaging and remotely, technical incident resolution.",
+      "Provided user support via messaging and remotely, technical incident resolution.",
     "experience.helpdesk.desc2":
       "Equipment review and verification of hardware and software errors.",
     "experience.java.position": "Java Analyst Developer",
