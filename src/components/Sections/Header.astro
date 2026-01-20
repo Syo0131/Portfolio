@@ -4,10 +4,8 @@ import SideBar from "../Headerbadge.astro";
 import LanguageToggle from "../LanguageToggle.astro";
 ---
 
-<!-- Language Toggle - Fixed top right, aligned with sidebar center -->
-<div
-  class="fixed top-4 right-[0.5rem] sm:right-[1rem] lg:right-[1.5rem] xl:right-[2rem] z-[60]"
->
+<!-- Language Toggle - Fixed top right for desktop -->
+<div class="fixed top-5 right-4 lg:right-6 xl:right-8 z-[60] hidden lg:block">
   <LanguageToggle />
 </div>
 
@@ -106,5 +104,6 @@ import LanguageToggle from "../LanguageToggle.astro";
     >
       Contacto
     </a>
+    <LanguageToggle />
   </nav>
 </header>

@@ -8,25 +8,25 @@ const translationsJSON = JSON.stringify(translations);
 
 <button
   id="lang-toggle"
-  class="group relative flex items-center gap-1.5 px-3 py-2 rounded-full bg-slate-900/80 backdrop-blur-lg text-slate-300 hover:text-shakespeare-400 transition-all duration-300 hover:scale-105 ring-1 ring-white/20 hover:ring-shakespeare-500/40 hover:shadow-lg hover:shadow-shakespeare-500/10"
+  class="group relative flex items-center gap-1.5 lg:px-3 lg:py-2 lg:rounded-full lg:bg-slate-900/80 lg:backdrop-blur-lg text-slate-300 hover:text-shakespeare-400 transition-all duration-300 hover:scale-105 lg:ring-1 lg:ring-white/20 lg:hover:ring-shakespeare-500/40 lg:hover:shadow-lg lg:hover:shadow-shakespeare-500/10"
   aria-label="Toggle language"
   title="Cambiar idioma / Change language"
 >
   <Icon
     name="mdi:web"
-    class="w-4 h-4 transition-transform duration-300 group-hover:rotate-12"
+    class="w-5 h-5 lg:w-4 lg:h-4 transition-transform duration-300 group-hover:rotate-12"
   />
   <span
     id="lang-text"
-    class="text-xs font-semibold tracking-wider transition-all duration-300"
+    class="hidden lg:inline text-xs font-semibold tracking-wider transition-all duration-300"
     >ES</span
   >
 </button>
 
 <script define:vars={{ translationsJSON }}>
   function initLanguageToggle() {
-    const langToggle = document.getElementById("lang-toggle");
-    const langText = document.getElementById("lang-text");
+    const langToggles = document.querySelectorAll("#lang-toggle");
+    const langTexts = document.querySelectorAll("#lang-text");
 
     // Parse translations from server
     const translations = JSON.parse(translationsJSON);
@@ -40,17 +40,21 @@ const translationsJSON = JSON.stringify(translations);
     // Apply translations on load
     applyTranslations(currentLang);
 
-    langToggle?.addEventListener("click", () => {
-      currentLang = currentLang === "es" ? "en" : "es";
-      localStorage.setItem("lang", currentLang);
-      updateLangText(currentLang);
-      applyTranslations(currentLang);
+    langToggles.forEach(langToggle => {
+      langToggle?.addEventListener("click", () => {
+        currentLang = currentLang === "es" ? "en" : "es";
+        localStorage.setItem("lang", currentLang);
+        updateLangText(currentLang);
+        applyTranslations(currentLang);
+      });
     });
 
     function updateLangText(lang) {
-      if (langText) {
-        langText.textContent = lang === "es" ? "ES" : "EN";
-      }
+      langTexts.forEach(langText => {
+        if (langText) {
+          langText.textContent = lang === "es" ? "ES" : "EN";
+        }
+      });
     }
 
     function applyTranslations(lang) {
