@@ -57,17 +57,19 @@ const alignmentClassesMobile =
     <p class="text-base sm:text-lg font-semibold text-shakespeare-400 mb-1">
       {company}
     </p>
-    
+
     {
       description && description.length > 0 && (
         <ul class="list-inside text-xs sm:text-sm text-slate-300 mt-2 mb-3 space-y-1">
           {description.map((item, index) => (
-            <li class="leading-relaxed" data-i18n={descriptionKeys?.[index]}>{item}</li>
+            <li class="leading-relaxed" data-i18n={descriptionKeys?.[index]}>
+              {item}
+            </li>
           ))}
         </ul>
       )
     }
-    
+
     <div class="flex flex-wrap gap-2 mt-2">
       <time
         class="inline-block text-xs sm:text-sm px-3 py-1 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30"
@@ -75,9 +77,7 @@ const alignmentClassesMobile =
       >
       {
         typecontrat && (
-          <span
-            class="inline-block text-xs sm:text-sm px-3 py-1 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30"
-          >
+          <span class="inline-block text-xs sm:text-sm px-3 py-1 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30">
             {typecontrat}
           </span>
         )
