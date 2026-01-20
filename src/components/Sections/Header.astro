@@ -62,12 +62,12 @@ import LanguageToggle from "../LanguageToggle.astro";
 >
   <nav
     aria-label="Navegación principal móvil"
-    class="flex items-center gap-1.5 sm:gap-2 md:gap-3 rounded-full bg-slate-900/90 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 backdrop-blur-lg ring-1 ring-white/20 shadow-lg"
+    class="flex items-center gap-0.5 sm:gap-2 md:gap-3 rounded-full bg-slate-900/90 px-1.5 sm:px-4 md:px-5 py-2 sm:py-2.5 backdrop-blur-lg ring-1 ring-white/20 shadow-lg"
   >
     <a
       href="#sobre-mi"
       aria-label="Ir a Inicio"
-      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      class="hidden sm:block text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1 sm:px-2 md:px-3 text-[11px] sm:text-sm hover:scale-105"
       data-i18n="nav.home"
     >
       Inicio
@@ -75,7 +75,7 @@ import LanguageToggle from "../LanguageToggle.astro";
     <a
       href="#experiencia"
       aria-label="Ver Experiencia"
-      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-0.5 sm:px-2 md:px-3 text-[11px] sm:text-sm hover:scale-105"
       data-i18n="nav.experience"
     >
       Experiencia
@@ -83,15 +83,23 @@ import LanguageToggle from "../LanguageToggle.astro";
     <a
       href="#proyectos"
       aria-label="Ver Proyectos"
-      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-0.5 sm:px-2 md:px-3 text-[11px] sm:text-sm hover:scale-105"
       data-i18n="nav.projects"
     >
       Proyectos
     </a>
     <a
+      href="#certifications"
+      aria-label="Ver Certificaciones"
+      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-0.5 sm:px-2 md:px-3 text-[11px] sm:text-sm hover:scale-105"
+      data-i18n="nav.certifications"
+    >
+      Certificaciones
+    </a>
+    <a
       href="#skills"
       aria-label="Ver Habilidades"
-      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-0.5 sm:px-2 md:px-3 text-[11px] sm:text-sm hover:scale-105"
       data-i18n="nav.skills"
     >
       Habilidades
@@ -99,7 +107,7 @@ import LanguageToggle from "../LanguageToggle.astro";
     <a
       href="#contacto"
       aria-label="Ir a Contacto"
-      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-xs sm:text-sm hover:scale-105"
+      class="text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-[11px] sm:text-sm hover:scale-105"
       data-i18n="nav.contact"
     >
       Contacto
