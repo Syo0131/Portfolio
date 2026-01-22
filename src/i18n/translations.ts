@@ -16,9 +16,9 @@ export const translations = {
     "nav.certifications": "Certificaciones",
 
     // Hero
-    "hero.greeting": "Hey, Soy Daybel Diaz",
-    "hero.experience": "+1 año de experiencia.",
-    "hero.role": "Desarrollador Java",
+    "hero.greeting": "Hey, Soy",
+    "hero.experience": "+2 años de experiencia.",
+    "hero.role": " Ingeniero de software",
     "hero.location": "de República Dominicana",
     "hero.description":
       "Especializado en crear soluciones escalables, desde la lógica de negocio hasta la integración final.",
@@ -111,9 +111,9 @@ export const translations = {
     "nav.certifications": "Certifications",
 
     // Hero
-    "hero.greeting": "Hey, I'm Daybel Diaz",
-    "hero.experience": "+1 year of experience.",
-    "hero.role": "Java Developer",
+    "hero.greeting": "Hey, I'm",
+    "hero.experience": "+2 years of experience.",
+    "hero.role": "Sotftware Engineer",
     "hero.location": "from Dominican Republic",
     "hero.description":
       "Specialized in creating scalable solutions, from business logic to final integration.",

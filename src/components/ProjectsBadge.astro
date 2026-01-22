@@ -5,7 +5,6 @@ import OptimizedImage from "./OptimizedImage.astro";
 interface Props {
   name: string;
   nameKey?: string;
-  description: string;
   descriptionKey?: string;
   category: string;
   categoryKey?: string;
@@ -23,7 +22,6 @@ const {
   srcImage,
   category,
   categoryKey,
-  description,
   descriptionKey,
   technologies,
 } = Astro.props;
@@ -78,7 +76,6 @@ const {
         class="text-white text-xs sm:text-sm md:text-base mb-3 sm:mb-4 leading-relaxed"
         data-i18n={descriptionKey}
       >
-        {description}
       </p>
       <div class="flex items-center gap-x-3 sm:gap-x-4">
         {

@@ -2,97 +2,230 @@
 import Links from "../Links.astro";
 import OptimizedImage from "../OptimizedImage.astro";
 import Highlight from "../Highlight.astro";
-import Badge from "../Badge.astro";
 ---
 
 <section
   id="sobre-mi"
-  class="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8 animate-on-scroll"
+  class="min-h-screen flex items-center justify-center py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8 animate-on-scroll"
   aria-labelledby="hero-title"
 >
-  <div class="max-w-7xl mx-auto">
+  <div class="max-w-4xl mx-auto text-center">
     <div
-      class="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center"
+      class="flex flex-col items-center justify-center space-y-4 sm:space-y-5 md:space-y-6"
     >
-      <div class="flex flex-col items-center gap-4 sm:gap-5 md:gap-6">
-        <div
-          class="relative group w-full max-w-[280px] sm:max-w-[320px] md:max-w-none"
-        >
-          <div
-            class="relative transition-transform duration-500 ease-smooth-out group-hover:scale-[1.01]"
-          >
-            <OptimizedImage
-              src="linkedin2.jpg"
-              alt="Retrato de Daybel Diaz, Desarrollador Java"
-              width={700}
-              height={700}
-              class="w-full max-h-[350px] sm:max-h-[400px] object-fill object-top rounded-2xl shadow-2xl transition-shadow duration-500 ease-smooth-out group-hover:shadow-shakespeare-500/30"
-              loading="eager"
-            />
-            <div
-              class="absolute inset-0 rounded-2xl ring-2 ring-shakespeare-500/30 group-hover:ring-shakespeare-500/70 transition-all duration-500 ease-smooth-out group-hover:ring-4 pointer-events-none"
-            >
-            </div>
-          </div>
-        </div>
-      </div>
+      <p
+        class="text-sm sm:text-base text-slate-400 font-medium"
+        data-i18n="hero.greeting"
+      >
+        Hello, I'm
+      </p>
+
+      <h1
+        id="hero-title"
+        class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-slate-100"
+      >
+        Daybel Diaz
+      </h1>
 
       <div
-        class="flex flex-col justify-center space-y-4 sm:space-y-5 md:space-y-6 max-w-2xl mx-auto md:mx-0"
+        class="flex flex-wrap items-center justify-center gap-2 text-xl sm:text-2xl md:text-3xl"
       >
-        <h1
-          id="hero-title"
-          class="text-2xl sm:text-3xl md:text-4xl font-bold ml-[20px] text-slate-100"
-          data-i18n="hero.greeting"
+        <span class="text-slate-400 font-medium">
+          <span id="animated-role" class="text-slate-400"></span>
+        </span>
+        <span class="text-slate-100">&</span>
+        <span class="text-slate-100 font-semibold" data-i18n="hero.role"
+          >Backend Developer</span
         >
-          Hey, Soy Daybel Diaz
-        </h1>
-        <p
-          class="text-sm sm:text-base md:text-lg lg:text-xl text-slate-200 leading-relaxed max-w-xl"
-        >
-          <span data-i18n="hero.experience">+1 año de experiencia.</span>
-          <Highlight class="text-shakespeare-300 font-semibold">
-            <span data-i18n="hero.role">Desarrollador Java</span>
-          </Highlight>
-          <span data-i18n="hero.location">de República Dominicana</span>
-          <OptimizedImage
-            src="do.svg"
-            alt="Bandera de República Dominicana"
-            width={24}
-            height={24}
-            class="inline-block ml-1 align-baseline"
-            aria-hidden="true"
-          />. <span data-i18n="hero.description"
-            >Especializado en crear soluciones escalables, desde la lógica de
-            negocio hasta la integración final.</span
-          >
-        </p>
+      </div>
 
-        <div
-          class="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-3 pt-2 sm:pt-4"
+      <p class="text-sm sm:text-base text-slate-400 max-w-md pt-2">
+        Spring Boot • PostgreSQL • Docker
+      </p>
+
+      <p
+        class="text-sm sm:text-base md:text-lg text-slate-300 leading-relaxed max-w-2xl pt-4"
+      >
+        <span data-i18n="hero.experience">+1 año de experiencia.</span>
+        <span data-i18n="hero.location">de República Dominicana</span>
+        <OptimizedImage
+          src="do.svg"
+          alt="Bandera de República Dominicana"
+          width={24}
+          height={24}
+          class="inline-block ml-1 align-baseline"
+          aria-hidden="true"
+        />. <span data-i18n="hero.description"
+          >Especializado en crear soluciones escalables, desde la lógica de
+          negocio hasta la integración final.</span
         >
-          <Links
-            name="Github"
-            href="https://github.com/Syo0131"
-            icon="simple-icons:github"
-            aria-label="Visitar mi perfil de GitHub"
-          />
-          <Links
-            name="LinkedIn"
-            href="https://linkedin.com/in/DaybelDiaz/"
-            icon="mdi:linkedin"
-            aria-label="Conectar en LinkedIn"
-          />
-          <Links
-            name="Descargar CV"
-            nameKey="hero.downloadCv"
-            href="/Daybel_Diaz_Cv_Java.pdf"
-            icon="material-symbols:download"
-            download="DaybelDiaz_CV_Java.pdf"
-            aria-label="Descargar mi currículum en PDF"
-          />
-        </div>
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-3 sm:gap-4 pt-6 sm:pt-8">
+        <Links
+          name="Github"
+          href="https://github.com/Syo0131"
+          icon="simple-icons:github"
+          aria-label="Visitar mi perfil de GitHub"
+        />
+        <Links
+          name="LinkedIn"
+          href="https://linkedin.com/in/DaybelDiaz/"
+          icon="mdi:linkedin"
+          aria-label="Conectar en LinkedIn"
+        />
+        <Links
+          name="Descargar CV"
+          nameKey="hero.downloadCv"
+          href="/Daybel_Diaz_Cv_Java.pdf"
+          icon="material-symbols:download"
+          download="DaybelDiaz_CV_Java.pdf"
+          aria-label="Descargar mi currículum en PDF"
+        />
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  function initRoleAnimation() {
+    const rolesES = [
+      "Desarrollador Java",
+      "Desarrollador Backend",
+      "Desarrollador Spring Boot",
+      "Desarrollador Full-Stack",
+    ];
+
+    const rolesEN = [
+      "Java Developer",
+      "Backend Developer",
+      "Spring Boot Developer",
+      "Full-Stack Developer",
+    ];
+
+    let currentIndex = 0;
+    let currentLang = localStorage.getItem("lang") || "es";
+    let isAnimating = false;
+    let activeTimeouts: ReturnType<typeof setTimeout>[] = [];
+    const roleElement = document.getElementById("animated-role");
+
+    if (!roleElement) return;
+
+    function getCurrentRoles() {
+      return currentLang === "es" ? rolesES : rolesEN;
+    }
+
+    function clearAllTimeouts() {
+      activeTimeouts.forEach((timeout) => clearTimeout(timeout));
+      activeTimeouts = [];
+    }
+
+    function typeWriter(text: string, index: number, callback: () => void) {
+      if (!roleElement || !isAnimating) return;
+      if (index < text.length) {
+        roleElement.textContent = text.substring(0, index + 1);
+        const timeout = setTimeout(
+          () => typeWriter(text, index + 1, callback),
+          100,
+        );
+        activeTimeouts.push(timeout);
+      } else {
+        const timeout = setTimeout(callback, 2000);
+        activeTimeouts.push(timeout);
+      }
+    }
+
+    function eraseText(callback: () => void) {
+      if (!roleElement || !isAnimating) return;
+      const currentText = roleElement.textContent || "";
+      if (currentText.length > 0) {
+        roleElement.textContent = currentText.substring(
+          0,
+          currentText.length - 1,
+        );
+        const timeout = setTimeout(() => eraseText(callback), 50);
+        activeTimeouts.push(timeout);
+      } else {
+        callback();
+      }
+    }
+
+    function animateRole() {
+      if (!roleElement || !isAnimating) return;
+
+      const roles = getCurrentRoles();
+      const currentRole = roles[currentIndex];
+      typeWriter(currentRole, 0, () => {
+        eraseText(() => {
+          currentIndex = (currentIndex + 1) % roles.length;
+          const timeout = setTimeout(animateRole, 500);
+          activeTimeouts.push(timeout);
+        });
+      });
+    }
+
+    function startAnimation() {
+      clearAllTimeouts();
+      isAnimating = true;
+      currentIndex = 0;
+      if (roleElement) {
+        roleElement.textContent = "";
+      }
+      animateRole();
+    }
+
+    function stopAnimation() {
+      isAnimating = false;
+      clearAllTimeouts();
+      if (roleElement) {
+        roleElement.textContent = "";
+      }
+    }
+
+    // Verificar cambios de idioma
+    let checkInterval = setInterval(() => {
+      const newLang = localStorage.getItem("lang") || "es";
+      if (newLang !== currentLang) {
+        currentLang = newLang;
+        stopAnimation();
+        setTimeout(startAnimation, 200);
+      }
+    }, 300);
+
+    // Iniciar animación
+    startAnimation();
+
+    // Cleanup al desmontar
+    window.addEventListener("beforeunload", () => {
+      clearInterval(checkInterval);
+      stopAnimation();
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initRoleAnimation);
+  } else {
+    initRoleAnimation();
+  }
+
+  document.addEventListener("astro:page-load", initRoleAnimation);
+</script>
+
+<style>
+  #animated-role::after {
+    content: "|";
+    animation: blink 1s infinite;
+    margin-left: 2px;
+  }
+
+  @keyframes blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
+</style>
