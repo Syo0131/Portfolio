@@ -49,6 +49,12 @@ import LanguageToggle from "../LanguageToggle.astro";
       icon="mdi:code-braces"
     />
     <SideBar
+      href="#learning"
+      name="Aprendizajes"
+      nameKey="nav.learning"
+      icon="mdi:school"
+    />
+    <SideBar
       href="#contacto"
       name="Contacto"
       nameKey="nav.contact"
@@ -123,6 +129,14 @@ import LanguageToggle from "../LanguageToggle.astro";
         data-section="skills"
       >
         Habilidades
+      </a>
+      <a
+        href="#learning"
+        class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
+        data-i18n="nav.learning"
+        data-section="learning"
+      >
+        Aprendizajes
       </a>
       <a
         href="#contacto"

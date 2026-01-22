@@ -12,6 +12,7 @@ export const translations = {
     "nav.experience": "Experiencia",
     "nav.projects": "Proyectos",
     "nav.skills": "Habilidades",
+    "nav.learning": "Ruta de aprendizaje",
     "nav.contact": "Contacto",
     "nav.certifications": "Certificaciones",
 
@@ -82,6 +83,10 @@ export const translations = {
     "certifications.solid.title": "Principios SOLID y Clean Code",
     "certifications.solid.date": "Enero 2026",
 
+    // Learning Path
+    "learning.title": "Ruta de Aprendizaje",
+    "learning.subtitle": "Mi enfoque actual",
+
     // Contact
     "contact.title": "¿Tienes algún proyecto en mente?",
     "contact.subtitle": "Completa el formulario y te responderé lo antes posible.",
@@ -107,6 +112,7 @@ export const translations = {
     "nav.experience": "Experience",
     "nav.projects": "Projects",
     "nav.skills": "Skills",
+    "nav.learning": "Learning Path",
     "nav.contact": "Contact",
     "nav.certifications": "Certifications",
 
@@ -175,6 +181,10 @@ export const translations = {
     "certifications.csharp.date": "December 2025",
     "certifications.solid.title": "SOLID Principles and Clean Code",
     "certifications.solid.date": "January 2026",
+
+    // Learning Path
+    "learning.title": "Learning Path",
+    "learning.subtitle": "My current focus",
 
     // Contact
     "contact.title": "Have a project in mind?",
