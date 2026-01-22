@@ -58,71 +58,113 @@ import LanguageToggle from "../LanguageToggle.astro";
 </aside>
 
 <header
-  class="fixed top-0 left-0 right-0 z-50 flex justify-center py-3 sm:py-4 px-3 sm:px-4 lg:hidden"
+  class="fixed top-0 left-0 right-0 z-50 lg:hidden"
 >
+  <div class="flex items-center justify-end px-3 sm:px-4 md:px-6 py-3 sm:py-3.5 md:py-4">
+    <!-- Controles derecha -->
+    <div class="flex items-center gap-2 sm:gap-3">
+      <LanguageToggle />
+      
+      <!-- Botón menú hamburguesa -->
+      <button
+        id="mobile-menu-toggle"
+        class="p-1.5 sm:p-2 text-slate-100 hover:text-shakespeare-400 transition-colors duration-300"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+        <Icon name="mdi:menu" class="w-5 h-5 sm:w-6 sm:h-6" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú móvil desplegable -->
   <nav
+    id="mobile-menu"
+    class="hidden bg-slate-950/95 backdrop-blur-lg border-t border-white/10"
     aria-label="Navegación principal móvil"
-    class="flex items-center gap-0.5 sm:gap-2 md:gap-3 rounded-full bg-slate-900/90 px-1.5 sm:px-4 md:px-5 py-2 sm:py-2.5 backdrop-blur-lg ring-1 ring-white/20 shadow-lg"
   >
-    <a
-      href="#sobre-mi"
-      aria-label="Ir a Inicio"
-      class="nav-link hidden sm:block text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1 sm:px-2 md:px-3 text-[11px] sm:text-sm hover:scale-105"
-      data-i18n="nav.home"
-      data-section="sobre-mi"
-    >
-      Inicio
-    </a>
-    <a
-      href="#experiencia"
-      aria-label="Ver Experiencia"
-      class="nav-link text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-0.5 sm:px-2 md:px-3 text-[11px] sm:text-sm hover:scale-105"
-      data-i18n="nav.experience"
-      data-section="experiencia"
-    >
-      Experiencia
-    </a>
-    <a
-      href="#proyectos"
-      aria-label="Ver Proyectos"
-      class="nav-link text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-0.5 sm:px-2 md:px-3 text-[11px] sm:text-sm hover:scale-105"
-      data-i18n="nav.projects"
-      data-section="proyectos"
-    >
-      Proyectos
-    </a>
-    <a
-      href="#certifications"
-      aria-label="Ver Certificaciones"
-      class="nav-link text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-0.5 sm:px-2 md:px-3 text-[11px] sm:text-sm hover:scale-105"
-      data-i18n="nav.certifications"
-      data-section="certifications"
-    >
-      Certificaciones
-    </a>
-    <a
-      href="#skills"
-      aria-label="Ver Habilidades"
-      class="nav-link text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-0.5 sm:px-2 md:px-3 text-[11px] sm:text-sm hover:scale-105"
-      data-i18n="nav.skills"
-      data-section="skills"
-    >
-      Habilidades
-    </a>
-    <a
-      href="#contacto"
-      aria-label="Ir a Contacto"
-      class="nav-link text-slate-100 hover:text-shakespeare-300 transition-all duration-300 px-1.5 sm:px-2 md:px-3 text-[11px] sm:text-sm hover:scale-105"
-      data-i18n="nav.contact"
-      data-section="contacto"
-    >
-      Contacto
-    </a>
-    <LanguageToggle />
+    <div class="px-3 sm:px-4 py-2 sm:py-3 space-y-0.5 sm:space-y-1">
+      <a
+        href="#sobre-mi"
+        class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
+        data-i18n="nav.home"
+        data-section="sobre-mi"
+      >
+        Inicio
+      </a>
+      <a
+        href="#experiencia"
+        class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
+        data-i18n="nav.experience"
+        data-section="experiencia"
+      >
+        Experiencia
+      </a>
+      <a
+        href="#proyectos"
+        class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
+        data-i18n="nav.projects"
+        data-section="proyectos"
+      >
+        Proyectos
+      </a>
+      <a
+        href="#certifications"
+        class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
+        data-i18n="nav.certifications"
+        data-section="certifications"
+      >
+        Certificaciones
+      </a>
+      <a
+        href="#skills"
+        class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
+        data-i18n="nav.skills"
+        data-section="skills"
+      >
+        Habilidades
+      </a>
+      <a
+        href="#contacto"
+        class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
+        data-i18n="nav.contact"
+        data-section="contacto"
+      >
+        Contacto
+      </a>
+    </div>
   </nav>
 </header>
 
 <script>
+  function initMobileMenu() {
+    const menuToggle = document.getElementById("mobile-menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const mobileNavItems = document.querySelectorAll(".mobile-nav-item");
+
+    if (!menuToggle || !mobileMenu) return;
+
+    menuToggle.addEventListener("click", () => {
+      const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
+      
+      if (isExpanded) {
+        mobileMenu.classList.add("hidden");
+        menuToggle.setAttribute("aria-expanded", "false");
+      } else {
+        mobileMenu.classList.remove("hidden");
+        menuToggle.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    // Cerrar menú al hacer click en un enlace
+    mobileNavItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
   function initActiveSection() {
     const sections = document.querySelectorAll("section[id]");
     const navLinks = document.querySelectorAll(".nav-link");
@@ -169,15 +211,21 @@ import LanguageToggle from "../LanguageToggle.astro";
     });
   }
 
-  // Inicializar en carga del DOM
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initActiveSection);
-  } else {
+  // Inicializar funciones
+  function initHeader() {
+    initMobileMenu();
     initActiveSection();
   }
 
+  // Inicializar en carga del DOM
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initHeader);
+  } else {
+    initHeader();
+  }
+
   // Reinicializar en navegación de Astro (si usas view transitions)
-  document.addEventListener("astro:page-load", initActiveSection);
+  document.addEventListener("astro:page-load", initHeader);
 </script>
 
 <style is:global>
@@ -185,7 +233,7 @@ import LanguageToggle from "../LanguageToggle.astro";
   header .nav-link.active {
     color: #5eb3e4 !important;
     font-weight: 700 !important;
-    transform: scale(1.08) !important;
+    background-color: rgba(94, 179, 228, 0.15) !important;
   }
 
   /* Estilos para nav links activos - desktop sidebar */
