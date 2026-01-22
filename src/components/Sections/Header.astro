@@ -57,14 +57,14 @@ import LanguageToggle from "../LanguageToggle.astro";
   </nav>
 </aside>
 
-<header
-  class="fixed top-0 left-0 right-0 z-50 lg:hidden"
->
-  <div class="flex items-center justify-end px-3 sm:px-4 md:px-6 py-3 sm:py-3.5 md:py-4">
+<header class="fixed top-0 left-0 right-0 z-50 lg:hidden">
+  <div
+    class="flex items-center justify-end px-3 sm:px-4 md:px-6 py-3 sm:py-3.5 md:py-4"
+  >
     <!-- Controles derecha -->
     <div class="flex items-center gap-2 sm:gap-3">
       <LanguageToggle />
-      
+
       <!-- Botón menú hamburguesa -->
       <button
         id="mobile-menu-toggle"
@@ -146,7 +146,7 @@ import LanguageToggle from "../LanguageToggle.astro";
 
     menuToggle.addEventListener("click", () => {
       const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
-      
+
       if (isExpanded) {
         mobileMenu.classList.add("hidden");
         menuToggle.setAttribute("aria-expanded", "false");
@@ -169,11 +169,7 @@ import LanguageToggle from "../LanguageToggle.astro";
     const sections = document.querySelectorAll("section[id]");
     const navLinks = document.querySelectorAll(".nav-link");
 
-    console.log("Sections found:", sections.length);
-    console.log("Nav links found:", navLinks.length);
-
     if (sections.length === 0 || navLinks.length === 0) {
-      console.warn("No sections or nav links found");
       return;
     }
 
@@ -188,14 +184,12 @@ import LanguageToggle from "../LanguageToggle.astro";
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const sectionId = entry.target.id;
-          console.log("Section active:", sectionId);
 
           // Remover clase activa de todos los links
           navLinks.forEach((link) => {
             const linkSection = link.getAttribute("data-section");
             if (linkSection === sectionId) {
               link.classList.add("active");
-              console.log("Added active class to:", link);
             } else {
               link.classList.remove("active");
             }
@@ -207,7 +201,6 @@ import LanguageToggle from "../LanguageToggle.astro";
     // Observar todas las secciones
     sections.forEach((section) => {
       observer.observe(section);
-      console.log("Observing section:", section.id);
     });
   }
 
