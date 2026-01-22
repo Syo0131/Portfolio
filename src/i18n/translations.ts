@@ -58,7 +58,7 @@ export const translations = {
     "skills.title": "Habilidades Técnicas",
     "skills.frontend": "Frontend",
     "skills.backend": "Backend",
-    "skills.devops": "DevOps & Tools",
+    "skills.tools": "Tools",
 
     // Certifications
     "certifications.title": "Certificaciones",
@@ -153,7 +153,7 @@ export const translations = {
     "skills.title": "Technical Skills",
     "skills.frontend": "Frontend",
     "skills.backend": "Backend",
-    "skills.devops": "DevOps & Tools",
+    "skills.tools": "Tools",
 
     // Certifications
     "certifications.title": "Certifications",
