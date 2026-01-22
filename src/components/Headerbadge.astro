@@ -8,12 +8,14 @@ interface Props {
 }
 
 const { href, name, nameKey, icon } = Astro.props;
+const sectionId = href.replace("#", "");
 ---
 
 <a
   href={href}
-  class="group relative flex items-center justify-center text-slate-100 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 p-2.5 sm:p-3 rounded-full hover:bg-shakespeare-500/10"
+  class="nav-link group relative flex items-center justify-center text-slate-100 hover:text-shakespeare-300 transition-all duration-300 ease-smooth-out hover:scale-110 p-2.5 sm:p-3 rounded-full hover:bg-shakespeare-500/10"
   aria-label={name}
+  data-section={sectionId}
 >
   <Icon
     name={icon}
