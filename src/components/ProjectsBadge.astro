@@ -30,7 +30,7 @@ const mainImage = images[0];
 ---
 
 <div
-  class="project-card group bg-[#111827]/40 backdrop-blur-md border border-slate-800/60 rounded-2xl p-6 transition-all duration-500 hover:border-shakespeare-500/40 hover:bg-[#111827] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] flex flex-col h-full border-b-2 hover:border-b-shakespeare-500 "
+  class="project-card group bg-[#111827]/40 backdrop-blur-md border border-slate-800/60 rounded-2xl p-6 transition-all duration-500 hover:border-shakespeare-500/40 hover:bg-[#111827] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] flex flex-col h-full border-b-2 hover:border-b-shakespeare-500"
 >
   <div class="flex justify-end mb-2">
     <div class="flex gap-4 items-center">
@@ -109,150 +109,161 @@ const mainImage = images[0];
       }
     </div>
 
-
-      <div class="flex items-center gap-2">
-        <div class="size-1.5 rounded-full bg-shakespeare-500 animate-pulse">
-        </div>
-        <span
-          class="text-[12px] font-bold tracking-wider text-slate-300 uppercase"
-          data-i18n={categoryKey}
-        >
-          {category}
-        </span>
- 
-  </div>
-</div>
-
-<dialog
-  id="image-modal"
-  class="bg-transparent backdrop:backdrop-blur-2xl p-0 w-full h-full max-w-full max-h-full border-none outline-none overflow-hidden group/modal"
->
-  <div
-    class="relative w-full h-full flex items-center justify-center bg-[#020617]/95"
-  >
-    <button
-      id="prev-img"
-      class="absolute left-6 z-[100] text-white/20 hover:text-shakespeare-400 transition-all p-4 hidden sm:block"
-    >
-      <Icon name="mdi:chevron-left" class="size-16" />
-    </button>
-    <button
-      id="next-img"
-      class="absolute right-6 z-[100] text-white/20 hover:text-shakespeare-400 transition-all p-4 hidden sm:block"
-    >
-      <Icon name="mdi:chevron-right" class="size-16" />
-    </button>
-    <button
-      id="close-modal"
-      class="absolute top-8 right-8 z-[100] text-white/20 hover:text-red-400 transition-all"
-    >
-      <Icon name="mdi:close-circle-outline" class="size-10" />
-    </button>
-
-    <div
-      class="w-full h-full flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
-      id="modal-bg-close"
-    >
-      <img
-        id="modal-img"
-        src=""
-        class="max-w-full max-h-full object-contain rounded-xl shadow-[0_0_80px_rgba(59,130,246,0.15)] transform transition-all duration-500 select-none"
-      />
+    <div class="flex items-center gap-2">
+      <div class="size-1.5 rounded-full bg-shakespeare-500 animate-pulse"></div>
+      <span
+        class="text-[12px] font-bold tracking-wider text-slate-300 uppercase"
+        data-i18n={categoryKey}
+      >
+        {category}
+      </span>
     </div>
   </div>
-</dialog>
 
-<script>
-  const initModal = () => {
-    const modal = document.getElementById("image-modal") as HTMLDialogElement;
-    const modalImg = document.getElementById("modal-img") as HTMLImageElement;
-    const nextBtn = document.getElementById("next-img");
-    const prevBtn = document.getElementById("prev-img");
-    const closeBtn = document.getElementById("close-modal");
-    const bgClose = document.getElementById("modal-bg-close");
+  <dialog
+    id="image-modal"
+    class="bg-transparent backdrop:backdrop-blur-2xl p-0 w-full h-full max-w-full max-h-full border-none outline-none overflow-hidden group/modal"
+  >
+    <div
+      class="relative w-full h-full flex items-center justify-center bg-[#020617]/95"
+    >
+      <button
+        id="prev-img"
+        class="absolute left-6 z-[100] text-white/20 hover:text-shakespeare-400 transition-all p-4 hidden sm:block"
+      >
+        <Icon name="mdi:chevron-left" class="size-16" />
+      </button>
+      <button
+        id="next-img"
+        class="absolute right-6 z-[100] text-white/20 hover:text-shakespeare-400 transition-all p-4 hidden sm:block"
+      >
+        <Icon name="mdi:chevron-right" class="size-16" />
+      </button>
+      <button
+        id="close-modal"
+        class="absolute top-8 right-8 z-[100] text-white/20 hover:text-red-400 transition-all"
+      >
+        <Icon name="mdi:close-circle-outline" class="size-10" />
+      </button>
 
-    let imagesList: string[] = [];
-    let currentIndex = 0;
+      <div
+        class="w-full h-full flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
+        id="modal-bg-close"
+      >
+        <img
+          id="modal-img"
+          src=""
+          class="max-w-full max-h-full object-contain rounded-xl shadow-[0_0_80px_rgba(59,130,246,0.15)] transform transition-all duration-500 select-none"
+        />
+      </div>
+    </div>
+  </dialog>
 
-    const updateView = () => {
-      if (!modalImg) return;
-      modalImg.style.opacity = "0";
-      modalImg.style.transform = "scale(0.98)";
+  <script>
+    const initModal = () => {
+      const modal = document.getElementById("image-modal") as HTMLDialogElement;
+      const modalImg = document.getElementById("modal-img") as HTMLImageElement;
+      const nextBtn = document.getElementById("next-img");
+      const prevBtn = document.getElementById("prev-img");
+      const closeBtn = document.getElementById("close-modal");
+      const bgClose = document.getElementById("modal-bg-close");
 
-      const loader = new Image();
-      loader.src = imagesList[currentIndex];
-      loader.onload = () => {
-        modalImg.src = imagesList[currentIndex];
-        modalImg.style.opacity = "1";
-        modalImg.style.transform = "scale(1)";
-      };
-    };
+      let imagesList: string[] = [];
+      let currentIndex = 0;
 
-    document.querySelectorAll(".expand-img-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const raw = btn.getAttribute("data-project-images");
-        imagesList = raw ? raw.split(",") : [];
-        currentIndex = 0;
+      const updateView = () => {
+        if (!modalImg) return;
+        modalImg.style.opacity = "0";
+        modalImg.style.transform = "scale(0.98)";
 
-        if (modalImg && imagesList.length > 0) {
+        const loader = new Image();
+        loader.src = imagesList[currentIndex];
+        loader.onload = () => {
           modalImg.src = imagesList[currentIndex];
           modalImg.style.opacity = "1";
           modalImg.style.transform = "scale(1)";
-          modal.showModal();
-          const multi = imagesList.length > 1;
-          [nextBtn, prevBtn].forEach((el) =>
-            el?.classList.toggle("hidden", !multi),
-          );
-        }
+        };
+      };
+
+      document.querySelectorAll(".expand-img-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const raw = btn.getAttribute("data-project-images");
+          imagesList = raw ? raw.split(",") : [];
+          currentIndex = 0;
+
+          if (modalImg && imagesList.length > 0) {
+            modalImg.src = imagesList[currentIndex];
+            modalImg.style.opacity = "1";
+            modalImg.style.transform = "scale(1)";
+            modal.showModal();
+            const multi = imagesList.length > 1;
+            [nextBtn, prevBtn].forEach((el) =>
+              el?.classList.toggle("hidden", !multi),
+            );
+          }
+        });
       });
-    });
 
-    nextBtn?.addEventListener("click", (e) => {
-      e.stopPropagation();
-      currentIndex = (currentIndex + 1) % imagesList.length;
-      updateView();
-    });
+      nextBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % imagesList.length;
+        updateView();
+      });
 
-    prevBtn?.addEventListener("click", (e) => {
-      e.stopPropagation();
-      currentIndex = (currentIndex - 1 + imagesList.length) % imagesList.length;
-      updateView();
-    });
+      prevBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentIndex =
+          (currentIndex - 1 + imagesList.length) % imagesList.length;
+        updateView();
+      });
 
-    const closeHandler = () => modal.close();
-    [closeBtn, bgClose].forEach((el) =>
-      el?.addEventListener("click", closeHandler),
-    );
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) closeHandler();
-    });
-  };
+      const resetModal = () => {
+        currentIndex = 0; // Reinicia el índice a la primera imagen
+        if (modalImg) {
+          modalImg.src = imagesList[currentIndex];
+          modalImg.style.opacity = "1";
+          modalImg.style.transform = "scale(1)";
+        }
+      };
 
-  initModal();
-  document.addEventListener("astro:after-swap", initModal);
-</script>
+      const closeHandler = () => {
+        resetModal(); // Llama a resetModal al cerrar el modal
+        modal.close();
+      };
+      [closeBtn, bgClose].forEach((el) =>
+        el?.addEventListener("click", closeHandler),
+      );
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeHandler();
+      });
+    };
 
-<style>
-  html:has(dialog[open]) {
-    overflow: hidden;
-  }
+    initModal();
+    document.addEventListener("astro:after-swap", initModal);
+  </script>
 
-  #modal-img {
-    max-width: 92vw;
-    max-height: 88vh;
-  }
-
-  /* Animación de entrada suave para el modal */
-  dialog[open] {
-    animation: fadeIn 0.3s ease-out forwards;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
+  <style>
+    html:has(dialog[open]) {
+      overflow: hidden;
     }
-    to {
-      opacity: 1;
+
+    #modal-img {
+      max-width: 92vw;
+      max-height: 88vh;
     }
-  }
-</style>
+
+    /* Animación de entrada suave para el modal */
+    dialog[open] {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</div>
