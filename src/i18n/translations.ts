@@ -73,8 +73,12 @@ export const translations = {
       "Spring Framework 6 & Spring Boot 3 desde cero a experto",
     "certifications.spring.date": "Octubre 2025",
     "certifications.java.title":
-      "Java avanzado: reactividad, concurrencia y patrones",
+    "Java avanzado: reactividad, concurrencia y patrones",
     "certifications.java.date": "Cursando",
+    "certifications.fullstack.title": "Desarrollo Web Full Stack - Nivel Intermedio",
+    "certifications.fullstack.date": "Enero 2026",
+    "certifications.springframework.title": "Spring Boot with Spring Framework",
+    "certifications.springframework.date": "Enero 2026",
     "certifications.python.title":
       "Python para principiantes - Aprende desde cero",
     "certifications.python.date": "Mayo 2024",
@@ -173,8 +177,12 @@ export const translations = {
       "Spring Framework 6 & Spring Boot 3 from zero to expert",
     "certifications.spring.date": "October 2025",
     "certifications.java.title":
-      "Advanced Java: reactivity, concurrency and patterns",
+    "Advanced Java: reactivity, concurrency and patterns",
     "certifications.java.date": "In progress",
+    "certifications.fullstack.title": "Full Stack Web Development - Intermediate Level",
+    "certifications.fullstack.date": "January 2026",
+    "certifications.springframework.title": "Spring Boot with Spring Framework",
+    "certifications.springframework.date": "January 2026",
     "certifications.python.title": "Python for beginners - Learn from scratch",
     "certifications.python.date": "May 2024",
     "certifications.csharp.title": "Introduction to programming with C#",
