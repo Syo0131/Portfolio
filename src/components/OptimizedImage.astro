@@ -26,18 +26,17 @@ const {
 
 // Importar dinámicamente la imagen desde assets
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "../assets/**/*.{png,jpg,jpeg,gif,webp,svg}"
+  "/public/**/*.{png,jpg,jpeg,gif,webp,svg}"
 );
 
 // Construir la ruta completa
-const imagePath = `../assets/${src}`;
-
+const imagePath = `/public/${src}`;
 // Obtener la imagen
 const imageModule = images[imagePath];
 
 if (!imageModule) {
   throw new Error(
-    `Image not found: ${src}. Make sure the image exists in src/assets/`
+    `Image not found: ${src}. Make sure the image exists in src/public/`
   );
 }
 

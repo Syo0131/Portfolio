@@ -9,7 +9,7 @@ export const translations = {
   es: {
     // Navigation
     "nav.home": "Inicio",
-    "nav.experience": "Experiencia",
+    "nav.experience": "Experiencia Laboral",
     "nav.projects": "Proyectos",
     "nav.skills": "Habilidades",
     "nav.learning": "Ruta de aprendizaje",
@@ -25,8 +25,8 @@ export const translations = {
       "Especializado en crear soluciones escalables, desde la lógica de negocio hasta la integración final.",
     "hero.downloadCv": "Descargar CV",
 
-    // Experience
-    "experience.title": "Experiencia",
+    // ! Experience Laboral
+    "experience.title": "Experiencia Laboral",
     "experience.helpdesk.position": "Soporte HelpDesk",
     "experience.helpdesk.company": "BitBox Caribe SRL",
     "experience.helpdesk.period": "Marzo 2025 - Mayo 2025",
@@ -45,11 +45,21 @@ export const translations = {
       "Implementación de funcionalidades para el procesamiento de facturas electrónicas y conciliación de transacciones.",
 
     // Projects
+
+    // * Spendly
     "projects.title": "Proyectos",
     "projects.spendly.name": "Spendly",
     "projects.spendly.description":
       "Una aplicación web moderna desarrollada con Spring Boot y PostgreSQL para el control y seguimiento de gastos personales mensuales con una interfaz elegante y funcional.",
     "projects.spendly.category": "Full-Stack",
+
+    // // * Citadel Logs
+    // "projects.citadelLogs.name": "Citadel Logs",
+    // "projects.citadelLogs.description":
+    //   "Aplicación web desarrollada con React y Node.js para la visualización y gestión de logs en tiempo real, ofreciendo una interfaz intuitiva para monitorear eventos del sistema.",
+    // "projects.citadelLogs.category": "Full-Stack",
+
+    // * El Pensum API
     "projects.elpensum.name": "El Pensum API",
     "projects.elpensum.description":
       "API RESTful construida con Spring Boot que proporciona acceso a datos académicos, incluyendo carreras, cursos y planes de estudio, facilitando la integración con aplicaciones educativas.",
@@ -113,7 +123,7 @@ export const translations = {
   en: {
     // Navigation
     "nav.home": "Home",
-    "nav.experience": "Experience",
+    "nav.experience": "Experiences",
     "nav.projects": "Projects",
     "nav.skills": "Skills",
     "nav.learning": "Learning Path",
@@ -130,7 +140,7 @@ export const translations = {
     "hero.downloadCv": "Download CV",
 
     // Experience
-    "experience.title": "Experience",
+    "experience.title": "Experiences",
     "experience.helpdesk.position": "HelpDesk Support",
     "experience.helpdesk.company": "BitBox Caribe SRL",
     "experience.helpdesk.period": "March 2025 - May 2025",
@@ -149,6 +159,7 @@ export const translations = {
       "Implementation of functionalities for electronic invoice processing and transaction reconciliation.",
 
     // Projects
+
     "projects.title": "Projects",
     "projects.spendly.name": "Spendly",
     "projects.spendly.description":
