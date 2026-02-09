@@ -43,6 +43,14 @@ export const translations = {
       "Desarrollo y mantenimiento de módulos Java para la gestión de usuarios y tarjetas de fidelidad.",
     "experience.java.desc2":
       "Implementación de funcionalidades para el procesamiento de facturas electrónicas y conciliación de transacciones.",
+    "experience.pensum.position": "BackEnd & Infraestructure engineer",
+    "experience.pensum.company": "El Pensum",
+    "experience.pensum.period": "Noviembre 2025 - Febrero 2026",
+    "experience.pensum.type": "Contrato de formación",
+    "experience.pensum.desc1":
+      "Responsable de la arquitectura integral del proyecto, enfocándome en la escalabilidad del backend y la eficiencia operativa de la infraestructura.",
+    "experience.pensum.desc2":
+      "Arquitecté el backend con Spring Boot, aplicando patrones de diseño para garantizar la mantenibilidad y el rendimiento con PostgreSQL",
 
     // Projects
 
@@ -157,6 +165,14 @@ export const translations = {
       "Development and maintenance of Java modules for user management and loyalty cards.",
     "experience.java.desc2":
       "Implementation of functionalities for electronic invoice processing and transaction reconciliation.",
+    "experience.pensum.position": "BackEnd & Infrastructure Engineer",
+    "experience.pensum.company": "El Pensum",
+    "experience.pensum.period": "November 2025 - February 2026",
+    "experience.pensum.type": "Training contract",
+    "experience.pensum.desc1":
+      "Responsible for the overall project architecture, focusing on backend scalability and infrastructure operational efficiency.",
+    "experience.pensum.desc2":
+      "Architected the backend with Spring Boot, applying design patterns to ensure maintainability and performance with PostgreSQL",
 
     // Projects
 
