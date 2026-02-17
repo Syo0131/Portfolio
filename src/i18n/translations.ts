@@ -87,6 +87,7 @@ export const translations = {
     "certifications.comingSoon": "Próximamente",
     "certifications.showMore": "Ver más certificaciones",
     "certifications.showLess": "Ver menos",
+    "certifications.close": "Cerrar",
     "certifications.spring.title":
       "Spring Framework 6 & Spring Boot 3 desde cero a experto",
     "certifications.spring.date": "Octubre 2025",
@@ -104,6 +105,8 @@ export const translations = {
     "certifications.csharp.date": "Diciembre 2025",
     "certifications.solid.title": "Principios SOLID y Clean Code",
     "certifications.solid.date": "Enero 2026",
+    "certifications.sql.title": "Introducción a SQL",
+    "certifications.sql.date": "Febrero 2026",
 
     // Learning Path
     "learning.title": "Ruta de Aprendizaje",
@@ -200,6 +203,7 @@ export const translations = {
     "certifications.comingSoon": "Coming soon",
     "certifications.showMore": "Show more certifications",
     "certifications.showLess": "Show less",
+    "certifications.close": "Close",
     "certifications.spring.title":
       "Spring Framework 6 & Spring Boot 3 from zero to expert",
     "certifications.spring.date": "October 2025",
@@ -216,6 +220,8 @@ export const translations = {
     "certifications.csharp.date": "December 2025",
     "certifications.solid.title": "SOLID Principles and Clean Code",
     "certifications.solid.date": "January 2026",
+    "certifications.sql.title": "Introduction to SQL",
+    "certifications.sql.date": "February 2026",
 
     // Learning Path
     "learning.title": "Learning Path",

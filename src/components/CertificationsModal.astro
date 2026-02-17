@@ -1,0 +1,193 @@
+---
+import CertificationsBadge from "./CertificationsBadge.astro";
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+  certifications: Array<{
+    title: string;
+    titleKey?: string;
+    issuer: string;
+    teacher?: string;
+    date: string;
+    dateKey?: string;
+    link?: string;
+    icon?: string;
+  }>;
+}
+
+const { certifications } = Astro.props;
+---
+
+<!-- Modal Backdrop -->
+<div
+  id="certifications-modal"
+  class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+>
+  <!-- Modal Container -->
+  <div
+    class="flex items-center justify-center min-h-screen p-4 sm:p-6"
+    id="modal-container"
+  >
+    <!-- Modal Content -->
+    <div
+      id="modal-content"
+      class="relative bg-gradient-to-br from-slate-900/95 to-slate-800/95 backdrop-blur-xl border border-shakespeare-800/40 rounded-3xl shadow-2xl w-full max-w-7xl max-h-[90vh] overflow-hidden transform scale-95 transition-transform duration-300"
+    >
+      <!-- Modal Header -->
+      <div
+        class="sticky top-0 z-10 bg-gradient-to-b from-slate-900 to-slate-900/95 backdrop-blur-xl border-b border-shakespeare-800/30 px-6 py-5 sm:px-8 sm:py-6"
+      >
+        <div class="flex items-center justify-between">
+          <h2
+            id="modal-title"
+            class="text-2xl sm:text-3xl font-bold text-slate-100 flex items-center gap-3"
+          >
+            <div
+              class="p-2 bg-shakespeare-500/20 rounded-xl border border-shakespeare-500/30"
+            >
+              <Icon
+                name="mdi:certificate"
+                class="size-6 text-shakespeare-400"
+              />
+            </div>
+            <span data-i18n="certifications.title">Certificaciones</span>
+          </h2>
+          <button
+            id="close-modal-btn"
+            class="group p-2.5 hover:bg-shakespeare-500/20 rounded-xl border border-transparent hover:border-shakespeare-500/30 transition-all duration-300"
+            data-i18n-aria="certifications.close"
+            aria-label="Cerrar"
+          >
+            <Icon
+              name="mdi:close"
+              class="size-6 text-slate-400 group-hover:text-shakespeare-400 group-hover:rotate-90 transition-all duration-300"
+            />
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body with Scroll -->
+      <div class="overflow-y-auto max-h-[calc(90vh-100px)] px-6 py-8 sm:px-8">
+        <!-- Certifications Grid -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+        >
+          {
+            certifications.map((cert, index) => (
+              <div
+                class="flex justify-center modal-cert-item"
+                style={`animation-delay: ${index * 50}ms`}
+              >
+                <CertificationsBadge {...cert} />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initModal() {
+    const modal = document.getElementById("certifications-modal");
+    const modalContent = document.getElementById("modal-content");
+    const closeBtn = document.getElementById("close-modal-btn");
+    const modalContainer = document.getElementById("modal-container");
+
+    // Function to open modal
+    function openModal() {
+      if (modal && modalContent) {
+        modal.classList.remove("hidden");
+        // Trigger reflow
+        modal.offsetHeight;
+        modal.classList.remove("opacity-0");
+        modalContent.classList.remove("scale-95");
+        modalContent.classList.add("scale-100");
+        document.body.style.overflow = "hidden";
+      }
+    }
+
+    // Function to close modal
+    function closeModal() {
+      if (modal && modalContent) {
+        modal.classList.add("opacity-0");
+        modalContent.classList.remove("scale-100");
+        modalContent.classList.add("scale-95");
+
+        setTimeout(() => {
+          modal.classList.add("hidden");
+          document.body.style.overflow = "";
+        }, 300);
+      }
+    }
+
+    // Close button click
+    closeBtn?.addEventListener("click", closeModal);
+
+    // Close when clicking backdrop
+    modalContainer?.addEventListener("click", (e) => {
+      if (e.target === modalContainer) {
+        closeModal();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modal?.classList.contains("hidden")) {
+        closeModal();
+      }
+    });
+
+    // Expose open function globally
+    (window as any).openCertificationsModal = openModal;
+  }
+
+  document.addEventListener("DOMContentLoaded", initModal);
+  document.addEventListener("astro:page-load", initModal);
+</script>
+
+<style>
+  .modal-cert-item {
+    animation: fadeInUp 0.4s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Custom scrollbar for modal */
+  .overflow-y-auto {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(56, 189, 248, 0.3) rgba(15, 23, 42, 0.3);
+  }
+
+  .overflow-y-auto::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.3);
+    border-radius: 10px;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: rgba(56, 189, 248, 0.3);
+    border-radius: 10px;
+  }
+
+  .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: rgba(56, 189, 248, 0.5);
+  }
+</style>

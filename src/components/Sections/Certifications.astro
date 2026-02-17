@@ -1,5 +1,6 @@
 ---
 import CertificationsBadge from "../CertificationsBadge.astro";
+import CertificationsModal from "../CertificationsModal.astro";
 import SectionTitle from "../SectionTitle.astro";
 
 const certification = [
@@ -62,6 +63,15 @@ const certification = [
     icon: "mdi:cube-outline",
     link: "https://cursos.devtalles.com/certificates/o675hwwzxh",
   },
+  {
+    title: "Introduccion a SQL",
+    titleKey: "certifications.sql.title",
+    issuer: "DataCamp",
+    date: "Febrero 2026",
+    dateKey: "certifications.sql.date",
+    icon: "mdi:sql-query",
+    link: "https://drive.google.com/file/d/1vGfaEqhuGc5f-BnSpJgF5zRQz8_2viX-/view?usp=sharing&usp=embed_facebook",
+  },
 ];
 ---
 
@@ -71,16 +81,15 @@ const certification = [
       >Certificaciones</SectionTitle
     >
 
-    <!-- Certifications Grid with improved spacing -->
+    <!-- Certifications Grid - showing first 6 -->
     <div
       id="certifications-grid"
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
     >
       {
-        certification.map((cert, index) => (
+        certification.slice(0, 6).map((cert, index) => (
           <div
-            class={`flex justify-center cert-item ${index >= 6 ? "hidden" : ""}`}
-            data-cert-item
+            class="flex justify-center cert-item"
             style={`animation-delay: ${index * 100}ms`}
           >
             <CertificationsBadge {...cert} />
@@ -94,15 +103,14 @@ const certification = [
       certification.length > 6 && (
         <div class="flex justify-center mt-8 sm:mt-12">
           <button
-            id="show-more-btn"
-            class="group flex items-center gap-2 px-6 py-3 bg-shakespeare-500/20 text-shakespeare-300 rounded-xl border border-shakespeare-500/30 hover:bg-shakespeare-500/30 hover:text-shakespeare-200 hover:border-shakespeare-500/50 transition-all duration-300 font-medium"
+            id="open-modal-btn"
+            class="group flex items-center gap-2 px-6 py-3 bg-shakespeare-500/20 text-shakespeare-300 rounded-xl border border-shakespeare-500/30 hover:bg-shakespeare-500/30 hover:text-shakespeare-200 hover:border-shakespeare-500/50 transition-all duration-300 font-medium shadow-lg shadow-shakespeare-500/10 hover:shadow-shakespeare-500/20"
           >
-            <span id="btn-text" data-i18n="certifications.showMore">
+            <span data-i18n="certifications.showMore">
               Ver más certificaciones
             </span>
             <svg
-              id="btn-icon"
-              class="w-5 h-5 transition-transform duration-300 group-hover:translate-y-1"
+              class="w-5 h-5 transition-transform duration-300 group-hover:scale-110"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -111,7 +119,7 @@ const certification = [
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M19 9l-7 7-7-7"
+                d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
               />
             </svg>
           </button>
@@ -121,58 +129,23 @@ const certification = [
   </div>
 </section>
 
+<!-- Certifications Modal -->
+<CertificationsModal certifications={certification} />
+
 <script>
-  function initShowMore() {
-    const showMoreBtn = document.getElementById("show-more-btn");
-    const btnText = document.getElementById("btn-text");
-    const btnIcon = document.getElementById("btn-icon");
-    const certItems = document.querySelectorAll("[data-cert-item]");
+  function initShowMoreBtn() {
+    const openModalBtn = document.getElementById("open-modal-btn");
 
-    let isExpanded = false;
-
-    showMoreBtn?.addEventListener("click", () => {
-      isExpanded = !isExpanded;
-
-      certItems.forEach((item, index) => {
-        if (index >= 6) {
-          if (isExpanded) {
-            item.classList.remove("hidden");
-          } else {
-            item.classList.add("hidden");
-          }
-        }
-      });
-
-      // Update button text and icon
-      const currentLang = localStorage.getItem("lang") || "es";
-      if (btnText) {
-        btnText.textContent = isExpanded
-          ? currentLang === "es"
-            ? "Ver menos"
-            : "Show less"
-          : currentLang === "es"
-            ? "Ver más certificaciones"
-            : "Show more certifications";
-      }
-
-      if (btnIcon) {
-        btnIcon.style.transform = isExpanded
-          ? "rotate(180deg)"
-          : "rotate(0deg)";
-      }
-
-      // Smooth scroll to certifications if collapsing
-      if (!isExpanded) {
-        document.getElementById("certifications-grid")?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+    openModalBtn?.addEventListener("click", () => {
+      // Call the global function exposed by the modal component
+      if (typeof (window as any).openCertificationsModal === "function") {
+        (window as any).openCertificationsModal();
       }
     });
   }
 
-  document.addEventListener("DOMContentLoaded", initShowMore);
-  document.addEventListener("astro:page-load", initShowMore);
+  document.addEventListener("DOMContentLoaded", initShowMoreBtn);
+  document.addEventListener("astro:page-load", initShowMoreBtn);
 </script>
 
 <style>
