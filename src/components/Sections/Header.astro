@@ -49,10 +49,10 @@ import LanguageToggle from "../LanguageToggle.astro";
       icon="mdi:code-braces"
     />
     <!-- <SideBar
-      href="#learning"
-      name="Aprendizajes"
-      nameKey="nav.learning"
-      icon="mdi:school"
+      href="#aboutme"
+      name="Sobre mí"
+      nameKey="nav.aboutme"
+      icon="mdi:account-circle-outline"
     /> -->
     <SideBar
       href="#contacto"
@@ -131,12 +131,12 @@ import LanguageToggle from "../LanguageToggle.astro";
         Habilidades
       </a>
       <!-- <a
-        href="#learning"
+        href="#aboutme"
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
-        data-i18n="nav.learning"
-        data-section="learning"
+        data-i18n="nav.aboutme"
+        data-section="aboutme"
       >
-        Aprendizajes
+        Sobre mí
       </a> -->
       <a
         href="#contacto"
@@ -187,29 +187,41 @@ import LanguageToggle from "../LanguageToggle.astro";
       return;
     }
 
+    let currentSection = "";
+
     // Configurar Intersection Observer
     const observerOptions = {
       root: null,
-      rootMargin: "-10% 0px -50% 0px",
-      threshold: 0.1,
+      rootMargin: "-20% 0px -60% 0px",
+      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5],
     };
 
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const sectionId = entry.target.id;
+      // Encontrar la sección más visible
+      let maxRatio = 0;
+      let mostVisibleSection = null;
 
-          // Remover clase activa de todos los links
-          navLinks.forEach((link) => {
-            const linkSection = link.getAttribute("data-section");
-            if (linkSection === sectionId) {
-              link.classList.add("active");
-            } else {
-              link.classList.remove("active");
-            }
-          });
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+          maxRatio = entry.intersectionRatio;
+          mostVisibleSection = entry.target.id;
         }
       });
+
+      // Solo actualizar si hay una sección visible y es diferente
+      if (mostVisibleSection && mostVisibleSection !== currentSection) {
+        currentSection = mostVisibleSection;
+
+        // Remover clase activa de todos los links
+        navLinks.forEach((link) => {
+          const linkSection = link.getAttribute("data-section");
+          if (linkSection === currentSection) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      }
     }, observerOptions);
 
     // Observar todas las secciones
