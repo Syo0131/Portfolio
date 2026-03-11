@@ -1,80 +1,142 @@
 ---
-import Links from "../Links.astro";
-import OptimizedImage from "../OptimizedImage.astro";
-import Highlight from "../Highlight.astro";
-import Badge from "../Badge.astro";
+import SectionTitle from "../SectionTitle.astro";
 ---
 
 <section
-  id="sobre-mi"
-  class="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8"
+  id="aboutme"
+  class="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8 animate-on-scroll"
 >
   <div class="max-w-7xl mx-auto">
-    <!-- Grid con foto y contenido -->
-    <div
-      class="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr] xl:grid-cols-[380px_1fr] gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center"
-    >
-      <!-- Columna de la foto CON BOTON -->
-      <div class="flex flex-col items-center gap-4 sm:gap-5 md:gap-6">
-        <div
-          class="relative group w-full max-w-[280px] sm:max-w-[320px] md:max-w-none"
+    <SectionTitle titleKey="nav.aboutme">Sobre Mí</SectionTitle>
+
+    <!-- Intro Section -->
+    <div class="mt-12 sm:mt-16 max-w-4xl">
+      <h3
+        class="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 tracking-tight leading-tight mb-6"
+      >
+        <span data-i18n="aboutme.highlight">Más allá del código:</span>
+        <span class="text-shakespeare-400" data-i18n="aboutme.scaling">
+          compromiso
+        </span>
+        <span data-i18n="aboutme.robust">con la excelencia.</span>
+      </h3>
+
+      <div class="space-y-4 text-base sm:text-lg text-slate-400 leading-relaxed">
+        <p data-i18n="aboutme.p1">
+          Mi objetivo es construir software que no solo resuelva problemas,
+          sino que sea un activo sólido para el futuro...
+        </p>
+        <p data-i18n="aboutme.p2">
+          Disfruto colaborar en entornos que desafían mi lógica...
+        </p>
+      </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Card 1: Experiencia -->
+      <div class="group relative border border-slate-800 p-6 hover:border-shakespeare-400/50 transition-all">
+        <div class="flex items-start justify-between mb-4">
+          <div class="text-4xl font-bold text-shakespeare-400">3+</div>
+          <svg class="w-6 h-6 text-slate-600 group-hover:text-shakespeare-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h4 class="text-sm uppercase tracking-wider text-slate-500 font-semibold">Años de Experiencia</h4>
+        <p class="mt-2 text-sm text-slate-400">Desarrollo profesional</p>
+      </div>
+
+      <!-- Card 2: Proyectos -->
+      <div class="group relative border border-slate-800 p-6 hover:border-shakespeare-400/50 transition-all">
+        <div class="flex items-start justify-between mb-4">
+          <div class="text-4xl font-bold text-shakespeare-400">15+</div>
+          <svg class="w-6 h-6 text-slate-600 group-hover:text-shakespeare-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+        </div>
+        <h4 class="text-sm uppercase tracking-wider text-slate-500 font-semibold">Proyectos</h4>
+        <p class="mt-2 text-sm text-slate-400">Completados con éxito</p>
+      </div>
+
+      <!-- Card 3: Tecnologías -->
+      <div class="group relative border border-slate-800 p-6 hover:border-shakespeare-400/50 transition-all">
+        <div class="flex items-start justify-between mb-4">
+          <div class="text-4xl font-bold text-shakespeare-400">10+</div>
+          <svg class="w-6 h-6 text-slate-600 group-hover:text-shakespeare-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+          </svg>
+        </div>
+        <h4 class="text-sm uppercase tracking-wider text-slate-500 font-semibold">Tecnologías</h4>
+        <p class="mt-2 text-sm text-slate-400">Stack dominado</p>
+      </div>
+
+      <!-- Card 4: Aprendizaje -->
+      <div class="group relative border border-slate-800 p-6 hover:border-shakespeare-400/50 transition-all">
+        <div class="flex items-start justify-between mb-4">
+          <div class="text-4xl font-bold text-shakespeare-400">∞</div>
+          <svg class="w-6 h-6 text-slate-600 group-hover:text-shakespeare-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <h4 class="text-sm uppercase tracking-wider text-slate-500 font-semibold">Aprendizaje</h4>
+        <p class="mt-2 text-sm text-slate-400">Crecimiento continuo</p>
+      </div>
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+      <!-- Philosophy & Mindset -->
+      <div>
+        <h4
+          class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-6 pb-2 border-b border-slate-800"
+          data-i18n="aboutme.label.philosophy"
         >
-          <div
-            class="relative transition-transform duration-500 ease-smooth-out group-hover:scale-[1.01]"
-          >
-            <OptimizedImage
-              src="profile.jpeg"
-              alt="Foto de perfil"
-              width={700}
-              height={700}
-              class="w-full max-h-[350px] sm:max-h-[400px] object-fill object-top rounded-2xl shadow-2xl transition-shadow duration-500 ease-smooth-out group-hover:shadow-shakespeare-500/30"
-              loading="eager"
-            />
-            <!-- Borde con efecto glow -->
-            <div
-              class="absolute inset-0 rounded-2xl ring-2 ring-shakespeare-500/30 group-hover:ring-shakespeare-500/70 transition-all duration-500 ease-smooth-out group-hover:ring-4 pointer-events-none"
-            >
-            </div>
+          Mentalidad
+        </h4>
+        <ul class="space-y-5">
+          {
+            ["aboutme.p_item1", "aboutme.p_item2", "aboutme.p_item3"].map(
+              (key) => (
+                <li class="flex items-start gap-4 group">
+                  <div class="mt-1 flex-shrink-0">
+                    <div class="w-6 h-6 border border-shakespeare-400 flex items-center justify-center group-hover:bg-shakespeare-400 transition-colors">
+                      <svg class="w-3 h-3 text-shakespeare-400 group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <span class="text-slate-300 leading-relaxed flex-1" data-i18n={key}>Texto</span>
+                </li>
+              ),
+            )
+          }
+        </ul>
+      </div>
+
+      <!-- Tech Stack & CTA -->
+      <div class="space-y-8">
+        <div>
+          <h4 class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-6 pb-2 border-b border-slate-800">
+            Stack Principal
+          </h4>
+          <div class="grid grid-cols-2 gap-3">
+            {["Java", "Spring Boot", "PostgreSQL", "Angular", "Docker", "Git"].map((tech) => (
+              <div class="flex items-center gap-2 text-slate-300">
+                <div class="w-1.5 h-1.5 bg-shakespeare-400"></div>
+                <span class="text-sm font-medium">{tech}</span>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-      <!-- Columna del contenido -->
-      <div
-        class="flex flex-col justify-center space-y-4 sm:space-y-5 md:space-y-6 max-w-2xl mx-auto md:mx-0"
-      >
-        <h1
-          class="text-2xl sm:text-3xl md:text-4xl font-bold ml-[120px] mb- sm:mb-1 md:mb- text-shakespeare-200"
-        >
-          Sobre mí
-        </h1>
-        <p
-          class="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 leading-relaxed"
-        >
-          ¡Hola! Soy <Highlight>Daybel Díaz</Highlight>, <Highlight class="text-shakespeare-300">Desarrollador Java</Highlight>. Mi
-          objetivo es contribuir al diseño y mejora de plataformas web
-          eficientes, mientras continúo fortaleciendo mis habilidades técnicas y
-          creciendo dentro de entornos dinámicos y orientados a la innovación.
-        </p>
 
-        <div
-          class="flex flex-wrap justify-center md:justify-start gap-3 sm:gap-3 pt-2 sm:pt-4"
-        >
-          <Links
-            name="Github"
-            href="https://github.com/Syo0131"
-            icon="simple-icons:github"
-          />
-          <Links
-            name="LinkedIn"
-            href="https://linkedin.com/in/DaybelDiaz/"
-            icon="mdi:linkedin"
-          />
-          <Links
-            name="Descargar cv"
-            href="/Daybel_Diaz_Cv_Java.pdf"
-            icon="material-symbols:download"
-            download="DaybelDiaz_CV_Java.pdf"
-          />
+        <!-- CTA -->
+        <div class="pt-4">
+          <a
+            href="#contacto"
+            class="inline-block border-2 border-shakespeare-400 px-6 py-3 text-shakespeare-400 font-bold hover:bg-shakespeare-400 hover:text-black transition-all"
+          >
+            <span data-i18n="aboutme.contact_me">Hablemos del proyecto</span>
+          </a>
         </div>
       </div>
     </div>

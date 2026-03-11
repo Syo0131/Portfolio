@@ -12,13 +12,13 @@ export const translations = {
     "nav.experience": "Experiencia Laboral",
     "nav.projects": "Proyectos",
     "nav.skills": "Habilidades",
-    "nav.learning": "Ruta de aprendizaje",
+    "nav.aboutme": "Sobre mí",
     "nav.contact": "Contacto",
     "nav.certifications": "Certificaciones",
 
     // Hero
     "hero.greeting": "Hey, Soy",
-    "hero.experience": "+2 años de experiencia.",
+    "hero.experience": "+3 años de experiencia",
     "hero.role": " Ingeniero de software",
     "hero.location": "de República Dominicana",
     "hero.description":
@@ -107,6 +107,8 @@ export const translations = {
     "certifications.solid.date": "Enero 2026",
     "certifications.sql.title": "Introducción a SQL",
     "certifications.sql.date": "Febrero 2026",
+    "certifications.enterprise.title": "Enterprise full stack with Spring Boot 4 and Angular 21",
+    "certifications.enterprise.date": "Marzo 2026",
 
     // Learning Path
     "learning.title": "Ruta de Aprendizaje",
@@ -137,13 +139,13 @@ export const translations = {
     "nav.experience": "Experiences",
     "nav.projects": "Projects",
     "nav.skills": "Skills",
-    "nav.learning": "Learning Path",
+    "nav.aboutme": "About me",
     "nav.contact": "Contact",
     "nav.certifications": "Certifications",
 
     // Hero
     "hero.greeting": "Hey, I'm",
-    "hero.experience": "+2 years of experience.",
+    "hero.experience": "+3 years of experience",
     "hero.role": "Sotftware Engineer",
     "hero.location": "from Dominican Republic",
     "hero.description":
@@ -222,6 +224,8 @@ export const translations = {
     "certifications.solid.date": "January 2026",
     "certifications.sql.title": "Introduction to SQL",
     "certifications.sql.date": "February 2026",
+    "certifications.enterprise.title": "Enterprise full stack with Spring Boot 4 and Angular 21",
+    "certifications.enterprise.date": "March 2026",
 
     // Learning Path
     "learning.title": "Learning Path",
