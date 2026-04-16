@@ -336,12 +336,20 @@ const ogImage = new URL(image, Astro.site);
   }
 
   /* Scroll animations */
+  .animate-on-scroll,
+  .animate-fade-left,
+  .animate-fade-right,
+  .animate-scale {
+    /* Forzar aceleración GPU para animaciones suaves */
+    will-change: opacity, transform;
+  }
+
   .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
     transition:
-      opacity 0.6s ease-out,
-      transform 0.6s ease-out;
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .animate-on-scroll.animate-visible {
@@ -367,8 +375,8 @@ const ogImage = new URL(image, Astro.site);
     opacity: 0;
     transform: translateX(-30px);
     transition:
-      opacity 0.6s ease-out,
-      transform 0.6s ease-out;
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .animate-fade-left.animate-visible {
@@ -381,8 +389,8 @@ const ogImage = new URL(image, Astro.site);
     opacity: 0;
     transform: translateX(30px);
     transition:
-      opacity 0.6s ease-out,
-      transform 0.6s ease-out;
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .animate-fade-right.animate-visible {
@@ -395,8 +403,8 @@ const ogImage = new URL(image, Astro.site);
     opacity: 0;
     transform: scale(0.95);
     transition:
-      opacity 0.6s ease-out,
-      transform 0.6s ease-out;
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .animate-scale.animate-visible {

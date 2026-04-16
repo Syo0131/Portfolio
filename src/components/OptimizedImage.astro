@@ -9,6 +9,7 @@ interface Props {
   width?: number;
   height?: number;
   loading?: "lazy" | "eager";
+  fetchpriority?: "high" | "low" | "auto";
   format?: "webp" | "avif" | "png" | "jpg";
   quality?: number;
 }
@@ -20,13 +21,14 @@ const {
   width,
   height,
   loading = "lazy",
+  fetchpriority = "auto",
   format = "webp",
   quality = 85,
 } = Astro.props;
 
 // Importar dinámicamente la imagen desde assets
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/public/**/*.{png,jpg,jpeg,gif,webp,svg}"
+  "/public/**/*.{png,jpg,jpeg,gif,webp,svg}",
 );
 
 // Construir la ruta completa
@@ -36,7 +38,7 @@ const imageModule = images[imagePath];
 
 if (!imageModule) {
   throw new Error(
-    `Image not found: ${src}. Make sure the image exists in src/public/`
+    `Image not found: ${src}. Make sure the image exists in src/public/`,
   );
 }
 
@@ -49,6 +51,7 @@ const imageSrc = (await imageModule()).default;
   width={width || imageSrc.width}
   height={height || imageSrc.height}
   loading={loading}
+  fetchpriority={fetchpriority}
   class={className}
   format={format}
   quality={quality}
