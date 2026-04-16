@@ -8,19 +8,21 @@ const translationsJSON = JSON.stringify(translations);
 
 <button
   id="lang-toggle"
-  class="group relative flex items-center gap-1.5 px-2 py-1.5 lg:px-3 lg:py-2 rounded-full bg-slate-900/60 lg:bg-slate-900/80 backdrop-blur-lg text-slate-300 hover:text-shakespeare-400 lg:hover:text-shakespeare-400 transition-all duration-300 hover:scale-105 lg:hover:scale-105 ring-1 ring-white/10 lg:ring-white/20 hover:ring-shakespeare-500/40 lg:hover:ring-shakespeare-500/40 hover:shadow-lg hover:shadow-shakespeare-500/10 lg:hover:shadow-shakespeare-500/10 active:scale-100"
+  class="group relative flex items-center justify-center size-10 lg:size-12 rounded-full bg-slate-900/80 backdrop-blur-lg text-slate-100 hover:text-white transition-all duration-300 ease-out hover:scale-110 ring-1 ring-white/20 hover:ring-shakespeare-400/60 hover:bg-shakespeare-900/30 hover:shadow-[0_0_15px_rgba(74,144,226,0.3)] active:scale-95 overflow-hidden"
   aria-label="Toggle language"
   title="Cambiar idioma / Change language"
 >
+  <!-- Icono decorativo de fondo (Watermark) -->
   <Icon
     name="mdi:web"
-    class="w-4 h-4 lg:w-4 lg:h-4 transition-transform duration-300 group-hover:rotate-12 lg:group-hover:rotate-12"
+    class="absolute -right-1.5 -bottom-1.5 size-7 text-shakespeare-400/20 transition-all duration-500 group-hover:-rotate-12 group-hover:scale-125 group-hover:text-shakespeare-300/30"
   />
+  
+  <!-- Texto del idioma centrado -->
   <span
     id="lang-text"
-    class="text-xs font-semibold tracking-wider transition-all duration-300"
-    >ES</span
-  >
+    class="relative z-10 text-sm font-bold tracking-wider drop-shadow-md transition-all duration-300 uppercase"
+  >ES</span>
 </button>
 
 <script define:vars={{ translationsJSON }}>

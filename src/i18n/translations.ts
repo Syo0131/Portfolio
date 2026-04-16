@@ -27,14 +27,14 @@ export const translations = {
 
     // ! Experience Laboral
     "experience.title": "Experiencia Laboral",
-    "experience.helpdesk.position": "Soporte HelpDesk",
-    "experience.helpdesk.company": "BitBox Caribe SRL",
-    "experience.helpdesk.period": "Marzo 2025 - Mayo 2025",
-    "experience.helpdesk.type": "Contrato de formación",
-    "experience.helpdesk.desc1":
-      "Brindé soporte a usuarios por mensaje y remotamente, resolución de incidencias técnicas.",
-    "experience.helpdesk.desc2":
-      "Revisión de equipos y verificación de errores de hardware y software.",
+    "experience.freelance.position": "Product Manager & FullStack Developer",
+    "experience.freelance.company": "Freelance",
+    "experience.freelance.period": "Marzo 2024 - Presente",
+    "experience.freelance.type": "Freelance",
+    "experience.freelance.desc1":
+      "Desarrollo de aplicaciones web a medida para diversos clientes, gestionando el ciclo completo del producto y liderando un equipo de desarrollo.",
+    "experience.freelance.desc2":
+      "Implementación de soluciones full-stack, arquitecturas escalables y coordinación de equipos para asegurar alto rendimiento y calidad.",
     "experience.java.position": "Java Analyst Developer",
     "experience.java.company": "BitBox Caribe SRL",
     "experience.java.period": "Junio 2025 - Presente",
@@ -51,6 +51,10 @@ export const translations = {
       "Responsable de la arquitectura integral del proyecto, enfocándome en la escalabilidad del backend y la eficiencia operativa de la infraestructura.",
     "experience.pensum.desc2":
       "Arquitecté el backend con Spring Boot, aplicando patrones de diseño para garantizar la mantenibilidad y el rendimiento con PostgreSQL",
+    "experience.founder.position": "Founder & Product Manager",
+    "experience.founder.period": "Junio 2025 - Presente",
+    "experience.founder.desc1": "Dirección integral en el desarrollo de software a medida para clientes, desde la toma de requerimientos hasta el despliegue final.",
+    "experience.founder.desc2": "Gestión de proyectos tecnológicos, alineando los objetivos de negocio con la arquitectura y coordinando equipos de desarrollo.",
 
     // Projects
 
@@ -154,14 +158,14 @@ export const translations = {
 
     // Experience
     "experience.title": "Experiences",
-    "experience.helpdesk.position": "HelpDesk Support",
-    "experience.helpdesk.company": "BitBox Caribe SRL",
-    "experience.helpdesk.period": "March 2025 - May 2025",
-    "experience.helpdesk.type": "Training contract",
-    "experience.helpdesk.desc1":
-      "Provided user support via messaging and remotely, technical incident resolution.",
-    "experience.helpdesk.desc2":
-      "Equipment review and verification of hardware and software errors.",
+    "experience.freelance.position": "Product Manager & FullStack Developer",
+    "experience.freelance.company": "Freelance",
+    "experience.freelance.period": "March 2024 - Present",
+    "experience.freelance.type": "Freelance",
+    "experience.freelance.desc1":
+      "Custom web application development for various clients, managing the complete product life cycle and leading a development team.",
+    "experience.freelance.desc2":
+      "Implementation of full-stack solutions, scalable architectures, and team coordination to ensure high performance and quality.",
     "experience.java.position": "Java Analyst Developer",
     "experience.java.company": "BitBox Caribe SRL",
     "experience.java.period": "June 2025 - Present",
@@ -178,6 +182,10 @@ export const translations = {
       "Responsible for the overall project architecture, focusing on backend scalability and infrastructure operational efficiency.",
     "experience.pensum.desc2":
       "Architected the backend with Spring Boot, applying design patterns to ensure maintainability and performance with PostgreSQL",
+    "experience.founder.position": "Founder & Product Manager",
+    "experience.founder.period": "June 2025 - Present",
+    "experience.founder.desc1": "End-to-end direction of custom software development for clients, from requirements gathering to final deployment.",
+    "experience.founder.desc2": "Management of technology projects, aligning business goals with architecture and coordinating development teams.",
 
     // Projects
 

@@ -5,18 +5,18 @@ import LanguageToggle from "../LanguageToggle.astro";
 ---
 
 <!-- Language Toggle - Fixed top right for desktop -->
-<div class="fixed top-5 right-4 lg:right-6 xl:right-8 z-[60] hidden lg:block">
+<div class="fixed top-5 right-4 lg:right-6 xl:right-8 z-[60] hidden lg:flex w-[60px] xl:w-[72px] justify-center">
   <LanguageToggle />
 </div>
 
 <aside
   id="main-sidebar"
-  class="fixed right-2 sm:right-4 lg:right-6 xl:right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block"
+  class="fixed right-4 lg:right-6 xl:right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block"
   aria-label="Navegación lateral"
 >
   <nav
     aria-label="Menú de escritorio"
-    class="flex flex-col gap-1.5 sm:gap-2 rounded-full bg-slate-900/80 px-2.5 sm:px-3 py-3 sm:py-4 backdrop-blur-lg ring-1 ring-white/20 transition-all duration-300 ease-smooth-out hover:ring-shakespeare-500/30 hover:shadow-lg hover:shadow-shakespeare-500/10"
+    class="flex flex-col items-center gap-1.5 sm:gap-2 rounded-full bg-slate-900/80 px-2.5 xl:px-3 py-3 sm:py-4 backdrop-blur-lg ring-1 ring-white/20 transition-all duration-300 ease-smooth-out hover:ring-shakespeare-500/30 hover:shadow-lg hover:shadow-shakespeare-500/10 w-[60px] xl:w-[72px]"
   >
     <SideBar
       href="#sobre-mi"
