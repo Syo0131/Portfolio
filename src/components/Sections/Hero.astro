@@ -2,6 +2,7 @@
 import Links from "../Links.astro";
 import OptimizedImage from "../OptimizedImage.astro";
 import Highlight from "../Highlight.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <section
@@ -79,14 +80,43 @@ import Highlight from "../Highlight.astro";
           icon="mdi:linkedin"
           aria-label="Conectar en LinkedIn"
         />
-        <Links
-          name="Descargar CV"
-          nameKey="hero.downloadCv"
-          href="/Daybel_Diaz_Cv_Java.pdf"
-          icon="material-symbols:download"
-          download="DaybelDiaz_CV_Java.pdf"
-          aria-label="Descargar mi currículum en PDF"
-        />
+        
+        <div class="relative group cv-dropdown">
+          <button
+            class="group bg-shakespeare-800/80 hover:bg-shakespeare-700/80 backdrop-blur-sm transition-all duration-300 ease-smooth-out hover:scale-105 hover:shadow-lg hover:shadow-shakespeare-500/20 text-white font-semibold py-2.5 px-5 sm:px-7 rounded-full flex items-center gap-x-2.5 text-sm sm:text-base cursor-pointer"
+            aria-haspopup="menu"
+            type="button"
+          >
+            <Icon
+              name="material-symbols:download"
+              class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 transition-transform duration-300 ease-smooth-out group-hover:scale-110"
+            />
+            <span data-i18n="hero.downloadCv">Descargar CV</span>
+            <Icon
+              name="material-symbols:keyboard-arrow-down"
+              class="w-5 h-5 transition-transform duration-300 group-hover:rotate-180"
+            />
+          </button>
+          
+          <div class="absolute top-full mt-2 left-0 w-full min-w-max bg-slate-800 backdrop-blur-md rounded-xl overflow-hidden shadow-xl border border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform translate-y-2 group-hover:translate-y-0">
+            <a 
+              href="/Daybel_Diaz_Cv_Java.pdf" 
+              download="Daybel_Diaz_Cv_Java.pdf" 
+              class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700/50 hover:text-white text-slate-200 transition-colors"
+            >
+              <span class="text-shakespeare-400 font-bold tracking-wide text-sm flex-shrink-0">ES</span>
+              <span class="text-sm font-medium">Español</span>
+            </a>
+            <a 
+              href="/Daybel_Diaz_JavaAnalystDev.pdf" 
+              download="Daybel_Diaz_JavaAnalystDev.pdf" 
+              class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700/50 hover:text-white text-slate-200 transition-colors border-t border-slate-700"
+            >
+              <span class="text-shakespeare-400 font-bold tracking-wide text-sm flex-shrink-0">EN</span>
+              <span class="text-sm font-medium">English</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
