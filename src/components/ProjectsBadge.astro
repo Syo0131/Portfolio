@@ -10,7 +10,7 @@ interface Props {
   categoryKey?: string;
   technologies: string[];
   urlDemo: string;
-  urlGit: string;
+  urlGit?: string;
   images: string[];
 }
 
@@ -30,131 +30,126 @@ const mainImage = images[0];
 ---
 
 <div
-  class="project-card group bg-[#111827]/40 backdrop-blur-md border border-slate-800/60 rounded-2xl p-6 transition-all duration-500 hover:border-shakespeare-500/40 hover:bg-[#111827] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] flex flex-col h-full border-b-2 hover:border-b-shakespeare-500"
+  class="project-card group bg-[#0d1117] border border-slate-800/50 rounded-3xl overflow-hidden flex flex-col h-full transition-all duration-500 hover:border-shakespeare-500/30 hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] hover:-translate-y-2"
 >
-  <div class="flex justify-end mb-2">
-    <div class="flex gap-4 items-center">
-      {
-        urlGit && (
-          <a
-            href={urlGit}
-            target="_blank"
-            class="text-slate-500 hover:text-white transition-all transform hover:-translate-y-1"
-            aria-label="GitHub"
-          >
-            <Icon name="mdi:github" class="size-6" />
-          </a>
-        )
-      }
-      {
-        urlDemo && (
-          <a
-            href={urlDemo}
-            target="_blank"
-            class="text-slate-500 hover:text-shakespeare-400 transition-all transform hover:-translate-y-1"
-            aria-label="Live Demo"
-          >
-            <Icon name="mdi:external-link" class="size-6" />
-          </a>
-        )
-      }
-    </div>
-  </div>
-
-  <div class="flex gap-2 items-center mb-2">
+  <!-- Image Header (16:9) -->
+  <div class="aspect-video w-full relative overflow-hidden bg-slate-900">
     <button
-      class="expand-img-btn relative size-28 shrink-0 rounded-2xl overflow-hidden border border-slate-700/50 group-hover:border-shakespeare-500/50 transition-all duration-500 shadow-2xl bg-slate-800"
+      class="expand-img-btn w-full h-full group/img outline-none"
       data-project-images={images.join(",")}
+      aria-label={`Ver imágenes de ${name}`}
     >
       <OptimizedImage
         src={mainImage}
         alt={name}
-        width={300}
-        height={300}
-        class="project-thumbnail w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-700"
+        width={600}
+        height={337}
+        class="project-thumbnail w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105"
       />
-      <div
-        class="absolute inset-0 bg-gradient-to-tr from-shakespeare-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
-      >
-        <Icon
-          name="mdi:arrow-expand"
-          class="text-white size-8 drop-shadow-lg"
-        />
+      
+      <!-- Subtle Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-transparent to-transparent opacity-60"></div>
+      
+      <!-- Expand Icon -->
+      <div class="absolute top-4 right-4 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300">
+        <div class="bg-slate-950/40 backdrop-blur-md border border-white/10 p-2 rounded-xl text-white">
+          <Icon name="mdi:arrow-expand" class="size-5" />
+        </div>
       </div>
     </button>
-
-    <div class="space-y-2">
-      <h3
-        class="font-bold text-slate-100 text-2xl tracking-tight leading-none"
-        data-i18n={nameKey}
-      >
-        {name}
-      </h3>
-      <p
-        class="text-[13px] text-slate-400 line-clamp-3 leading-relaxed font-normal"
-        data-i18n={descriptionKey}
-      >
-      </p>
-    </div>
   </div>
 
-  <div class="mt-3 space-y-6">
-    <div class="flex flex-wrap gap-2">
+  <!-- Content Section -->
+  <div class="p-6 md:p-8 flex flex-col flex-1">
+    <div class="flex items-center justify-between mb-4">
+      <span 
+        class="text-[10px] font-bold tracking-[0.15em] text-shakespeare-400 uppercase"
+        data-i18n={categoryKey}
+      >
+        {category}
+      </span>
+      <div class="flex gap-3">
+        {
+          urlGit && (
+            <a
+              href={urlGit}
+              target="_blank"
+              class="text-slate-500 hover:text-white transition-colors"
+              aria-label="GitHub"
+            >
+              <Icon name="mdi:github" class="size-5" />
+            </a>
+          )
+        }
+        {
+          urlDemo && (
+            <a
+              href={urlDemo}
+              target="_blank"
+              class="text-slate-500 hover:text-shakespeare-400 transition-colors"
+              aria-label="Live Demo"
+            >
+              <Icon name="mdi:external-link" class="size-5" />
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    <h3 
+      class="text-2xl font-bold text-slate-100 mb-3 tracking-tight group-hover:text-shakespeare-400 transition-colors"
+      data-i18n={nameKey}
+    >
+      {name}
+    </h3>
+    
+    <div class="relative group/desc">
+      <p 
+        class="description-text text-slate-400 text-sm leading-relaxed mb-4 font-normal overflow-hidden transition-all duration-500"
+        data-i18n={descriptionKey}
+        style="-webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical;"
+      >
+      </p>
+      <button 
+        class="read-more-btn hidden text-shakespeare-400 text-xs font-bold hover:text-shakespeare-300 transition-colors mb-6  items-center gap-1"
+      >
+        <span class="btn-text" data-i18n="projects.readMore">Leer más</span>
+        <Icon name="mdi:chevron-down" class="size-4 transition-transform duration-300" />
+      </button>
+    </div>
+
+    <!-- Technologies -->
+    <div class="mt-auto flex flex-wrap gap-2">
       {
         technologies.map((tech) => (
-          <span class="text-[11px] font-bold tracking-wider text-shakespeare-300/80  bg-shakespeare-500/5 px-2.5 py-2 rounded-md border border-shakespeare-500/10">
+          <span class="px-2.5 py-1 bg-slate-900 border border-slate-800/80 rounded-lg text-[10px] font-medium text-slate-400">
             {tech}
           </span>
         ))
       }
     </div>
-
-    <div class="flex items-center gap-2">
-      <div class="size-1.5 rounded-full bg-shakespeare-500 animate-pulse"></div>
-      <span
-        class="text-[12px] font-bold tracking-wider text-slate-300 uppercase"
-        data-i18n={categoryKey}
-      >
-        {category}
-      </span>
-    </div>
   </div>
 
+  <!-- Modal Dialog -->
   <dialog
     id="image-modal"
-    class="bg-transparent backdrop:backdrop-blur-2xl p-0 w-full h-full max-w-full max-h-full border-none outline-none overflow-hidden group/modal"
+    class="bg-transparent backdrop:backdrop-blur-2xl p-0 w-full h-full max-w-full max-h-full border-none outline-none overflow-hidden"
   >
     <div
-      class="relative w-full h-full flex items-center justify-center bg-[#020617]/95"
+      class="relative w-full h-full flex items-center justify-center bg-slate-950/90"
     >
-      <button
-        id="prev-img"
-        class="absolute left-6 z-[100] text-white/20 hover:text-shakespeare-400 transition-all p-4 hidden sm:block"
-      >
+      <button id="prev-img" class="absolute left-6 z-[100] text-white/20 hover:text-shakespeare-400 transition-all p-4 hidden sm:block">
         <Icon name="mdi:chevron-left" class="size-16" />
       </button>
-      <button
-        id="next-img"
-        class="absolute right-6 z-[100] text-white/20 hover:text-shakespeare-400 transition-all p-4 hidden sm:block"
-      >
+      <button id="next-img" class="absolute right-6 z-[100] text-white/20 hover:text-shakespeare-400 transition-all p-4 hidden sm:block">
         <Icon name="mdi:chevron-right" class="size-16" />
       </button>
-      <button
-        id="close-modal"
-        class="absolute top-8 right-8 z-[100] text-white/20 hover:text-red-400 transition-all"
-      >
+      <button id="close-modal" class="absolute top-8 right-8 z-[100] text-white/20 hover:text-red-400 transition-all">
         <Icon name="mdi:close-circle-outline" class="size-10" />
       </button>
 
-      <div
-        class="w-full h-full flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
-        id="modal-bg-close"
-      >
-        <img
-          id="modal-img"
-          src=""
-          class="max-w-full max-h-full object-contain rounded-xl shadow-[0_0_80px_rgba(59,130,246,0.15)] transform transition-all duration-500 select-none"
-        />
+      <div class="w-full h-full flex items-center justify-center p-4 cursor-zoom-out" id="modal-bg-close">
+        <img id="modal-img" src="" class="max-w-full max-h-full object-contain rounded-xl shadow-2xl transition-all duration-500" />
       </div>
     </div>
   </dialog>
@@ -174,14 +169,11 @@ const mainImage = images[0];
       const updateView = () => {
         if (!modalImg) return;
         modalImg.style.opacity = "0";
-        modalImg.style.transform = "scale(0.98)";
-
         const loader = new Image();
         loader.src = imagesList[currentIndex];
         loader.onload = () => {
           modalImg.src = imagesList[currentIndex];
           modalImg.style.opacity = "1";
-          modalImg.style.transform = "scale(1)";
         };
       };
 
@@ -194,12 +186,9 @@ const mainImage = images[0];
           if (modalImg && imagesList.length > 0) {
             modalImg.src = imagesList[currentIndex];
             modalImg.style.opacity = "1";
-            modalImg.style.transform = "scale(1)";
             modal.showModal();
             const multi = imagesList.length > 1;
-            [nextBtn, prevBtn].forEach((el) =>
-              el?.classList.toggle("hidden", !multi),
-            );
+            [nextBtn, prevBtn].forEach(el => el?.classList.toggle("hidden", !multi));
           }
         });
       });
@@ -212,58 +201,88 @@ const mainImage = images[0];
 
       prevBtn?.addEventListener("click", (e) => {
         e.stopPropagation();
-        currentIndex =
-          (currentIndex - 1 + imagesList.length) % imagesList.length;
+        currentIndex = (currentIndex - 1 + imagesList.length) % imagesList.length;
         updateView();
       });
 
-      const resetModal = () => {
-        currentIndex = 0; // Reinicia el índice a la primera imagen
-        if (modalImg) {
-          modalImg.src = imagesList[currentIndex];
-          modalImg.style.opacity = "1";
-          modalImg.style.transform = "scale(1)";
-        }
+      const closeHandler = () => modal.close();
+      [closeBtn, bgClose].forEach(el => el?.addEventListener("click", closeHandler));
+      modal.addEventListener("click", (e) => { if (e.target === modal) closeHandler(); });
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (!modal.open) return;
+        if (e.key === "ArrowRight") nextBtn?.click();
+        if (e.key === "ArrowLeft") prevBtn?.click();
+        if (e.key === "Escape") closeHandler();
+      });
       };
 
-      const closeHandler = () => {
-        resetModal(); // Llama a resetModal al cerrar el modal
-        modal.close();
-      };
-      [closeBtn, bgClose].forEach((el) =>
-        el?.addEventListener("click", closeHandler),
-      );
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) closeHandler();
+      const initReadMore = () => {
+      const cards = document.querySelectorAll('.project-card');
+      
+      cards.forEach(card => {
+        const desc = card.querySelector('.description-text') as HTMLElement;
+        const btn = card.querySelector('.read-more-btn') as HTMLElement;
+        const btnText = btn?.querySelector('.btn-text');
+        const icon = btn?.querySelector('svg');
+        
+        if (!desc || !btn) return;
+
+        // Reset state
+        btn.classList.add('hidden');
+        desc.style.display = '-webkit-box';
+        btn.setAttribute('aria-expanded', 'false');
+
+        // Observe height changes (like when i18n fills the text)
+        const observer = new ResizeObserver(() => {
+          // A tiny delay to ensure layout is updated
+          requestAnimationFrame(() => {
+            const isTruncated = desc.scrollHeight > desc.clientHeight;
+            if (isTruncated && btn.getAttribute('aria-expanded') !== 'true') {
+              btn.classList.remove('hidden');
+            }
+          });
+        });
+
+        observer.observe(desc);
+
+        btn.addEventListener('click', () => {
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          const lang = document.documentElement.lang || 'es';
+          
+          if (expanded) {
+            desc.style.display = '-webkit-box';
+            btn.setAttribute('aria-expanded', 'false');
+            if (btnText) btnText.textContent = lang === 'en' ? 'Read more' : 'Leer más';
+            if (icon) icon.style.transform = 'rotate(0deg)';
+          } else {
+            desc.style.display = 'block';
+            btn.setAttribute('aria-expanded', 'true');
+            if (btnText) btnText.textContent = lang === 'en' ? 'Read less' : 'Leer menos';
+            if (icon) icon.style.transform = 'rotate(180deg)';
+          }
+        });
       });
     };
 
-    initModal();
-    document.addEventListener("astro:after-swap", initModal);
+    // Initialize with a small delay to allow i18n script to work
+    setTimeout(() => {
+      initModal();
+      initReadMore();
+    }, 100);
+
+    document.addEventListener("astro:after-swap", () => {
+      setTimeout(() => {
+        initModal();
+        initReadMore();
+      }, 100);
+    });
   </script>
 
   <style>
-    html:has(dialog[open]) {
-      overflow: hidden;
-    }
-
-    #modal-img {
-      max-width: 92vw;
-      max-height: 88vh;
-    }
-
-    /* Animación de entrada suave para el modal */
-    dialog[open] {
-      animation: fadeIn 0.3s ease-out forwards;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
+    html:has(dialog[open]) { overflow: hidden; }
+    #modal-img { max-width: 92vw; max-height: 85vh; }
+    dialog[open] { animation: fadeIn 0.3s ease-out forwards; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   </style>
 </div>
