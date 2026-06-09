@@ -1,6 +1,76 @@
 ---
 import SectionTitle from "../SectionTitle.astro";
 import ProjectsBadge from "../ProjectsBadge.astro";
+
+const projects = [
+  {
+    name: "Spendly",
+    nameKey: "projects.spendly.name",
+    descriptionKey: "projects.spendly.description",
+    technologies: [
+      "Java", "Spring Boot", "PostgreSQL", "Angular", 
+      "Dokploy", "Docker", "Swagger", "Spring Security", "Spring Data JPA"
+    ],
+    category: "Full-Stack",
+    categoryKey: "projects.spendly.category",
+    images: [
+      "spendly/Spendly.png",
+      "spendly/EndpointsSpendly.png",
+      "spendly/SpendlySideBar.png",
+    ],
+    urlDemo: "https://frontend.daybeldiaz.dev/",
+    urlGit: "https://github.com/Syo0131"
+  },
+  {
+    name: "El Pensum API",
+    nameKey: "projects.elpensum.name",
+    descriptionKey: "projects.elpensum.description",
+    technologies: [
+      "Spring Boot", "Spring Security", "PostgreSQL", 
+      "Dokploy", "Docker", "Swagger", "Spring Data JPA"
+    ],
+    category: "Backend",
+    categoryKey: "projects.elpensum.category",
+    images: [
+      "elpensum/pensumweb.png",
+      "elpensum/elpensumAPI.png",
+      "elpensum/EndpointsPensum.png",
+    ],
+    urlDemo: "https://backend.elpensum.com/swagger-ui/index.html"
+  },
+  {
+    name: "Tograbao Real State",
+    nameKey: "projects.tograbao.name",
+    descriptionKey: "projects.tograbao.description",
+    technologies: [
+      "Strapi", "Dokploy", "Next.js", "Tailwind CSS", "Docker", "Swagger"
+    ],
+    category: "Full-Stack",
+    categoryKey: "projects.tograbao.category",
+    images: [
+      "tograbao/hero.png",
+      "tograbao/aboutus.png",
+      "tograbao/properties.png",
+    ],
+    urlDemo: "Tograbao.com"
+  }
+];
+
+// Extract unique categories dynamically
+const uniqueCategories = [...new Set(projects.map(p => p.category))];
+const categories = ["all", ...uniqueCategories];
+
+const getCategoryKey = (cat: string) => {
+  if (cat === "all") return "projects.filter.all";
+  // Convert "Full-Stack" -> "fullstack", "Frontend" -> "frontend", etc.
+  const normalizedCat = cat.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return `projects.category.${normalizedCat}`;
+};
+
+const getCategoryLabel = (cat: string) => {
+  if (cat === "all") return "Todos";
+  return cat;
+};
 ---
 
 <section
@@ -8,62 +78,143 @@ import ProjectsBadge from "../ProjectsBadge.astro";
   class="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8 animate-on-scroll"
 >
   <div class="max-w-7xl mx-auto">
-    <SectionTitle class="mb-12 sm:mb-16 lg:mb-20" titleKey="projects.title"
+    <SectionTitle class="mb-8 sm:mb-12" titleKey="projects.title"
       >Proyectos</SectionTitle
     >
 
-    <div
-      class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 xl:gap-12"
-    >
-      <ProjectsBadge
-        name="Spendly"
-        nameKey="projects.spendly.name"
-        descriptionKey="projects.spendly.description"
-        technologies={[
-          "Java",
-          "Spring Boot",
-          "PostgreSQL",
-          "Angular",
-          "Dokploy",
-          "Docker",
-          "Swagger",
-          "Spring Security",
-          "Spring Data JPA",
-        ]}
-        category="Full-Stack"
-        categoryKey="projects.spendly.category"
-        images={[
-          "spendly/Spendly.png",
-          "spendly/EndpointsSpendly.png",
-          "spendly/SpendlySideBar.png",
-        ]}
-        urlDemo="https://frontend.daybeldiaz.dev/"
-        urlGit="https://github.com/Syo0131"
-      />
+    <!-- Dynamic Category Filters -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12 sm:mb-16">
+      {categories.map((cat) => (
+        <button
+          class:list={[
+            "filter-btn px-6 py-2 rounded-full border border-slate-800 text-slate-400 text-sm font-semibold transition-all hover:border-shakespeare-500/30",
+            cat === "all" && "active"
+          ]}
+          data-filter={cat}
+          data-i18n={getCategoryKey(cat)}
+        >
+          {getCategoryLabel(cat)}
+        </button>
+      ))}
+    </div>
 
-      <ProjectsBadge
-        name="El Pensum API"
-        nameKey="projects.elpensum.name"
-        descriptionKey="projects.elpensum.description"
-        technologies={[
-          "Spring Boot",
-          "Spring Security",
-          "PostgreSQL",
-          "Dokploy",
-          "Docker",
-          "Swagger",
-          "Spring Data JPA",
-        ]}
-        category="Backend"
-        categoryKey="projects.elpensum.category"
-        images={[
-          "elpensum/pensumweb.png",
-          "elpensum/elpensumAPI.png",
-          "elpensum/EndpointsPensum.png",
-        ]}
-        urlDemo="https://backend.elpensum.com/swagger-ui/index.html"
-        urlGit="https://github.com/Elpensum"
-      />
+    <div
+      id="projects-grid"
+      class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 transition-all duration-500"
+    >
+      {projects.map((project) => (
+        <div class="project-item" data-category={project.category}>
+          <ProjectsBadge 
+            {...project} 
+            categoryKey={getCategoryKey(project.category)}
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Show More Button -->
+    <div id="show-more-container" class="mt-16 flex justify-center">
+      <button
+        id="show-more-btn"
+        class="group px-8 py-3 rounded-xl border border-slate-800 text-slate-300 font-bold hover:bg-slate-800 transition-all flex items-center gap-3"
+      >
+        <span id="show-more-text" data-i18n="projects.showMore">Ver más proyectos</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-5 transition-transform group-hover:translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
     </div>
   </div>
 </section>
+
+<script>
+  function initProjects() {
+    const filters = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.project-item');
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const showMoreContainer = document.getElementById('show-more-container');
+    const showMoreText = document.getElementById('show-more-text');
+    
+    let currentFilter = 'all';
+    let isExpanded = false;
+    const INITIAL_LIMIT = 4;
+
+    function updateVisibility() {
+      let visibleCount = 0;
+      let totalMatchCount = 0;
+
+      items.forEach((item) => {
+        const itemCategory = item.getAttribute('data-category');
+        const matches = currentFilter === 'all' || itemCategory === currentFilter;
+        
+        if (matches) {
+          totalMatchCount++;
+          if (isExpanded || visibleCount < INITIAL_LIMIT) {
+            item.classList.remove('hidden');
+            (item as HTMLElement).style.opacity = '0';
+            (item as HTMLElement).style.transform = 'translateY(20px)';
+            setTimeout(() => {
+              (item as HTMLElement).style.opacity = '1';
+              (item as HTMLElement).style.transform = 'translateY(0)';
+              (item as HTMLElement).style.transition = 'all 0.5s ease-out';
+            }, 50);
+            visibleCount++;
+          } else {
+            item.classList.add('hidden');
+          }
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      if (totalMatchCount > INITIAL_LIMIT) {
+        showMoreContainer?.classList.remove('hidden');
+        if (showMoreText) {
+          const key = isExpanded ? 'projects.showLess' : 'projects.showMore';
+          showMoreText.setAttribute('data-i18n', key);
+          // Fallback manual injection if i18n script already ran
+          const lang = document.documentElement.lang || 'es';
+          if (lang === 'en') {
+             showMoreText.textContent = isExpanded ? 'Show less' : 'Show more projects';
+          } else {
+             showMoreText.textContent = isExpanded ? 'Ver menos' : 'Ver más proyectos';
+          }
+        }
+      } else {
+        showMoreContainer?.classList.add('hidden');
+      }
+    }
+
+    filters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filters.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        currentFilter = btn.getAttribute('data-filter') || 'all';
+        isExpanded = false; 
+        updateVisibility();
+      });
+    });
+
+    showMoreBtn?.addEventListener('click', () => {
+      isExpanded = !isExpanded;
+      updateVisibility();
+      if (!isExpanded) {
+        document.getElementById('proyectos')?.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    updateVisibility();
+  }
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .filter-btn.active {
+      border-color: #20cef0 !important;
+      color: white !important;
+      background-color: rgba(32, 206, 240, 0.1);
+    }
+  `;
+  document.head.appendChild(style);
+
+  document.addEventListener('DOMContentLoaded', initProjects);
+  document.addEventListener('astro:after-swap', initProjects);
+</script>

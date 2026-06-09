@@ -3,7 +3,7 @@ export const languages = {
   en: "English",
 };
 
-export const defaultLang = "es";
+export const defaultLang = "es"
 
 export const translations = {
   es: {
@@ -71,11 +71,23 @@ export const translations = {
     //   "Aplicación web desarrollada con React y Node.js para la visualización y gestión de logs en tiempo real, ofreciendo una interfaz intuitiva para monitorear eventos del sistema.",
     // "projects.citadelLogs.category": "Full-Stack",
 
-    // * El Pensum API
-    "projects.elpensum.name": "El Pensum API",
-    "projects.elpensum.description":
-      "API RESTful construida con Spring Boot que proporciona acceso a datos académicos, incluyendo carreras, cursos y planes de estudio, facilitando la integración con aplicaciones educativas.",
     "projects.elpensum.category": "Backend",
+
+    // * Tograbao Real State
+    "projects.tograbao.name": "Tograbao Real State",
+    "projects.tograbao.description":
+      "Transformación de una visión inmobiliaria en una solución digital robusta. Como líder de proyecto, orquesté el ciclo de vida completo del software y dirigí a un equipo de 3 personas, optimizando la productividad mediante Sprints y planificación estratégica en GitHub Projects.",
+    "projects.tograbao.category": "Full-Stack",
+
+    // * Filters & Pagination
+    "projects.filter.all": "Todos",
+    "projects.category.fullstack": "Full-Stack",
+    "projects.category.backend": "Backend",
+    "projects.category.frontend": "Frontend",
+    "projects.showMore": "Ver más proyectos",
+    "projects.showLess": "Ver menos",
+    "projects.readMore": "Leer más",
+    "projects.readLess": "Leer menos",
 
     // Skills
     "skills.title": "Habilidades Técnicas",
@@ -194,10 +206,23 @@ export const translations = {
     "projects.spendly.description":
       "A modern web application developed with Spring Boot and PostgreSQL for tracking and managing monthly personal expenses with an elegant and functional interface.",
     "projects.spendly.category": "Full-Stack",
-    "projects.elpensum.name": "El Pensum API",
-    "projects.elpensum.description":
-      "RESTful API built with Spring Boot that provides access to academic data, including careers, courses and curricula, facilitating integration with educational applications.",
     "projects.elpensum.category": "Backend",
+
+    // * Tograbao Real State
+    "projects.tograbao.name": "Tograbao Real State",
+    "projects.tograbao.description":
+      "Transforming a real estate vision into a robust digital solution. As project lead, I orchestrated the full software lifecycle and directed a team of 3, optimizing productivity through Sprints and strategic planning in GitHub Projects.",
+    "projects.tograbao.category": "Full-Stack",
+
+    // * Filters & Pagination
+    "projects.filter.all": "All",
+    "projects.category.fullstack": "Full-Stack",
+    "projects.category.backend": "Backend",
+    "projects.category.frontend": "Frontend",
+    "projects.showMore": "Show more projects",
+    "projects.showLess": "Show less",
+    "projects.readMore": "Read more",
+    "projects.readLess": "Read less",
 
     // Skills
     "skills.title": "Technical Skills",
