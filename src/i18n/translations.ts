@@ -22,7 +22,7 @@ export const translations = {
     "hero.role": " Ingeniero de software",
     "hero.location": "de República Dominicana",
     "hero.description":
-      "Especializado en crear soluciones escalables, desde la lógica de negocio hasta la integración final.",
+      "Especializado en backend Java/Spring Boot e infraestructura cloud. Diseño APIs robustas, automatizo despliegues con Docker y construyo sistemas escalables de extremo a extremo.",
     "hero.downloadCv": "Descargar CV",
 
     // ! Experience Laboral
@@ -32,9 +32,9 @@ export const translations = {
     "experience.freelance.period": "Marzo 2024 - Presente",
     "experience.freelance.type": "Freelance",
     "experience.freelance.desc1":
-      "Desarrollo de aplicaciones web a medida para diversos clientes, gestionando el ciclo completo del producto y liderando un equipo de desarrollo.",
+      "Gestión end-to-end de proyectos de software: levantamiento de requerimientos con el cliente, definición de la arquitectura técnica, documentación y coordinación del equipo de desarrollo cuando el proyecto lo requiere.",
     "experience.freelance.desc2":
-      "Implementación de soluciones full-stack, arquitecturas escalables y coordinación de equipos para asegurar alto rendimiento y calidad.",
+      "Responsable del ciclo completo de entrega: desde la toma de decisiones tecnológicas hasta el despliegue en producción, asegurando que la solución final se alinee con los objetivos del negocio.",
     "experience.java.position": "Java Analyst Developer",
     "experience.java.company": "BitBox Caribe SRL",
     "experience.java.period": "Junio 2025 - Presente",
@@ -48,9 +48,9 @@ export const translations = {
     "experience.pensum.period": "Noviembre 2025 - Febrero 2026",
     "experience.pensum.type": "Contrato de formación",
     "experience.pensum.desc1":
-      "Responsable de la arquitectura integral del proyecto, enfocándome en la escalabilidad del backend y la eficiencia operativa de la infraestructura.",
+      "Diseño y gestión de la infraestructura cloud: configuración de servidores VPS, DNS, seguridad SSL y pipelines de despliegue automatizado con Docker y Dokploy.",
     "experience.pensum.desc2":
-      "Arquitecté el backend con Spring Boot, aplicando patrones de diseño para garantizar la mantenibilidad y el rendimiento con PostgreSQL",
+      "Desarrollo del backend completo con Java Spring Boot y Spring Security, modelando una arquitectura jerárquica para la gestión de universidades, recintos, facultades, carreras y pensums.",
     "experience.founder.position": "Founder & Product Manager",
     "experience.founder.period": "Junio 2025 - Presente",
     "experience.founder.desc1": "Dirección integral en el desarrollo de software a medida para clientes, desde la toma de requerimientos hasta el despliegue final.",
@@ -62,7 +62,7 @@ export const translations = {
     "projects.title": "Proyectos",
     "projects.spendly.name": "Spendly",
     "projects.spendly.description":
-      "Una aplicación web moderna desarrollada con Spring Boot y PostgreSQL para el control y seguimiento de gastos personales mensuales con una interfaz elegante y funcional.",
+      "Aplicación web full-stack para el control inteligente de finanzas personales. Desarrollada con Spring Boot y Angular, cuenta con un sistema automatizado que parsea y registra los gastos directamente a partir de las notificaciones de transacciones recibidas por correo electrónico, garantizando un control en tiempo real.",
     "projects.spendly.category": "Full-Stack",
 
     // // * Citadel Logs
@@ -71,12 +71,15 @@ export const translations = {
     //   "Aplicación web desarrollada con React y Node.js para la visualización y gestión de logs en tiempo real, ofreciendo una interfaz intuitiva para monitorear eventos del sistema.",
     // "projects.citadelLogs.category": "Full-Stack",
 
+    "projects.elpensum.name": "El Pensum API",
+    "projects.elpensum.description":
+      "Diseño y despliegue de la infraestructura cloud utilizando Docker y Dokploy, incluyendo configuración de servidores VPS, DNS y seguridad SSL. Desarrollo de una API REST robusta y segura con Java Spring Boot, Spring Security y PostgreSQL, diseñada para el modelado jerárquico complejo de entidades académicas (universidades, recintos, facultades, carreras y pensums).",
     "projects.elpensum.category": "Backend",
 
     // * Tograbao Real State
     "projects.tograbao.name": "Tograbao Real State",
     "projects.tograbao.description":
-      "Transformación de una visión inmobiliaria en una solución digital robusta. Como líder de proyecto, orquesté el ciclo de vida completo del software y dirigí a un equipo de 3 personas, optimizando la productividad mediante Sprints y planificación estratégica en GitHub Projects.",
+      "Plataforma inmobiliaria de alto rendimiento optimizada para SEO y velocidad de carga. Como líder de proyecto, orquesté el ciclo de vida completo del software (SDLC) coordinando a un equipo de 3 personas bajo metodologías ágiles. Implementé una arquitectura robusta utilizando Next.js para un frontend ultrarrápido, Strapi como Headless CMS para la gestión ágil de propiedades, y despliegue contenedorizado con Docker y Dokploy.",
     "projects.tograbao.category": "Full-Stack",
 
     // * Filters & Pagination
@@ -165,7 +168,7 @@ export const translations = {
     "hero.role": "Sotftware Engineer",
     "hero.location": "from Dominican Republic",
     "hero.description":
-      "Specialized in creating scalable solutions, from business logic to final integration.",
+      "Specialized in Java/Spring Boot backend and cloud infrastructure. I design robust APIs, automate deployments with Docker, and build scalable end-to-end systems.",
     "hero.downloadCv": "Download CV",
 
     // Experience
@@ -175,9 +178,9 @@ export const translations = {
     "experience.freelance.period": "March 2024 - Present",
     "experience.freelance.type": "Freelance",
     "experience.freelance.desc1":
-      "Custom web application development for various clients, managing the complete product life cycle and leading a development team.",
+      "End-to-end software project management: requirements gathering with the client, technical architecture definition, documentation, and development team coordination when the project demands it.",
     "experience.freelance.desc2":
-      "Implementation of full-stack solutions, scalable architectures, and team coordination to ensure high performance and quality.",
+      "Responsible for the complete delivery cycle: from technology decisions to production deployment, ensuring the final solution aligns with the business objectives.",
     "experience.java.position": "Java Analyst Developer",
     "experience.java.company": "BitBox Caribe SRL",
     "experience.java.period": "June 2025 - Present",
@@ -191,9 +194,9 @@ export const translations = {
     "experience.pensum.period": "November 2025 - February 2026",
     "experience.pensum.type": "Training contract",
     "experience.pensum.desc1":
-      "Responsible for the overall project architecture, focusing on backend scalability and infrastructure operational efficiency.",
+      "Design and management of the project's cloud infrastructure: VPS server configuration, DNS, SSL security, and automated deployment pipelines with Docker and Dokploy.",
     "experience.pensum.desc2":
-      "Architected the backend with Spring Boot, applying design patterns to ensure maintainability and performance with PostgreSQL",
+      "Full backend development with Java Spring Boot and Spring Security, modeling a complex hierarchical architecture for managing universities, campuses, faculties, careers, and curricula.",
     "experience.founder.position": "Founder & Product Manager",
     "experience.founder.period": "June 2025 - Present",
     "experience.founder.desc1": "End-to-end direction of custom software development for clients, from requirements gathering to final deployment.",
@@ -204,14 +207,17 @@ export const translations = {
     "projects.title": "Projects",
     "projects.spendly.name": "Spendly",
     "projects.spendly.description":
-      "A modern web application developed with Spring Boot and PostgreSQL for tracking and managing monthly personal expenses with an elegant and functional interface.",
+      "Full-stack web application for smart personal finance tracking. Built with Spring Boot and Angular, it features an automated system that parses and logs expenses directly from bank transaction emails, ensuring real-time control over budgets.",
     "projects.spendly.category": "Full-Stack",
+    "projects.elpensum.name": "El Pensum API",
+    "projects.elpensum.description":
+      "Design and deployment of the cloud infrastructure using Docker and Dokploy, including VPS server, DNS, and SSL security configuration. Developed a robust and secure REST API with Java Spring Boot, Spring Security, and PostgreSQL, designed for complex hierarchical modeling of academic entities (universities, campuses, faculties, careers, and curricula/pensums).",
     "projects.elpensum.category": "Backend",
 
     // * Tograbao Real State
     "projects.tograbao.name": "Tograbao Real State",
     "projects.tograbao.description":
-      "Transforming a real estate vision into a robust digital solution. As project lead, I orchestrated the full software lifecycle and directed a team of 3, optimizing productivity through Sprints and strategic planning in GitHub Projects.",
+      "High-performance real estate platform optimized for SEO and load speed. As project lead, I orchestrated the complete software development lifecycle (SDLC) coordinating a team of 3 under agile methodologies. Implemented a robust architecture utilizing Next.js for a lightning-fast frontend, Strapi as a Headless CMS for agile property management, and containerized deployment with Docker and Dokploy.",
     "projects.tograbao.category": "Full-Stack",
 
     // * Filters & Pagination

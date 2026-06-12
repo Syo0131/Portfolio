@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import OptimizedImage from "./OptimizedImage.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/translations";
 
 interface Props {
   name: string;
@@ -27,16 +28,22 @@ const {
 } = Astro.props;
 
 const mainImage = images[0];
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Unique ID for this card's modals
+const uid = Math.random().toString(36).slice(2, 8);
 ---
 
 <div
-  class="project-card group bg-[#0d1117] border border-slate-800/50 rounded-3xl overflow-hidden flex flex-col h-full transition-all duration-500 hover:border-shakespeare-500/30 hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] hover:-translate-y-2"
+  class="project-card group bg-[#0d1117] border border-slate-800/50 rounded-3xl overflow-hidden flex flex-col transition-all duration-500 hover:border-shakespeare-500/30 hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] hover:-translate-y-2"
 >
   <!-- Image Header (16:9) -->
-  <div class="aspect-video w-full relative overflow-hidden bg-slate-900">
+  <div class="aspect-video w-full relative overflow-hidden bg-slate-900 flex-shrink-0">
     <button
       class="expand-img-btn w-full h-full group/img outline-none"
       data-project-images={images.join(",")}
+      data-img-modal-id={`img-modal-${uid}`}
       aria-label={`Ver imágenes de ${name}`}
     >
       <OptimizedImage
@@ -46,10 +53,8 @@ const mainImage = images[0];
         height={337}
         class="project-thumbnail w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105"
       />
-      
       <!-- Subtle Overlay -->
       <div class="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-transparent to-transparent opacity-60"></div>
-      
       <!-- Expand Icon -->
       <div class="absolute top-4 right-4 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300">
         <div class="bg-slate-950/40 backdrop-blur-md border border-white/10 p-2 rounded-xl text-white">
@@ -59,14 +64,14 @@ const mainImage = images[0];
     </button>
   </div>
 
-  <!-- Content Section -->
+  <!-- Content Section — fixed height layout -->
   <div class="p-6 md:p-8 flex flex-col flex-1">
     <div class="flex items-center justify-between mb-4">
-      <span 
+      <span
         class="text-[10px] font-bold tracking-[0.15em] text-shakespeare-400 uppercase"
         data-i18n={categoryKey}
       >
-        {category}
+        {categoryKey ? t(categoryKey as any) : category}
       </span>
       <div class="flex gap-3">
         {
@@ -98,30 +103,23 @@ const mainImage = images[0];
       </div>
     </div>
 
-    <h3 
+    <h3
       class="text-2xl font-bold text-slate-100 mb-3 tracking-tight group-hover:text-shakespeare-400 transition-colors"
       data-i18n={nameKey}
     >
-      {name}
+      {nameKey ? t(nameKey as any) : name}
     </h3>
-    
-    <div class="relative group/desc">
-      <p 
-        class="description-text text-slate-400 text-sm leading-relaxed mb-4 font-normal overflow-hidden transition-all duration-500"
-        data-i18n={descriptionKey}
-        style="-webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical;"
-      >
-      </p>
-      <button 
-        class="read-more-btn hidden text-shakespeare-400 text-xs font-bold hover:text-shakespeare-300 transition-colors mb-6  items-center gap-1"
-      >
-        <span class="btn-text" data-i18n="projects.readMore">Leer más</span>
-        <Icon name="mdi:chevron-down" class="size-4 transition-transform duration-300" />
-      </button>
-    </div>
+
+    <!-- Description — always clamped to 3 lines -->
+    <p
+      class="description-text text-slate-400 text-sm leading-relaxed font-normal line-clamp-3 mb-4"
+      data-i18n={descriptionKey}
+    >
+      {descriptionKey ? t(descriptionKey as any) : ""}
+    </p>
 
     <!-- Technologies -->
-    <div class="mt-auto flex flex-wrap gap-2">
+    <div class="mt-auto flex flex-wrap gap-2 mb-5">
       {
         technologies.map((tech) => (
           <span class="px-2.5 py-1 bg-slate-900 border border-slate-800/80 rounded-lg text-[10px] font-medium text-slate-400">
@@ -130,69 +128,196 @@ const mainImage = images[0];
         ))
       }
     </div>
+
+    <!-- Read More Button — opens detail modal -->
+    {descriptionKey && (
+      <button
+        class="open-detail-btn w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-slate-700/60 text-slate-400 text-xs font-semibold hover:border-shakespeare-500/50 hover:text-shakespeare-400 hover:bg-shakespeare-500/5 transition-all duration-300"
+        data-detail-modal-id={`detail-modal-${uid}`}
+        data-i18n-btn="projects.readMore"
+      >
+        <span data-i18n="projects.readMore">Leer más</span>
+        <Icon name="mdi:arrow-top-right" class="size-3.5" />
+      </button>
+    )}
   </div>
+</div>
 
-  <!-- Modal Dialog -->
-  <dialog
-    id="image-modal"
-    class="bg-transparent backdrop:backdrop-blur-2xl p-0 w-full h-full max-w-full max-h-full border-none outline-none overflow-hidden"
-  >
-    <div
-      class="relative w-full h-full flex items-center justify-center bg-slate-950/90"
-    >
-      <button id="prev-img" class="absolute left-6 z-[100] text-white/20 hover:text-shakespeare-400 transition-all p-4 hidden sm:block">
-        <Icon name="mdi:chevron-left" class="size-16" />
-      </button>
-      <button id="next-img" class="absolute right-6 z-[100] text-white/20 hover:text-shakespeare-400 transition-all p-4 hidden sm:block">
-        <Icon name="mdi:chevron-right" class="size-16" />
-      </button>
-      <button id="close-modal" class="absolute top-8 right-8 z-[100] text-white/20 hover:text-red-400 transition-all">
-        <Icon name="mdi:close-circle-outline" class="size-10" />
-      </button>
-
-      <div class="w-full h-full flex items-center justify-center p-4 cursor-zoom-out" id="modal-bg-close">
-        <img id="modal-img" src="" class="max-w-full max-h-full object-contain rounded-xl shadow-2xl transition-all duration-500" />
-      </div>
+<!-- ===================== IMAGE MODAL ===================== -->
+<dialog
+  id={`img-modal-${uid}`}
+  class="project-img-modal bg-transparent backdrop:backdrop-blur-2xl p-0 w-full h-full max-w-full max-h-full border-none outline-none overflow-hidden"
+>
+  <div class="relative w-full h-full flex items-center justify-center bg-slate-950/90">
+    <button class="prev-img-btn absolute left-6 z-[100] text-white/20 hover:text-shakespeare-400 transition-all p-4 hidden sm:block">
+      <Icon name="mdi:chevron-left" class="size-16" />
+    </button>
+    <button class="next-img-btn absolute right-6 z-[100] text-white/20 hover:text-shakespeare-400 transition-all p-4 hidden sm:block">
+      <Icon name="mdi:chevron-right" class="size-16" />
+    </button>
+    <button class="close-img-modal-btn absolute top-8 right-8 z-[100] text-white/20 hover:text-red-400 transition-all">
+      <Icon name="mdi:close-circle-outline" class="size-10" />
+    </button>
+    <div class="w-full h-full flex items-center justify-center p-4 cursor-zoom-out img-modal-bg-close">
+      <img class="modal-img-el max-w-full max-h-full object-contain rounded-xl shadow-2xl transition-opacity duration-300" src="" alt="" />
     </div>
-  </dialog>
+  </div>
+</dialog>
 
-  <script>
-    const initModal = () => {
-      const modal = document.getElementById("image-modal") as HTMLDialogElement;
-      const modalImg = document.getElementById("modal-img") as HTMLImageElement;
-      const nextBtn = document.getElementById("next-img");
-      const prevBtn = document.getElementById("prev-img");
-      const closeBtn = document.getElementById("close-modal");
-      const bgClose = document.getElementById("modal-bg-close");
+<!-- ===================== DETAIL MODAL ===================== -->
+<dialog
+  id={`detail-modal-${uid}`}
+  class="project-detail-modal bg-transparent backdrop:bg-black/30 p-0 w-full max-w-2xl max-h-[90vh] border-none outline-none rounded-2xl overflow-hidden mx-auto my-auto"
+>
+  <div class="bg-[#0d1117] border border-slate-700/50 rounded-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <!-- Modal Header image — clickable to open image carousel -->
+    <div class="aspect-video w-full relative overflow-hidden bg-slate-900 flex-shrink-0 group/modal-img">
+      <button
+        class="expand-img-btn w-full h-full outline-none"
+        data-project-images={images.join(",")}
+        data-img-modal-id={`img-modal-${uid}`}
+        aria-label={`Ver imágenes de ${name}`}
+      >
+        <img
+          src={`/${mainImage}`}
+          alt={name}
+          class="w-full h-full object-cover transition-transform duration-500 group-hover/modal-img:scale-105"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-transparent to-transparent opacity-70"></div>
+        <!-- Expand hint -->
+        <div class="absolute top-4 left-4 opacity-0 group-hover/modal-img:opacity-100 transition-opacity duration-300">
+          <div class="bg-slate-950/50 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-xl text-white text-[10px] font-semibold flex items-center gap-1.5">
+            <Icon name="mdi:arrow-expand" class="size-3.5" />
+            Ver imágenes
+          </div>
+        </div>
+      </button>
+      <!-- Close -->
+      <button class="close-detail-modal-btn absolute top-4 right-4 z-10 bg-slate-950/60 backdrop-blur-md border border-white/10 p-2 rounded-xl text-white/60 hover:text-red-400 transition-colors">
+        <Icon name="mdi:close" class="size-5" />
+      </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="p-6 md:p-8 overflow-y-auto flex flex-col gap-5">
+      <!-- Title & category -->
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <span
+            class="text-[10px] font-bold tracking-[0.15em] text-shakespeare-400 uppercase block mb-1"
+            data-i18n={categoryKey}
+          >
+            {categoryKey ? t(categoryKey as any) : category}
+          </span>
+          <h2 class="text-2xl font-bold text-slate-100 tracking-tight" data-i18n={nameKey}>
+            {nameKey ? t(nameKey as any) : name}
+          </h2>
+        </div>
+        <!-- Links -->
+        <div class="flex gap-3 flex-shrink-0 mt-1">
+          {urlGit && (
+            <a href={urlGit} target="_blank" rel="noopener noreferrer"
+               class="text-slate-400 hover:text-white transition-colors" aria-label="GitHub">
+              <Icon name="mdi:github" class="size-6" />
+            </a>
+          )}
+          {urlDemo && (
+            <a href={urlDemo} target="_blank" rel="noopener noreferrer"
+               class="text-slate-400 hover:text-shakespeare-400 transition-colors" aria-label="Live Demo">
+              <Icon name="mdi:external-link" class="size-6" />
+            </a>
+          )}
+        </div>
+      </div>
+
+      <!-- Full description -->
+      <p
+        class="text-slate-300 text-sm leading-relaxed"
+        data-i18n={descriptionKey}
+      >
+        {descriptionKey ? t(descriptionKey as any) : ""}
+      </p>
+
+      <!-- Technologies -->
+      <div>
+        <p class="text-[10px] font-bold tracking-[0.12em] text-slate-500 uppercase mb-3">Stack</p>
+        <div class="flex flex-wrap gap-2">
+          {technologies.map((tech) => (
+            <span class="px-3 py-1.5 bg-slate-900 border border-slate-700/80 rounded-lg text-xs font-medium text-slate-300">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      {urlDemo && (
+        <a
+          href={urlDemo}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-shakespeare-500/10 border border-shakespeare-500/30 text-shakespeare-400 text-sm font-bold hover:bg-shakespeare-500/20 hover:border-shakespeare-500/60 transition-all duration-300"
+        >
+          <Icon name="mdi:rocket-launch-outline" class="size-4" />
+          <span>Ver Demo en vivo</span>
+        </a>
+      )}
+    </div>
+  </div>
+</dialog>
+
+<script>
+  function initProjectCards() {
+    // ── IMAGE MODALS ──────────────────────────────────────────────
+    document.querySelectorAll<HTMLButtonElement>(".expand-img-btn").forEach((btn) => {
+      const modalId = btn.getAttribute("data-img-modal-id");
+      if (!modalId) return;
+      const modal = document.getElementById(modalId) as HTMLDialogElement | null;
+      if (!modal) return;
+
+      const imgEl = modal.querySelector<HTMLImageElement>(".modal-img-el");
+      const nextBtn = modal.querySelector<HTMLButtonElement>(".next-img-btn");
+      const prevBtn = modal.querySelector<HTMLButtonElement>(".prev-img-btn");
+      const closeBtn = modal.querySelector<HTMLButtonElement>(".close-img-modal-btn");
+      const bgClose = modal.querySelector<HTMLElement>(".img-modal-bg-close");
 
       let imagesList: string[] = [];
       let currentIndex = 0;
 
       const updateView = () => {
-        if (!modalImg) return;
-        modalImg.style.opacity = "0";
+        if (!imgEl) return;
+        imgEl.style.opacity = "0";
         const loader = new Image();
         loader.src = imagesList[currentIndex];
         loader.onload = () => {
-          modalImg.src = imagesList[currentIndex];
-          modalImg.style.opacity = "1";
+          imgEl.src = imagesList[currentIndex];
+          imgEl.style.opacity = "1";
         };
       };
 
-      document.querySelectorAll(".expand-img-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const raw = btn.getAttribute("data-project-images");
-          imagesList = raw ? raw.split(",") : [];
-          currentIndex = 0;
-
-          if (modalImg && imagesList.length > 0) {
-            modalImg.src = imagesList[currentIndex];
-            modalImg.style.opacity = "1";
+      btn.addEventListener("click", () => {
+        const raw = btn.getAttribute("data-project-images");
+        imagesList = raw ? raw.split(",") : [];
+        currentIndex = 0;
+        if (imgEl && imagesList.length > 0) {
+          imgEl.src = imagesList[currentIndex];
+          imgEl.style.opacity = "1";
+          // If triggered from inside a detail modal, close it first
+          const parentDetailModal = btn.closest<HTMLDialogElement>(".project-detail-modal");
+          if (parentDetailModal?.open) {
+            parentDetailModal.close();
+            // Small delay so close animation doesn't clash
+            setTimeout(() => {
+              modal.showModal();
+              const multi = imagesList.length > 1;
+              [nextBtn, prevBtn].forEach((el) => el?.classList.toggle("hidden", !multi));
+            }, 80);
+          } else {
             modal.showModal();
             const multi = imagesList.length > 1;
-            [nextBtn, prevBtn].forEach(el => el?.classList.toggle("hidden", !multi));
+            [nextBtn, prevBtn].forEach((el) => el?.classList.toggle("hidden", !multi));
           }
-        });
+        }
       });
 
       nextBtn?.addEventListener("click", (e) => {
@@ -200,91 +325,126 @@ const mainImage = images[0];
         currentIndex = (currentIndex + 1) % imagesList.length;
         updateView();
       });
-
       prevBtn?.addEventListener("click", (e) => {
         e.stopPropagation();
         currentIndex = (currentIndex - 1 + imagesList.length) % imagesList.length;
         updateView();
       });
 
-      const closeHandler = () => modal.close();
-      [closeBtn, bgClose].forEach(el => el?.addEventListener("click", closeHandler));
-      modal.addEventListener("click", (e) => { if (e.target === modal) closeHandler(); });
-      // Keyboard navigation
-      document.addEventListener("keydown", (e) => {
-        if (!modal.open) return;
-        if (e.key === "ArrowRight") nextBtn?.click();
-        if (e.key === "ArrowLeft") prevBtn?.click();
-        if (e.key === "Escape") closeHandler();
-      });
-      };
-
-      const initReadMore = () => {
-      const cards = document.querySelectorAll('.project-card');
-      
-      cards.forEach(card => {
-        const desc = card.querySelector('.description-text') as HTMLElement;
-        const btn = card.querySelector('.read-more-btn') as HTMLElement;
-        const btnText = btn?.querySelector('.btn-text');
-        const icon = btn?.querySelector('svg');
-        
-        if (!desc || !btn) return;
-
-        // Reset state
-        btn.classList.add('hidden');
-        desc.style.display = '-webkit-box';
-        btn.setAttribute('aria-expanded', 'false');
-
-        // Observe height changes (like when i18n fills the text)
-        const observer = new ResizeObserver(() => {
-          // A tiny delay to ensure layout is updated
-          requestAnimationFrame(() => {
-            const isTruncated = desc.scrollHeight > desc.clientHeight;
-            if (isTruncated && btn.getAttribute('aria-expanded') !== 'true') {
-              btn.classList.remove('hidden');
-            }
-          });
-        });
-
-        observer.observe(desc);
-
-        btn.addEventListener('click', () => {
-          const expanded = btn.getAttribute('aria-expanded') === 'true';
-          const lang = document.documentElement.lang || 'es';
-          
-          if (expanded) {
-            desc.style.display = '-webkit-box';
-            btn.setAttribute('aria-expanded', 'false');
-            if (btnText) btnText.textContent = lang === 'en' ? 'Read more' : 'Leer más';
-            if (icon) icon.style.transform = 'rotate(0deg)';
-          } else {
-            desc.style.display = 'block';
-            btn.setAttribute('aria-expanded', 'true');
-            if (btnText) btnText.textContent = lang === 'en' ? 'Read less' : 'Leer menos';
-            if (icon) icon.style.transform = 'rotate(180deg)';
-          }
-        });
-      });
-    };
-
-    // Initialize with a small delay to allow i18n script to work
-    setTimeout(() => {
-      initModal();
-      initReadMore();
-    }, 100);
-
-    document.addEventListener("astro:after-swap", () => {
-      setTimeout(() => {
-        initModal();
-        initReadMore();
-      }, 100);
+      const closeImg = () => modal.close();
+      closeBtn?.addEventListener("click", closeImg);
+      bgClose?.addEventListener("click", closeImg);
+      modal.addEventListener("click", (e) => { if (e.target === modal) closeImg(); });
     });
-  </script>
 
-  <style>
-    html:has(dialog[open]) { overflow: hidden; }
-    #modal-img { max-width: 92vw; max-height: 85vh; }
-    dialog[open] { animation: fadeIn 0.3s ease-out forwards; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  </style>
-</div>
+    // ── DETAIL MODALS ─────────────────────────────────────────────
+    document.querySelectorAll<HTMLButtonElement>(".open-detail-btn").forEach((btn) => {
+      const modalId = btn.getAttribute("data-detail-modal-id");
+      if (!modalId) return;
+      const modal = document.getElementById(modalId) as HTMLDialogElement | null;
+      if (!modal) return;
+
+      const closeBtn = modal.querySelector<HTMLButtonElement>(".close-detail-modal-btn");
+
+      btn.addEventListener("click", () => modal.showModal());
+
+      const closeDetail = () => modal.close();
+      closeBtn?.addEventListener("click", closeDetail);
+      modal.addEventListener("click", (e) => { if (e.target === modal) closeDetail(); });
+    });
+
+    // ── SHARED KEYBOARD NAV ───────────────────────────────────────
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      document.querySelectorAll<HTMLDialogElement>("dialog[open]").forEach((d) => d.close());
+    });
+  }
+
+  // Apply i18n to detail modal buttons on language change
+  function applyDetailBtnI18n() {
+    const lang = document.documentElement.lang || "es";
+    document.querySelectorAll<HTMLButtonElement>(".open-detail-btn").forEach((btn) => {
+      const span = btn.querySelector("span[data-i18n]");
+      if (span) span.textContent = lang === "en" ? "Read more" : "Leer más";
+    });
+  }
+
+  setTimeout(() => {
+    initProjectCards();
+    applyDetailBtnI18n();
+  }, 100);
+
+  document.addEventListener("astro:after-swap", () => {
+    setTimeout(() => {
+      initProjectCards();
+      applyDetailBtnI18n();
+    }, 100);
+  });
+
+  // React to language toggle
+  document.addEventListener("DOMContentLoaded", () => {
+    const langToggle = document.getElementById("lang-toggle");
+    langToggle?.addEventListener("click", () => {
+      setTimeout(applyDetailBtnI18n, 50);
+    });
+  });
+</script>
+
+<style>
+  html:has(dialog[open]) { overflow: hidden; }
+
+  /* ── IMAGE MODAL ─────────────────────────────────── */
+  .project-img-modal {
+    position: fixed;
+    inset: 0;
+  }
+  /* Backdrop fade */
+  .project-img-modal::backdrop {
+    background: rgba(2, 6, 23, 0);
+    animation: backdropFade 0.3s ease-out forwards;
+  }
+  /* Dialog container slides in */
+  .project-img-modal[open] {
+    animation: imgModalIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  /* The actual image zooms in */
+  .project-img-modal[open] .modal-img-el {
+    animation: imgZoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* ── DETAIL MODAL ────────────────────────────────── */
+  .project-detail-modal {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+  }
+  /* Backdrop soft fade */
+  .project-detail-modal::backdrop {
+    background: rgba(0, 0, 0, 0);
+    animation: backdropFadeSoft 0.25s ease-out forwards;
+  }
+  /* Card springs up */
+  .project-detail-modal[open] {
+    animation: slideUp 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* ── KEYFRAMES ───────────────────────────────────── */
+  @keyframes backdropFade {
+    to { background: rgba(2, 6, 23, 0.92); }
+  }
+  @keyframes backdropFadeSoft {
+    to { background: rgba(0, 0, 0, 0.30); }
+  }
+  @keyframes imgModalIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes imgZoomIn {
+    from { opacity: 0; transform: scale(0.88); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(32px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);    }
+  }
+</style>
