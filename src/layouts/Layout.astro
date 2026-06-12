@@ -36,6 +36,9 @@ const ogImage = new URL(image, Astro.site);
       content="Daybel Diaz, Ingeniero de Software, Full Stack Developer, Java Developer, Spring Boot, React, PostgreSQL, República Dominicana, Software Engineer, Backend Developer, Frontend Developer"
     />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="es" href={canonicalURL.toString()} />
+    <link rel="alternate" hreflang="en" href={canonicalURL.toString() + "?lang=en"} />
+    <link rel="alternate" hreflang="x-default" href={canonicalURL.toString()} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
