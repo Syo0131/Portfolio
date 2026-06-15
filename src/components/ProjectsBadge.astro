@@ -155,11 +155,12 @@ const uid = Math.random().toString(36).slice(2, 8);
     <button class="next-img-btn absolute right-6 z-[100] text-white/20 hover:text-shakespeare-400 transition-all p-4 hidden sm:block">
       <Icon name="mdi:chevron-right" class="size-16" />
     </button>
-    <button class="close-img-modal-btn absolute top-8 right-8 z-[100] text-white/20 hover:text-red-400 transition-all">
-      <Icon name="mdi:close-circle-outline" class="size-10" />
+    <button class="close-img-modal-btn absolute top-5 right-5 z-[100] flex items-center gap-2 bg-slate-950/80 backdrop-blur-md border border-white/10 text-white/80 hover:text-red-400 hover:border-red-400/30 hover:bg-red-950/40 transition-all duration-200 px-3 py-2 rounded-xl text-xs font-semibold">
+      <Icon name="mdi:close" class="size-4" />
+      <span>Cerrar</span>
     </button>
     <div class="w-full h-full flex items-center justify-center p-4 cursor-zoom-out img-modal-bg-close">
-      <img class="modal-img-el max-w-full max-h-full object-contain rounded-xl shadow-2xl transition-opacity duration-300" src="" alt="" />
+      <img class="modal-img-el object-contain rounded-2xl shadow-2xl transition-opacity duration-300" src="" alt="" style="max-width: 78vw; max-height: 72vh;" />
     </div>
   </div>
 </dialog>
