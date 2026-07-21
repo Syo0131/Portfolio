@@ -1,6 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 export default {
     content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+    // Los colores de skills se construyen dinamicamente (`group-hover/skill:${skill.color}`),
+    // asi que Tailwind no los ve al escanear el codigo. Hay que declararlos aqui.
+    safelist: [
+        'text-orange-500', 'group-hover/skill:text-orange-500',
+        'text-blue-500', 'group-hover/skill:text-blue-500',
+        'text-blue-400', 'group-hover/skill:text-blue-400',
+        'text-yellow-400', 'group-hover/skill:text-yellow-400',
+        'text-yellow-600', 'group-hover/skill:text-yellow-600',
+        'text-sky-500', 'group-hover/skill:text-sky-500',
+        'text-sky-400', 'group-hover/skill:text-sky-400',
+        'text-red-500', 'group-hover/skill:text-red-500',
+        'text-purple-600', 'group-hover/skill:text-purple-600',
+        'text-green-500', 'group-hover/skill:text-green-500',
+        'text-[#F05032]', 'group-hover/skill:text-[#F05032]',
+        'text-[#0969DA]', 'group-hover/skill:text-[#0969DA]',
+    ],
     theme: {
         extend: {
             colors: {

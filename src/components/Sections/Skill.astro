@@ -21,14 +21,8 @@ const skillCategories: SkillCategory[] = [
     titleKey: "skills.frontend",
     icon: "mdi:palette",
     skills: [
-      { icon: "simple-icons:html5", 
-        name: "HTML", 
-        color: "text-orange-500" 
-      },
-      { icon: "simple-icons:css3", 
-        name: "CSS", 
-        color: "text-blue-500" 
-      },
+      { icon: "simple-icons:html5", name: "HTML", color: "text-orange-500" },
+      { icon: "simple-icons:css3", name: "CSS", color: "text-blue-500" },
       {
         icon: "simple-icons:javascript",
         name: "JavaScript",
@@ -46,14 +40,14 @@ const skillCategories: SkillCategory[] = [
       },
       {
         icon: "devicon-plain:nextjs",
-        name: "React",
+        name: "Next",
         color: "text-blue-400",
       },
       {
         icon: "devicon-plain:angular",
         name: "Angular",
         color: "text-red-500",
-      }
+      },
     ],
   },
   {
@@ -61,19 +55,15 @@ const skillCategories: SkillCategory[] = [
     titleKey: "skills.backend",
     icon: "mdi:server",
     skills: [
-      { icon: "fontisto:java", 
-        name: "Java", 
-        color: "text-red-500" 
-      },
-      { icon: "devicon-plain:csharp", 
-        name: "C#", 
-        color: "text-purple-600" 
-      },
+      { icon: "fontisto:java", name: "Java", color: "text-red-500" },
+
       {
         icon: "simple-icons:springboot",
         name: "Spring Boot",
         color: "text-green-500",
       },
+      { icon: "simple-icons:quarkus", name: "Quarkus", color: "text-blue-500" },
+      { icon: "devicon-plain:csharp", name: "C#", color: "text-purple-600" },
       {
         icon: "simple-icons:hibernate",
         name: "Hibernate",
@@ -91,18 +81,9 @@ const skillCategories: SkillCategory[] = [
     titleKey: "skills.tools",
     icon: "mdi:tools",
     skills: [
-      { icon: "simple-icons:git", 
-        name: "Git", 
-        color: "text-[#F05032]" 
-      },
-      { icon: "simple-icons:github", 
-        name: "GitHub", 
-        color: "text-[#0969DA]" 
-      },
-      { icon: "simple-icons:docker", 
-        name: "Docker", 
-        color: "text-blue-500" 
-      },
+      { icon: "simple-icons:git", name: "Git", color: "text-[#F05032]" },
+      { icon: "simple-icons:github", name: "GitHub", color: "text-[#0969DA]" },
+      { icon: "simple-icons:docker", name: "Docker", color: "text-blue-500" },
       {
         icon: "simple-icons:postman",
         name: "Postman",
@@ -167,7 +148,7 @@ const skillCategories: SkillCategory[] = [
                     />
                     {/* Glow effect on hover */}
                     <div
-                      class={`absolute inset-0 ${skill.color} opacity-0 group-hover/skill:opacity-20 blur-xl transition-opacity duration-300`}
+                      class={`absolute inset-0 ${skill.color} bg-current opacity-0 group-hover/skill:opacity-20 blur-xl transition-opacity duration-300`}
                     />
                   </div>
                   <span
@@ -180,7 +161,7 @@ const skillCategories: SkillCategory[] = [
             </div>
 
             {/* Decorative corner accent */}
-            <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-shakespeare-500/10 to-transparent rounded-tr-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div class="absolute top-0 right-0 w-24 h-24 bg-[radial-gradient(circle_at_top_right,theme(colors.shakespeare.500/18%),transparent_70%)] rounded-tr-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </div>
         ))
       }
@@ -192,7 +173,9 @@ const skillCategories: SkillCategory[] = [
   .skill-category {
     animation: fadeInUp 0.6s ease-out forwards;
     opacity: 0;
-    transform: translateY(20px);
+    /* `translate` en vez de `transform`: una animacion con `forwards` gana sobre
+       cualquier regla normal, y usar `transform` aqui mataba el hover:-translate-y-1 */
+    translate: 0 20px;
   }
 
   .skill-item {
@@ -203,7 +186,7 @@ const skillCategories: SkillCategory[] = [
   @keyframes fadeInUp {
     to {
       opacity: 1;
-      transform: translateY(0);
+      translate: 0 0;
     }
   }
 
@@ -213,8 +196,7 @@ const skillCategories: SkillCategory[] = [
     }
   }
 
-  /* Hover effect for skill icons - apply color on hover */
-  .skill-item:hover .text-slate-400 {
-    color: inherit;
-  }
+  /* El color de hover de cada icono lo pone la clase `group-hover/skill:text-*`
+     (declarada en el safelist de tailwind.config.mjs). No poner reglas aqui sobre
+     .text-slate-400: ganan por especificidad y pintan todo del color heredado. */
 </style>
