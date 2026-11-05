@@ -70,10 +70,13 @@ import { Icon } from "astro-icon/components";
           aria-label="Conectar en LinkedIn"
         />
         
-        <div class="relative group cv-dropdown">
+        <div class="relative cv-dropdown" id="cv-dropdown-container">
           <button
+            id="cv-menu-btn"
             class="group bg-shakespeare-800/80 hover:bg-shakespeare-700/80 backdrop-blur-sm transition-all duration-300 ease-smooth-out hover:scale-105 hover:shadow-lg hover:shadow-shakespeare-500/20 text-white font-semibold py-2.5 px-5 sm:px-7 rounded-full flex items-center gap-x-2.5 text-sm sm:text-base cursor-pointer"
             aria-haspopup="menu"
+            aria-controls="cv-menu"
+            aria-expanded="false"
             type="button"
           >
             <Icon
@@ -87,8 +90,14 @@ import { Icon } from "astro-icon/components";
             />
           </button>
           
-          <div class="absolute top-full mt-2 left-0 w-full min-w-max bg-slate-800 backdrop-blur-md rounded-xl overflow-hidden shadow-xl border border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform translate-y-2 group-hover:translate-y-0">
+          <div
+            id="cv-menu"
+            role="menu"
+            hidden
+            class="absolute top-full mt-2 left-0 w-full min-w-max bg-slate-800 backdrop-blur-md rounded-xl overflow-hidden shadow-xl border border-slate-700 z-50"
+          >
             <a 
+              role="menuitem"
               href="/Daybel_Diaz_Cv_Java.pdf" 
               download="Daybel_Diaz_Cv_Java.pdf" 
               class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700/50 hover:text-white text-slate-200 transition-colors"
@@ -97,6 +106,7 @@ import { Icon } from "astro-icon/components";
               <span class="text-sm font-medium">Español</span>
             </a>
             <a 
+              role="menuitem"
               href="/Daybel_Diaz_JavaAnalystDev.pdf" 
               download="Daybel_Diaz_JavaAnalystDev.pdf" 
               class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700/50 hover:text-white text-slate-200 transition-colors border-t border-slate-700"
@@ -232,13 +242,70 @@ import { Icon } from "astro-icon/components";
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initRoleAnimation);
-  } else {
-    initRoleAnimation();
+  function initCvMenu() {
+    const container = document.getElementById("cv-dropdown-container");
+    const btn = document.getElementById("cv-menu-btn");
+    const menu = document.getElementById("cv-menu");
+    if (!container || !btn || !menu) return;
+    if (btn.dataset.bound === "true") return;
+    btn.dataset.bound = "true";
+
+    function openMenu() {
+      menu?.removeAttribute("hidden");
+      btn?.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu(restoreFocus = false) {
+      if (!menu || menu.hasAttribute("hidden")) return;
+      menu.setAttribute("hidden", "");
+      btn?.setAttribute("aria-expanded", "false");
+      if (restoreFocus) btn?.focus();
+    }
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && btn.getAttribute("aria-expanded") === "true") {
+        closeMenu(true);
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!container.contains(e.target as Node)) {
+        closeMenu();
+      }
+    });
+
+    if (window.matchMedia("(hover: hover)").matches) {
+      container.addEventListener("mouseenter", () => {
+        openMenu();
+      });
+      container.addEventListener("mouseleave", () => {
+        closeMenu();
+      });
+    }
   }
 
-  document.addEventListener("astro:page-load", initRoleAnimation);
+  function initHero() {
+    initRoleAnimation();
+    initCvMenu();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initHero);
+  } else {
+    initHero();
+  }
+
+  document.addEventListener("astro:page-load", initHero);
 </script>
 <style>
   @keyframes heroFadeIn {
