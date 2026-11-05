@@ -1,0 +1,176 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import { useTranslations } from "../i18n/translations";
+import type { Project } from "../data/projects";
+
+interface Props {
+  project: Project;
+  index: number;
+  total: number;
+}
+
+const { project, index, total } = Astro.props;
+const t = useTranslations("es");
+
+const flipped = index % 2 === 1;
+const cover = project.images[0];
+// Los datos sin valor quedan visibles sólo en desarrollo, para recordar completarlos.
+const facts = project.facts.filter((f) => f.valueKey || import.meta.env.DEV);
+
+// Clases literales (Tailwind no ve clases construidas dinámicamente).
+const gridCols = project.featured
+  ? flipped
+    ? "lg:grid-cols-[1fr_1.4fr]"
+    : "lg:grid-cols-[1.4fr_1fr]"
+  : flipped
+    ? "lg:grid-cols-[1fr_1.2fr]"
+    : "lg:grid-cols-[1.2fr_1fr]";
+---
+
+<article
+  class:list={[
+    "project-case animate-on-scroll grid grid-cols-1 items-center gap-8 lg:gap-14",
+    gridCols,
+  ]}
+  data-project-id={project.id}
+>
+  <!-- Captura en marco de navegador -->
+  <div class:list={["browser-frame", flipped && "lg:order-2"]}>
+    <div
+      class="overflow-hidden rounded-xl border border-slate-800 bg-slate-900 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)] transition-colors duration-300 hover:border-shakespeare-500/40"
+    >
+      <div class="flex items-center gap-1.5 border-b border-slate-800 px-3 py-2.5">
+        <span class="size-2.5 rounded-full bg-slate-700"></span>
+        <span class="size-2.5 rounded-full bg-slate-700"></span>
+        <span class="size-2.5 rounded-full bg-slate-700"></span>
+        {
+          project.urlDemoLabel && (
+            <span class="ml-3 truncate font-mono text-[11px] text-slate-500">
+              {project.urlDemoLabel}
+            </span>
+          )
+        }
+      </div>
+      <button
+        type="button"
+        class="open-gallery group/img relative block aspect-video w-full overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-shakespeare-400"
+        data-project-id={project.id}
+      >
+        <Image
+          src={cover.src}
+          alt={cover.alt}
+          widths={[640, 960, 1280]}
+          sizes="(min-width: 1024px) 60vw, 100vw"
+          format="webp"
+          loading={index === 0 ? "eager" : "lazy"}
+          fetchpriority={index === 0 ? "high" : "auto"}
+          class="h-full w-full object-cover object-top transition-transform duration-700 group-hover/img:scale-[1.03]"
+        />
+        <span
+          class="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-lg border border-white/10 bg-slate-950/70 px-2.5 py-1.5 text-xs font-semibold text-white opacity-0 transition-opacity duration-300 group-hover/img:opacity-100 group-focus-visible/img:opacity-100"
+        >
+          <Icon name="mdi:image-multiple-outline" class="size-4" aria-hidden="true" />
+          <span data-i18n="projects.viewImages">{t("projects.viewImages")}</span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Información -->
+  <div class="flex flex-col gap-5">
+    <div class="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.15em]">
+      <span class="text-slate-500">
+        {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+      </span>
+      <span class="text-shakespeare-400" data-i18n={project.categoryKey}>
+        {t(project.categoryKey)}
+      </span>
+    </div>
+
+    <h3
+      class:list={[
+        "font-display font-bold tracking-tight text-slate-100 text-balance",
+        project.featured ? "text-3xl sm:text-4xl" : "text-2xl sm:text-3xl",
+      ]}
+    >
+      {project.name}
+    </h3>
+
+    <p class="max-w-[52ch] text-base leading-relaxed text-slate-300" data-i18n={project.pitchKey}>
+      {t(project.pitchKey)}
+    </p>
+
+    {
+      facts.length > 0 && (
+        <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {facts.map((fact) => (
+            <div class="border-l-2 border-shakespeare-500/60 pl-3">
+              <dt
+                class="font-mono text-[10px] uppercase tracking-[0.12em] text-slate-500"
+                data-i18n={fact.labelKey}
+              >
+                {t(fact.labelKey)}
+              </dt>
+              {fact.valueKey ? (
+                <dd class="mt-1 text-sm font-semibold text-slate-100" data-i18n={fact.valueKey}>
+                  {t(fact.valueKey)}
+                </dd>
+              ) : (
+                <dd class="mt-1 text-sm italic text-amber-400/80" data-i18n="projects.pending">
+                  {t("projects.pending")}
+                </dd>
+              )}
+            </div>
+          ))}
+        </dl>
+      )
+    }
+
+    <ul class="flex flex-wrap gap-2" aria-label="Stack">
+      {
+        project.stack.map((tech) => (
+          <li class="rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1 text-xs text-slate-300">
+            {tech}
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="flex flex-wrap gap-3 pt-1">
+      {
+        project.urlDemo && (
+          <a
+            href={project.urlDemo}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-xl bg-shakespeare-500 px-5 py-2.5 text-sm font-bold text-slate-950 transition-colors duration-300 hover:bg-shakespeare-400"
+          >
+            <span data-i18n="projects.viewLive">{t("projects.viewLive")}</span>
+            <Icon name="mdi:arrow-top-right" class="size-4" aria-hidden="true" />
+          </a>
+        )
+      }
+      <button
+        type="button"
+        class="open-details inline-flex items-center gap-2 rounded-xl border border-slate-700 px-5 py-2.5 text-sm font-semibold text-slate-200 transition-colors duration-300 hover:border-shakespeare-500/60 hover:text-shakespeare-300"
+        data-project-id={project.id}
+      >
+        <span data-i18n="projects.details">{t("projects.details")}</span>
+      </button>
+      {
+        project.urlGit && (
+          <a
+            href={project.urlGit}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-xl border border-slate-700 px-5 py-2.5 text-sm font-semibold text-slate-200 transition-colors duration-300 hover:border-shakespeare-500/60 hover:text-shakespeare-300"
+          >
+            <Icon name="mdi:github" class="size-4" aria-hidden="true" />
+            <span data-i18n="projects.code">{t("projects.code")}</span>
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>

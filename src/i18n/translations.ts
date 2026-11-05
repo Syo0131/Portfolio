@@ -73,6 +73,14 @@ export const translations = {
     "projects.fact.infra": "Infraestructura",
     "projects.fact.result": "Resultado",
     "projects.pending": "Pendiente",
+    "projects.viewLive": "Ver en vivo",
+    "projects.details": "Detalles",
+    "projects.code": "Código",
+    "projects.close": "Cerrar",
+    "projects.viewImages": "Ver imágenes",
+    "projects.prevImage": "Imagen anterior",
+    "projects.nextImage": "Imagen siguiente",
+    "projects.stack": "Stack",
     "projects.title": "Proyectos",
     "projects.spendly.name": "Spendly",
     "projects.spendly.description":
@@ -96,15 +104,6 @@ export const translations = {
       "Plataforma inmobiliaria de alto rendimiento optimizada para SEO y velocidad de carga. Como líder de proyecto, orquesté el ciclo de vida completo del software (SDLC) coordinando a un equipo de 3 personas bajo metodologías ágiles. Implementé una arquitectura robusta utilizando Next.js para un frontend ultrarrápido, Strapi como Headless CMS para la gestión ágil de propiedades, y despliegue contenedorizado con Docker y Dokploy.",
     "projects.tograbao.category": "Full-Stack",
 
-    // * Filters & Pagination
-    "projects.filter.all": "Todos",
-    "projects.category.fullstack": "Full-Stack",
-    "projects.category.backend": "Backend",
-    "projects.category.frontend": "Frontend",
-    "projects.showMore": "Ver más proyectos",
-    "projects.showLess": "Ver menos",
-    "projects.readMore": "Leer más",
-    "projects.readLess": "Leer menos",
 
     // Skills
     "skills.title": "Habilidades Técnicas",
@@ -235,6 +234,14 @@ export const translations = {
     "projects.fact.infra": "Infrastructure",
     "projects.fact.result": "Outcome",
     "projects.pending": "Pending",
+    "projects.viewLive": "View live",
+    "projects.details": "Details",
+    "projects.code": "Code",
+    "projects.close": "Close",
+    "projects.viewImages": "View images",
+    "projects.prevImage": "Previous image",
+    "projects.nextImage": "Next image",
+    "projects.stack": "Stack",
     "projects.title": "Projects",
     "projects.spendly.name": "Spendly",
     "projects.spendly.description":
@@ -251,15 +258,6 @@ export const translations = {
       "High-performance real estate platform optimized for SEO and load speed. As project lead, I orchestrated the complete software development lifecycle (SDLC) coordinating a team of 3 under agile methodologies. Implemented a robust architecture utilizing Next.js for a lightning-fast frontend, Strapi as a Headless CMS for agile property management, and containerized deployment with Docker and Dokploy.",
     "projects.tograbao.category": "Full-Stack",
 
-    // * Filters & Pagination
-    "projects.filter.all": "All",
-    "projects.category.fullstack": "Full-Stack",
-    "projects.category.backend": "Backend",
-    "projects.category.frontend": "Frontend",
-    "projects.showMore": "Show more projects",
-    "projects.showLess": "Show less",
-    "projects.readMore": "Read more",
-    "projects.readLess": "Read less",
 
     // Skills
     "skills.title": "Technical Skills",
