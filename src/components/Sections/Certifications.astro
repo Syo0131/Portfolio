@@ -157,21 +157,3 @@ const certification = [
   document.addEventListener("DOMContentLoaded", initShowMoreBtn);
   document.addEventListener("astro:page-load", initShowMoreBtn);
 </script>
-
-<style>
-  .cert-item {
-    animation: fadeInScale 0.6s ease-out forwards;
-    opacity: 0;
-  }
-
-  @keyframes fadeInScale {
-    from {
-      opacity: 0;
-      transform: scale(0.95) translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-  }
-</style>

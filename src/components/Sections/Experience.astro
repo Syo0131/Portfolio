@@ -157,8 +157,14 @@ const experiencias: ExperienceProps[] = [
   // Ejecutar al cargar la página
   document.addEventListener("DOMContentLoaded", checkScroll);
 
-  // Ejecutar al redimensionar la ventana
-  window.addEventListener("resize", checkScroll);
+  // ResizeObserver sobre #scroll-container
+  const scrollContainer = document.getElementById("scroll-container");
+  if (scrollContainer) {
+    const resizeObserver = new ResizeObserver(() => {
+      checkScroll();
+    });
+    resizeObserver.observe(scrollContainer);
+  }
 
   // Ejecutar después de que las fuentes y contenido se carguen completamente
   window.addEventListener("load", checkScroll);

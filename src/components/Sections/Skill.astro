@@ -115,8 +115,8 @@ const skillCategories: SkillCategory[] = [
       {
         skillCategories.map((category, categoryIndex) => (
           <div
-            class="skill-category group relative bg-slate-900/40 backdrop-blur-sm border border-shakespeare-800/30 rounded-2xl p-6 hover:border-shakespeare-600/50 transition-all duration-500 hover:shadow-xl hover:shadow-shakespeare-500/10 hover:-translate-y-1"
-            style={`animation-delay: ${categoryIndex * 150}ms`}
+            class="skill-category animate-on-scroll stagger group relative bg-slate-900/40 backdrop-blur-sm border border-shakespeare-800/30 rounded-2xl p-6 hover:border-shakespeare-600/50 transition-all duration-500 hover:shadow-xl hover:shadow-shakespeare-500/10 hover:-translate-y-1"
+            style={`--i: ${categoryIndex};`}
           >
             {/* Header de categoría */}
             <div class="flex items-center gap-3 mb-6 pb-4 border-b border-shakespeare-800/30">
@@ -170,32 +170,6 @@ const skillCategories: SkillCategory[] = [
 </section>
 
 <style>
-  .skill-category {
-    animation: fadeInUp 0.6s ease-out forwards;
-    opacity: 0;
-    /* `translate` en vez de `transform`: una animacion con `forwards` gana sobre
-       cualquier regla normal, y usar `transform` aqui mataba el hover:-translate-y-1 */
-    translate: 0 20px;
-  }
-
-  .skill-item {
-    animation: fadeIn 0.4s ease-out forwards;
-    opacity: 0;
-  }
-
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      translate: 0 0;
-    }
-  }
-
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-    }
-  }
-
   /* El color de hover de cada icono lo pone la clase `group-hover/skill:text-*`
      (declarada en el safelist de tailwind.config.mjs). No poner reglas aqui sobre
      .text-slate-400: ganan por especificidad y pintan todo del color heredado. */
