@@ -1,6 +1,5 @@
 ---
 import CertificationsBadge from "../CertificationsBadge.astro";
-import CertificationsModal from "../CertificationsModal.astro";
 import SectionTitle from "../SectionTitle.astro";
 
 const certification = [
@@ -10,6 +9,7 @@ const certification = [
     issuer: "Udemy",
     date: "Octubre 2025",
     dateKey: "certifications.spring.date",
+    sortDate: "2025-10",
     teacher: "Andrés Guzmán",
     link: "https://udemy-certificate.s3.amazonaws.com/image/UC-9ab6ccbc-2fb0-4647-9ec7-514aa80407a0.jpg",
     icon: "simple-icons:spring",
@@ -20,6 +20,7 @@ const certification = [
     issuer: "Devtalles",
     date: "Cursando",
     dateKey: "certifications.java.date",
+    sortDate: "9999-99",
     teacher: "Gabriel Chaldú",
     icon: "fontisto:java",
   },
@@ -29,6 +30,7 @@ const certification = [
     issuer: "Udemy",
     date: "Enero 2026",
     dateKey: "certifications.springframework.date",
+    sortDate: "2026-01",
     teacher: "Gauttam SK",
     icon: "simple-icons:spring",
     link: "https://udemy-certificate.s3.amazonaws.com/image/UC-064f57fb-40eb-4513-8a90-675334e51d74.jpg",
@@ -39,6 +41,7 @@ const certification = [
     issuer: "INDOTEL / Cymetria",
     date: "Enero 2026",
     dateKey: "certifications.fullstack.date",
+    sortDate: "2026-01",
     teacher: "INDOTEL",
     icon: "mdi:web",
     link: "https://drive.google.com/file/d/1JldTyGnOApBhZzxsEHgXwU6daP8S-kel/view?usp=sharing",
@@ -49,6 +52,7 @@ const certification = [
     issuer: "Udemy",
     date: "Diciembre 2025",
     dateKey: "certifications.csharp.date",
+    sortDate: "2025-12",
     teacher: "Juan Restituyo",
     icon: "devicon-plain:csharp",
     link: "https://udemy-certificate.s3.amazonaws.com/image/UC-2aa988ce-56bf-42a6-9d72-5304fc064cbb.jpg",
@@ -59,6 +63,7 @@ const certification = [
     issuer: "Dev Senior Code",
     date: "Marzo 2026",
     dateKey: "certifications.enterprise.date",
+    sortDate: "2026-03",
     teacher: "Cesar Díaz",
     icon: "simple-icons:spring",
     link: "https://drive.google.com/file/d/17WvCzGNkNEg6PDl90C71273tWePrMfOa/view?usp=sharing",
@@ -69,6 +74,7 @@ const certification = [
     issuer: "Devtalles",
     date: "Enero 2026",
     dateKey: "certifications.solid.date",
+    sortDate: "2026-01",
     teacher: "Fernando Herrera",
     icon: "mdi:cube-outline",
     link: "https://cursos.devtalles.com/certificates/o675hwwzxh",
@@ -79,10 +85,13 @@ const certification = [
     issuer: "DataCamp",
     date: "Febrero 2026",
     dateKey: "certifications.sql.date",
+    sortDate: "2026-02",
     icon: "mdi:sql-query",
     link: "https://drive.google.com/file/d/1vGfaEqhuGc5f-BnSpJgF5zRQz8_2viX-/view?usp=sharing&usp=embed_facebook",
   },
-];
+].sort((a, b) => b.sortDate.localeCompare(a.sortDate));
+
+const VISIBLE = 6;
 ---
 
 <section id="certifications" class="animate-on-scroll">
@@ -91,16 +100,16 @@ const certification = [
       >Certificaciones</SectionTitle
     >
 
-    <!-- Certifications Grid - showing first 6 -->
     <div
       id="certifications-grid"
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
     >
       {
-        certification.slice(0, 6).map((cert, index) => (
+        certification.map(({ sortDate, ...cert }, index) => (
           <div
             class="flex justify-center cert-item"
-            style={`animation-delay: ${index * 100}ms`}
+            data-cert-extra={index >= VISIBLE ? "" : undefined}
+            hidden={index >= VISIBLE}
           >
             <CertificationsBadge {...cert} />
           </div>
@@ -108,29 +117,26 @@ const certification = [
       }
     </div>
 
-    <!-- Show More Button (only visible if more than 6 certifications) -->
     {
-      certification.length > 6 && (
+      certification.length > VISIBLE && (
         <div class="flex justify-center mt-8 sm:mt-12">
           <button
-            id="open-modal-btn"
-            class="group bg-shakespeare-500/20 hover:bg-shakespeare-500/30 backdrop-blur-sm transition-all duration-300 ease-smooth-out hover:scale-105 hover:shadow-lg hover:shadow-shakespeare-500/20 text-shakespeare-300 hover:text-shakespeare-200 font-semibold py-3 px-6 sm:px-8 rounded-full flex items-center gap-x-3 text-sm sm:text-base border border-shakespeare-500/30 hover:border-shakespeare-500/50"
+            id="certs-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="certifications-grid"
+            class="group bg-shakespeare-500/20 hover:bg-shakespeare-500/30 transition-all duration-300 ease-smooth-out hover:scale-105 hover:shadow-lg hover:shadow-shakespeare-500/20 text-shakespeare-300 hover:text-shakespeare-200 font-semibold py-3 px-6 sm:px-8 rounded-full flex items-center gap-x-3 text-sm sm:text-base border border-shakespeare-500/30 hover:border-shakespeare-500/50"
           >
-            <span data-i18n="certifications.showMore">
-              Ver más certificaciones
-            </span>
+            <span id="certs-toggle-text" data-i18n="certifications.showAll">Ver todas</span>
             <svg
-              class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 transition-transform duration-300 ease-smooth-out group-hover:translate-x-1"
+              class="certs-toggle-icon w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 transition-transform duration-300"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
               stroke-width="2"
+              aria-hidden="true"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 5l7 7-7 7"
-              />
+              <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
             </svg>
           </button>
         </div>
@@ -139,21 +145,31 @@ const certification = [
   </div>
 </section>
 
-<!-- Certifications Modal -->
-<CertificationsModal certifications={certification} />
-
 <script>
-  function initShowMoreBtn() {
-    const openModalBtn = document.getElementById("open-modal-btn");
+  import { t } from "../../i18n/client";
 
-    openModalBtn?.addEventListener("click", () => {
-      // Call the global function exposed by the modal component
-      if (typeof (window as any).openCertificationsModal === "function") {
-        (window as any).openCertificationsModal();
-      }
+  function initCertsToggle() {
+    const btn = document.getElementById("certs-toggle");
+    const text = document.getElementById("certs-toggle-text");
+    if (!btn || !text || btn.dataset.bound === "true") return;
+    btn.dataset.bound = "true";
+
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      document
+        .querySelectorAll<HTMLElement>("[data-cert-extra]")
+        .forEach((el) => (el.hidden = expanded));
+      btn.setAttribute("aria-expanded", String(!expanded));
+      const key = expanded ? "certifications.showAll" : "certifications.showLess";
+      text.setAttribute("data-i18n", key);
+      text.textContent = t(key);
+      btn.querySelector(".certs-toggle-icon")?.classList.toggle("rotate-180", !expanded);
     });
   }
 
-  document.addEventListener("DOMContentLoaded", initShowMoreBtn);
-  document.addEventListener("astro:page-load", initShowMoreBtn);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCertsToggle);
+  } else {
+    initCertsToggle();
+  }
 </script>

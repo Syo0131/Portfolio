@@ -104,9 +104,8 @@ export const translations = {
     "certifications.inProgress": "En curso",
     "certifications.completed": "Completado",
     "certifications.comingSoon": "Próximamente",
-    "certifications.showMore": "Ver más certificaciones",
+    "certifications.showAll": "Ver todas",
     "certifications.showLess": "Ver menos",
-    "certifications.close": "Cerrar",
     "certifications.spring.title":
       "Spring Framework 6 & Spring Boot 3 desde cero a experto",
     "certifications.spring.date": "Octubre 2025",
@@ -242,9 +241,8 @@ export const translations = {
     "certifications.inProgress": "In progress",
     "certifications.completed": "Completed",
     "certifications.comingSoon": "Coming soon",
-    "certifications.showMore": "Show more certifications",
+    "certifications.showAll": "Show all",
     "certifications.showLess": "Show less",
-    "certifications.close": "Close",
     "certifications.spring.title":
       "Spring Framework 6 & Spring Boot 3 from zero to expert",
     "certifications.spring.date": "October 2025",
