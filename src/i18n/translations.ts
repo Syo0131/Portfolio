@@ -59,6 +59,20 @@ export const translations = {
     // Projects
 
     // * Spendly
+    "projects.tograbao.pitch": "Plataforma inmobiliaria rápida y optimizada para SEO. Lideré a un equipo de 3 personas de principio a fin.",
+    "projects.tograbao.fact.role": "Líder de proyecto",
+    "projects.tograbao.fact.team": "3 personas",
+    "projects.spendly.pitch": "Finanzas personales que registra tus gastos solos leyendo las notificaciones del banco.",
+    "projects.spendly.fact.key": "Registro automático desde correos del banco",
+    "projects.elpensum.pitch": "API que modela universidades, carreras y pensums, sobre infraestructura cloud montada por mí.",
+    "projects.elpensum.fact.role": "Backend e infraestructura",
+    "projects.elpensum.fact.infra": "VPS, DNS y SSL propios",
+    "projects.fact.role": "Rol",
+    "projects.fact.team": "Equipo",
+    "projects.fact.key": "Clave",
+    "projects.fact.infra": "Infraestructura",
+    "projects.fact.result": "Resultado",
+    "projects.pending": "Pendiente",
     "projects.title": "Proyectos",
     "projects.spendly.name": "Spendly",
     "projects.spendly.description":
@@ -207,6 +221,20 @@ export const translations = {
 
     // Projects
 
+    "projects.tograbao.pitch": "Fast, SEO-optimized real estate platform. I led a team of 3 from start to finish.",
+    "projects.tograbao.fact.role": "Project lead",
+    "projects.tograbao.fact.team": "3 people",
+    "projects.spendly.pitch": "Personal finance app that logs your expenses automatically from bank notifications.",
+    "projects.spendly.fact.key": "Auto-logging from bank emails",
+    "projects.elpensum.pitch": "API modeling universities, degrees and curricula, on cloud infrastructure I set up.",
+    "projects.elpensum.fact.role": "Backend & infrastructure",
+    "projects.elpensum.fact.infra": "Own VPS, DNS and SSL",
+    "projects.fact.role": "Role",
+    "projects.fact.team": "Team",
+    "projects.fact.key": "Key feature",
+    "projects.fact.infra": "Infrastructure",
+    "projects.fact.result": "Outcome",
+    "projects.pending": "Pending",
     "projects.title": "Projects",
     "projects.spendly.name": "Spendly",
     "projects.spendly.description":

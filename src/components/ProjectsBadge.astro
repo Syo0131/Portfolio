@@ -1,38 +1,28 @@
 ---
 import { Icon } from "astro-icon/components";
-import OptimizedImage from "./OptimizedImage.astro";
-import { getLangFromUrl, useTranslations } from "../i18n/translations";
+import { Image, getImage } from "astro:assets";
+import { useTranslations } from "../i18n/translations";
+import type { Project } from "../data/projects";
 
 interface Props {
-  name: string;
-  nameKey?: string;
-  descriptionKey?: string;
-  category: string;
-  categoryKey?: string;
-  technologies: string[];
-  urlDemo: string;
-  urlGit?: string;
-  images: string[];
+  project: Project;
 }
 
-const {
-  name,
-  nameKey,
-  urlDemo,
-  urlGit,
-  images,
-  category,
-  categoryKey,
-  descriptionKey,
-  technologies,
-} = Astro.props;
+const { project } = Astro.props;
+const { name, urlDemo, urlGit, categoryKey, descriptionKey } = project;
+const technologies = project.stackFull;
+const t = useTranslations("es");
+const nameKey = undefined;
+const category = t(categoryKey);
 
-const mainImage = images[0];
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const mainImage = project.images[0];
+const optimized = await Promise.all(
+  project.images.map((img) => getImage({ src: img.src, format: "webp", width: 1600 })),
+);
+const images = optimized.map((img) => img.src);
 
 // Unique ID for this card's modals
-const uid = Math.random().toString(36).slice(2, 8);
+const uid = project.id;
 ---
 
 <div
@@ -46,9 +36,10 @@ const uid = Math.random().toString(36).slice(2, 8);
       data-img-modal-id={`img-modal-${uid}`}
       aria-label={`Ver imágenes de ${name}`}
     >
-      <OptimizedImage
-        src={mainImage}
-        alt={name}
+      <Image
+        src={mainImage.src}
+        alt={mainImage.alt}
+        format="webp"
         width={600}
         height={337}
         class="project-thumbnail w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105"
@@ -180,7 +171,7 @@ const uid = Math.random().toString(36).slice(2, 8);
         aria-label={`Ver imágenes de ${name}`}
       >
         <img
-          src={`/${mainImage}`}
+          src={images[0]}
           alt={name}
           class="w-full h-full object-cover transition-transform duration-500 group-hover/modal-img:scale-105"
         />

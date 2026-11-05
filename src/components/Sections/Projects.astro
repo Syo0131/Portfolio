@@ -1,63 +1,13 @@
 ---
 import SectionTitle from "../SectionTitle.astro";
 import ProjectsBadge from "../ProjectsBadge.astro";
+import { projects, type Project } from "../../data/projects";
+import { translations } from "../../i18n/translations";
 
-const projects = [
-  {
-    name: "Spendly",
-    nameKey: "projects.spendly.name",
-    descriptionKey: "projects.spendly.description",
-    technologies: [
-      "Java", "Spring Boot", "PostgreSQL", "Angular", 
-      "Dokploy", "Docker", "Swagger", "Spring Security", "Spring Data JPA"
-    ],
-    category: "Full-Stack",
-    categoryKey: "projects.spendly.category",
-    images: [
-      "spendly/Spendly.png",
-      "spendly/EndpointsSpendly.png",
-      "spendly/SpendlySideBar.png",
-    ],
-    urlDemo: "https://frontend.daybeldiaz.dev/",
-    urlGit: "https://github.com/Syo0131"
-  },
-  {
-    name: "El Pensum API",
-    nameKey: "projects.elpensum.name",
-    descriptionKey: "projects.elpensum.description",
-    technologies: [
-      "Spring Boot", "Spring Security", "PostgreSQL", 
-      "Dokploy", "Docker", "Swagger", "Spring Data JPA"
-    ],
-    category: "Backend",
-    categoryKey: "projects.elpensum.category",
-    images: [
-      "elpensum/pensumweb.png",
-      "elpensum/elpensumAPI.png",
-      "elpensum/EndpointsPensum.png",
-    ],
-    urlDemo: "https://backend.elpensum.com/swagger-ui/index.html"
-  },
-  {
-    name: "Tograbao Real State",
-    nameKey: "projects.tograbao.name",
-    descriptionKey: "projects.tograbao.description",
-    technologies: [
-      "Strapi", "Dokploy", "Next.js", "Tailwind CSS", "Docker", "Swagger"
-    ],
-    category: "Full-Stack",
-    categoryKey: "projects.tograbao.category",
-    images: [
-      "tograbao/hero.png",
-      "tograbao/aboutus.png",
-      "tograbao/properties.png",
-    ],
-    urlDemo: "Tograbao.com"
-  }
-];
+const category = (p: Project) => translations.es[p.categoryKey];
 
 // Extract unique categories dynamically
-const uniqueCategories = [...new Set(projects.map(p => p.category))];
+const uniqueCategories = [...new Set(projects.map(category))];
 const categories = ["all", ...uniqueCategories];
 
 const getCategoryKey = (cat: string) => {
@@ -103,11 +53,8 @@ const getCategoryLabel = (cat: string) => {
       class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 transition-all duration-500"
     >
       {projects.map((project) => (
-        <div class="project-item" data-category={project.category}>
-          <ProjectsBadge 
-            {...project} 
-            categoryKey={getCategoryKey(project.category)}
-          />
+        <div class="project-item" data-category={category(project)}>
+          <ProjectsBadge project={project} />
         </div>
       ))}
     </div>
