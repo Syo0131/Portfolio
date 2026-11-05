@@ -19,6 +19,9 @@ export default {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                display: ['"Sora Variable"', 'system-ui', 'sans-serif'],
+            },
             colors: {
                 shakespeare: {
                     '50': '#ecfdff',
@@ -47,5 +50,22 @@ export default {
             },
         },
     },
-    plugins: [],
+    plugins: [
+        // Superficies compartidas por las tarjetas de Experiencia, Certificaciones, Skills y Contacto.
+        // Se registran como componentes para que las utilidades puedan sobrescribirlas.
+        function ({ addComponents, theme }) {
+            addComponents({
+                '.surface': {
+                    backgroundColor: 'rgb(15 23 42 / 0.4)',
+                    border: `1px solid rgb(30 41 59 / 0.6)`,
+                    borderRadius: theme('borderRadius.2xl'),
+                },
+                // Solo el color del borde: la transicion la pone cada tarjeta, para no pisar
+                // la de .animate-on-scroll.
+                '.surface-hover': {
+                    '&:hover': { borderColor: 'rgb(4 187 227 / 0.4)' },
+                },
+            });
+        },
+    ],
 }

@@ -1,7 +1,5 @@
 ---
 import Links from "../Links.astro";
-import OptimizedImage from "../OptimizedImage.astro";
-import Highlight from "../Highlight.astro";
 import { Icon } from "astro-icon/components";
 ---
 
@@ -19,12 +17,12 @@ import { Icon } from "astro-icon/components";
         class="text-sm sm:text-base text-slate-400 font-medium"
         data-i18n="hero.greeting"
       >
-        Hello, I'm
+        Hey, Soy
       </p>
 
       <h1
         id="hero-title"
-        class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-slate-100"
+        class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-slate-100"
       >
         Daybel Diaz
       </h1>
@@ -50,7 +48,7 @@ import { Icon } from "astro-icon/components";
       <p
         class="text-sm sm:text-base md:text-lg text-slate-300 leading-relaxed max-w-2xl pt-4"
       >
-        <span data-i18n="hero.experience">+1 año de experiencia.</span>
+        <span data-i18n="hero.experience">+3 años de experiencia.</span>
         <span data-i18n="hero.location">de República Dominicana</span>.
          <span data-i18n="hero.description"
           >Especializado en crear soluciones escalables, desde la lógica de
@@ -72,10 +70,13 @@ import { Icon } from "astro-icon/components";
           aria-label="Conectar en LinkedIn"
         />
         
-        <div class="relative group cv-dropdown">
+        <div class="relative cv-dropdown" id="cv-dropdown-container">
           <button
+            id="cv-menu-btn"
             class="group bg-shakespeare-800/80 hover:bg-shakespeare-700/80 backdrop-blur-sm transition-all duration-300 ease-smooth-out hover:scale-105 hover:shadow-lg hover:shadow-shakespeare-500/20 text-white font-semibold py-2.5 px-5 sm:px-7 rounded-full flex items-center gap-x-2.5 text-sm sm:text-base cursor-pointer"
             aria-haspopup="menu"
+            aria-controls="cv-menu"
+            aria-expanded="false"
             type="button"
           >
             <Icon
@@ -89,8 +90,16 @@ import { Icon } from "astro-icon/components";
             />
           </button>
           
-          <div class="absolute top-full mt-2 left-0 w-full min-w-max bg-slate-800 backdrop-blur-md rounded-xl overflow-hidden shadow-xl border border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform translate-y-2 group-hover:translate-y-0">
+          <!-- pt-2 (no mt-2): el hueco forma parte del menú, así el puntero no sale del contenedor al bajar -->
+          <div
+            id="cv-menu"
+            role="menu"
+            hidden
+            class="absolute top-full pt-2 left-0 w-full min-w-max z-50"
+          >
+            <div class="bg-slate-800 rounded-xl overflow-hidden shadow-xl border border-slate-700">
             <a 
+              role="menuitem"
               href="/Daybel_Diaz_Cv_Java.pdf" 
               download="Daybel_Diaz_Cv_Java.pdf" 
               class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700/50 hover:text-white text-slate-200 transition-colors"
@@ -99,6 +108,7 @@ import { Icon } from "astro-icon/components";
               <span class="text-sm font-medium">Español</span>
             </a>
             <a 
+              role="menuitem"
               href="/Daybel_Diaz_JavaAnalystDev.pdf" 
               download="Daybel_Diaz_JavaAnalystDev.pdf" 
               class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700/50 hover:text-white text-slate-200 transition-colors border-t border-slate-700"
@@ -106,6 +116,7 @@ import { Icon } from "astro-icon/components";
               <span class="text-shakespeare-400 font-bold tracking-wide text-sm flex-shrink-0">EN</span>
               <span class="text-sm font-medium">English</span>
             </a>
+            </div>
           </div>
         </div>
       </div>
@@ -114,6 +125,8 @@ import { Icon } from "astro-icon/components";
 </section>
 
 <script>
+  import { getLang, onLangChange } from "../../i18n/client";
+
   function initRoleAnimation() {
     const rolesES = [
       "Desarrollador Java",
@@ -130,7 +143,7 @@ import { Icon } from "astro-icon/components";
     ];
 
     let currentIndex = 0;
-    let currentLang = localStorage.getItem("lang") || "es";
+    let currentLang = getLang();
     let isAnimating = false;
     let activeTimeouts: ReturnType<typeof setTimeout>[] = [];
     const roleElement = document.getElementById("animated-role");
@@ -139,6 +152,15 @@ import { Icon } from "astro-icon/components";
 
     function getCurrentRoles() {
       return currentLang === "es" ? rolesES : rolesEN;
+    }
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      roleElement.textContent = getCurrentRoles()[0];
+      onLangChange((lang) => {
+        currentLang = lang;
+        roleElement.textContent = getCurrentRoles()[0];
+      });
+      return;
     }
 
     function clearAllTimeouts() {
@@ -208,33 +230,101 @@ import { Icon } from "astro-icon/components";
       }
     }
 
-    // Verificar cambios de idioma
-    let checkInterval = setInterval(() => {
-      const newLang = localStorage.getItem("lang") || "es";
-      if (newLang !== currentLang) {
-        currentLang = newLang;
-        stopAnimation();
-        setTimeout(startAnimation, 200);
-      }
-    }, 300);
+    onLangChange((newLang) => {
+      currentLang = newLang;
+      stopAnimation();
+      setTimeout(startAnimation, 200);
+    });
 
     // Iniciar animación
     startAnimation();
 
     // Cleanup al desmontar
     window.addEventListener("beforeunload", () => {
-      clearInterval(checkInterval);
       stopAnimation();
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initRoleAnimation);
-  } else {
-    initRoleAnimation();
+  function initCvMenu() {
+    const container = document.getElementById("cv-dropdown-container");
+    const btn = document.getElementById("cv-menu-btn");
+    const menu = document.getElementById("cv-menu");
+    if (!container || !btn || !menu) return;
+    if (btn.dataset.bound === "true") return;
+    btn.dataset.bound = "true";
+
+    function openMenu() {
+      menu?.removeAttribute("hidden");
+      btn?.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu(restoreFocus = false) {
+      if (!menu || menu.hasAttribute("hidden")) return;
+      menu.setAttribute("hidden", "");
+      btn?.setAttribute("aria-expanded", "false");
+      openedByHover = false;
+      if (restoreFocus) btn?.focus();
+    }
+
+    const hoverCapable = window.matchMedia("(hover: hover)").matches;
+    // Si el menú se abrió por hover, el clic que viene después lo "fija" en vez de cerrarlo.
+    let openedByHover = false;
+    let closeTimer: ReturnType<typeof setTimeout> | undefined;
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+      if (isOpen && openedByHover) {
+        openedByHover = false;
+      } else if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && btn.getAttribute("aria-expanded") === "true") {
+        closeMenu(true);
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!container.contains(e.target as Node)) {
+        closeMenu();
+      }
+    });
+
+    if (hoverCapable) {
+      container.addEventListener("mouseenter", () => {
+        clearTimeout(closeTimer);
+        if (btn.getAttribute("aria-expanded") !== "true") {
+          openedByHover = true;
+          openMenu();
+        }
+      });
+      container.addEventListener("mouseleave", () => {
+        clearTimeout(closeTimer);
+        closeTimer = setTimeout(() => {
+          openedByHover = false;
+          closeMenu();
+        }, 150);
+      });
+    }
   }
 
-  document.addEventListener("astro:page-load", initRoleAnimation);
+  function initHero() {
+    initRoleAnimation();
+    initCvMenu();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initHero);
+  } else {
+    initHero();
+  }
+
+  document.addEventListener("astro:page-load", initHero);
 </script>
 <style>
   @keyframes heroFadeIn {

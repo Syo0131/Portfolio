@@ -43,7 +43,7 @@ export const translations = {
       "Desarrollo y mantenimiento de módulos Java para la gestión de usuarios y tarjetas de fidelidad.",
     "experience.java.desc2":
       "Implementación de funcionalidades para el procesamiento de facturas electrónicas y conciliación de transacciones.",
-    "experience.pensum.position": "BackEnd & Infraestructure engineer",
+    "experience.pensum.position": "BackEnd & Infrastructure engineer",
     "experience.pensum.company": "El Pensum",
     "experience.pensum.period": "Noviembre 2025 - Febrero 2026",
     "experience.pensum.type": "Contrato de formación",
@@ -59,6 +59,28 @@ export const translations = {
     // Projects
 
     // * Spendly
+    "projects.tograbao.pitch": "Plataforma inmobiliaria rápida y optimizada para SEO. Lideré a un equipo de 3 personas de principio a fin.",
+    "projects.tograbao.fact.role": "Líder de proyecto",
+    "projects.tograbao.fact.team": "3 personas",
+    "projects.spendly.pitch": "Finanzas personales que registra tus gastos solos leyendo las notificaciones del banco.",
+    "projects.spendly.fact.key": "Registro automático desde correos del banco",
+    "projects.elpensum.pitch": "API que modela universidades, carreras y pensums, sobre infraestructura cloud montada por mí.",
+    "projects.elpensum.fact.role": "Backend e infraestructura",
+    "projects.elpensum.fact.infra": "VPS, DNS y SSL propios",
+    "projects.fact.role": "Rol",
+    "projects.fact.team": "Equipo",
+    "projects.fact.key": "Clave",
+    "projects.fact.infra": "Infraestructura",
+    "projects.fact.result": "Resultado",
+    "projects.pending": "Pendiente",
+    "projects.viewLive": "Ver en vivo",
+    "projects.details": "Detalles",
+    "projects.code": "Código",
+    "projects.close": "Cerrar",
+    "projects.viewImages": "Ver imágenes",
+    "projects.prevImage": "Imagen anterior",
+    "projects.nextImage": "Imagen siguiente",
+    "projects.stack": "Stack",
     "projects.title": "Proyectos",
     "projects.spendly.name": "Spendly",
     "projects.spendly.description":
@@ -82,15 +104,6 @@ export const translations = {
       "Plataforma inmobiliaria de alto rendimiento optimizada para SEO y velocidad de carga. Como líder de proyecto, orquesté el ciclo de vida completo del software (SDLC) coordinando a un equipo de 3 personas bajo metodologías ágiles. Implementé una arquitectura robusta utilizando Next.js para un frontend ultrarrápido, Strapi como Headless CMS para la gestión ágil de propiedades, y despliegue contenedorizado con Docker y Dokploy.",
     "projects.tograbao.category": "Full-Stack",
 
-    // * Filters & Pagination
-    "projects.filter.all": "Todos",
-    "projects.category.fullstack": "Full-Stack",
-    "projects.category.backend": "Backend",
-    "projects.category.frontend": "Frontend",
-    "projects.showMore": "Ver más proyectos",
-    "projects.showLess": "Ver menos",
-    "projects.readMore": "Leer más",
-    "projects.readLess": "Leer menos",
 
     // Skills
     "skills.title": "Habilidades Técnicas",
@@ -99,14 +112,17 @@ export const translations = {
     "skills.tools": "Tools",
 
     // Certifications
+    "experience.eyebrow": "Trayectoria",
+    "projects.eyebrow": "Casos de estudio",
+    "certifications.eyebrow": "Aprendizaje",
+    "skills.eyebrow": "Stack",
     "certifications.title": "Certificaciones",
     "certifications.viewCert": "Ver Certificación",
     "certifications.inProgress": "En curso",
     "certifications.completed": "Completado",
     "certifications.comingSoon": "Próximamente",
-    "certifications.showMore": "Ver más certificaciones",
+    "certifications.showAll": "Ver todas",
     "certifications.showLess": "Ver menos",
-    "certifications.close": "Cerrar",
     "certifications.spring.title":
       "Spring Framework 6 & Spring Boot 3 desde cero a experto",
     "certifications.spring.date": "Octubre 2025",
@@ -204,6 +220,28 @@ export const translations = {
 
     // Projects
 
+    "projects.tograbao.pitch": "Fast, SEO-optimized real estate platform. I led a team of 3 from start to finish.",
+    "projects.tograbao.fact.role": "Project lead",
+    "projects.tograbao.fact.team": "3 people",
+    "projects.spendly.pitch": "Personal finance app that logs your expenses automatically from bank notifications.",
+    "projects.spendly.fact.key": "Auto-logging from bank emails",
+    "projects.elpensum.pitch": "API modeling universities, degrees and curricula, on cloud infrastructure I set up.",
+    "projects.elpensum.fact.role": "Backend & infrastructure",
+    "projects.elpensum.fact.infra": "Own VPS, DNS and SSL",
+    "projects.fact.role": "Role",
+    "projects.fact.team": "Team",
+    "projects.fact.key": "Key feature",
+    "projects.fact.infra": "Infrastructure",
+    "projects.fact.result": "Outcome",
+    "projects.pending": "Pending",
+    "projects.viewLive": "View live",
+    "projects.details": "Details",
+    "projects.code": "Code",
+    "projects.close": "Close",
+    "projects.viewImages": "View images",
+    "projects.prevImage": "Previous image",
+    "projects.nextImage": "Next image",
+    "projects.stack": "Stack",
     "projects.title": "Projects",
     "projects.spendly.name": "Spendly",
     "projects.spendly.description":
@@ -220,15 +258,6 @@ export const translations = {
       "High-performance real estate platform optimized for SEO and load speed. As project lead, I orchestrated the complete software development lifecycle (SDLC) coordinating a team of 3 under agile methodologies. Implemented a robust architecture utilizing Next.js for a lightning-fast frontend, Strapi as a Headless CMS for agile property management, and containerized deployment with Docker and Dokploy.",
     "projects.tograbao.category": "Full-Stack",
 
-    // * Filters & Pagination
-    "projects.filter.all": "All",
-    "projects.category.fullstack": "Full-Stack",
-    "projects.category.backend": "Backend",
-    "projects.category.frontend": "Frontend",
-    "projects.showMore": "Show more projects",
-    "projects.showLess": "Show less",
-    "projects.readMore": "Read more",
-    "projects.readLess": "Read less",
 
     // Skills
     "skills.title": "Technical Skills",
@@ -237,14 +266,17 @@ export const translations = {
     "skills.tools": "Tools",
 
     // Certifications
+    "experience.eyebrow": "Career",
+    "projects.eyebrow": "Case studies",
+    "certifications.eyebrow": "Learning",
+    "skills.eyebrow": "Stack",
     "certifications.title": "Certifications",
     "certifications.viewCert": "View Certificate",
     "certifications.inProgress": "In progress",
     "certifications.completed": "Completed",
     "certifications.comingSoon": "Coming soon",
-    "certifications.showMore": "Show more certifications",
+    "certifications.showAll": "Show all",
     "certifications.showLess": "Show less",
-    "certifications.close": "Close",
     "certifications.spring.title":
       "Spring Framework 6 & Spring Boot 3 from zero to expert",
     "certifications.spring.date": "October 2025",

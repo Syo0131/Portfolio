@@ -12,6 +12,7 @@
     "@astrojs/sitemap": "^3.7.0",
     "@astrojs/tailwind": "^6.0.2",
     "@emailjs/browser": "^4.4.1",
+    "@fontsource-variable/sora": "^5.3.0",
     "@iconify-json/devicon": "^1.2.57",
     "@iconify-json/devicon-plain": "^1.2.52",
     "@iconify-json/file-icons": "^1.2.2",
