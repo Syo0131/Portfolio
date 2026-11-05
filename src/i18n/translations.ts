@@ -43,7 +43,7 @@ export const translations = {
       "Desarrollo y mantenimiento de módulos Java para la gestión de usuarios y tarjetas de fidelidad.",
     "experience.java.desc2":
       "Implementación de funcionalidades para el procesamiento de facturas electrónicas y conciliación de transacciones.",
-    "experience.pensum.position": "BackEnd & Infraestructure engineer",
+    "experience.pensum.position": "BackEnd & Infrastructure engineer",
     "experience.pensum.company": "El Pensum",
     "experience.pensum.period": "Noviembre 2025 - Febrero 2026",
     "experience.pensum.type": "Contrato de formación",

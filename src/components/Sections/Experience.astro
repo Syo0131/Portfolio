@@ -5,37 +5,6 @@ import type { Props as ExperienceProps } from "../ExperienceTimeline.astro";
 
 const experiencias: ExperienceProps[] = [
   {
-    position: "Product Manager & FullStack Developer",
-    positionKey: "experience.freelance.position",
-    company: "Freelance",
-    period: "Marzo 2024 - Presente",
-    periodKey: "experience.freelance.period",
-    alignment: "top",
-    alignmentMobile: "right",
-    description: [
-      "Desarrollo de aplicaciones web a medida para diversos clientes, gestionando el ciclo completo del producto y liderando un equipo de desarrollo.",
-      "Implementación de soluciones full-stack, arquitecturas escalables y coordinación de equipos para asegurar alto rendimiento y calidad.",
-    ],
-    descriptionKeys: [
-      "experience.freelance.desc1",
-      "experience.freelance.desc2",
-    ],
-  },
-  {
-    position: "BackEnd & Infraestructure engineer",
-    positionKey: "experience.pensum.position",
-    company: "El Pensum",
-    period: "Noviembre 2025 - Febrero 2026",
-    periodKey: "experience.pensum.period",
-    alignment: "bottom",
-    alignmentMobile: "left",
-    description: [
-      "Responsable de la arquitectura integral del proyecto, enfocándome en la escalabilidad del backend y la eficiencia operativa de la infraestructura.",
-      "Arquitecté el backend con Spring Boot, aplicando patrones de diseño para garantizar la mantenibilidad y el rendimiento con PostgreSQL",
-    ],
-    descriptionKeys: ["experience.pensum.desc1", "experience.pensum.desc2"],
-  },
-  {
     position: "Java Analyst Developer",
     positionKey: "experience.java.position",
     company: "IKEA Sarton ( BitBox Caribe SRL )",
@@ -49,20 +18,37 @@ const experiencias: ExperienceProps[] = [
     ],
     descriptionKeys: ["experience.java.desc1", "experience.java.desc2"],
   },
-  // {
-  //   position: "Founder & Product Manager",
-  //   positionKey: "experience.founder.position",
-  //   company: "CommitCore",
-  //   period: "Junio 2025 - Presente",
-  //   periodKey: "experience.founder.period",
-  //   alignment: "top",
-  //   alignmentMobile: "right",
-  //   description: [
-  //     "Lideré el desarrollo de una plataforma de gestión de proyectos, desde la concepción hasta el lanzamiento, utilizando React para el frontend y Node.js para el backend.",
-  //     "Gestioné un equipo multidisciplinario, coordinando tareas y asegurando la entrega oportuna de funcionalidades clave.",
-  //   ],
-  //   descriptionKeys: ["experience.founder.desc1", "experience.founder.desc2"],
-  // },
+  {
+    position: "Product Manager & FullStack Developer",
+    positionKey: "experience.freelance.position",
+    company: "Freelance",
+    period: "Marzo 2024 - Presente",
+    periodKey: "experience.freelance.period",
+    alignment: "bottom",
+    alignmentMobile: "left",
+    description: [
+      "Desarrollo de aplicaciones web a medida para diversos clientes, gestionando el ciclo completo del producto y liderando un equipo de desarrollo.",
+      "Implementación de soluciones full-stack, arquitecturas escalables y coordinación de equipos para asegurar alto rendimiento y calidad.",
+    ],
+    descriptionKeys: [
+      "experience.freelance.desc1",
+      "experience.freelance.desc2",
+    ],
+  },
+  {
+    position: "BackEnd & Infrastructure engineer",
+    positionKey: "experience.pensum.position",
+    company: "El Pensum",
+    period: "Noviembre 2025 - Febrero 2026",
+    periodKey: "experience.pensum.period",
+    alignment: "top",
+    alignmentMobile: "right",
+    description: [
+      "Responsable de la arquitectura integral del proyecto, enfocándome en la escalabilidad del backend y la eficiencia operativa de la infraestructura.",
+      "Arquitecté el backend con Spring Boot, aplicando patrones de diseño para garantizar la mantenibilidad y el rendimiento con PostgreSQL",
+    ],
+    descriptionKeys: ["experience.pensum.desc1", "experience.pensum.desc2"],
+  },
 ];
 ---
 
