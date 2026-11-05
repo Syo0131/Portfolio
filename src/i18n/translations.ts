@@ -99,6 +99,10 @@ export const translations = {
     "skills.tools": "Tools",
 
     // Certifications
+    "experience.eyebrow": "Trayectoria",
+    "projects.eyebrow": "Casos de estudio",
+    "certifications.eyebrow": "Aprendizaje",
+    "skills.eyebrow": "Stack",
     "certifications.title": "Certificaciones",
     "certifications.viewCert": "Ver Certificación",
     "certifications.inProgress": "En curso",
@@ -236,6 +240,10 @@ export const translations = {
     "skills.tools": "Tools",
 
     // Certifications
+    "experience.eyebrow": "Career",
+    "projects.eyebrow": "Case studies",
+    "certifications.eyebrow": "Learning",
+    "skills.eyebrow": "Stack",
     "certifications.title": "Certifications",
     "certifications.viewCert": "View Certificate",
     "certifications.inProgress": "In progress",

@@ -250,18 +250,15 @@ import LanguageToggle from "../LanguageToggle.astro";
 </script>
 
 <style is:global>
-  /* Estilos para nav links activos - móvil */
-  header .nav-link.active {
-    color: #5eb3e4 !important;
-    font-weight: 700 !important;
-    background-color: rgba(94, 179, 228, 0.15) !important;
-  }
-
-  /* Estilos para nav links activos - desktop sidebar */
+  /* Nav activo (móvil y sidebar). !important porque compite con las utilidades hover:* del enlace */
+  header .nav-link.active,
   aside .nav-link.active {
-    color: #20cef0 !important;
-    background-color: rgba(94, 179, 228, 0.15) !important;
-    box-shadow: 0 0 0 1px rgba(94, 179, 228, 0.4) !important;
-    transform: scale(1.1) !important;
+    @apply !text-shakespeare-400 !bg-shakespeare-500/15 !ring-1 !ring-shakespeare-400/40;
+  }
+  header .nav-link.active {
+    @apply !font-bold;
+  }
+  aside .nav-link.active {
+    @apply !scale-110;
   }
 </style>
