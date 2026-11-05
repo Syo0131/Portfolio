@@ -112,6 +112,8 @@ import { Icon } from "astro-icon/components";
 </section>
 
 <script>
+  import { getLang, onLangChange } from "../../i18n/client";
+
   function initRoleAnimation() {
     const rolesES = [
       "Desarrollador Java",
@@ -128,7 +130,7 @@ import { Icon } from "astro-icon/components";
     ];
 
     let currentIndex = 0;
-    let currentLang = localStorage.getItem("lang") || "es";
+    let currentLang = getLang();
     let isAnimating = false;
     let activeTimeouts: ReturnType<typeof setTimeout>[] = [];
     const roleElement = document.getElementById("animated-role");
@@ -137,6 +139,15 @@ import { Icon } from "astro-icon/components";
 
     function getCurrentRoles() {
       return currentLang === "es" ? rolesES : rolesEN;
+    }
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      roleElement.textContent = getCurrentRoles()[0];
+      onLangChange((lang) => {
+        currentLang = lang;
+        roleElement.textContent = getCurrentRoles()[0];
+      });
+      return;
     }
 
     function clearAllTimeouts() {
@@ -206,22 +217,17 @@ import { Icon } from "astro-icon/components";
       }
     }
 
-    // Verificar cambios de idioma
-    let checkInterval = setInterval(() => {
-      const newLang = localStorage.getItem("lang") || "es";
-      if (newLang !== currentLang) {
-        currentLang = newLang;
-        stopAnimation();
-        setTimeout(startAnimation, 200);
-      }
-    }, 300);
+    onLangChange((newLang) => {
+      currentLang = newLang;
+      stopAnimation();
+      setTimeout(startAnimation, 200);
+    });
 
     // Iniciar animación
     startAnimation();
 
     // Cleanup al desmontar
     window.addEventListener("beforeunload", () => {
-      clearInterval(checkInterval);
       stopAnimation();
     });
   }

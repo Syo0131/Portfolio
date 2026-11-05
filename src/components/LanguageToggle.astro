@@ -1,16 +1,12 @@
 ---
 import { Icon } from "astro-icon/components";
-import { translations } from "../i18n/translations";
-
-// Make translations available to the client-side script
-const translationsJSON = JSON.stringify(translations);
 ---
 
 <button
-  id="lang-toggle"
-  class="group relative flex items-center justify-center size-10 lg:size-12 rounded-full bg-slate-900/80 backdrop-blur-lg text-slate-100 hover:text-white transition-all duration-300 ease-out hover:scale-110 ring-1 ring-white/20 hover:ring-shakespeare-400/60 hover:bg-shakespeare-900/30 hover:shadow-[0_0_15px_rgba(74,144,226,0.3)] active:scale-95 overflow-hidden"
+  class="lang-toggle group relative flex items-center justify-center size-10 lg:size-12 rounded-full bg-slate-900/80 backdrop-blur-lg text-slate-100 hover:text-white transition-all duration-300 ease-out hover:scale-110 ring-1 ring-white/20 hover:ring-shakespeare-400/60 hover:bg-shakespeare-900/30 hover:shadow-[0_0_15px_rgba(74,144,226,0.3)] active:scale-95 overflow-hidden"
   aria-label="Toggle language"
   title="Cambiar idioma / Change language"
+  type="button"
 >
   <!-- Icono decorativo de fondo (Watermark) -->
   <Icon
@@ -20,95 +16,34 @@ const translationsJSON = JSON.stringify(translations);
 
   <!-- Texto del idioma centrado -->
   <span
-    id="lang-text"
-    class="relative z-10 text-sm font-bold tracking-wider drop-shadow-md transition-all duration-300 uppercase"
+    class="lang-text relative z-10 text-sm font-bold tracking-wider drop-shadow-md transition-all duration-300 uppercase"
     >ES</span
   >
 </button>
 
-<script define:vars={{ translationsJSON }}>
+<script>
+  import { getLang, setLang } from "../i18n/client";
+
   function initLanguageToggle() {
-    const langToggles = document.querySelectorAll("#lang-toggle");
-    const langTexts = document.querySelectorAll("#lang-text");
+    const toggles = document.querySelectorAll<HTMLButtonElement>(".lang-toggle");
 
-    // Parse translations from server
-    const translations = JSON.parse(translationsJSON);
-
-    // Get current language from localStorage or default to 'es'
-    let currentLang = localStorage.getItem("lang") || "es";
-
-    // Update text on load
-    updateLangText(currentLang);
-
-    // Apply translations on load
-    applyTranslations(currentLang);
-
-    langToggles.forEach((langToggle) => {
-      langToggle?.addEventListener("click", () => {
-        currentLang = currentLang === "es" ? "en" : "es";
-        localStorage.setItem("lang", currentLang);
-        updateLangText(currentLang);
-        applyTranslations(currentLang);
+    toggles.forEach((btn) => {
+      if (btn.dataset.bound === "true") return;
+      btn.dataset.bound = "true";
+      btn.addEventListener("click", () => {
+        const nextLang = getLang() === "es" ? "en" : "es";
+        setLang(nextLang);
       });
     });
 
-    function updateLangText(lang) {
-      langTexts.forEach((langText) => {
-        if (langText) {
-          langText.textContent = lang === "es" ? "ES" : "EN";
-        }
-      });
-    }
-
-    function applyTranslations(lang) {
-      // Update all elements with data-i18n attribute
-      document.querySelectorAll("[data-i18n]").forEach((el) => {
-        const key = el.getAttribute("data-i18n");
-        if (key) {
-          const translation = getTranslation(lang, key);
-          if (translation) {
-            el.textContent = translation;
-          }
-        }
-      });
-
-      // Update placeholders
-      document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
-        const key = el.getAttribute("data-i18n-placeholder");
-        if (
-          key &&
-          (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)
-        ) {
-          const translation = getTranslation(lang, key);
-          if (translation) {
-            el.placeholder = translation;
-          }
-        }
-      });
-
-      // Update aria-labels
-      document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
-        const key = el.getAttribute("data-i18n-aria");
-        if (key) {
-          const translation = getTranslation(lang, key);
-          if (translation) {
-            el.setAttribute("aria-label", translation);
-          }
-        }
-      });
-
-      // Update html lang attribute
-      document.documentElement.lang = lang;
-    }
-
-    function getTranslation(lang, key) {
-      return translations[lang]?.[key] || null;
-    }
+    setLang(getLang());
   }
 
-  // Initialize on DOMContentLoaded
-  document.addEventListener("DOMContentLoaded", initLanguageToggle);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initLanguageToggle);
+  } else {
+    initLanguageToggle();
+  }
 
-  // Also initialize on Astro page load (for view transitions)
   document.addEventListener("astro:page-load", initLanguageToggle);
 </script>

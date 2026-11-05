@@ -1,0 +1,70 @@
+import { translations, type TranslationKey } from "./translations";
+
+export type Lang = "es" | "en";
+
+export function getLang(): Lang {
+  if (typeof window === "undefined") return "es";
+  const params = new URLSearchParams(window.location.search);
+  const urlLang = params.get("lang");
+  if (urlLang === "es" || urlLang === "en") return urlLang;
+
+  const stored = localStorage.getItem("lang");
+  if (stored === "es" || stored === "en") return stored;
+
+  return "es";
+}
+
+export function t(key: TranslationKey, lang?: Lang): string {
+  const currentLang = lang || getLang();
+  const dict = translations[currentLang] as Record<string, string>;
+  return dict?.[key] ?? key;
+}
+
+export function setLang(lang: Lang): void {
+  if (typeof window === "undefined") return;
+
+  localStorage.setItem("lang", lang);
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll(".lang-text").forEach((el) => {
+    el.textContent = lang.toUpperCase();
+  });
+
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.getAttribute("data-i18n");
+    if (key) {
+      const val = t(key as TranslationKey, lang);
+      if (val) el.textContent = val;
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    if (
+      key &&
+      (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)
+    ) {
+      const val = t(key as TranslationKey, lang);
+      if (val) el.placeholder = val;
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-aria");
+    if (key) {
+      const val = t(key as TranslationKey, lang);
+      if (val) el.setAttribute("aria-label", val);
+    }
+  });
+
+  document.dispatchEvent(
+    new CustomEvent("langchange", { detail: { lang } })
+  );
+}
+
+export function onLangChange(cb: (lang: Lang) => void): void {
+  if (typeof document === "undefined") return;
+  document.addEventListener("langchange", ((e: CustomEvent<{ lang: Lang }>) => {
+    cb(e.detail.lang);
+  }) as EventListener);
+}

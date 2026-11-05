@@ -361,33 +361,14 @@ const uid = Math.random().toString(36).slice(2, 8);
     });
   }
 
-  // Apply i18n to detail modal buttons on language change
-  function applyDetailBtnI18n() {
-    const lang = document.documentElement.lang || "es";
-    document.querySelectorAll<HTMLButtonElement>(".open-detail-btn").forEach((btn) => {
-      const span = btn.querySelector("span[data-i18n]");
-      if (span) span.textContent = lang === "en" ? "Read more" : "Leer más";
-    });
-  }
-
   setTimeout(() => {
     initProjectCards();
-    applyDetailBtnI18n();
   }, 100);
 
   document.addEventListener("astro:after-swap", () => {
     setTimeout(() => {
       initProjectCards();
-      applyDetailBtnI18n();
     }, 100);
-  });
-
-  // React to language toggle
-  document.addEventListener("DOMContentLoaded", () => {
-    const langToggle = document.getElementById("lang-toggle");
-    langToggle?.addEventListener("click", () => {
-      setTimeout(applyDetailBtnI18n, 50);
-    });
   });
 </script>
 
