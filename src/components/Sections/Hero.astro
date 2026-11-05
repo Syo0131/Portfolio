@@ -90,12 +90,14 @@ import { Icon } from "astro-icon/components";
             />
           </button>
           
+          <!-- pt-2 (no mt-2): el hueco forma parte del menú, así el puntero no sale del contenedor al bajar -->
           <div
             id="cv-menu"
             role="menu"
             hidden
-            class="absolute top-full mt-2 left-0 w-full min-w-max bg-slate-800 backdrop-blur-md rounded-xl overflow-hidden shadow-xl border border-slate-700 z-50"
+            class="absolute top-full pt-2 left-0 w-full min-w-max z-50"
           >
+            <div class="bg-slate-800 rounded-xl overflow-hidden shadow-xl border border-slate-700">
             <a 
               role="menuitem"
               href="/Daybel_Diaz_Cv_Java.pdf" 
@@ -114,6 +116,7 @@ import { Icon } from "astro-icon/components";
               <span class="text-shakespeare-400 font-bold tracking-wide text-sm flex-shrink-0">EN</span>
               <span class="text-sm font-medium">English</span>
             </a>
+            </div>
           </div>
         </div>
       </div>
@@ -259,13 +262,21 @@ import { Icon } from "astro-icon/components";
       if (!menu || menu.hasAttribute("hidden")) return;
       menu.setAttribute("hidden", "");
       btn?.setAttribute("aria-expanded", "false");
+      openedByHover = false;
       if (restoreFocus) btn?.focus();
     }
+
+    const hoverCapable = window.matchMedia("(hover: hover)").matches;
+    // Si el menú se abrió por hover, el clic que viene después lo "fija" en vez de cerrarlo.
+    let openedByHover = false;
+    let closeTimer: ReturnType<typeof setTimeout> | undefined;
 
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
       const isOpen = btn.getAttribute("aria-expanded") === "true";
-      if (isOpen) {
+      if (isOpen && openedByHover) {
+        openedByHover = false;
+      } else if (isOpen) {
         closeMenu();
       } else {
         openMenu();
@@ -284,12 +295,20 @@ import { Icon } from "astro-icon/components";
       }
     });
 
-    if (window.matchMedia("(hover: hover)").matches) {
+    if (hoverCapable) {
       container.addEventListener("mouseenter", () => {
-        openMenu();
+        clearTimeout(closeTimer);
+        if (btn.getAttribute("aria-expanded") !== "true") {
+          openedByHover = true;
+          openMenu();
+        }
       });
       container.addEventListener("mouseleave", () => {
-        closeMenu();
+        clearTimeout(closeTimer);
+        closeTimer = setTimeout(() => {
+          openedByHover = false;
+          closeMenu();
+        }, 150);
       });
     }
   }

@@ -204,6 +204,12 @@ const ogImage = new URL(image, Astro.site);
 </html>
 
 <style is:global>
+  /* El atributo `hidden` debe ganar siempre: el preflight de Tailwind lo declara con la
+     misma especificidad que .flex/.grid, y esas utilidades van después en el CSS. */
+  [hidden] {
+    display: none !important;
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     html {
       scroll-behavior: smooth;
