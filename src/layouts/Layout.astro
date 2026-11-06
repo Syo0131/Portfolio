@@ -312,12 +312,17 @@ const ogImage = new URL(image, Astro.site);
     }
 
     /* Scroll animations - only hide under .js when motion is allowed */
+    /* Incluye border-color/box-shadow/background-color: esta regla pisa el transition-*
+       de las tarjetas, y sin ellos el hover cambiaría de golpe. */
     .js .animate-on-scroll {
       opacity: 0;
       transform: translateY(30px);
       transition:
         opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
     }
 
     .js .animate-fade-left {
