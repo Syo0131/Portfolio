@@ -62,7 +62,8 @@ const gridCols = big
       >
         <Image
           src={cover.src}
-          alt={cover.alt}
+          alt={t(cover.altKey)}
+          data-i18n-alt={cover.altKey}
           widths={[640, 960, 1280]}
           sizes="(min-width: 1024px) 60vw, 100vw"
           format="webp"

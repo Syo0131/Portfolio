@@ -181,6 +181,7 @@ import { Icon } from "astro-icon/components";
 
 <script>
   import emailjs from "@emailjs/browser";
+  import { t as tr } from "../../i18n/client";
 
   function initContactForm() {
     const form = document.getElementById("contact-form") as HTMLFormElement;
@@ -213,24 +214,6 @@ import { Icon } from "astro-icon/components";
       emailjs.init(publicKey);
     }
 
-    // Get translations
-    const getCurrentLang = () => localStorage.getItem("lang") || "es";
-
-    const translations = {
-      es: {
-        sending: "Enviando...",
-        success: "¡Mensaje enviado con éxito!",
-        error: "Error al enviar el mensaje. Por favor, intenta de nuevo.",
-        send: "Enviar mensaje",
-      },
-      en: {
-        sending: "Sending...",
-        success: "Message sent successfully!",
-        error: "Error sending message. Please try again.",
-        send: "Send message",
-      },
-    };
-
     let clearStatusTimer: ReturnType<typeof setTimeout>;
 
     const showStatus = (kind: "success" | "error", text: string) => {
@@ -256,8 +239,13 @@ import { Icon } from "astro-icon/components";
     form.addEventListener("submit", async (e) => {
       e.preventDefault(); // Evita el comportamiento por defecto del formulario
 
-      const lang = getCurrentLang() as "es" | "en";
-      const t = translations[lang];
+      // Textos en el idioma activo (misma fuente que el resto del sitio).
+      const t = {
+        sending: tr("contact.sending"),
+        success: tr("contact.success"),
+        error: tr("contact.error"),
+        send: tr("contact.send"),
+      };
 
       // Honeypot: los bots rellenan todos los campos, un humano no ve este.
       // Fingimos exito para no darle pistas al bot.

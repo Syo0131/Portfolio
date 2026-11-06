@@ -26,3 +26,10 @@ test("withLangParam: keeps other params and hash", () => {
 test("withLangParam: null when URL has no lang param", () => {
   assert.equal(withLangParam("https://daybeldiaz.dev/#proyectos", "en"), null);
 });
+
+test("withLangParam: keeps other params' encoding untouched", () => {
+  assert.equal(withLangParam("https://x.dev/?q=a%20b&lang=en", "es"), "https://x.dev/?q=a%20b&lang=es");
+});
+test("withLangParam: keeps valueless params", () => {
+  assert.equal(withLangParam("https://x.dev/?ref&lang=en#p", "es"), "https://x.dev/?ref&lang=es#p");
+});

@@ -18,7 +18,10 @@ export function resolveLang(search: string, stored: string | null): Lang {
  */
 export function withLangParam(href: string, lang: Lang): string | null {
   const url = new URL(href);
-  if (!url.searchParams.has("lang")) return null;
-  url.searchParams.set("lang", lang);
+  const re = /([?&])lang=[^&#]*/;
+  if (!re.test(url.search)) return null;
+  // Se reemplaza sólo el valor de `lang` en la query cruda: el resto de parámetros
+  // conserva su codificación original (URLSearchParams la reescribiría).
+  url.search = url.search.replace(re, `$1lang=${lang}`);
   return url.toString();
 }

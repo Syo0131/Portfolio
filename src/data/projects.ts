@@ -28,7 +28,7 @@ export interface Project {
   facts: ProjectFact[];
   stack: string[];
   stackFull: string[];
-  images: { src: ImageMetadata; alt: string }[];
+  images: { src: ImageMetadata; altKey: TranslationKey }[];
   urlDemo?: string;
   urlDemoLabel?: string;
   urlGit?: string;
@@ -55,7 +55,7 @@ export const projects: Project[] = [
     stack: ["Next.js", "Docker", "Dokploy"],
     stackFull: ["Next.js", "Docker", "Dokploy", "VPS"],
     // TODO: captura real (reemplazar el placeholder y quitar `placeholder: true`)
-    images: [{ src: cifmecPlaceholder, alt: "CIFMEC: captura próximamente" }],
+    images: [{ src: cifmecPlaceholder, altKey: "projects.cifmec.img1" }],
     placeholder: true,
     urlDemo: "https://cifmec.edu.do",
     urlDemoLabel: "cifmec.edu.do",
@@ -78,9 +78,9 @@ export const projects: Project[] = [
       "Docker", "Swagger", "Spring Security", "Spring Data JPA",
     ],
     images: [
-      { src: spendlyHome, alt: "Spendly: panel principal" },
-      { src: spendlyEndpoints, alt: "Spendly: endpoints de la API" },
-      { src: spendlySidebar, alt: "Spendly: menú lateral" },
+      { src: spendlyHome, altKey: "projects.spendly.img1" },
+      { src: spendlyEndpoints, altKey: "projects.spendly.img2" },
+      { src: spendlySidebar, altKey: "projects.spendly.img3" },
     ],
     urlDemo: "https://frontend.daybeldiaz.dev/",
     urlDemoLabel: "frontend.daybeldiaz.dev",
@@ -100,9 +100,9 @@ export const projects: Project[] = [
     stack: ["Next.js", "Strapi", "Docker", "Dokploy"],
     stackFull: ["Strapi", "Dokploy", "Next.js", "Tailwind CSS", "Docker", "Swagger"],
     images: [
-      { src: tograbaoHero, alt: "Tograbao Real State: portada" },
-      { src: tograbaoAbout, alt: "Tograbao Real State: sección Nosotros" },
-      { src: tograbaoProperties, alt: "Tograbao Real State: listado de propiedades" },
+      { src: tograbaoHero, altKey: "projects.tograbao.img1" },
+      { src: tograbaoAbout, altKey: "projects.tograbao.img2" },
+      { src: tograbaoProperties, altKey: "projects.tograbao.img3" },
     ],
     urlDemo: "https://tograbao.com",
     urlDemoLabel: "tograbao.com",
@@ -125,9 +125,9 @@ export const projects: Project[] = [
       "Dokploy", "Docker", "Swagger", "Spring Data JPA",
     ],
     images: [
-      { src: pensumWeb, alt: "El Pensum: sitio web" },
-      { src: pensumApi, alt: "El Pensum: API" },
-      { src: pensumEndpoints, alt: "El Pensum: endpoints de la API" },
+      { src: pensumWeb, altKey: "projects.elpensum.img1" },
+      { src: pensumApi, altKey: "projects.elpensum.img2" },
+      { src: pensumEndpoints, altKey: "projects.elpensum.img3" },
     ],
     urlDemo: "https://backend.elpensum.com/swagger-ui/index.html",
     urlDemoLabel: "backend.elpensum.com",
@@ -145,7 +145,7 @@ export const projects: Project[] = [
     stack: ["Next.js", "Payload CMS", "PostgreSQL"],
     stackFull: ["Next.js", "Payload CMS", "PostgreSQL", "Docker", "Dokploy", "VPS"],
     // TODO: captura real (reemplazar el placeholder y quitar `placeholder: true`)
-    images: [{ src: galanPlaceholder, alt: "Galan Sorteos: captura próximamente" }],
+    images: [{ src: galanPlaceholder, altKey: "projects.galansorteos.img1" }],
     placeholder: true,
     urlDemo: "https://galansorteos.com",
     urlDemoLabel: "galansorteos.com",

@@ -60,6 +60,14 @@ export function setLang(lang: Lang): void {
     }
   });
 
+  document.querySelectorAll("[data-i18n-alt]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-alt");
+    if (key) {
+      const val = t(key as TranslationKey, lang);
+      if (val) el.setAttribute("alt", val);
+    }
+  });
+
   document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
     const key = el.getAttribute("data-i18n-aria");
     if (key) {

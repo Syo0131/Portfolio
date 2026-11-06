@@ -27,7 +27,8 @@ const cover = project.images[0];
   >
     <Image
       src={cover.src}
-      alt={cover.alt}
+      alt={t(cover.altKey)}
+      data-i18n-alt={cover.altKey}
       widths={[400, 640, 960]}
       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
       format="webp"

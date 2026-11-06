@@ -15,7 +15,7 @@ if len(parts) < 2:
     print("FAIL: could not split translations into es/en")
     sys.exit(1)
 es, en = parts[0], parts[1]
-keys = set(re.findall(r'data-i18n(?:-aria|-placeholder)?="([^"]+)"', open('dist/index.html').read()))
+keys = set(re.findall(r'data-i18n(?:-aria|-placeholder|-alt)?="([^"]+)"', open('dist/index.html').read()))
 miss = [k for k in keys if f'"{k}"' not in es or f'"{k}"' not in en]
 if miss:
     print("FAIL: missing i18n keys", miss)
