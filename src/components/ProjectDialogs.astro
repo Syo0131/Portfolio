@@ -111,6 +111,34 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
             {t(p.descriptionKey)}
           </p>
 
+          {p.facts.some((f) => f.valueKey) && (
+            <div>
+              <p
+                class="mb-3 font-mono text-[10px] uppercase tracking-[0.12em] text-slate-500"
+                data-i18n="projects.facts"
+              >
+                {t("projects.facts")}
+              </p>
+              <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {p.facts
+                  .filter((f) => f.valueKey)
+                  .map((f) => (
+                    <div class="border-l-2 border-shakespeare-500/60 pl-3">
+                      <dt
+                        class="font-mono text-[10px] uppercase tracking-[0.12em] text-slate-500"
+                        data-i18n={f.labelKey}
+                      >
+                        {t(f.labelKey)}
+                      </dt>
+                      <dd class="mt-1 text-sm font-semibold text-slate-100" data-i18n={f.valueKey}>
+                        {t(f.valueKey!)}
+                      </dd>
+                    </div>
+                  ))}
+              </dl>
+            </div>
+          )}
+
           <div>
             <p
               class="mb-3 font-mono text-[10px] uppercase tracking-[0.12em] text-slate-500"

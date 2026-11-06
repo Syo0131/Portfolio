@@ -3,6 +3,12 @@ import SectionTitle from "../SectionTitle.astro";
 import ProjectCase from "../ProjectCase.astro";
 import ProjectDialogs from "../ProjectDialogs.astro";
 import { projects } from "../../data/projects";
+
+// Recordatorio en el build: proyectos que todavía usan imagen temporal.
+const pendingShots = projects.filter((p) => p.placeholder).map((p) => p.name);
+if (pendingShots.length > 0) {
+  console.warn(`[proyectos] Imagen temporal en: ${pendingShots.join(", ")}. Reemplázala antes de publicar.`);
+}
 ---
 
 <section
