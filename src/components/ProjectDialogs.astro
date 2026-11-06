@@ -194,6 +194,7 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
 
 <script>
   import { t } from "../i18n/client";
+  import { galleryStep } from "../lib/ui";
   import type { TranslationKey } from "../i18n/translations";
 
   type GalleryImage = { src: string; altKey: string };
@@ -216,7 +217,7 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
     let current = 0;
 
     const show = (i: number) => {
-      current = (i + images.length) % images.length;
+      current = i;
       const item = images[current];
       img.src = item.src;
       img.alt = t(item.altKey as TranslationKey);
@@ -270,13 +271,13 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
         ?.focus();
     });
 
-    prev.addEventListener("click", () => show(current - 1));
-    next.addEventListener("click", () => show(current + 1));
+    prev.addEventListener("click", () => show(galleryStep(current, -1, images.length)));
+    next.addEventListener("click", () => show(galleryStep(current, 1, images.length)));
 
     gallery.addEventListener("keydown", (e) => {
       if (images.length < 2) return;
-      if (e.key === "ArrowLeft") show(current - 1);
-      if (e.key === "ArrowRight") show(current + 1);
+      if (e.key === "ArrowLeft") show(galleryStep(current, -1, images.length));
+      if (e.key === "ArrowRight") show(galleryStep(current, 1, images.length));
     });
 
     [gallery, details].forEach((dialog) => {

@@ -120,6 +120,7 @@ import { Icon } from "astro-icon/components";
 </section>
 
 <script>
+  import { shouldCloseCvMenu } from "../../lib/ui";
   import { getLang, onLangChange } from "../../i18n/client";
 
   function initRoleAnimation() {
@@ -294,10 +295,11 @@ import { Icon } from "astro-icon/components";
     // Teclado: al salir con Tab del botón o de los enlaces, el menú se cierra.
     container.addEventListener("focusout", (e) => {
       const next = (e as FocusEvent).relatedTarget as Node | null;
-      // Safari no enfoca enlaces al hacer clic: relatedTarget llega null en el mousedown.
-      // Si el puntero está sobre el menú, es un clic dentro y no hay que cerrarlo.
-      if (!next && container.matches(":hover")) return;
-      if (!next || !container.contains(next)) closeMenu();
+      // Regla en src/lib/ui.ts (con tests): en Safari relatedTarget llega null al hacer clic
+      // en un enlace del menú, y en ese caso el puntero encima decide que no se cierre.
+      if (shouldCloseCvMenu(next ? container.contains(next) : null, container.matches(":hover"))) {
+        closeMenu();
+      }
     });
 
     if (hoverCapable) {

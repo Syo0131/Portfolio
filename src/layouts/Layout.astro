@@ -400,6 +400,8 @@ const ogImage = new URL(image, Astro.site);
 </style>
 
 <script>
+  import { fallbackAlreadyShown } from "../lib/ui";
+
   // Intersection Observer for scroll animations
   const observerOptions = {
     root: null,
@@ -440,12 +442,12 @@ const ogImage = new URL(image, Astro.site);
   // (reveal-fallback). Los elementos que el respaldo ya mostró se liberan aquí mismo; si no,
   // al poner data-reveal la animación desaparecería y volverían a opacity 0 (parpadeo).
   document.querySelectorAll(REVEAL_SELECTOR).forEach((el) => {
-    const shown = el.getAnimations?.().some((a) => {
-      if ((a as CSSAnimation).animationName !== "reveal-fallback") return false;
-      const t = Number(a.currentTime ?? 0);
-      return a.playState === "finished" || t >= 2000;
-    });
-    if (shown) el.classList.remove(...ANIMATION_CLASSES);
+    const animations = (el.getAnimations?.() ?? []).map((a) => ({
+      animationName: (a as CSSAnimation).animationName,
+      playState: a.playState,
+      currentTime: a.currentTime === null ? null : Number(a.currentTime),
+    }));
+    if (fallbackAlreadyShown(animations)) el.classList.remove(...ANIMATION_CLASSES);
   });
 
   // A partir de aquí el respaldo deja de aplicar y el observer se encarga.
