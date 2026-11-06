@@ -224,7 +224,7 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
     const openGallery = (id: string) => {
       images = data[id] ?? [];
       if (images.length === 0) return;
-      const name = document.querySelector(`:is(.project-case, .project-card)[data-project-id="${id}"] h3`);
+      const name = document.querySelector(`:is(.project-case, .project-card)[data-project-id="${id}"] :is(h3, h4)`);
       title.textContent = name?.textContent?.trim() ?? "";
       const multi = images.length > 1;
       prev.hidden = !multi;

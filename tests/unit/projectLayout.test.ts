@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { splitProjects, MAX_FEATURED, MAX_CARDS } from "../../src/lib/projectLayout.ts";
+import { splitProjects, orderProjects, MAX_FEATURED, MAX_CARDS } from "../../src/lib/projectLayout.ts";
 
 const make = (n: number, featured: number) =>
   Array.from({ length: n }, (_, i) => ({ id: `p${i}`, featured: i < featured }));
@@ -40,4 +40,14 @@ test("3 featured + 7 others -> 5 cards and view-all", () => {
 
 test("empty list", () => {
   assert.deepEqual(splitProjects([]), { featured: [], cards: [], showViewAll: false });
+});
+
+test("orderProjects: all featured keeps array order", () => {
+  assert.deepEqual(ids(orderProjects(make(5, 5))), ["p0", "p1", "p2", "p3", "p4"]);
+});
+
+test("orderProjects: capped featured first, extra featured stays in the rest in array order", () => {
+  const flags = [true, false, true, false, true, true];
+  const items = flags.map((featured, i) => ({ id: `p${i}`, featured }));
+  assert.deepEqual(ids(orderProjects(items)), ["p0", "p2", "p4", "p1", "p3", "p5"]);
 });

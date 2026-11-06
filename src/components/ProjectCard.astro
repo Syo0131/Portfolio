@@ -6,9 +6,12 @@ import type { Project } from "../data/projects";
 
 interface Props {
   project: Project;
+  /** 4 en la home (debajo del h3 "Más proyectos"); 3 en /proyectos (debajo del h2). */
+  headingLevel?: 3 | 4;
 }
 
-const { project } = Astro.props;
+const { project, headingLevel = 3 } = Astro.props;
+const Heading = headingLevel === 4 ? "h4" : "h3";
 const t = useTranslations("es");
 const cover = project.images[0];
 ---
@@ -25,7 +28,7 @@ const cover = project.images[0];
     <Image
       src={cover.src}
       alt={cover.alt}
-      widths={[400, 640]}
+      widths={[400, 640, 960]}
       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
       format="webp"
       loading="lazy"
@@ -51,7 +54,7 @@ const cover = project.images[0];
     >
       {t(project.categoryKey)}
     </span>
-    <h3 class="font-display text-xl font-bold tracking-tight text-slate-100">{project.name}</h3>
+    <Heading class="font-display text-xl font-bold tracking-tight text-slate-100">{project.name}</Heading>
     <p class="text-sm leading-relaxed text-slate-300" data-i18n={project.pitchKey}>
       {t(project.pitchKey)}
     </p>

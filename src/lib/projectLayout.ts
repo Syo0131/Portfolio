@@ -17,3 +17,14 @@ export function splitProjects<T extends { featured?: boolean }>(
   // La última posición de la cuadrícula se reserva para la tarjeta "Ver todos".
   return { featured, cards: rest.slice(0, MAX_CARDS - 1), showViewAll: true };
 }
+
+/** Orden de la lista completa (/proyectos): destacados dentro del tope primero, luego el resto en orden. */
+export function orderProjects<T extends { featured?: boolean }>(items: T[]): T[] {
+  const featured: T[] = [];
+  const rest: T[] = [];
+  for (const item of items) {
+    if (item.featured && featured.length < MAX_FEATURED) featured.push(item);
+    else rest.push(item);
+  }
+  return [...featured, ...rest];
+}

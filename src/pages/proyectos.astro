@@ -7,11 +7,12 @@ import SectionTitle from "../components/SectionTitle.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import ProjectDialogs from "../components/ProjectDialogs.astro";
 import { projects } from "../data/projects";
+import { orderProjects } from "../lib/projectLayout";
 import { useTranslations } from "../i18n/translations";
 
 const t = useTranslations("es");
-// Destacados primero, luego el resto, conservando el orden de los datos.
-const ordered = [...projects.filter((p) => p.featured), ...projects.filter((p) => !p.featured)];
+// Mismo orden que la home: destacados (dentro del tope) primero, luego el resto.
+const ordered = orderProjects(projects);
 ---
 
 <Layout
