@@ -1,0 +1,92 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import { useTranslations } from "../i18n/translations";
+import type { Project } from "../data/projects";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const t = useTranslations("es");
+const cover = project.images[0];
+---
+
+<article
+  class="project-card surface surface-hover animate-on-scroll flex flex-col overflow-hidden transition-all duration-300"
+  data-project-id={project.id}
+>
+  <button
+    type="button"
+    class="open-gallery group/img relative block aspect-video w-full overflow-hidden border-b border-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-shakespeare-400"
+    data-project-id={project.id}
+  >
+    <Image
+      src={cover.src}
+      alt={cover.alt}
+      widths={[400, 640]}
+      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+      format="webp"
+      loading="lazy"
+      class="h-full w-full object-cover object-top transition-transform duration-700 group-hover/img:scale-[1.03]"
+    />
+    {
+      project.placeholder && import.meta.env.DEV && (
+        <span
+          class="absolute left-2 top-2 rounded-md border border-amber-400/40 bg-amber-500/15 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-amber-300"
+          data-i18n="projects.placeholderBadge"
+        >
+          {t("projects.placeholderBadge")}
+        </span>
+      )
+    }
+    <span class="sr-only" data-i18n="projects.viewImages">{t("projects.viewImages")}</span>
+  </button>
+
+  <div class="flex flex-1 flex-col gap-3 p-5">
+    <span
+      class="font-mono text-[11px] uppercase tracking-[0.15em] text-shakespeare-400"
+      data-i18n={project.categoryKey}
+    >
+      {t(project.categoryKey)}
+    </span>
+    <h3 class="font-display text-xl font-bold tracking-tight text-slate-100">{project.name}</h3>
+    <p class="text-sm leading-relaxed text-slate-300" data-i18n={project.pitchKey}>
+      {t(project.pitchKey)}
+    </p>
+
+    <ul class="flex flex-wrap gap-1.5" aria-label="Stack">
+      {
+        project.stack.map((tech) => (
+          <li class="rounded-full border border-slate-800 bg-slate-900/60 px-2.5 py-0.5 text-[11px] text-slate-300">
+            {tech}
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-auto flex flex-wrap gap-2 pt-2">
+      {
+        project.urlDemo && (
+          <a
+            href={project.urlDemo}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 rounded-lg bg-shakespeare-500 px-3.5 py-2 text-xs font-bold text-slate-950 transition-colors duration-300 hover:bg-shakespeare-400"
+          >
+            <span data-i18n="projects.viewLive">{t("projects.viewLive")}</span>
+            <Icon name="mdi:arrow-top-right" class="size-3.5" aria-hidden="true" />
+          </a>
+        )
+      }
+      <button
+        type="button"
+        class="open-details inline-flex items-center gap-1.5 rounded-lg border border-slate-700 px-3.5 py-2 text-xs font-semibold text-slate-200 transition-colors duration-300 hover:border-shakespeare-500/60 hover:text-shakespeare-300"
+        data-project-id={project.id}
+      >
+        <span data-i18n="projects.details">{t("projects.details")}</span>
+      </button>
+    </div>
+  </div>
+</article>

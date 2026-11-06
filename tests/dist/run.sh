@@ -8,6 +8,13 @@ shopt -s nullglob
 scripts=("$DIR"/[0-9]*.sh)
 shopt -u nullglob
 
+echo "==> Running unit tests..."
+if ! node --experimental-strip-types --no-warnings --test "$DIR"/../unit/*.test.ts > /tmp/portfolio-unit.log 2>&1; then
+  tail -30 /tmp/portfolio-unit.log
+  echo "FAIL: unit tests"
+  FAILED=1
+fi
+
 for script in "${scripts[@]}"; do
   echo "==> Running $(basename "$script")..."
   source "$script"
