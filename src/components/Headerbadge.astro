@@ -8,7 +8,8 @@ interface Props {
 }
 
 const { href, name, nameKey, icon } = Astro.props;
-const sectionId = href.replace("#", "");
+// "/#seccion" o "#seccion" -> "seccion"
+const sectionId = href.split("#")[1] ?? "";
 ---
 
 <a
