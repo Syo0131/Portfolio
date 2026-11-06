@@ -53,7 +53,6 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
       <img
         id="project-gallery-img"
         class="max-h-[75vh] max-w-full rounded-xl object-contain shadow-2xl transition-opacity duration-300"
-        src=""
         alt=""
         decoding="async"
       />
@@ -95,7 +94,7 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
             >
               {t(p.categoryKey)}
             </span>
-            <h3 class="mt-1 font-display text-2xl font-bold text-slate-100">{p.name}</h3>
+            <h3 id={`project-details-title-${p.id}`} class="mt-1 font-display text-2xl font-bold text-slate-100">{p.name}</h3>
           </div>
           <button
             type="button"
@@ -226,7 +225,10 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
       count.textContent = `${current + 1} / ${images.length}`;
     };
 
-    const openGallery = (id: string) => {
+    // Si la galería se abrió desde Detalles, al cerrarla se vuelve a Detalles del mismo proyecto.
+    let returnToDetails: string | null = null;
+
+    const openGallery = (id: string, fromDetails = false) => {
       images = data[id] ?? [];
       if (images.length === 0) return;
       const name = document.querySelector(`:is(.project-case, .project-card)[data-project-id="${id}"] :is(h3, h4)`);
@@ -236,6 +238,7 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
       next.hidden = !multi;
       count.hidden = !multi;
       show(0);
+      returnToDetails = fromDetails ? id : null;
       if (details.open) details.close();
       gallery.showModal();
     };
@@ -244,15 +247,27 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
       details.querySelectorAll<HTMLElement>("section[data-project-id]").forEach((s) => {
         s.hidden = s.dataset.projectId !== id;
       });
+      details.setAttribute("aria-labelledby", `project-details-title-${id}`);
       details.showModal();
     };
 
     document.addEventListener("click", (e) => {
       const target = e.target as HTMLElement;
       const galleryBtn = target.closest<HTMLElement>(".open-gallery");
-      if (galleryBtn?.dataset.projectId) return openGallery(galleryBtn.dataset.projectId);
+      if (galleryBtn?.dataset.projectId)
+        return openGallery(galleryBtn.dataset.projectId, details.contains(galleryBtn));
       const detailsBtn = target.closest<HTMLElement>(".open-details");
       if (detailsBtn?.dataset.projectId) return openDetails(detailsBtn.dataset.projectId);
+    });
+
+    gallery.addEventListener("close", () => {
+      if (!returnToDetails) return;
+      const id = returnToDetails;
+      returnToDetails = null;
+      openDetails(id);
+      details
+        .querySelector<HTMLElement>(`section[data-project-id="${id}"] .open-gallery`)
+        ?.focus();
     });
 
     prev.addEventListener("click", () => show(current - 1));

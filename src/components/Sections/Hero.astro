@@ -73,7 +73,6 @@ import { Icon } from "astro-icon/components";
           <button
             id="cv-menu-btn"
             class="group bg-shakespeare-800/80 hover:bg-shakespeare-700/80 backdrop-blur-sm transition-all duration-300 ease-smooth-out hover:scale-105 hover:shadow-lg hover:shadow-shakespeare-500/20 text-white font-semibold py-2.5 px-5 sm:px-7 rounded-full flex items-center gap-x-2.5 text-sm sm:text-base cursor-pointer"
-            aria-haspopup="menu"
             aria-controls="cv-menu"
             aria-expanded="false"
             type="button"
@@ -92,13 +91,11 @@ import { Icon } from "astro-icon/components";
           <!-- pt-2 (no mt-2): el hueco forma parte del menú, así el puntero no sale del contenedor al bajar -->
           <div
             id="cv-menu"
-            role="menu"
             hidden
             class="absolute top-full pt-2 left-0 w-full min-w-max z-50"
           >
             <div class="bg-slate-800 rounded-xl overflow-hidden shadow-xl border border-slate-700">
             <a 
-              role="menuitem"
               href="/Daybel_Diaz_Cv_Java.pdf" 
               download="Daybel_Diaz_Cv_Java.pdf" 
               class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700/50 hover:text-white text-slate-200 transition-colors"
@@ -107,7 +104,6 @@ import { Icon } from "astro-icon/components";
               <span class="text-sm font-medium">Español</span>
             </a>
             <a 
-              role="menuitem"
               href="/Daybel_Diaz_JavaAnalystDev.pdf" 
               download="Daybel_Diaz_JavaAnalystDev.pdf" 
               class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700/50 hover:text-white text-slate-200 transition-colors border-t border-slate-700"
@@ -293,6 +289,12 @@ import { Icon } from "astro-icon/components";
       if (!container.contains(e.target as Node)) {
         closeMenu();
       }
+    });
+
+    // Teclado: al salir con Tab del botón o de los enlaces, el menú se cierra.
+    container.addEventListener("focusout", (e) => {
+      const next = (e as FocusEvent).relatedTarget as Node | null;
+      if (!next || !container.contains(next)) closeMenu();
     });
 
     if (hoverCapable) {
