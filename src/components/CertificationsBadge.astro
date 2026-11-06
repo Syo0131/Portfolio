@@ -51,14 +51,14 @@ const dateText = dateKey ? t(dateKey as TranslationKey) : date;
       isInProgress ? (
         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">
           <span class="relative flex h-1.5 w-1.5">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75" />
+            <span class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75" />
             <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-yellow-400" />
           </span>
           <span data-i18n="certifications.inProgress">En curso</span>
         </span>
       ) : (
         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-400 border border-green-500/30">
-          <Icon name="mdi:check-circle" class="size-3" />
+          <Icon name="mdi:check-circle" class="size-3" aria-hidden="true" />
           <span data-i18n="certifications.completed">Completado</span>
         </span>
       )
@@ -72,8 +72,7 @@ const dateText = dateKey ? t(dateKey as TranslationKey) : date;
         <div class="w-14 h-14 rounded-xl bg-shakespeare-500/10 border border-shakespeare-500/20 flex items-center justify-center group-hover:bg-shakespeare-500/20 group-hover:border-shakespeare-500/40 transition-all duration-300 group-hover:scale-110">
           <Icon
             name={icon}
-            class={`size-7 text-slate-300 ${hovercolor} transition-all duration-400 ease-smooth-out`}
-          />
+            class={`size-7 text-slate-300 ${hovercolor} transition-all duration-400 ease-smooth-out`} aria-hidden="true" />
         </div>
       </div>
     )
@@ -92,16 +91,14 @@ const dateText = dateKey ? t(dateKey as TranslationKey) : date;
       <div class="flex items-center gap-2 text-sm text-slate-300">
         <Icon
           name="mdi:school"
-          class="size-4 text-shakespeare-500 flex-shrink-0"
-        />
+          class="size-4 text-shakespeare-500 flex-shrink-0" aria-hidden="true" />
         <span>{issuer}</span>
       </div>
 
       <div class="flex items-center gap-2 text-sm text-slate-400">
         <Icon
           name="mdi:calendar"
-          class="size-4 text-shakespeare-500/70 flex-shrink-0"
-        />
+          class="size-4 text-shakespeare-500/70 flex-shrink-0" aria-hidden="true" />
         <span data-i18n={dateKey}>{dateText}</span>
       </div>
 
@@ -110,8 +107,7 @@ const dateText = dateKey ? t(dateKey as TranslationKey) : date;
           <div class="flex items-center gap-2 text-sm text-slate-400">
             <Icon
               name="mdi:account"
-              class="size-4 text-shakespeare-500/70 flex-shrink-0"
-            />
+              class="size-4 text-shakespeare-500/70 flex-shrink-0" aria-hidden="true" />
             <span>{teacher}</span>
           </div>
         )
@@ -131,19 +127,17 @@ const dateText = dateKey ? t(dateKey as TranslationKey) : date;
         >
           <Icon
             name="mdi:certificate"
-            class="size-4 group-hover/btn:scale-110 transition-transform duration-300"
-          />
+            class="size-4 group-hover/btn:scale-110 transition-transform duration-300" aria-hidden="true" />
           <span data-i18n="certifications.viewCert">
             {buttonText || "Ver Certificación"}
           </span>
           <Icon
             name="mdi:arrow-top-right"
-            class="size-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300"
-          />
+            class="size-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300" aria-hidden="true" />
         </a>
       ) : (
-        <div class="flex items-center justify-center gap-2 w-full text-sm font-medium px-4 py-2.5 bg-slate-700/30 text-slate-500 rounded-xl border border-slate-600/30 cursor-not-allowed">
-          <Icon name="mdi:progress-clock" class="size-4 animate-pulse" />
+        <div class="flex items-center justify-center gap-2 w-full text-sm font-medium px-4 py-2.5 bg-slate-700/30 text-slate-400 rounded-xl border border-slate-600/30 cursor-not-allowed">
+          <Icon name="mdi:progress-clock" class="size-4 motion-safe:animate-pulse" aria-hidden="true" />
           <span data-i18n="certifications.comingSoon">
             {buttonText || "Próximamente"}
           </span>

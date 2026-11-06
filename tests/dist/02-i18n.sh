@@ -15,12 +15,17 @@ if len(parts) < 2:
     print("FAIL: could not split translations into es/en")
     sys.exit(1)
 es, en = parts[0], parts[1]
-keys = set(re.findall(r'data-i18n(?:-aria|-placeholder|-alt)?="([^"]+)"', open('dist/index.html').read()))
+pages = ['dist/index.html', 'dist/proyectos/index.html', 'dist/404.html']
+keys = set()
+for pg in pages:
+    keys |= set(re.findall(r'data-i18n(?:-aria|-placeholder|-alt)?="([^"]+)"', open(pg).read()))
 # claves que sólo usa la galería (alt de imágenes 2, 3, …) van en el JSON, no en atributos
 html = open('dist/index.html').read()
 gal = re.search(r'<script type="application/json" id="project-gallery-data">(.*?)</script>', html, re.S)
-if gal:
-    keys |= set(re.findall(r'"altKey":"([^"]+)"', gal.group(1)))
+if not gal:
+    print("FAIL: gallery data script not found in dist/index.html (check 02 would skip its alt keys)")
+    sys.exit(1)
+keys |= set(re.findall(r'"altKey":"([^"]+)"', gal.group(1)))
 miss = [k for k in keys if f'"{k}"' not in es or f'"{k}"' not in en]
 if miss:
     print("FAIL: missing i18n keys", miss)

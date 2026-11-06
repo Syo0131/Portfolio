@@ -1,6 +1,9 @@
 ---
 import ExperienceTimeline from "../ExperienceTimeline.astro";
 import SectionTitle from "../SectionTitle.astro";
+import { useTranslations } from "../../i18n/translations";
+
+const t = useTranslations("es");
 import type { Props as ExperienceProps } from "../ExperienceTimeline.astro";
 
 const experiencias: ExperienceProps[] = [
@@ -102,8 +105,8 @@ const experiencias: ExperienceProps[] = [
 
       <!-- Indicador de scroll -->
       <div id="scroll-indicator" class="text-center mt-6 hidden">
-        <p class="text-xs text-slate-500 animate-pulse">
-          ← Desliza para ver más experiencias →
+        <p class="text-xs text-slate-400 motion-safe:animate-pulse" data-i18n="experience.swipeHint">
+          {t("experience.swipeHint")}
         </p>
       </div>
     </div>
@@ -113,7 +116,6 @@ const experiencias: ExperienceProps[] = [
 <style>
   /* Contenedor de scroll */
   #scroll-container {
-    scroll-behavior: smooth;
     overflow-x: auto;
     /* Ocultar scrollbar estándar pero mantener funcionalidad de scroll */
     scrollbar-width: none; /* Firefox */

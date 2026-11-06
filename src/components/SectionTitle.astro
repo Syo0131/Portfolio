@@ -6,9 +6,11 @@ interface Props {
   eyebrowKey?: string;
   /** "h1" sólo donde el título de sección es el principal de la página (p. ej. /proyectos). */
   as?: "h1" | "h2";
+  /** id del encabezado, para aria-labelledby de la sección. */
+  id?: string;
 }
 
-const { class: className = "", titleKey, eyebrow, eyebrowKey, as: Tag = "h2" } = Astro.props;
+const { class: className = "", titleKey, eyebrow, eyebrowKey, as: Tag = "h2", id } = Astro.props;
 ---
 
 <div class={`flex flex-col items-center gap-3 text-center mb-10 sm:mb-14 md:mb-16 ${className}`}>
@@ -23,6 +25,7 @@ const { class: className = "", titleKey, eyebrow, eyebrowKey, as: Tag = "h2" } =
     )
   }
   <Tag
+    id={id}
     class="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-100 text-balance"
     data-i18n={titleKey}
   >

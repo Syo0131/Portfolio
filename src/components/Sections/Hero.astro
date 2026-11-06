@@ -56,16 +56,14 @@ const t = useTranslations("es");
 
       <div class="flex flex-wrap justify-center gap-3 sm:gap-4 pt-6 sm:pt-8">
         <Links
-          name="Github"
+          name="GitHub"
           href="https://github.com/Syo0131"
           icon="simple-icons:github"
-          aria-label="Visitar mi perfil de GitHub"
         />
         <Links
           name="LinkedIn"
           href="https://linkedin.com/in/DaybelDiaz/"
           icon="mdi:linkedin"
-          aria-label="Conectar en LinkedIn"
         />
         
         <div class="relative cv-dropdown" id="cv-dropdown-container">
@@ -78,13 +76,11 @@ const t = useTranslations("es");
           >
             <Icon
               name="material-symbols:download"
-              class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 transition-transform duration-300 ease-smooth-out group-hover:scale-110"
-            />
+              class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 transition-transform duration-300 ease-smooth-out group-hover:scale-110" aria-hidden="true" />
             <span data-i18n="hero.downloadCv">{t("hero.downloadCv")}</span>
             <Icon
               name="material-symbols:keyboard-arrow-down"
-              class="w-5 h-5 transition-transform duration-300 group-hover:rotate-180"
-            />
+              class="w-5 h-5 transition-transform duration-300 group-aria-expanded:rotate-180" aria-hidden="true" />
           </button>
           
           <!-- pt-2 (no mt-2): el hueco forma parte del menú, así el puntero no sale del contenedor al bajar -->
@@ -234,11 +230,6 @@ const t = useTranslations("es");
 
     // Iniciar animación
     startAnimation();
-
-    // Cleanup al desmontar
-    window.addEventListener("beforeunload", () => {
-      stopAnimation();
-    });
   }
 
   function initCvMenu() {

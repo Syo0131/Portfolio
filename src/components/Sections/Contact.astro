@@ -9,7 +9,7 @@ import { Icon } from "astro-icon/components";
   aria-labelledby="contact-title"
 >
   <div class="max-w-2xl mx-auto">
-    <SectionTitle titleKey="contact.title">
+    <SectionTitle id="contact-title" titleKey="contact.title">
       ¿Tienes algún proyecto en mente?
     </SectionTitle>
 
@@ -33,8 +33,7 @@ import { Icon } from "astro-icon/components";
         >
           <Icon
             name="material-symbols:mail-rounded"
-            class="w-8 h-8 text-shakespeare-400"
-          />
+            class="w-8 h-8 text-shakespeare-400" aria-hidden="true" />
         </div>
         <p class="text-base text-slate-300" data-i18n="contact.subtitle">
           Completa el formulario y te responderé lo antes posible.
@@ -52,7 +51,7 @@ import { Icon } from "astro-icon/components";
             for="name"
             class="flex items-center gap-2 text-sm font-semibold text-slate-200 mb-2"
           >
-            <Icon name="mdi:account" class="size-4 text-shakespeare-500" />
+            <Icon name="mdi:account" class="size-4 text-shakespeare-500" aria-hidden="true" />
             <span data-i18n="contact.name">Nombre</span>
           </label>
           <div class="relative">
@@ -80,7 +79,7 @@ import { Icon } from "astro-icon/components";
             for="email"
             class="flex items-center gap-2 text-sm font-semibold text-slate-200 mb-2"
           >
-            <Icon name="mdi:email" class="size-4 text-shakespeare-500" />
+            <Icon name="mdi:email" class="size-4 text-shakespeare-500" aria-hidden="true" />
             <span data-i18n="contact.email">Email</span>
           </label>
           <div class="relative">
@@ -106,7 +105,7 @@ import { Icon } from "astro-icon/components";
             for="message"
             class="flex items-center gap-2 text-sm font-semibold text-slate-200 mb-2"
           >
-            <Icon name="mdi:message-text" class="size-4 text-shakespeare-500" />
+            <Icon name="mdi:message-text" class="size-4 text-shakespeare-500" aria-hidden="true" />
             <span data-i18n="contact.message">Mensaje</span>
           </label>
           <div class="relative">
@@ -223,7 +222,7 @@ import { Icon } from "astro-icon/components";
 
       statusMessage.innerHTML = `
         <div class="flex items-center gap-2 ${color} font-medium">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${path}"></path>
           </svg>
           <span>${text}</span>

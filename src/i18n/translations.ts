@@ -9,6 +9,16 @@ export const translations = {
   es: {
     // Navigation
     "nav.home": "Inicio",
+    "a11y.sideNav": "Navegación lateral",
+    "a11y.desktopMenu": "Menú de escritorio",
+    "a11y.mobileNav": "Navegación principal móvil",
+    "a11y.openMenu": "Abrir menú",
+    "a11y.toggleLanguage": "Cambiar idioma",
+    "a11y.footerNav": "Redes sociales",
+    "experience.swipeHint": "← Desliza para ver más experiencias →",
+    "notFound.title": "Página no encontrada",
+    "notFound.text": "Lo sentimos, la página que buscas no existe o ha sido movida.",
+    "notFound.back": "Volver al inicio",
     "nav.experience": "Experiencia Laboral",
     "nav.projects": "Proyectos",
     "nav.skills": "Habilidades",
@@ -17,9 +27,9 @@ export const translations = {
     "nav.certifications": "Certificaciones",
 
     // Hero
-    "hero.greeting": "Hey, Soy",
+    "hero.greeting": "Hey, soy",
     "hero.experience": "+3 años de experiencia",
-    "hero.role": " Ingeniero de software",
+    "hero.role": "Ingeniero de software",
     "hero.location": "de República Dominicana",
     "hero.description":
       "Especializado en backend Java/Spring Boot e infraestructura cloud. Diseño APIs robustas, automatizo despliegues con Docker y construyo sistemas escalables de extremo a extremo.",
@@ -43,7 +53,7 @@ export const translations = {
       "Desarrollo y mantenimiento de módulos Java para la gestión de usuarios y tarjetas de fidelidad.",
     "experience.java.desc2":
       "Implementación de funcionalidades para el procesamiento de facturas electrónicas y conciliación de transacciones.",
-    "experience.pensum.position": "BackEnd & Infrastructure engineer",
+    "experience.pensum.position": "Backend & Infrastructure Engineer",
     "experience.pensum.company": "El Pensum",
     "experience.pensum.period": "Noviembre 2025 - Febrero 2026",
     "experience.pensum.type": "Contrato de formación",
@@ -201,7 +211,17 @@ export const translations = {
   en: {
     // Navigation
     "nav.home": "Home",
-    "nav.experience": "Experiences",
+    "a11y.sideNav": "Side navigation",
+    "a11y.desktopMenu": "Desktop menu",
+    "a11y.mobileNav": "Main mobile navigation",
+    "a11y.openMenu": "Open menu",
+    "a11y.toggleLanguage": "Change language",
+    "a11y.footerNav": "Social links",
+    "experience.swipeHint": "← Swipe to see more experience →",
+    "notFound.title": "Page not found",
+    "notFound.text": "Sorry, the page you're looking for doesn't exist or has been moved.",
+    "notFound.back": "Back to home",
+    "nav.experience": "Experience",
     "nav.projects": "Projects",
     "nav.skills": "Skills",
     "nav.aboutme": "About me",
@@ -211,14 +231,14 @@ export const translations = {
     // Hero
     "hero.greeting": "Hey, I'm",
     "hero.experience": "+3 years of experience",
-    "hero.role": "Sotftware Engineer",
+    "hero.role": "Software Engineer",
     "hero.location": "from Dominican Republic",
     "hero.description":
       "Specialized in Java/Spring Boot backend and cloud infrastructure. I design robust APIs, automate deployments with Docker, and build scalable end-to-end systems.",
     "hero.downloadCv": "Download CV",
 
     // Experience
-    "experience.title": "Experiences",
+    "experience.title": "Experience",
     "experience.freelance.position": "Product Manager & FullStack Developer",
     "experience.freelance.company": "Freelance",
     "experience.freelance.period": "March 2024 - Present",
@@ -235,7 +255,7 @@ export const translations = {
       "Development and maintenance of Java modules for user management and loyalty cards.",
     "experience.java.desc2":
       "Implementation of functionalities for electronic invoice processing and transaction reconciliation.",
-    "experience.pensum.position": "BackEnd & Infrastructure Engineer",
+    "experience.pensum.position": "Backend & Infrastructure Engineer",
     "experience.pensum.company": "El Pensum",
     "experience.pensum.period": "November 2025 - February 2026",
     "experience.pensum.type": "Training contract",
@@ -376,7 +396,7 @@ export const translations = {
     // Footer
     "footer.cta": "Ready to create something amazing together?",
     "footer.talk": "Let's talk",
-    "footer.role": "Java Analyst Developer • Dominican Republic",
+    "footer.role": "Java Developer • Dominican Republic",
     "footer.available": "Available for new projects",
     "footer.credit": "Designed and developed with",
     "footer.using": "using Astro & Tailwind CSS",

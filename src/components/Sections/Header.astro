@@ -20,10 +20,12 @@ const base = Astro.url.pathname === "/" ? "" : "/";
 <aside
   id="main-sidebar"
   class="fixed right-4 lg:right-6 xl:right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block"
-  aria-label="Navegación lateral"
+  aria-label={t("a11y.sideNav")}
+    data-i18n-aria="a11y.sideNav"
 >
   <nav
-    aria-label="Menú de escritorio"
+    aria-label={t("a11y.desktopMenu")}
+    data-i18n-aria="a11y.desktopMenu"
     class="flex flex-col items-center gap-1.5 sm:gap-2 rounded-full bg-slate-900/80 px-2.5 xl:px-3 py-3 sm:py-4 backdrop-blur-lg ring-1 ring-white/20 transition-all duration-300 ease-smooth-out hover:ring-shakespeare-500/30 hover:shadow-lg hover:shadow-shakespeare-500/10 w-[60px] xl:w-[72px]"
   >
     <SideBar
@@ -82,11 +84,14 @@ const base = Astro.url.pathname === "/" ? "" : "/";
       <!-- Botón menú hamburguesa -->
       <button
         id="mobile-menu-toggle"
+        type="button"
+        aria-controls="mobile-menu"
         class="p-1.5 sm:p-2 text-slate-100 hover:text-shakespeare-400 transition-colors duration-300"
-        aria-label="Abrir menú"
+        aria-label={t("a11y.openMenu")}
+    data-i18n-aria="a11y.openMenu"
         aria-expanded="false"
       >
-        <Icon name="mdi:menu" class="w-5 h-5 sm:w-6 sm:h-6" />
+        <Icon name="mdi:menu" class="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
       </button>
     </div>
   </div>
@@ -95,7 +100,8 @@ const base = Astro.url.pathname === "/" ? "" : "/";
   <nav
     id="mobile-menu"
     class="hidden bg-slate-950/95 backdrop-blur-lg border-t border-white/10"
-    aria-label="Navegación principal móvil"
+    aria-label={t("a11y.mobileNav")}
+    data-i18n-aria="a11y.mobileNav"
   >
     <div class="px-3 sm:px-4 py-2 sm:py-3 space-y-0.5 sm:space-y-1">
       <a
@@ -176,6 +182,24 @@ const base = Astro.url.pathname === "/" ? "" : "/";
         mobileMenu.classList.remove("hidden");
         menuToggle.setAttribute("aria-expanded", "true");
       }
+    });
+
+    const closeMobileMenu = () => {
+      if (mobileMenu.classList.contains("hidden")) return;
+      mobileMenu.classList.add("hidden");
+      menuToggle.setAttribute("aria-expanded", "false");
+    };
+
+    // Escape cierra y devuelve el foco al botón; un clic fuera del header también cierra.
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !mobileMenu.classList.contains("hidden")) {
+        closeMobileMenu();
+        menuToggle.focus();
+      }
+    });
+    document.addEventListener("click", (e) => {
+      const header = menuToggle.closest("header");
+      if (header && !header.contains(e.target as Node)) closeMobileMenu();
     });
 
     // Cerrar menú al hacer click en un enlace

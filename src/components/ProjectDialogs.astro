@@ -113,7 +113,7 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
           {p.facts.some((f) => f.valueKey) && (
             <div>
               <p
-                class="mb-3 font-mono text-[10px] uppercase tracking-[0.12em] text-slate-500"
+                class="mb-3 font-mono text-[10px] uppercase tracking-[0.12em] text-slate-400"
                 data-i18n="projects.facts"
               >
                 {t("projects.facts")}
@@ -124,7 +124,7 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
                   .map((f) => (
                     <div class="border-l-2 border-shakespeare-500/60 pl-3">
                       <dt
-                        class="font-mono text-[10px] uppercase tracking-[0.12em] text-slate-500"
+                        class="font-mono text-[10px] uppercase tracking-[0.12em] text-slate-400"
                         data-i18n={f.labelKey}
                       >
                         {t(f.labelKey)}
@@ -140,7 +140,7 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
 
           <div>
             <p
-              class="mb-3 font-mono text-[10px] uppercase tracking-[0.12em] text-slate-500"
+              class="mb-3 font-mono text-[10px] uppercase tracking-[0.12em] text-slate-400"
               data-i18n="projects.stack"
             >
               {t("projects.stack")}
