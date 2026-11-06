@@ -349,9 +349,14 @@ const ogImage = new URL(image, Astro.site);
         transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .animate-visible {
-      opacity: 1 !important;
-      transform: none !important;
+    /* Más específico que `.js .animate-*` sin necesidad de !important: así, cuando el
+       script quita las clases tras la entrada, el hover de cada tarjeta vuelve a funcionar. */
+    .js .animate-on-scroll.animate-visible,
+    .js .animate-fade-left.animate-visible,
+    .js .animate-fade-right.animate-visible,
+    .js .animate-scale.animate-visible {
+      opacity: 1;
+      transform: none;
     }
 
     .js .stagger {
@@ -363,6 +368,22 @@ const ogImage = new URL(image, Astro.site);
         0s,
         0s,
         0s;
+    }
+  }
+
+  /* Respaldo: si el script de animaciones no llega a correr (error, bloqueo), el contenido
+     aparece igual a los 2 s. Cuando el script corre pone data-reveal y esta regla deja de aplicar. */
+  .js:not([data-reveal]) .animate-on-scroll,
+  .js:not([data-reveal]) .animate-fade-left,
+  .js:not([data-reveal]) .animate-fade-right,
+  .js:not([data-reveal]) .animate-scale {
+    animation: reveal-fallback 0.4s ease 2s forwards;
+  }
+
+  @keyframes reveal-fallback {
+    to {
+      opacity: 1;
+      transform: none;
     }
   }
 
@@ -386,11 +407,40 @@ const ogImage = new URL(image, Astro.site);
     threshold: 0.1,
   };
 
+  document.documentElement.dataset.reveal = "ready";
+
+  const ANIMATION_CLASSES = [
+    "animate-on-scroll",
+    "animate-fade-left",
+    "animate-fade-right",
+    "animate-scale",
+    "stagger",
+    "animate-visible",
+  ];
+
+  // Tras la entrada se quitan las clases de animación: el elemento queda con sus propias
+  // utilidades (hover:-translate-y-*, transition-*), que las reglas de entrada anulaban.
+  function handOff(el: Element) {
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      el.classList.remove(...ANIMATION_CLASSES);
+    };
+    el.addEventListener("transitionend", (e) => {
+      const te = e as TransitionEvent;
+      if (te.target === el && te.propertyName === "opacity") finish();
+    });
+    // Respaldo por si no hay transición (movimiento reducido) o el evento no llega.
+    setTimeout(finish, 1500);
+  }
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("animate-visible");
         observer.unobserve(entry.target);
+        handOff(entry.target);
       }
     });
   }, observerOptions);

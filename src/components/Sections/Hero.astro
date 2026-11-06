@@ -5,8 +5,7 @@ import { Icon } from "astro-icon/components";
 
 <section
   id="sobre-mi"
-  class="min-h-screen flex items-center justify-center py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8 relative z-10"
-  style="animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;"
+  class="hero-fade-in min-h-screen flex items-center justify-center py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8 relative z-10"
   aria-labelledby="hero-title"
 >
   <div class="max-w-4xl mx-auto text-center">
@@ -148,7 +147,8 @@ import { Icon } from "astro-icon/components";
     let activeTimeouts: ReturnType<typeof setTimeout>[] = [];
     const roleElement = document.getElementById("animated-role");
 
-    if (!roleElement) return;
+    if (!roleElement || roleElement.dataset.bound === "true") return;
+    roleElement.dataset.bound = "true";
 
     function getCurrentRoles() {
       return currentLang === "es" ? rolesES : rolesEN;
@@ -327,6 +327,12 @@ import { Icon } from "astro-icon/components";
   document.addEventListener("astro:page-load", initHero);
 </script>
 <style>
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-fade-in {
+      animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  }
+
   @keyframes heroFadeIn {
     0% {
       opacity: 0.01;
