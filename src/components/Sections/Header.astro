@@ -2,6 +2,9 @@
 import { Icon } from "astro-icon/components";
 import SideBar from "../Headerbadge.astro";
 import LanguageToggle from "../LanguageToggle.astro";
+import { useTranslations } from "../../i18n/translations";
+
+const t = useTranslations("es");
 // En la home los enlaces son hashes puros: así no recargan la página aunque la URL tenga
 // ?lang=en o parámetros de campaña. En otras páginas (/proyectos) apuntan a la home.
 const base = Astro.url.pathname === "/" ? "" : "/";
@@ -101,7 +104,7 @@ const base = Astro.url.pathname === "/" ? "" : "/";
         data-i18n="nav.home"
         data-section="sobre-mi"
       >
-        Inicio
+        {t("nav.home")}
       </a>
       <a
         href={`${base}#experiencia`}
@@ -109,7 +112,7 @@ const base = Astro.url.pathname === "/" ? "" : "/";
         data-i18n="nav.experience"
         data-section="experiencia"
       >
-        Experiencia
+        {t("nav.experience")}
       </a>
       <a
         href={`${base}#proyectos`}
@@ -117,7 +120,7 @@ const base = Astro.url.pathname === "/" ? "" : "/";
         data-i18n="nav.projects"
         data-section="proyectos"
       >
-        Proyectos
+        {t("nav.projects")}
       </a>
       <a
         href={`${base}#certifications`}
@@ -125,7 +128,7 @@ const base = Astro.url.pathname === "/" ? "" : "/";
         data-i18n="nav.certifications"
         data-section="certifications"
       >
-        Certificaciones
+        {t("nav.certifications")}
       </a>
       <a
         href={`${base}#skills`}
@@ -133,7 +136,7 @@ const base = Astro.url.pathname === "/" ? "" : "/";
         data-i18n="nav.skills"
         data-section="skills"
       >
-        Habilidades
+        {t("nav.skills")}
       </a>
       <!-- <a
         href={`${base}#aboutme`}
@@ -141,7 +144,7 @@ const base = Astro.url.pathname === "/" ? "" : "/";
         data-i18n="nav.aboutme"
         data-section="aboutme"
       >
-        Sobre mí
+        {t("nav.aboutme")}
       </a> -->
       <a
         href={`${base}#contacto`}
@@ -149,7 +152,7 @@ const base = Astro.url.pathname === "/" ? "" : "/";
         data-i18n="nav.contact"
         data-section="contacto"
       >
-        Contacto
+        {t("nav.contact")}
       </a>
     </div>
   </nav>

@@ -1,4 +1,6 @@
 ---
+import { useTranslations, type TranslationKey } from "../i18n/translations";
+
 export interface Props {
   position: string;
   positionKey?: string;
@@ -9,6 +11,8 @@ export interface Props {
   alignmentMobile?: "left" | "right";
   description?: string[];
   descriptionKeys?: string[];
+  /** Cada lista (móvil / escritorio) renderiza sólo su variante: antes cada entrada salía 4 veces. */
+  variant: "mobile" | "desktop";
 }
 
 const {
@@ -21,7 +25,16 @@ const {
   alignmentMobile = "right",
   description,
   descriptionKeys,
+  variant,
 } = Astro.props;
+
+// El HTML del servidor sale con los mismos textos que pone setLang("es") al cargar.
+const t = useTranslations("es");
+const tx = (key: string | undefined, fallback: string) =>
+  key ? t(key as TranslationKey) : fallback;
+const positionText = tx(positionKey, position);
+const periodText = tx(periodKey, period);
+const items = (description ?? []).map((item, i) => tx(descriptionKeys?.[i], item));
 
 // Clases para alineación horizontal (desktop/tablet)
 const alignmentClasses =
@@ -36,6 +49,8 @@ const alignmentClassesMobile =
     : "w-1/2 pl-4 sm:pl-8 text-left ml-auto";
 ---
 
+{
+  variant === "mobile" && (
 <!-- 🌐 Versión móvil (timeline vertical centrado) --><!-- Solo visible en pantallas < 768px -->
 <li class="relative md:hidden mb-12">
   <!-- Punto central -->
@@ -50,16 +65,16 @@ const alignmentClassesMobile =
       class="text-lg sm:text-xl font-semibold text-slate-100 mb-2"
       data-i18n={positionKey}
     >
-      {position}
+      {positionText}
     </h3>
     <p class="text-base sm:text-lg font-semibold text-shakespeare-400 mb-1">
       {company}
     </p>
 
     {
-      description && description.length > 0 && (
+      items.length > 0 && (
         <ul class="list-inside text-xs sm:text-sm text-slate-300 mt-2 mb-3 space-y-1">
-          {description.map((item, index) => (
+          {items.map((item, index) => (
             <li class="leading-relaxed" data-i18n={descriptionKeys?.[index]}>
               {item}
             </li>
@@ -69,14 +84,18 @@ const alignmentClassesMobile =
     }
 
     <div class="flex flex-wrap gap-2 mt-2">
-      <time
+      <span
         class="inline-block text-xs sm:text-sm px-3 py-1 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30"
-        data-i18n={periodKey}>{period}</time
+        data-i18n={periodKey}>{periodText}</span
       >
     </div>
   </div>
 </li>
+  )
+}
 
+{
+  variant === "desktop" && (
 <!-- 💻 Versión tablet/desktop (timeline horizontal con scroll) -->
 <!-- Solo visible en pantallas ≥ 768px -->
 <li class="hidden md:flex relative flex-shrink-0 w-[300px] lg:w-[340px]">
@@ -95,15 +114,15 @@ const alignmentClassesMobile =
         class="text-base lg:text-lg font-semibold text-slate-100 mb-2"
         data-i18n={positionKey}
       >
-        {position}
+        {positionText}
       </h3>
       <p class="text-sm lg:text-base font-semibold text-shakespeare-400 mb-1">
         {company}
       </p>
       {
-        description && description.length > 0 && (
+        items.length > 0 && (
           <ul class="list-inside text-xs lg:text-sm text-slate-300 mt-2 space-y-1">
-            {description.map((item, index) => (
+            {items.map((item, index) => (
               <li data-i18n={descriptionKeys?.[index]}>{item}</li>
             ))}
           </ul>
@@ -114,8 +133,10 @@ const alignmentClassesMobile =
         class="inline-grid text-xs lg:text-sm px-3 py-1 mt-3 bg-shakespeare-500/20 text-shakespeare-300 rounded-full border border-shakespeare-500/30"
         data-i18n={periodKey}
       >
-        {period}
+        {periodText}
       </span>
     </div>
   </div>
 </li>
+  )
+}

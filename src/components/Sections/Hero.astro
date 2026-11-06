@@ -1,6 +1,10 @@
 ---
 import Links from "../Links.astro";
 import { Icon } from "astro-icon/components";
+import { useTranslations } from "../../i18n/translations";
+
+// El HTML del servidor sale con los mismos textos que pone setLang("es") al cargar.
+const t = useTranslations("es");
 ---
 
 <section
@@ -15,9 +19,7 @@ import { Icon } from "astro-icon/components";
       <p
         class="text-sm sm:text-base text-slate-400 font-medium"
         data-i18n="hero.greeting"
-      >
-        Hey, Soy
-      </p>
+      >{t("hero.greeting")}</p>
 
       <h1
         id="hero-title"
@@ -36,8 +38,7 @@ import { Icon } from "astro-icon/components";
         </span>
         <span class="text-slate-100">&</span>
         <span class="text-slate-100 font-semibold" data-i18n="hero.role"
-          >Backend Developer</span
-        >
+          >{t("hero.role")}</span>
       </div>
 
       <p class="text-sm sm:text-base text-slate-400 max-w-md pt-2">
@@ -47,12 +48,10 @@ import { Icon } from "astro-icon/components";
       <p
         class="text-sm sm:text-base md:text-lg text-slate-300 leading-relaxed max-w-2xl pt-4"
       >
-        <span data-i18n="hero.experience">+3 años de experiencia.</span>
-        <span data-i18n="hero.location">de República Dominicana</span>.
+        <span data-i18n="hero.experience">{t("hero.experience")}</span>
+        <span data-i18n="hero.location">{t("hero.location")}</span>.
          <span data-i18n="hero.description"
-          >Especializado en crear soluciones escalables, desde la lógica de
-          negocio hasta la integración final.</span
-        >
+          >{t("hero.description")}</span>
       </p>
 
       <div class="flex flex-wrap justify-center gap-3 sm:gap-4 pt-6 sm:pt-8">
@@ -81,7 +80,7 @@ import { Icon } from "astro-icon/components";
               name="material-symbols:download"
               class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 transition-transform duration-300 ease-smooth-out group-hover:scale-110"
             />
-            <span data-i18n="hero.downloadCv">Descargar CV</span>
+            <span data-i18n="hero.downloadCv">{t("hero.downloadCv")}</span>
             <Icon
               name="material-symbols:keyboard-arrow-down"
               class="w-5 h-5 transition-transform duration-300 group-hover:rotate-180"

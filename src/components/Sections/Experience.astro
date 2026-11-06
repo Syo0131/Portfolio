@@ -69,7 +69,7 @@ const experiencias: ExperienceProps[] = [
 
       <!-- Lista de experiencias móvil -->
       <ul class="relative space-y-0">
-        {experiencias.map((exp) => <ExperienceTimeline {...exp} />)}
+        {experiencias.map((exp) => <ExperienceTimeline {...exp} variant="mobile" />)}
       </ul>
     </div>
 
@@ -95,7 +95,7 @@ const experiencias: ExperienceProps[] = [
             class="relative flex items-center justify-center gap-12"
             style="z-index: 1;"
           >
-            {experiencias.map((exp) => <ExperienceTimeline {...exp} />)}
+            {experiencias.map((exp) => <ExperienceTimeline {...exp} variant="desktop" />)}
           </ul>
         </div>
       </div>

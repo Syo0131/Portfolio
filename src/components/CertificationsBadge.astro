@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { useTranslations, type TranslationKey } from "../i18n/translations";
 
 export interface Props {
   title: string;
@@ -28,6 +29,11 @@ const {
 } = Astro.props;
 
 const isInProgress = !link;
+
+// Mismo texto que pone setLang("es") al cargar.
+const t = useTranslations("es");
+const titleText = titleKey ? t(titleKey as TranslationKey) : title;
+const dateText = dateKey ? t(dateKey as TranslationKey) : date;
 ---
 
 <div
@@ -79,7 +85,7 @@ const isInProgress = !link;
       class={`text-base sm:text-lg font-bold text-slate-100 ${hovercolor} transition-all duration-300 mb-3 line-clamp-2 leading-tight min-h-[3.5rem]`}
       data-i18n={titleKey}
     >
-      {title}
+      {titleText}
     </h3>
 
     <div class="space-y-2 mb-4">
@@ -96,7 +102,7 @@ const isInProgress = !link;
           name="mdi:calendar"
           class="size-4 text-shakespeare-500/70 flex-shrink-0"
         />
-        <span data-i18n={dateKey}>{date}</span>
+        <span data-i18n={dateKey}>{dateText}</span>
       </div>
 
       {
