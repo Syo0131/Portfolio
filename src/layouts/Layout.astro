@@ -369,21 +369,21 @@ const ogImage = new URL(image, Astro.site);
         0s,
         0s;
     }
-  }
 
-  /* Respaldo: si el script de animaciones no llega a correr (error, bloqueo), el contenido
-     aparece igual a los 2 s. Cuando el script corre pone data-reveal y esta regla deja de aplicar. */
-  .js:not([data-reveal]) .animate-on-scroll,
-  .js:not([data-reveal]) .animate-fade-left,
-  .js:not([data-reveal]) .animate-fade-right,
-  .js:not([data-reveal]) .animate-scale {
-    animation: reveal-fallback 0.4s ease 2s forwards;
-  }
+    /* Respaldo (sólo con movimiento permitido: con `reduce` nada se oculta): si el script de animaciones no llega a correr (error, bloqueo), el contenido
+       aparece igual a los 2 s. Cuando el script corre pone data-reveal y esta regla deja de aplicar. */
+    .js:not([data-reveal]) .animate-on-scroll,
+    .js:not([data-reveal]) .animate-fade-left,
+    .js:not([data-reveal]) .animate-fade-right,
+    .js:not([data-reveal]) .animate-scale {
+      animation: reveal-fallback 0.4s ease 2s forwards;
+    }
 
-  @keyframes reveal-fallback {
-    to {
-      opacity: 1;
-      transform: none;
+    @keyframes reveal-fallback {
+      to {
+        opacity: 1;
+        transform: none;
+      }
     }
   }
 
