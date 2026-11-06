@@ -407,8 +407,6 @@ const ogImage = new URL(image, Astro.site);
     threshold: 0.1,
   };
 
-  document.documentElement.dataset.reveal = "ready";
-
   const ANIMATION_CLASSES = [
     "animate-on-scroll",
     "animate-fade-left",
@@ -435,6 +433,24 @@ const ogImage = new URL(image, Astro.site);
     setTimeout(finish, 1500);
   }
 
+  const REVEAL_SELECTOR =
+    ".animate-on-scroll, .animate-fade-left, .animate-fade-right, .animate-scale";
+
+  // En conexiones lentas este script puede llegar después de los 2 s del respaldo CSS
+  // (reveal-fallback). Los elementos que el respaldo ya mostró se liberan aquí mismo; si no,
+  // al poner data-reveal la animación desaparecería y volverían a opacity 0 (parpadeo).
+  document.querySelectorAll(REVEAL_SELECTOR).forEach((el) => {
+    const shown = el.getAnimations?.().some((a) => {
+      if ((a as CSSAnimation).animationName !== "reveal-fallback") return false;
+      const t = Number(a.currentTime ?? 0);
+      return a.playState === "finished" || t >= 2000;
+    });
+    if (shown) el.classList.remove(...ANIMATION_CLASSES);
+  });
+
+  // A partir de aquí el respaldo deja de aplicar y el observer se encarga.
+  document.documentElement.dataset.reveal = "ready";
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -446,9 +462,7 @@ const ogImage = new URL(image, Astro.site);
   }, observerOptions);
 
   function observeElements() {
-    const animatedElements = document.querySelectorAll(
-      ".animate-on-scroll, .animate-fade-left, .animate-fade-right, .animate-scale",
-    );
+    const animatedElements = document.querySelectorAll(REVEAL_SELECTOR);
     animatedElements.forEach((el) => observer.observe(el));
   }
 

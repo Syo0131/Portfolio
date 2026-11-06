@@ -294,6 +294,9 @@ import { Icon } from "astro-icon/components";
     // Teclado: al salir con Tab del botón o de los enlaces, el menú se cierra.
     container.addEventListener("focusout", (e) => {
       const next = (e as FocusEvent).relatedTarget as Node | null;
+      // Safari no enfoca enlaces al hacer clic: relatedTarget llega null en el mousedown.
+      // Si el puntero está sobre el menú, es un clic dentro y no hay que cerrarlo.
+      if (!next && container.matches(":hover")) return;
       if (!next || !container.contains(next)) closeMenu();
     });
 
