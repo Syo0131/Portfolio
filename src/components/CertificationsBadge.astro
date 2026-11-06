@@ -11,8 +11,6 @@ export interface Props {
   dateKey?: string;
   link?: string;
   icon?: string;
-  hovercolor?: string;
-  buttonText?: string;
 }
 
 const {
@@ -24,8 +22,6 @@ const {
   dateKey,
   link,
   icon,
-  hovercolor = "group-hover:text-shakespeare-400",
-  buttonText,
 } = Astro.props;
 
 const isInProgress = !link;
@@ -72,7 +68,7 @@ const dateText = dateKey ? t(dateKey as TranslationKey) : date;
         <div class="w-14 h-14 rounded-xl bg-shakespeare-500/10 border border-shakespeare-500/20 flex items-center justify-center group-hover:bg-shakespeare-500/20 group-hover:border-shakespeare-500/40 transition-all duration-300 group-hover:scale-110">
           <Icon
             name={icon}
-            class={`size-7 text-slate-300 ${hovercolor} transition-all duration-400 ease-smooth-out`} aria-hidden="true" />
+            class={`size-7 text-slate-300 group-hover:text-shakespeare-400 transition-all duration-400 ease-smooth-out`} aria-hidden="true" />
         </div>
       </div>
     )
@@ -81,7 +77,7 @@ const dateText = dateKey ? t(dateKey as TranslationKey) : date;
   {/* Content */}
   <div class="flex-1 flex flex-col">
     <h3
-      class={`text-base sm:text-lg font-bold text-slate-100 ${hovercolor} transition-all duration-300 mb-3 line-clamp-2 leading-tight min-h-[3.5rem]`}
+      class={`text-base sm:text-lg font-bold text-slate-100 group-hover:text-shakespeare-400 transition-all duration-300 mb-3 line-clamp-2 leading-tight min-h-[3.5rem]`}
       data-i18n={titleKey}
     >
       {titleText}
@@ -129,7 +125,7 @@ const dateText = dateKey ? t(dateKey as TranslationKey) : date;
             name="mdi:certificate"
             class="size-4 group-hover/btn:scale-110 transition-transform duration-300" aria-hidden="true" />
           <span data-i18n="certifications.viewCert">
-            {buttonText || "Ver Certificación"}
+            Ver Certificación
           </span>
           <Icon
             name="mdi:arrow-top-right"
@@ -139,7 +135,7 @@ const dateText = dateKey ? t(dateKey as TranslationKey) : date;
         <div class="flex items-center justify-center gap-2 w-full text-sm font-medium px-4 py-2.5 bg-slate-700/30 text-slate-400 rounded-xl border border-slate-600/30 cursor-not-allowed">
           <Icon name="mdi:progress-clock" class="size-4 motion-safe:animate-pulse" aria-hidden="true" />
           <span data-i18n="certifications.comingSoon">
-            {buttonText || "Próximamente"}
+            Próximamente
           </span>
         </div>
       )

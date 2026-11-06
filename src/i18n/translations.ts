@@ -1,8 +1,3 @@
-export const languages = {
-  es: "Español",
-  en: "English",
-};
-
 export const defaultLang = "es"
 
 export const translations = {
@@ -38,37 +33,24 @@ export const translations = {
     // ! Experience Laboral
     "experience.title": "Experiencia Laboral",
     "experience.freelance.position": "Product Manager & FullStack Developer",
-    "experience.freelance.company": "Freelance",
     "experience.freelance.period": "Marzo 2024 - Presente",
-    "experience.freelance.type": "Freelance",
     "experience.freelance.desc1":
       "Gestión end-to-end de proyectos de software: levantamiento de requerimientos con el cliente, definición de la arquitectura técnica, documentación y coordinación del equipo de desarrollo cuando el proyecto lo requiere.",
     "experience.freelance.desc2":
       "Responsable del ciclo completo de entrega: desde la toma de decisiones tecnológicas hasta el despliegue en producción, asegurando que la solución final se alinee con los objetivos del negocio.",
     "experience.java.position": "Java Analyst Developer",
-    "experience.java.company": "BitBox Caribe SRL",
     "experience.java.period": "Junio 2025 - Presente",
-    "experience.java.type": "Jornada completa",
     "experience.java.desc1":
       "Desarrollo y mantenimiento de módulos Java para la gestión de usuarios y tarjetas de fidelidad.",
     "experience.java.desc2":
       "Implementación de funcionalidades para el procesamiento de facturas electrónicas y conciliación de transacciones.",
     "experience.pensum.position": "Backend & Infrastructure Engineer",
-    "experience.pensum.company": "El Pensum",
     "experience.pensum.period": "Noviembre 2025 - Febrero 2026",
-    "experience.pensum.type": "Contrato de formación",
     "experience.pensum.desc1":
       "Diseño y gestión de la infraestructura cloud: configuración de servidores VPS, DNS, seguridad SSL y pipelines de despliegue automatizado con Docker y Dokploy.",
     "experience.pensum.desc2":
       "Desarrollo del backend completo con Java Spring Boot y Spring Security, modelando una arquitectura jerárquica para la gestión de universidades, recintos, facultades, carreras y pensums.",
-    "experience.founder.position": "Founder & Product Manager",
-    "experience.founder.period": "Junio 2025 - Presente",
-    "experience.founder.desc1": "Dirección integral en el desarrollo de software a medida para clientes, desde la toma de requerimientos hasta el despliegue final.",
-    "experience.founder.desc2": "Gestión de proyectos tecnológicos, alineando los objetivos de negocio con la arquitectura y coordinando equipos de desarrollo.",
 
-    // Projects
-
-    // * Spendly
     "projects.tograbao.fact.role": "Líder de proyecto",
     "projects.tograbao.fact.team": "3 personas",
     "projects.spendly.fact.key": "Registro automático desde correos del banco",
@@ -125,22 +107,12 @@ export const translations = {
     "projects.elpensum.img3": "El Pensum: endpoints de la API",
     "projects.galansorteos.img1": "Galan Sorteos: captura próximamente",
     "projects.title": "Proyectos",
-    "projects.spendly.name": "Spendly",
     "projects.spendly.category": "Full-Stack",
 
-    // // * Citadel Logs
-    // "projects.citadelLogs.name": "Citadel Logs",
-    // "projects.citadelLogs.description":
-    //   "Aplicación web desarrollada con React y Node.js para la visualización y gestión de logs en tiempo real, ofreciendo una interfaz intuitiva para monitorear eventos del sistema.",
-    // "projects.citadelLogs.category": "Full-Stack",
-
-    "projects.elpensum.name": "El Pensum API",
     "projects.elpensum.category": "Backend",
 
     // * Tograbao Real State
-    "projects.tograbao.name": "Tograbao Real State",
     "projects.tograbao.category": "Full-Stack",
-
 
     // Skills
     "skills.title": "Habilidades Técnicas",
@@ -170,9 +142,6 @@ export const translations = {
     "certifications.fullstack.date": "Enero 2026",
     "certifications.springframework.title": "Spring Boot with Spring Framework",
     "certifications.springframework.date": "Enero 2026",
-    "certifications.python.title":
-      "Python para principiantes - Aprende desde cero",
-    "certifications.python.date": "Mayo 2024",
     "certifications.csharp.title": "Introducción a la programación con C#",
     "certifications.csharp.date": "Diciembre 2025",
     "certifications.solid.title": "Principios SOLID y Clean Code",
@@ -181,10 +150,6 @@ export const translations = {
     "certifications.sql.date": "Febrero 2026",
     "certifications.enterprise.title": "Enterprise full stack with Spring Boot 4 and Angular 21",
     "certifications.enterprise.date": "Marzo 2026",
-
-    // Learning Path
-    "learning.title": "Ruta de Aprendizaje",
-    "learning.subtitle": "Mi enfoque actual",
 
     // Contact
     "contact.title": "¿Tienes algún proyecto en mente?",
@@ -205,8 +170,6 @@ export const translations = {
     "footer.talk": "Hablemos",
     "footer.role": "Desarrollador Java • República Dominicana",
     "footer.available": "Disponible para nuevos proyectos",
-    "footer.credit": "Diseñado y desarrollado con",
-    "footer.using": "usando Astro & Tailwind CSS",
   },
   en: {
     // Navigation
@@ -240,35 +203,23 @@ export const translations = {
     // Experience
     "experience.title": "Experience",
     "experience.freelance.position": "Product Manager & FullStack Developer",
-    "experience.freelance.company": "Freelance",
     "experience.freelance.period": "March 2024 - Present",
-    "experience.freelance.type": "Freelance",
     "experience.freelance.desc1":
       "End-to-end software project management: requirements gathering with the client, technical architecture definition, documentation, and development team coordination when the project demands it.",
     "experience.freelance.desc2":
       "Responsible for the complete delivery cycle: from technology decisions to production deployment, ensuring the final solution aligns with the business objectives.",
     "experience.java.position": "Java Analyst Developer",
-    "experience.java.company": "BitBox Caribe SRL",
     "experience.java.period": "June 2025 - Present",
-    "experience.java.type": "Full-time",
     "experience.java.desc1":
       "Development and maintenance of Java modules for user management and loyalty cards.",
     "experience.java.desc2":
       "Implementation of functionalities for electronic invoice processing and transaction reconciliation.",
     "experience.pensum.position": "Backend & Infrastructure Engineer",
-    "experience.pensum.company": "El Pensum",
     "experience.pensum.period": "November 2025 - February 2026",
-    "experience.pensum.type": "Training contract",
     "experience.pensum.desc1":
       "Design and management of the project's cloud infrastructure: VPS server configuration, DNS, SSL security, and automated deployment pipelines with Docker and Dokploy.",
     "experience.pensum.desc2":
       "Full backend development with Java Spring Boot and Spring Security, modeling a complex hierarchical architecture for managing universities, campuses, faculties, careers, and curricula.",
-    "experience.founder.position": "Founder & Product Manager",
-    "experience.founder.period": "June 2025 - Present",
-    "experience.founder.desc1": "End-to-end direction of custom software development for clients, from requirements gathering to final deployment.",
-    "experience.founder.desc2": "Management of technology projects, aligning business goals with architecture and coordinating development teams.",
-
-    // Projects
 
     "projects.tograbao.fact.role": "Project lead",
     "projects.tograbao.fact.team": "3 people",
@@ -326,15 +277,11 @@ export const translations = {
     "projects.elpensum.img3": "El Pensum: API endpoints",
     "projects.galansorteos.img1": "Galan Sorteos: screenshot coming soon",
     "projects.title": "Projects",
-    "projects.spendly.name": "Spendly",
     "projects.spendly.category": "Full-Stack",
-    "projects.elpensum.name": "El Pensum API",
     "projects.elpensum.category": "Backend",
 
     // * Tograbao Real State
-    "projects.tograbao.name": "Tograbao Real State",
     "projects.tograbao.category": "Full-Stack",
-
 
     // Skills
     "skills.title": "Technical Skills",
@@ -364,8 +311,6 @@ export const translations = {
     "certifications.fullstack.date": "January 2026",
     "certifications.springframework.title": "Spring Boot with Spring Framework",
     "certifications.springframework.date": "January 2026",
-    "certifications.python.title": "Python for beginners - Learn from scratch",
-    "certifications.python.date": "May 2024",
     "certifications.csharp.title": "Introduction to programming with C#",
     "certifications.csharp.date": "December 2025",
     "certifications.solid.title": "SOLID Principles and Clean Code",
@@ -374,10 +319,6 @@ export const translations = {
     "certifications.sql.date": "February 2026",
     "certifications.enterprise.title": "Enterprise full stack with Spring Boot 4 and Angular 21",
     "certifications.enterprise.date": "March 2026",
-
-    // Learning Path
-    "learning.title": "Learning Path",
-    "learning.subtitle": "My current focus",
 
     // Contact
     "contact.title": "Have a project in mind?",
@@ -398,20 +339,10 @@ export const translations = {
     "footer.talk": "Let's talk",
     "footer.role": "Java Developer • Dominican Republic",
     "footer.available": "Available for new projects",
-    "footer.credit": "Designed and developed with",
-    "footer.using": "using Astro & Tailwind CSS",
   },
 } as const;
 
 export type TranslationKey = keyof (typeof translations)["es"];
-
-export function getLangFromUrl(url: URL) {
-  const lang = url.searchParams.get("lang");
-  if (lang && lang in translations) {
-    return lang as keyof typeof translations;
-  }
-  return defaultLang;
-}
 
 export function useTranslations(lang: keyof typeof translations) {
   return function t(key: TranslationKey) {

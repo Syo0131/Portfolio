@@ -135,10 +135,9 @@ const skillCategories: SkillCategory[] = [
 
             {/* Grid de skills */}
             <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-4">
-              {category.skills.map((skill, skillIndex) => (
+              {category.skills.map((skill) => (
                 <div
                   class="skill-item flex flex-col items-center gap-2 p-2 rounded-xl hover:bg-slate-800/50 transition-all duration-300 cursor-default group/skill"
-                  style={`animation-delay: ${categoryIndex * 150 + skillIndex * 50}ms`}
                 >
                   <div class="relative">
                     <Icon
@@ -167,8 +166,6 @@ const skillCategories: SkillCategory[] = [
   </div>
 </section>
 
-<style>
-  /* El color de hover de cada icono lo pone la clase `group-hover/skill:text-*`
+{/* El color de hover de cada icono lo pone la clase `group-hover/skill:text-*`
      (declarada en el safelist de tailwind.config.mjs). No poner reglas aqui sobre
-     .text-slate-400: ganan por especificidad y pintan todo del color heredado. */
-</style>
+     .text-slate-400: ganan por especificidad y pintan todo del color heredado. */}

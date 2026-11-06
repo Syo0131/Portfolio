@@ -275,8 +275,6 @@ const base = Astro.url.pathname === "/" ? "" : "/";
     initHeader();
   }
 
-  // Reinicializar en navegación de Astro (si usas view transitions)
-  document.addEventListener("astro:page-load", initHeader);
 </script>
 
 <style is:global>

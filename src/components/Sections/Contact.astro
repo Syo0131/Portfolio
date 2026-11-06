@@ -166,16 +166,6 @@ import { Icon } from "astro-icon/components";
     opacity: 1;
     box-shadow: 0 0 20px rgba(4, 187, 227, 0.15);
   }
-
-  /* Success state */
-  .form-input.success {
-    border-color: #22c55e;
-  }
-
-  /* Error state */
-  .form-input.error {
-    border-color: #ef4444;
-  }
 </style>
 
 <script>
@@ -195,7 +185,7 @@ import { Icon } from "astro-icon/components";
     if (!form || !submitBtn || !btnText || !statusMessage) return;
 
     // Evita registrar un segundo listener de submit si init corre dos veces
-    // (DOMContentLoaded + astro:page-load), lo que enviaria el email duplicado.
+    // (p. ej. si se añade navegación con ClientRouter), lo que enviaria el email duplicado.
     if (form.dataset.bound === "true") return;
     form.dataset.bound = "true";
 
@@ -283,5 +273,4 @@ import { Icon } from "astro-icon/components";
 
   // Initialize on page load
   document.addEventListener("DOMContentLoaded", initContactForm);
-  document.addEventListener("astro:page-load", initContactForm);
 </script>
