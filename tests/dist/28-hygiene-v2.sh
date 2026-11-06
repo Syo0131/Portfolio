@@ -34,3 +34,6 @@ assert_absent public/robots.txt '/api/'
 assert_absent astro.config.mjs 'dangerouslyProcessSVG'
 assert_absent package.json '@iconify-json/(devicon"|file-icons|logos|streamline)'
 assert_absent README.md 'Astro Starter Kit'
+# Un solo correo de contacto en todo el sitio.
+for f in public/.well-known/security.txt src/layouts/Layout.astro; do assert_present "$f" 'contacto@daybeldiaz\.dev'; done
+if grep -rq "sdiazdaybel" public src; then echo "FAIL: old contact email still present"; FAILED=1; fi
