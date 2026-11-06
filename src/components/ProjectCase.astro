@@ -18,8 +18,11 @@ const cover = project.images[0];
 // Los datos sin valor quedan visibles sólo en desarrollo, para recordar completarlos.
 const facts = project.facts.filter((f) => f.valueKey || import.meta.env.DEV);
 
+// Sólo la primera fila lleva el tamaño grande; las demás destacadas usan el normal.
+const big = index === 0;
+
 // Clases literales (Tailwind no ve clases construidas dinámicamente).
-const gridCols = project.featured
+const gridCols = big
   ? flipped
     ? "lg:grid-cols-[1fr_1.4fr]"
     : "lg:grid-cols-[1.4fr_1fr]"
@@ -101,7 +104,7 @@ const gridCols = project.featured
     <h3
       class:list={[
         "font-display font-bold tracking-tight text-slate-100 text-balance",
-        project.featured ? "text-3xl sm:text-4xl" : "text-2xl sm:text-3xl",
+        big ? "text-3xl sm:text-4xl" : "text-2xl sm:text-3xl",
       ]}
     >
       {project.name}

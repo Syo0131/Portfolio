@@ -2,6 +2,9 @@
 import { Icon } from "astro-icon/components";
 import SideBar from "../Headerbadge.astro";
 import LanguageToggle from "../LanguageToggle.astro";
+// En la home los enlaces son hashes puros: así no recargan la página aunque la URL tenga
+// ?lang=en o parámetros de campaña. En otras páginas (/proyectos) apuntan a la home.
+const base = Astro.url.pathname === "/" ? "" : "/";
 ---
 
 <!-- Language Toggle - Fixed top right for desktop -->
@@ -21,43 +24,43 @@ import LanguageToggle from "../LanguageToggle.astro";
     class="flex flex-col items-center gap-1.5 sm:gap-2 rounded-full bg-slate-900/80 px-2.5 xl:px-3 py-3 sm:py-4 backdrop-blur-lg ring-1 ring-white/20 transition-all duration-300 ease-smooth-out hover:ring-shakespeare-500/30 hover:shadow-lg hover:shadow-shakespeare-500/10 w-[60px] xl:w-[72px]"
   >
     <SideBar
-      href="/#sobre-mi"
+      href={`${base}#sobre-mi`}
       name="Inicio"
       nameKey="nav.home"
       icon="mdi:home"
     />
     <SideBar
-      href="/#experiencia"
+      href={`${base}#experiencia`}
       name="Experiencia"
       nameKey="nav.experience"
       icon="mdi:briefcase"
     />
     <SideBar
-      href="/#proyectos"
+      href={`${base}#proyectos`}
       name="Proyectos"
       nameKey="nav.projects"
       icon="mdi:folder-multiple"
     />
     <SideBar
-      href="/#certifications"
+      href={`${base}#certifications`}
       name="Certificaciones"
       nameKey="nav.certifications"
       icon="mdi:certificate-outline"
     />
     <SideBar
-      href="/#skills"
+      href={`${base}#skills`}
       name="Habilidades"
       nameKey="nav.skills"
       icon="mdi:code-braces"
     />
     <!-- <SideBar
-      href="/#aboutme"
+      href={`${base}#aboutme`}
       name="Sobre mí"
       nameKey="nav.aboutme"
       icon="mdi:account-circle-outline"
     /> -->
     <SideBar
-      href="/#contacto"
+      href={`${base}#contacto`}
       name="Contacto"
       nameKey="nav.contact"
       icon="mdi:email"
@@ -93,7 +96,7 @@ import LanguageToggle from "../LanguageToggle.astro";
   >
     <div class="px-3 sm:px-4 py-2 sm:py-3 space-y-0.5 sm:space-y-1">
       <a
-        href="/#sobre-mi"
+        href={`${base}#sobre-mi`}
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
         data-i18n="nav.home"
         data-section="sobre-mi"
@@ -101,7 +104,7 @@ import LanguageToggle from "../LanguageToggle.astro";
         Inicio
       </a>
       <a
-        href="/#experiencia"
+        href={`${base}#experiencia`}
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
         data-i18n="nav.experience"
         data-section="experiencia"
@@ -109,7 +112,7 @@ import LanguageToggle from "../LanguageToggle.astro";
         Experiencia
       </a>
       <a
-        href="/#proyectos"
+        href={`${base}#proyectos`}
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
         data-i18n="nav.projects"
         data-section="proyectos"
@@ -117,7 +120,7 @@ import LanguageToggle from "../LanguageToggle.astro";
         Proyectos
       </a>
       <a
-        href="/#certifications"
+        href={`${base}#certifications`}
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
         data-i18n="nav.certifications"
         data-section="certifications"
@@ -125,7 +128,7 @@ import LanguageToggle from "../LanguageToggle.astro";
         Certificaciones
       </a>
       <a
-        href="/#skills"
+        href={`${base}#skills`}
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
         data-i18n="nav.skills"
         data-section="skills"
@@ -133,7 +136,7 @@ import LanguageToggle from "../LanguageToggle.astro";
         Habilidades
       </a>
       <!-- <a
-        href="/#aboutme"
+        href={`${base}#aboutme`}
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
         data-i18n="nav.aboutme"
         data-section="aboutme"
@@ -141,7 +144,7 @@ import LanguageToggle from "../LanguageToggle.astro";
         Sobre mí
       </a> -->
       <a
-        href="/#contacto"
+        href={`${base}#contacto`}
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
         data-i18n="nav.contact"
         data-section="contacto"
