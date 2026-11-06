@@ -23,7 +23,11 @@ export function t(key: TranslationKey, lang?: Lang): string {
 export function setLang(lang: Lang): void {
   if (typeof window === "undefined") return;
 
-  localStorage.setItem("lang", lang);
+  try {
+    localStorage.setItem("lang", lang);
+  } catch {
+    // almacenamiento bloqueado: el idioma sigue aplicándose; ?lang lo conserva si existe
+  }
   document.documentElement.lang = lang;
 
   // Si la URL trae ?lang (p. ej. un enlace hreflang), se actualiza para que no

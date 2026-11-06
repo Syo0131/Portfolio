@@ -355,7 +355,14 @@ const ogImage = new URL(image, Astro.site);
     }
 
     .js .stagger {
-      transition-delay: calc(var(--i, 0) * 100ms);
+      /* Sólo se retrasan opacity y transform (la entrada escalonada); los colores de hover
+         (border-color, box-shadow, background-color) responden sin demora. */
+      transition-delay:
+        calc(var(--i, 0) * 100ms),
+        calc(var(--i, 0) * 100ms),
+        0s,
+        0s,
+        0s;
     }
   }
 
