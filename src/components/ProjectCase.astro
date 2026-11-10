@@ -67,7 +67,7 @@ const gridCols = big
           alt={t(cover.altKey)}
           data-i18n-alt={cover.altKey}
           widths={[640, 960, 1280]}
-          sizes="(min-width: 1024px) 60vw, 100vw"
+          sizes="(min-width: 1024px) 60vw, (min-width: 640px) 45vw, 100vw"
           format="webp"
           loading={index === 0 ? "eager" : "lazy"}
           fetchpriority={index === 0 ? "high" : "auto"}
@@ -119,7 +119,7 @@ const gridCols = big
 
     {
       facts.length > 0 && (
-        <dl class="grid grid-cols-1 gap-3">
+        <dl class="grid grid-cols-1 gap-4 sm:gap-3">
           {facts.map((fact) => (
             <div class="border-l-2 border-shakespeare-500/60 pl-3">
               <dt
