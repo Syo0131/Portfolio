@@ -1,17 +1,17 @@
 import { translations, type TranslationKey } from "./translations";
+import { resolveLang, withLangParam, type Lang } from "./lang";
 
-export type Lang = "es" | "en";
+export type { Lang };
 
 export function getLang(): Lang {
   if (typeof window === "undefined") return "es";
-  const params = new URLSearchParams(window.location.search);
-  const urlLang = params.get("lang");
-  if (urlLang === "es" || urlLang === "en") return urlLang;
-
-  const stored = localStorage.getItem("lang");
-  if (stored === "es" || stored === "en") return stored;
-
-  return "es";
+  let stored: string | null = null;
+  try {
+    stored = localStorage.getItem("lang");
+  } catch {
+    // almacenamiento bloqueado: se usa la URL o el idioma por defecto
+  }
+  return resolveLang(window.location.search, stored);
 }
 
 export function t(key: TranslationKey, lang?: Lang): string {
@@ -23,8 +23,19 @@ export function t(key: TranslationKey, lang?: Lang): string {
 export function setLang(lang: Lang): void {
   if (typeof window === "undefined") return;
 
-  localStorage.setItem("lang", lang);
+  try {
+    localStorage.setItem("lang", lang);
+  } catch {
+    // almacenamiento bloqueado: el idioma sigue aplicándose; ?lang lo conserva si existe
+  }
   document.documentElement.lang = lang;
+
+  // Si la URL trae ?lang (p. ej. un enlace hreflang), se actualiza para que no
+  // vuelva a imponer el idioma anterior en el siguiente cambio o al recargar.
+  const nextUrl = withLangParam(window.location.href, lang);
+  if (nextUrl && nextUrl !== window.location.href) {
+    history.replaceState(history.state, "", nextUrl);
+  }
 
   document.querySelectorAll(".lang-text").forEach((el) => {
     el.textContent = lang.toUpperCase();
@@ -46,6 +57,14 @@ export function setLang(lang: Lang): void {
     ) {
       const val = t(key as TranslationKey, lang);
       if (val) el.placeholder = val;
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-alt]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-alt");
+    if (key) {
+      const val = t(key as TranslationKey, lang);
+      if (val) el.setAttribute("alt", val);
     }
   });
 

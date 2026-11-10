@@ -1,5 +1,11 @@
 ---
 import { Icon } from "astro-icon/components";
+import { useTranslations } from "../../i18n/translations";
+// En la home los enlaces son hashes puros: así no recargan la página aunque la URL tenga
+// ?lang=en o parámetros de campaña. En otras páginas (/proyectos) apuntan a la home.
+const base = Astro.url.pathname === "/" ? "" : "/";
+
+const t = useTranslations("es");
 ---
 
 <footer class="relative mt-20 overflow-hidden">
@@ -26,14 +32,13 @@ import { Icon } from "astro-icon/components";
           ¿Listo para crear algo increíble juntos?
         </p>
         <a
-          href="#contacto"
+          href={`${base}#contacto`}
           class="inline-flex items-center gap-2 text-shakespeare-400 hover:text-shakespeare-300 transition-all duration-300 group"
         >
           <span class="font-medium" data-i18n="footer.talk">Hablemos</span>
           <Icon
             name="mdi:arrow-right"
-            class="size-5 group-hover:translate-x-1 transition-transform duration-300"
-          />
+            class="size-5 group-hover:translate-x-1 transition-transform duration-300" aria-hidden="true" />
         </a>
       </div>
 
@@ -50,7 +55,7 @@ import { Icon } from "astro-icon/components";
           <div class="flex items-center gap-3">
             <span class="relative flex h-2.5 w-2.5">
               <span
-                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+                class="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
               ></span>
               <span
                 class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"
@@ -63,7 +68,7 @@ import { Icon } from "astro-icon/components";
           <p class="text-sm text-slate-400" data-i18n="footer.role">
             Desarrollador Java • República Dominicana
           </p>
-          <p class="text-xs text-slate-500">
+          <p class="text-xs text-slate-400">
             © {new Date().getFullYear()} • <span data-i18n="footer.available"
               >Disponible para nuevos proyectos</span
             >
@@ -71,7 +76,11 @@ import { Icon } from "astro-icon/components";
         </div>
 
         <!-- Links sociales -->
-        <nav class="flex items-center gap-3 sm:gap-4">
+        <nav
+          class="flex items-center gap-3 sm:gap-4"
+          aria-label={t("a11y.footerNav")}
+          data-i18n-aria="a11y.footerNav"
+        >
           <a
             href="https://linkedin.com/in/daybeldiaz"
             target="_blank"
@@ -79,7 +88,7 @@ import { Icon } from "astro-icon/components";
             aria-label="LinkedIn"
             class="group flex items-center justify-center w-11 h-11 rounded-full bg-slate-800/50 hover:bg-shakespeare-500/20 border border-slate-700/50 hover:border-shakespeare-500/50 text-slate-400 hover:text-shakespeare-400 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-shakespeare-500/20"
           >
-            <Icon name="mdi:linkedin" class="size-5" />
+            <Icon name="mdi:linkedin" class="size-5" aria-hidden="true" />
           </a>
 
           <a
@@ -89,15 +98,15 @@ import { Icon } from "astro-icon/components";
             aria-label="GitHub"
             class="group flex items-center justify-center w-11 h-11 rounded-full bg-slate-800/50 hover:bg-shakespeare-500/20 border border-slate-700/50 hover:border-shakespeare-500/50 text-slate-400 hover:text-shakespeare-400 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-shakespeare-500/20"
           >
-            <Icon name="mdi:github" class="size-5" />
+            <Icon name="mdi:github" class="size-5" aria-hidden="true" />
           </a>
 
           <a
-            href="#contacto"
+            href={`${base}#contacto`}
             aria-label="Email"
             class="group flex items-center justify-center w-11 h-11 rounded-full bg-slate-800/50 hover:bg-shakespeare-500/20 border border-slate-700/50 hover:border-shakespeare-500/50 text-slate-400 hover:text-shakespeare-400 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-shakespeare-500/20"
           >
-            <Icon name="material-symbols:mail-outline" class="size-5" />
+            <Icon name="material-symbols:mail-outline" class="size-5" aria-hidden="true" />
           </a>
         </nav>
       </div>

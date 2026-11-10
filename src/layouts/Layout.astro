@@ -19,6 +19,9 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
+
+// El menú lateral fijo sólo existe en páginas que renderizan el Header (no en la 404).
+const hasSideMenu = Astro.slots.has("header");
 ---
 
 <!doctype html>
@@ -193,13 +196,19 @@ const ogImage = new URL(image, Astro.site);
 
     <slot name="header" />
     <main
-      class="text-shakespeare-300 pt-14 sm:pt-16 md:pt-18 lg:pt-0 relative z-0"
+      class:list={[
+        "text-shakespeare-300 pt-14 sm:pt-16 md:pt-18 lg:pt-0 relative z-0",
+        hasSideMenu && "lg:pr-[104px] xl:pr-[124px]",
+      ]}
     >
       <SpeedInsights />
       <Analytics />
       <slot />
     </main>
-    <slot name="footer" />
+    <!-- Con menú lateral (páginas con Header), el contenido reserva su ancho (lg: 60 + 24 px, xl: 72 + 32 px, + aire) -->
+    <div class:list={[hasSideMenu && "lg:pr-[104px] xl:pr-[124px]"]}>
+      <slot name="footer" />
+    </div>
   </body>
 </html>
 
@@ -208,6 +217,13 @@ const ogImage = new URL(image, Astro.site);
      misma especificidad que .flex/.grid, y esas utilidades van después en el CSS. */
   [hidden] {
     display: none !important;
+  }
+
+  /* Con la barra superior móvil (< lg), los saltos a #seccion dejan el título debajo de ella. */
+  @media (max-width: 1023px) {
+    html {
+      scroll-padding-top: 5rem;
+    }
   }
 
   /* Barra de scroll acorde a la paleta para contenedores con scroll propio (diálogos, etc.) */
@@ -312,12 +328,17 @@ const ogImage = new URL(image, Astro.site);
     }
 
     /* Scroll animations - only hide under .js when motion is allowed */
+    /* Incluye border-color/box-shadow/background-color: esta regla pisa el transition-*
+       de las tarjetas, y sin ellos el hover cambiaría de golpe. */
     .js .animate-on-scroll {
       opacity: 0;
       transform: translateY(30px);
       transition:
         opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
     }
 
     .js .animate-fade-left {
@@ -344,13 +365,41 @@ const ogImage = new URL(image, Astro.site);
         transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .animate-visible {
-      opacity: 1 !important;
-      transform: none !important;
+    /* Más específico que `.js .animate-*` sin necesidad de !important: así, cuando el
+       script quita las clases tras la entrada, el hover de cada tarjeta vuelve a funcionar. */
+    .js .animate-on-scroll.animate-visible,
+    .js .animate-fade-left.animate-visible,
+    .js .animate-fade-right.animate-visible,
+    .js .animate-scale.animate-visible {
+      opacity: 1;
+      transform: none;
     }
 
     .js .stagger {
-      transition-delay: calc(var(--i, 0) * 100ms);
+      /* Sólo se retrasan opacity y transform (la entrada escalonada); los colores de hover
+         (border-color, box-shadow, background-color) responden sin demora. */
+      transition-delay:
+        calc(var(--i, 0) * 100ms),
+        calc(var(--i, 0) * 100ms),
+        0s,
+        0s,
+        0s;
+    }
+
+    /* Respaldo (sólo con movimiento permitido: con `reduce` nada se oculta): si el script de animaciones no llega a correr (error, bloqueo), el contenido
+       aparece igual a los 2 s. Cuando el script corre pone data-reveal y esta regla deja de aplicar. */
+    .js:not([data-reveal]) .animate-on-scroll,
+    .js:not([data-reveal]) .animate-fade-left,
+    .js:not([data-reveal]) .animate-fade-right,
+    .js:not([data-reveal]) .animate-scale {
+      animation: reveal-fallback 0.4s ease 2s forwards;
+    }
+
+    @keyframes reveal-fallback {
+      to {
+        opacity: 1;
+        transform: none;
+      }
     }
   }
 
@@ -367,6 +416,8 @@ const ogImage = new URL(image, Astro.site);
 </style>
 
 <script>
+  import { fallbackAlreadyShown } from "../lib/ui";
+
   // Intersection Observer for scroll animations
   const observerOptions = {
     root: null,
@@ -374,22 +425,64 @@ const ogImage = new URL(image, Astro.site);
     threshold: 0.1,
   };
 
+  const ANIMATION_CLASSES = [
+    "animate-on-scroll",
+    "animate-fade-left",
+    "animate-fade-right",
+    "animate-scale",
+    "stagger",
+    "animate-visible",
+  ];
+
+  // Tras la entrada se quitan las clases de animación: el elemento queda con sus propias
+  // utilidades (hover:-translate-y-*, transition-*), que las reglas de entrada anulaban.
+  function handOff(el: Element) {
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      el.classList.remove(...ANIMATION_CLASSES);
+    };
+    el.addEventListener("transitionend", (e) => {
+      const te = e as TransitionEvent;
+      if (te.target === el && te.propertyName === "opacity") finish();
+    });
+    // Respaldo por si no hay transición (movimiento reducido) o el evento no llega.
+    setTimeout(finish, 1500);
+  }
+
+  const REVEAL_SELECTOR =
+    ".animate-on-scroll, .animate-fade-left, .animate-fade-right, .animate-scale";
+
+  // En conexiones lentas este script puede llegar después de los 2 s del respaldo CSS
+  // (reveal-fallback). Los elementos que el respaldo ya mostró se liberan aquí mismo; si no,
+  // al poner data-reveal la animación desaparecería y volverían a opacity 0 (parpadeo).
+  document.querySelectorAll(REVEAL_SELECTOR).forEach((el) => {
+    const animations = (el.getAnimations?.() ?? []).map((a) => ({
+      animationName: (a as CSSAnimation).animationName,
+      playState: a.playState,
+      currentTime: a.currentTime === null ? null : Number(a.currentTime),
+    }));
+    if (fallbackAlreadyShown(animations)) el.classList.remove(...ANIMATION_CLASSES);
+  });
+
+  // A partir de aquí el respaldo deja de aplicar y el observer se encarga.
+  document.documentElement.dataset.reveal = "ready";
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("animate-visible");
         observer.unobserve(entry.target);
+        handOff(entry.target);
       }
     });
   }, observerOptions);
 
   function observeElements() {
-    const animatedElements = document.querySelectorAll(
-      ".animate-on-scroll, .animate-fade-left, .animate-fade-right, .animate-scale",
-    );
+    const animatedElements = document.querySelectorAll(REVEAL_SELECTOR);
     animatedElements.forEach((el) => observer.observe(el));
   }
 
   document.addEventListener("DOMContentLoaded", observeElements);
-  document.addEventListener("astro:page-load", observeElements);
 </script>

@@ -2,6 +2,12 @@
 import { Icon } from "astro-icon/components";
 import SideBar from "../Headerbadge.astro";
 import LanguageToggle from "../LanguageToggle.astro";
+import { useTranslations } from "../../i18n/translations";
+
+const t = useTranslations("es");
+// En la home los enlaces son hashes puros: así no recargan la página aunque la URL tenga
+// ?lang=en o parámetros de campaña. En otras páginas (/proyectos) apuntan a la home.
+const base = Astro.url.pathname === "/" ? "" : "/";
 ---
 
 <!-- Language Toggle - Fixed top right for desktop -->
@@ -14,50 +20,52 @@ import LanguageToggle from "../LanguageToggle.astro";
 <aside
   id="main-sidebar"
   class="fixed right-4 lg:right-6 xl:right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block"
-  aria-label="Navegación lateral"
+  aria-label={t("a11y.sideNav")}
+    data-i18n-aria="a11y.sideNav"
 >
   <nav
-    aria-label="Menú de escritorio"
+    aria-label={t("a11y.desktopMenu")}
+    data-i18n-aria="a11y.desktopMenu"
     class="flex flex-col items-center gap-1.5 sm:gap-2 rounded-full bg-slate-900/80 px-2.5 xl:px-3 py-3 sm:py-4 backdrop-blur-lg ring-1 ring-white/20 transition-all duration-300 ease-smooth-out hover:ring-shakespeare-500/30 hover:shadow-lg hover:shadow-shakespeare-500/10 w-[60px] xl:w-[72px]"
   >
     <SideBar
-      href="#sobre-mi"
+      href={`${base}#sobre-mi`}
       name="Inicio"
       nameKey="nav.home"
       icon="mdi:home"
     />
     <SideBar
-      href="#experiencia"
+      href={`${base}#experiencia`}
       name="Experiencia"
       nameKey="nav.experience"
       icon="mdi:briefcase"
     />
     <SideBar
-      href="#proyectos"
+      href={`${base}#proyectos`}
       name="Proyectos"
       nameKey="nav.projects"
       icon="mdi:folder-multiple"
     />
     <SideBar
-      href="#certifications"
+      href={`${base}#certifications`}
       name="Certificaciones"
       nameKey="nav.certifications"
       icon="mdi:certificate-outline"
     />
     <SideBar
-      href="#skills"
+      href={`${base}#skills`}
       name="Habilidades"
       nameKey="nav.skills"
       icon="mdi:code-braces"
     />
     <!-- <SideBar
-      href="#aboutme"
+      href={`${base}#aboutme`}
       name="Sobre mí"
       nameKey="nav.aboutme"
       icon="mdi:account-circle-outline"
     /> -->
     <SideBar
-      href="#contacto"
+      href={`${base}#contacto`}
       name="Contacto"
       nameKey="nav.contact"
       icon="mdi:email"
@@ -67,7 +75,7 @@ import LanguageToggle from "../LanguageToggle.astro";
 
 <header class="fixed top-0 left-0 right-0 z-50 lg:hidden">
   <div
-    class="flex items-center justify-end px-3 sm:px-4 md:px-6 py-3 sm:py-3.5 md:py-4"
+    class="flex items-center justify-end px-3 sm:px-4 md:px-6 py-3 sm:py-3.5 md:py-4 bg-black/80 backdrop-blur-md border-b border-white/5"
   >
     <!-- Controles derecha -->
     <div class="flex items-center gap-2 sm:gap-3">
@@ -76,11 +84,14 @@ import LanguageToggle from "../LanguageToggle.astro";
       <!-- Botón menú hamburguesa -->
       <button
         id="mobile-menu-toggle"
+        type="button"
+        aria-controls="mobile-menu"
         class="p-1.5 sm:p-2 text-slate-100 hover:text-shakespeare-400 transition-colors duration-300"
-        aria-label="Abrir menú"
+        aria-label={t("a11y.openMenu")}
+    data-i18n-aria="a11y.openMenu"
         aria-expanded="false"
       >
-        <Icon name="mdi:menu" class="w-5 h-5 sm:w-6 sm:h-6" />
+        <Icon name="mdi:menu" class="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
       </button>
     </div>
   </div>
@@ -89,64 +100,65 @@ import LanguageToggle from "../LanguageToggle.astro";
   <nav
     id="mobile-menu"
     class="hidden bg-slate-950/95 backdrop-blur-lg border-t border-white/10"
-    aria-label="Navegación principal móvil"
+    aria-label={t("a11y.mobileNav")}
+    data-i18n-aria="a11y.mobileNav"
   >
     <div class="px-3 sm:px-4 py-2 sm:py-3 space-y-0.5 sm:space-y-1">
       <a
-        href="#sobre-mi"
+        href={`${base}#sobre-mi`}
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
         data-i18n="nav.home"
         data-section="sobre-mi"
       >
-        Inicio
+        {t("nav.home")}
       </a>
       <a
-        href="#experiencia"
+        href={`${base}#experiencia`}
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
         data-i18n="nav.experience"
         data-section="experiencia"
       >
-        Experiencia
+        {t("nav.experience")}
       </a>
       <a
-        href="#proyectos"
+        href={`${base}#proyectos`}
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
         data-i18n="nav.projects"
         data-section="proyectos"
       >
-        Proyectos
+        {t("nav.projects")}
       </a>
       <a
-        href="#certifications"
+        href={`${base}#certifications`}
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
         data-i18n="nav.certifications"
         data-section="certifications"
       >
-        Certificaciones
+        {t("nav.certifications")}
       </a>
       <a
-        href="#skills"
+        href={`${base}#skills`}
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
         data-i18n="nav.skills"
         data-section="skills"
       >
-        Habilidades
+        {t("nav.skills")}
       </a>
       <!-- <a
-        href="#aboutme"
+        href={`${base}#aboutme`}
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
         data-i18n="nav.aboutme"
         data-section="aboutme"
       >
-        Sobre mí
+        {t("nav.aboutme")}
       </a> -->
       <a
-        href="#contacto"
+        href={`${base}#contacto`}
         class="nav-link mobile-nav-item block px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 hover:text-shakespeare-400 hover:bg-shakespeare-500/10 rounded-lg transition-all duration-300"
         data-i18n="nav.contact"
         data-section="contacto"
       >
-        Contacto
+        {t("nav.contact")}
       </a>
     </div>
   </nav>
@@ -170,6 +182,24 @@ import LanguageToggle from "../LanguageToggle.astro";
         mobileMenu.classList.remove("hidden");
         menuToggle.setAttribute("aria-expanded", "true");
       }
+    });
+
+    const closeMobileMenu = () => {
+      if (mobileMenu.classList.contains("hidden")) return;
+      mobileMenu.classList.add("hidden");
+      menuToggle.setAttribute("aria-expanded", "false");
+    };
+
+    // Escape cierra y devuelve el foco al botón; un clic fuera del header también cierra.
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !mobileMenu.classList.contains("hidden")) {
+        closeMobileMenu();
+        menuToggle.focus();
+      }
+    });
+    document.addEventListener("click", (e) => {
+      const header = menuToggle.closest("header");
+      if (header && !header.contains(e.target as Node)) closeMobileMenu();
     });
 
     // Cerrar menú al hacer click en un enlace
@@ -245,8 +275,6 @@ import LanguageToggle from "../LanguageToggle.astro";
     initHeader();
   }
 
-  // Reinicializar en navegación de Astro (si usas view transitions)
-  document.addEventListener("astro:page-load", initHeader);
 </script>
 
 <style is:global>

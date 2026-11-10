@@ -1,0 +1,53 @@
+---
+import { Icon } from "astro-icon/components";
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Sections/Header.astro";
+import Footer from "../components/Sections/Footer.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import ProjectDialogs from "../components/ProjectDialogs.astro";
+import { projects } from "../data/projects";
+import { orderProjects } from "../lib/projectLayout";
+import { useTranslations } from "../i18n/translations";
+
+const t = useTranslations("es");
+// Mismo orden que la home: destacados (dentro del tope) primero, luego el resto.
+const ordered = orderProjects(projects);
+---
+
+<Layout
+  title="Proyectos · Daybel Diaz"
+  description="Todos los proyectos de Daybel Diaz: plataformas web, APIs y aplicaciones full-stack con Java, Spring Boot, Next.js y más."
+>
+  <Header slot="header" />
+
+  <section
+    id="todos-los-proyectos"
+    class="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"
+  >
+    <div class="max-w-6xl mx-auto">
+      <a
+        href="/#proyectos"
+        class="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-slate-400 transition-colors hover:text-shakespeare-300"
+      >
+        <Icon name="mdi:arrow-left" class="size-4" aria-hidden="true" />
+        <span data-i18n="projects.backHome">{t("projects.backHome")}</span>
+      </a>
+
+      <SectionTitle
+        as="h1"
+        titleKey="projects.title"
+        eyebrow="Casos de estudio"
+        eyebrowKey="projects.eyebrow">Proyectos</SectionTitle
+      >
+
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {ordered.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </div>
+  </section>
+
+  <ProjectDialogs projects={projects} />
+
+  <Footer slot="footer" />
+</Layout>

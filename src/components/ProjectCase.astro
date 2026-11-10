@@ -18,25 +18,30 @@ const cover = project.images[0];
 // Los datos sin valor quedan visibles sólo en desarrollo, para recordar completarlos.
 const facts = project.facts.filter((f) => f.valueKey || import.meta.env.DEV);
 
+// Sólo la primera fila lleva el tamaño grande; las demás destacadas usan el normal.
+const big = index === 0;
+
 // Clases literales (Tailwind no ve clases construidas dinámicamente).
-const gridCols = project.featured
+// En sm (640–767) la imagen cede ancho al texto: la columna de texto es la que fija la altura
+// de la fila y la imagen se puede ampliar con un clic (galería).
+const gridCols = big
   ? flipped
-    ? "lg:grid-cols-[1fr_1.4fr]"
-    : "lg:grid-cols-[1.4fr_1fr]"
+    ? "sm:grid-cols-[1.35fr_1fr] md:grid-cols-[1fr_1.1fr] lg:grid-cols-[1fr_1.4fr]"
+    : "sm:grid-cols-[1fr_1.35fr] md:grid-cols-[1.1fr_1fr] lg:grid-cols-[1.4fr_1fr]"
   : flipped
-    ? "lg:grid-cols-[1fr_1.2fr]"
-    : "lg:grid-cols-[1.2fr_1fr]";
+    ? "sm:grid-cols-[1.35fr_1fr] md:grid-cols-[1fr_1.1fr] lg:grid-cols-[1fr_1.2fr]"
+    : "sm:grid-cols-[1fr_1.35fr] md:grid-cols-[1.1fr_1fr] lg:grid-cols-[1.2fr_1fr]";
 ---
 
 <article
   class:list={[
-    "project-case animate-on-scroll grid grid-cols-1 items-center gap-8 lg:gap-14",
+    "project-case animate-on-scroll grid grid-cols-1 items-center gap-8 sm:gap-6 md:gap-10 lg:gap-14",
     gridCols,
   ]}
   data-project-id={project.id}
 >
   <!-- Captura en marco de navegador -->
-  <div class:list={["browser-frame", flipped && "lg:order-2"]}>
+  <div class:list={["browser-frame", flipped && "sm:order-2"]}>
     <div
       class="overflow-hidden rounded-xl border border-slate-800 bg-slate-900 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)] transition-colors duration-300 hover:border-shakespeare-500/40"
     >
@@ -46,7 +51,7 @@ const gridCols = project.featured
         <span class="size-2.5 rounded-full bg-slate-700"></span>
         {
           project.urlDemoLabel && (
-            <span class="ml-3 truncate font-mono text-[11px] text-slate-500">
+            <span class="ml-3 truncate font-mono text-[11px] text-slate-400">
               {project.urlDemoLabel}
             </span>
           )
@@ -59,14 +64,25 @@ const gridCols = project.featured
       >
         <Image
           src={cover.src}
-          alt={cover.alt}
+          alt={t(cover.altKey)}
+          data-i18n-alt={cover.altKey}
           widths={[640, 960, 1280]}
-          sizes="(min-width: 1024px) 60vw, 100vw"
+          sizes="(min-width: 1024px) 60vw, (min-width: 640px) 45vw, 100vw"
           format="webp"
           loading={index === 0 ? "eager" : "lazy"}
           fetchpriority={index === 0 ? "high" : "auto"}
           class="h-full w-full object-cover object-top transition-transform duration-700 group-hover/img:scale-[1.03]"
         />
+        {
+          project.placeholder && import.meta.env.DEV && (
+            <span
+              class="absolute left-3 top-3 rounded-md border border-amber-400/40 bg-amber-500/15 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-amber-300"
+              data-i18n="projects.placeholderBadge"
+            >
+              {t("projects.placeholderBadge")}
+            </span>
+          )
+        }
         <span
           class="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-lg border border-white/10 bg-slate-950/70 px-2.5 py-1.5 text-xs font-semibold text-white opacity-0 transition-opacity duration-300 group-hover/img:opacity-100 group-focus-visible/img:opacity-100"
         >
@@ -78,9 +94,9 @@ const gridCols = project.featured
   </div>
 
   <!-- Información -->
-  <div class="flex flex-col gap-5">
+  <div class="flex flex-col gap-5 sm:gap-4 xl:gap-5">
     <div class="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.15em]">
-      <span class="text-slate-500">
+      <span class="text-slate-400">
         {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
       </span>
       <span class="text-shakespeare-400" data-i18n={project.categoryKey}>
@@ -91,23 +107,23 @@ const gridCols = project.featured
     <h3
       class:list={[
         "font-display font-bold tracking-tight text-slate-100 text-balance",
-        project.featured ? "text-3xl sm:text-4xl" : "text-2xl sm:text-3xl",
+        big ? "text-2xl md:text-3xl xl:text-4xl" : "text-2xl xl:text-3xl",
       ]}
     >
       {project.name}
     </h3>
 
-    <p class="max-w-[52ch] text-base leading-relaxed text-slate-300" data-i18n={project.pitchKey}>
+    <p class="max-w-[52ch] text-base sm:text-sm xl:text-base leading-relaxed text-slate-300" data-i18n={project.pitchKey}>
       {t(project.pitchKey)}
     </p>
 
     {
       facts.length > 0 && (
-        <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <dl class="grid grid-cols-1 gap-4 sm:gap-3">
           {facts.map((fact) => (
             <div class="border-l-2 border-shakespeare-500/60 pl-3">
               <dt
-                class="font-mono text-[10px] uppercase tracking-[0.12em] text-slate-500"
+                class="font-mono text-[10px] uppercase tracking-[0.12em] text-slate-400"
                 data-i18n={fact.labelKey}
               >
                 {t(fact.labelKey)}

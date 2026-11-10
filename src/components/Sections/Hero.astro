@@ -1,12 +1,15 @@
 ---
 import Links from "../Links.astro";
 import { Icon } from "astro-icon/components";
+import { useTranslations } from "../../i18n/translations";
+
+// El HTML del servidor sale con los mismos textos que pone setLang("es") al cargar.
+const t = useTranslations("es");
 ---
 
 <section
   id="sobre-mi"
-  class="min-h-screen flex items-center justify-center py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8 relative z-10"
-  style="animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;"
+  class="hero-fade-in min-h-screen flex items-center justify-center py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8 relative z-10"
   aria-labelledby="hero-title"
 >
   <div class="max-w-4xl mx-auto text-center">
@@ -16,9 +19,7 @@ import { Icon } from "astro-icon/components";
       <p
         class="text-sm sm:text-base text-slate-400 font-medium"
         data-i18n="hero.greeting"
-      >
-        Hey, Soy
-      </p>
+      >{t("hero.greeting")}</p>
 
       <h1
         id="hero-title"
@@ -37,8 +38,7 @@ import { Icon } from "astro-icon/components";
         </span>
         <span class="text-slate-100">&</span>
         <span class="text-slate-100 font-semibold" data-i18n="hero.role"
-          >Backend Developer</span
-        >
+          >{t("hero.role")}</span>
       </div>
 
       <p class="text-sm sm:text-base text-slate-400 max-w-md pt-2">
@@ -48,58 +48,49 @@ import { Icon } from "astro-icon/components";
       <p
         class="text-sm sm:text-base md:text-lg text-slate-300 leading-relaxed max-w-2xl pt-4"
       >
-        <span data-i18n="hero.experience">+3 años de experiencia.</span>
-        <span data-i18n="hero.location">de República Dominicana</span>.
+        <span data-i18n="hero.experience">{t("hero.experience")}</span>
+        <span data-i18n="hero.location">{t("hero.location")}</span>.
          <span data-i18n="hero.description"
-          >Especializado en crear soluciones escalables, desde la lógica de
-          negocio hasta la integración final.</span
-        >
+          >{t("hero.description")}</span>
       </p>
 
       <div class="flex flex-wrap justify-center gap-3 sm:gap-4 pt-6 sm:pt-8">
         <Links
-          name="Github"
+          name="GitHub"
           href="https://github.com/Syo0131"
           icon="simple-icons:github"
-          aria-label="Visitar mi perfil de GitHub"
         />
         <Links
           name="LinkedIn"
           href="https://linkedin.com/in/DaybelDiaz/"
           icon="mdi:linkedin"
-          aria-label="Conectar en LinkedIn"
         />
         
         <div class="relative cv-dropdown" id="cv-dropdown-container">
           <button
             id="cv-menu-btn"
             class="group bg-shakespeare-800/80 hover:bg-shakespeare-700/80 backdrop-blur-sm transition-all duration-300 ease-smooth-out hover:scale-105 hover:shadow-lg hover:shadow-shakespeare-500/20 text-white font-semibold py-2.5 px-5 sm:px-7 rounded-full flex items-center gap-x-2.5 text-sm sm:text-base cursor-pointer"
-            aria-haspopup="menu"
             aria-controls="cv-menu"
             aria-expanded="false"
             type="button"
           >
             <Icon
               name="material-symbols:download"
-              class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 transition-transform duration-300 ease-smooth-out group-hover:scale-110"
-            />
-            <span data-i18n="hero.downloadCv">Descargar CV</span>
+              class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 transition-transform duration-300 ease-smooth-out group-hover:scale-110" aria-hidden="true" />
+            <span data-i18n="hero.downloadCv">{t("hero.downloadCv")}</span>
             <Icon
               name="material-symbols:keyboard-arrow-down"
-              class="w-5 h-5 transition-transform duration-300 group-hover:rotate-180"
-            />
+              class="w-5 h-5 transition-transform duration-300 group-aria-expanded:rotate-180" aria-hidden="true" />
           </button>
           
           <!-- pt-2 (no mt-2): el hueco forma parte del menú, así el puntero no sale del contenedor al bajar -->
           <div
             id="cv-menu"
-            role="menu"
             hidden
             class="absolute top-full pt-2 left-0 w-full min-w-max z-50"
           >
             <div class="bg-slate-800 rounded-xl overflow-hidden shadow-xl border border-slate-700">
             <a 
-              role="menuitem"
               href="/Daybel_Diaz_Cv_Java.pdf" 
               download="Daybel_Diaz_Cv_Java.pdf" 
               class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700/50 hover:text-white text-slate-200 transition-colors"
@@ -108,7 +99,6 @@ import { Icon } from "astro-icon/components";
               <span class="text-sm font-medium">Español</span>
             </a>
             <a 
-              role="menuitem"
               href="/Daybel_Diaz_JavaAnalystDev.pdf" 
               download="Daybel_Diaz_JavaAnalystDev.pdf" 
               class="flex items-center gap-3 px-4 py-3 hover:bg-slate-700/50 hover:text-white text-slate-200 transition-colors border-t border-slate-700"
@@ -125,6 +115,7 @@ import { Icon } from "astro-icon/components";
 </section>
 
 <script>
+  import { shouldCloseCvMenu } from "../../lib/ui";
   import { getLang, onLangChange } from "../../i18n/client";
 
   function initRoleAnimation() {
@@ -148,7 +139,8 @@ import { Icon } from "astro-icon/components";
     let activeTimeouts: ReturnType<typeof setTimeout>[] = [];
     const roleElement = document.getElementById("animated-role");
 
-    if (!roleElement) return;
+    if (!roleElement || roleElement.dataset.bound === "true") return;
+    roleElement.dataset.bound = "true";
 
     function getCurrentRoles() {
       return currentLang === "es" ? rolesES : rolesEN;
@@ -238,11 +230,6 @@ import { Icon } from "astro-icon/components";
 
     // Iniciar animación
     startAnimation();
-
-    // Cleanup al desmontar
-    window.addEventListener("beforeunload", () => {
-      stopAnimation();
-    });
   }
 
   function initCvMenu() {
@@ -295,6 +282,16 @@ import { Icon } from "astro-icon/components";
       }
     });
 
+    // Teclado: al salir con Tab del botón o de los enlaces, el menú se cierra.
+    container.addEventListener("focusout", (e) => {
+      const next = (e as FocusEvent).relatedTarget as Node | null;
+      // Regla en src/lib/ui.ts (con tests): en Safari relatedTarget llega null al hacer clic
+      // en un enlace del menú, y en ese caso el puntero encima decide que no se cierre.
+      if (shouldCloseCvMenu(next ? container.contains(next) : null, container.matches(":hover"))) {
+        closeMenu();
+      }
+    });
+
     if (hoverCapable) {
       container.addEventListener("mouseenter", () => {
         clearTimeout(closeTimer);
@@ -324,9 +321,14 @@ import { Icon } from "astro-icon/components";
     initHero();
   }
 
-  document.addEventListener("astro:page-load", initHero);
 </script>
 <style>
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-fade-in {
+      animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  }
+
   @keyframes heroFadeIn {
     0% {
       opacity: 0.01;

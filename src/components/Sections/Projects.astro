@@ -1,8 +1,21 @@
 ---
+import { Icon } from "astro-icon/components";
 import SectionTitle from "../SectionTitle.astro";
 import ProjectCase from "../ProjectCase.astro";
+import ProjectCard from "../ProjectCard.astro";
 import ProjectDialogs from "../ProjectDialogs.astro";
 import { projects } from "../../data/projects";
+import { splitProjects } from "../../lib/projectLayout";
+import { useTranslations } from "../../i18n/translations";
+
+const t = useTranslations("es");
+const { featured, cards, showViewAll } = splitProjects(projects);
+
+// Recordatorio en el build: proyectos que todavía usan imagen temporal.
+const pendingShots = projects.filter((p) => p.placeholder).map((p) => p.name);
+if (pendingShots.length > 0) {
+  console.warn(`[proyectos] Imagen temporal en: ${pendingShots.join(", ")}. Reemplázala antes de publicar.`);
+}
 ---
 
 <section
@@ -18,11 +31,45 @@ import { projects } from "../../data/projects";
 
     <div class="flex flex-col gap-16 lg:gap-24">
       {
-        projects.map((project, index) => (
-          <ProjectCase project={project} index={index} total={projects.length} />
+        featured.map((project, index) => (
+          <ProjectCase project={project} index={index} total={featured.length} />
         ))
       }
     </div>
+
+    {
+      cards.length > 0 && (
+        <div class="mt-20 lg:mt-28">
+          <h3
+            class="mb-8 font-display text-2xl font-bold tracking-tight text-slate-100"
+            data-i18n="projects.more"
+          >
+            {t("projects.more")}
+          </h3>
+          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {cards.map((project) => (
+              <ProjectCard project={project} headingLevel={4} />
+            ))}
+            {showViewAll && (
+              <a
+                href="/proyectos"
+                class="surface surface-hover group flex min-h-[16rem] flex-col items-center justify-center gap-3 border-dashed p-6 text-center transition-all duration-300"
+              >
+                <Icon
+                  name="mdi:view-grid-outline"
+                  class="size-8 text-shakespeare-400 transition-transform duration-300 group-hover:scale-110"
+                  aria-hidden="true"
+                />
+                <span class="font-display text-lg font-bold text-slate-100" data-i18n="projects.viewAll">
+                  {t("projects.viewAll")}
+                </span>
+                <Icon name="mdi:arrow-right" class="size-5 text-shakespeare-400" aria-hidden="true" />
+              </a>
+            )}
+          </div>
+        </div>
+      )
+    }
   </div>
 </section>
 

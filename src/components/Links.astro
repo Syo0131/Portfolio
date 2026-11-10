@@ -2,31 +2,26 @@
 import { Icon } from "astro-icon/components";
 interface Props {
   name: string;
-  nameKey?: string;
   href: string;
   icon?: string;
-  class?: string;
-  download?: string;
 }
 
-const { href, name, nameKey, icon, class: className, download } = Astro.props;
+// El nombre visible (p. ej. "GitHub") es el nombre accesible del enlace.
+const { href, name, icon } = Astro.props;
 ---
 
 <a
   href={href}
   target="_blank"
-  download={download}
   rel="noopener noreferrer"
-  aria-label={`Visitar ${name}`}
-  class={`group bg-shakespeare-800/80 hover:bg-shakespeare-700/80 backdrop-blur-sm transition-all duration-300 ease-smooth-out hover:scale-105 hover:shadow-lg hover:shadow-shakespeare-500/20 text-white font-semibold py-2.5 px-5 sm:px-7 rounded-full flex items-center gap-x-2.5 text-sm sm:text-base ${className || ""}`}
+  class={`group bg-shakespeare-800/80 hover:bg-shakespeare-700/80 backdrop-blur-sm transition-all duration-300 ease-smooth-out hover:scale-105 hover:shadow-lg hover:shadow-shakespeare-500/20 text-white font-semibold py-2.5 px-5 sm:px-7 rounded-full flex items-center gap-x-2.5 text-sm sm:text-base`}
 >
   {
     icon && (
       <Icon
         name={icon}
-        class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 transition-transform duration-300 ease-smooth-out group-hover:scale-110"
-      />
+        class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 transition-transform duration-300 ease-smooth-out group-hover:scale-110" aria-hidden="true" />
     )
   }
-  <span data-i18n={nameKey}>{name}</span>
+  <span>{name}</span>
 </a>

@@ -17,7 +17,7 @@ const galleryEntries = await Promise.all(
     const imgs = await Promise.all(
       p.images.map(async (img) => ({
         src: (await getImage({ src: img.src, format: "webp", width: 1600 })).src,
-        alt: img.alt,
+        altKey: img.altKey,
       })),
     );
     return [p.id, imgs] as const;
@@ -52,8 +52,7 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
     <div class="relative flex w-full max-w-6xl flex-1 items-center justify-center overflow-hidden">
       <img
         id="project-gallery-img"
-        class="max-h-[75vh] max-w-full rounded-xl object-contain shadow-2xl transition-opacity duration-300"
-        src=""
+        class="max-h-[75vh] max-w-full rounded-xl object-contain shadow-2xl"
         alt=""
         decoding="async"
       />
@@ -95,7 +94,7 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
             >
               {t(p.categoryKey)}
             </span>
-            <h3 class="mt-1 font-display text-2xl font-bold text-slate-100">{p.name}</h3>
+            <h3 id={`project-details-title-${p.id}`} class="mt-1 font-display text-2xl font-bold text-slate-100">{p.name}</h3>
           </div>
           <button
             type="button"
@@ -111,9 +110,37 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
             {t(p.descriptionKey)}
           </p>
 
+          {p.facts.some((f) => f.valueKey) && (
+            <div>
+              <p
+                class="mb-3 font-mono text-[10px] uppercase tracking-[0.12em] text-slate-400"
+                data-i18n="projects.facts"
+              >
+                {t("projects.facts")}
+              </p>
+              <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {p.facts
+                  .filter((f) => f.valueKey)
+                  .map((f) => (
+                    <div class="border-l-2 border-shakespeare-500/60 pl-3">
+                      <dt
+                        class="font-mono text-[10px] uppercase tracking-[0.12em] text-slate-400"
+                        data-i18n={f.labelKey}
+                      >
+                        {t(f.labelKey)}
+                      </dt>
+                      <dd class="mt-1 text-sm font-semibold text-slate-100" data-i18n={f.valueKey}>
+                        {t(f.valueKey!)}
+                      </dd>
+                    </div>
+                  ))}
+              </dl>
+            </div>
+          )}
+
           <div>
             <p
-              class="mb-3 font-mono text-[10px] uppercase tracking-[0.12em] text-slate-500"
+              class="mb-3 font-mono text-[10px] uppercase tracking-[0.12em] text-slate-400"
               data-i18n="projects.stack"
             >
               {t("projects.stack")}
@@ -166,7 +193,11 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
 </dialog>
 
 <script>
-  type GalleryImage = { src: string; alt: string };
+  import { t } from "../i18n/client";
+  import { galleryStep } from "../lib/ui";
+  import type { TranslationKey } from "../i18n/translations";
+
+  type GalleryImage = { src: string; altKey: string };
 
   function initProjectDialogs() {
     const gallery = document.getElementById("project-gallery") as HTMLDialogElement | null;
@@ -186,23 +217,29 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
     let current = 0;
 
     const show = (i: number) => {
-      current = (i + images.length) % images.length;
+      current = i;
       const item = images[current];
       img.src = item.src;
-      img.alt = item.alt;
+      img.alt = t(item.altKey as TranslationKey);
+      // setLang actualiza el alt si se cambia de idioma con la galería abierta.
+      img.setAttribute("data-i18n-alt", item.altKey);
       count.textContent = `${current + 1} / ${images.length}`;
     };
 
-    const openGallery = (id: string) => {
+    // Si la galería se abrió desde Detalles, al cerrarla se vuelve a Detalles del mismo proyecto.
+    let returnToDetails: string | null = null;
+
+    const openGallery = (id: string, fromDetails = false) => {
       images = data[id] ?? [];
       if (images.length === 0) return;
-      const name = document.querySelector(`.project-case[data-project-id="${id}"] h3`);
+      const name = document.querySelector(`:is(.project-case, .project-card)[data-project-id="${id}"] :is(h3, h4)`);
       title.textContent = name?.textContent?.trim() ?? "";
       const multi = images.length > 1;
       prev.hidden = !multi;
       next.hidden = !multi;
       count.hidden = !multi;
       show(0);
+      returnToDetails = fromDetails ? id : null;
       if (details.open) details.close();
       gallery.showModal();
     };
@@ -211,24 +248,36 @@ const galleryData = JSON.stringify(Object.fromEntries(galleryEntries));
       details.querySelectorAll<HTMLElement>("section[data-project-id]").forEach((s) => {
         s.hidden = s.dataset.projectId !== id;
       });
+      details.setAttribute("aria-labelledby", `project-details-title-${id}`);
       details.showModal();
     };
 
     document.addEventListener("click", (e) => {
       const target = e.target as HTMLElement;
       const galleryBtn = target.closest<HTMLElement>(".open-gallery");
-      if (galleryBtn?.dataset.projectId) return openGallery(galleryBtn.dataset.projectId);
+      if (galleryBtn?.dataset.projectId)
+        return openGallery(galleryBtn.dataset.projectId, details.contains(galleryBtn));
       const detailsBtn = target.closest<HTMLElement>(".open-details");
       if (detailsBtn?.dataset.projectId) return openDetails(detailsBtn.dataset.projectId);
     });
 
-    prev.addEventListener("click", () => show(current - 1));
-    next.addEventListener("click", () => show(current + 1));
+    gallery.addEventListener("close", () => {
+      if (!returnToDetails) return;
+      const id = returnToDetails;
+      returnToDetails = null;
+      openDetails(id);
+      details
+        .querySelector<HTMLElement>(`section[data-project-id="${id}"] .open-gallery`)
+        ?.focus();
+    });
+
+    prev.addEventListener("click", () => show(galleryStep(current, -1, images.length)));
+    next.addEventListener("click", () => show(galleryStep(current, 1, images.length)));
 
     gallery.addEventListener("keydown", (e) => {
       if (images.length < 2) return;
-      if (e.key === "ArrowLeft") show(current - 1);
-      if (e.key === "ArrowRight") show(current + 1);
+      if (e.key === "ArrowLeft") show(galleryStep(current, -1, images.length));
+      if (e.key === "ArrowRight") show(galleryStep(current, 1, images.length));
     });
 
     [gallery, details].forEach((dialog) => {
