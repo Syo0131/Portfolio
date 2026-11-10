@@ -1,6 +1,6 @@
 // R5: la barra superior móvil tiene fondo (los títulos no pasan por debajo de los controles)
 // y el menú desplegado es legible. En escritorio la barra no se muestra.
-export const widths = [[375, 812], [390, 844], [768, 1024], [1024, 768]];
+export const widths = [[375, 812], [390, 844], [640, 900], [768, 1024], [1024, 768]];
 
 const alpha = (color) => {
   const m = color.match(/rgba?\(([^)]+)\)/);
@@ -31,5 +31,21 @@ export default async function check(page, { width }) {
   });
   if (!menuBg.visible) errors.push("mobile menu did not open");
   else if (alpha(menuBg.bg) < 0.8) errors.push(`open menu background alpha ${alpha(menuBg.bg)} < 0.8`);
+  if (!menuBg.visible) return errors;
+
+  // Navegar a cada sección desde el menú y medir el título contra la barra.
+  for (const id of ["experiencia", "contacto"]) {
+    if (!(await page.isVisible("#mobile-menu"))) await page.click("#mobile-menu-toggle");
+    await page.click(`#mobile-menu a[data-section="${id}"]`);
+    await page.waitForTimeout(300);
+    const r = await page.evaluate((id) => {
+      const bar = document.getElementById("mobile-menu-toggle").closest("div.flex").parentElement;
+      const title = document.querySelector(`#${id} h2`).parentElement; // contenedor de SectionTitle (eyebrow + h2)
+      return { barBottom: bar.getBoundingClientRect().bottom, titleTop: title.getBoundingClientRect().top };
+    }, id);
+    if (r.titleTop < r.barBottom - 1) {
+      errors.push(`#${id} title starts at ${Math.round(r.titleTop)}px, under the ${Math.round(r.barBottom)}px bar`);
+    }
+  }
   return errors;
 }

@@ -10,3 +10,8 @@ else
   fi
   rm -f "$RESP_LOG"
 fi
+# Autoprueba del arnés: puerto ocupado → fallo claro y sin servidores huérfanos.
+if [ -x /opt/google/chrome/chrome ] && ! bash tests/responsive/port-collision.selftest.sh > /dev/null 2>&1; then
+  echo "FAIL: responsive harness port-collision self-test"
+  FAILED=1
+fi

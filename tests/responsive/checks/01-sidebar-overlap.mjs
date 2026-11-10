@@ -18,9 +18,11 @@ export default async function check(page) {
     const navLeft = sidebar.querySelector("nav").getBoundingClientRect().left;
     const scroller = document.getElementById("scroll-container");
     const errors = [];
+    let measured = 0;
     for (const sel of selectors) {
       for (const el of document.querySelectorAll(sel)) {
         if (el.offsetParent === null) continue; // oculto (p. ej. certificaciones extra o variante móvil)
+        measured++;
         let right = el.getBoundingClientRect().right;
         // En la timeline horizontal sólo cuenta lo que se ve dentro de su contenedor con scroll.
         if (scroller && scroller.contains(el)) {
@@ -30,6 +32,7 @@ export default async function check(page) {
         if (overlap > 0) errors.push(`${sel} overlaps sidebar by ${overlap}px`);
       }
     }
+    if (measured === 0) errors.push("no content elements measured (check would pass vacuously)");
     return [...new Set(errors)];
   }, SELECTORS);
 }

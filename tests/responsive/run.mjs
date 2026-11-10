@@ -18,6 +18,8 @@ const root = join(here, "..", "..");
 const PORT = 4410;
 const BASE = `http://127.0.0.1:${PORT}`;
 
+let server;
+
 function startPreview() {
   return new Promise((resolve, reject) => {
     const proc = spawn("npx", ["astro", "preview", "--host", "127.0.0.1", "--port", String(PORT)], {
@@ -26,6 +28,9 @@ function startPreview() {
       // Grupo de procesos propio: `npx` lanza a su vez a astro, y matar sólo a npx lo dejaría vivo.
       detached: true,
     });
+    // Se registra de inmediato: si el arranque falla (puerto ocupado, timeout), stopServer()
+    // igual puede matar el grupo. Antes sólo se asignaba al resolver y quedaba huérfano.
+    server = proc;
     const timer = setTimeout(() => reject(new Error("astro preview no arrancó en 30 s")), 30_000);
     const onData = (buf) => {
       const text = buf.toString();
@@ -45,7 +50,6 @@ function startPreview() {
 }
 
 const files = (await readdir(join(here, "checks"))).filter((f) => f.endsWith(".mjs")).sort();
-let server;
 
 // Apagar el servidor aunque el proceso termine de golpe (p. ej. salida cortada con `| head`).
 const stopServer = () => {
@@ -66,7 +70,7 @@ let browser;
 let failures = 0;
 
 try {
-  server = await startPreview();
+  await startPreview();
   browser = await chromium.launch({ channel: "chrome" });
   const context = await browser.newContext({ reducedMotion: "reduce" });
   const page = await context.newPage();
@@ -76,6 +80,7 @@ try {
     for (const [width, height] of mod.widths) {
       await page.setViewportSize({ width, height });
       await page.goto(BASE + (mod.path ?? "/"), { waitUntil: "networkidle" });
+      await page.evaluate(() => document.fonts.ready); // medir el texto con las fuentes ya aplicadas
       const errors = await mod.default(page, { width, height });
       for (const e of errors) {
         console.log(`FAIL: [${file} @${width}x${height}] ${e}`);

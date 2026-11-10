@@ -19,6 +19,9 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
+
+// El menú lateral fijo sólo existe en páginas que renderizan el Header (no en la 404).
+const hasSideMenu = Astro.slots.has("header");
 ---
 
 <!doctype html>
@@ -193,14 +196,17 @@ const ogImage = new URL(image, Astro.site);
 
     <slot name="header" />
     <main
-      class="text-shakespeare-300 pt-14 sm:pt-16 md:pt-18 lg:pt-0 lg:pr-[104px] xl:pr-[124px] relative z-0"
+      class:list={[
+        "text-shakespeare-300 pt-14 sm:pt-16 md:pt-18 lg:pt-0 relative z-0",
+        hasSideMenu && "lg:pr-[104px] xl:pr-[124px]",
+      ]}
     >
       <SpeedInsights />
       <Analytics />
       <slot />
     </main>
-    <!-- El contenido reserva el ancho del menú lateral fijo (lg: 60 + 24 px, xl: 72 + 32 px, + aire) -->
-    <div class="lg:pr-[104px] xl:pr-[124px]">
+    <!-- Con menú lateral (páginas con Header), el contenido reserva su ancho (lg: 60 + 24 px, xl: 72 + 32 px, + aire) -->
+    <div class:list={[hasSideMenu && "lg:pr-[104px] xl:pr-[124px]"]}>
       <slot name="footer" />
     </div>
   </body>
@@ -211,6 +217,13 @@ const ogImage = new URL(image, Astro.site);
      misma especificidad que .flex/.grid, y esas utilidades van después en el CSS. */
   [hidden] {
     display: none !important;
+  }
+
+  /* Con la barra superior móvil (< lg), los saltos a #seccion dejan el título debajo de ella. */
+  @media (max-width: 1023px) {
+    html {
+      scroll-padding-top: 5rem;
+    }
   }
 
   /* Barra de scroll acorde a la paleta para contenedores con scroll propio (diálogos, etc.) */

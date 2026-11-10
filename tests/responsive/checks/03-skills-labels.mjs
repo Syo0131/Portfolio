@@ -4,6 +4,7 @@ export const widths = [[390, 844], [768, 1024], [1024, 768], [1280, 800], [1366,
 export default async function check(page) {
   return page.evaluate(() => {
     const errors = [];
+    if (document.querySelectorAll(".skill-category .skill-item").length === 0) return ["no skill items found (check would pass vacuously)"];
     const cross = (a, b) => a.left < b.right - 1 && b.left < a.right - 1 && a.top < b.bottom - 1 && b.top < a.bottom - 1;
     for (const cat of document.querySelectorAll(".skill-category")) {
       const title = cat.querySelector("h3")?.textContent.trim();
