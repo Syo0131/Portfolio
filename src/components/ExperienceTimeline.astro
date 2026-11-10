@@ -8,7 +8,6 @@ export interface Props {
   period: string;
   periodKey?: string;
   alignment?: "top" | "bottom";
-  alignmentMobile?: "left" | "right";
   description?: string[];
   descriptionKeys?: string[];
   /** Cada lista (móvil / escritorio) renderiza sólo su variante: antes cada entrada salía 4 veces. */
@@ -22,7 +21,6 @@ const {
   period,
   periodKey,
   alignment = "top",
-  alignmentMobile = "right",
   description,
   descriptionKeys,
   variant,
@@ -42,25 +40,19 @@ const alignmentClasses =
     ? "flex-col-reverse" // Contenido arriba, punto abajo
     : "flex-col"; // Punto arriba, contenido abajo
 
-// Clases para alineación vertical (móvil) - izquierda/derecha
-const alignmentClassesMobile =
-  alignmentMobile === "right"
-    ? "w-1/2 pr-4 sm:pr-8 text-right ml-0"
-    : "w-1/2 pl-4 sm:pl-8 text-left ml-auto";
 ---
 
 {
   variant === "mobile" && (
-<!-- 🌐 Versión móvil (timeline vertical centrado) --><!-- Solo visible en pantallas < 768px -->
-<li class="relative md:hidden mb-12">
-  <!-- Punto central -->
+<!-- Versión móvil (< 768 px): riel a la izquierda, texto a ancho completo -->
+<li class="relative md:hidden pl-8 mb-10">
+  <!-- Punto sobre el riel (la línea está a left-[7px] en Experience.astro) -->
   <div
-    class="absolute left-1/2 -translate-x-1/2 top-2 w-3 h-3 bg-shakespeare-400 rounded-full ring-4 ring-slate-900 z-10"
+    class="absolute left-[1px] top-2 w-3.5 h-3.5 bg-shakespeare-400 rounded-full ring-4 ring-slate-900 z-10"
   >
   </div>
 
-  <!-- Contenedor de texto alineado -->
-  <div class={alignmentClassesMobile}>
+  <div class="text-left">
     <h3
       class="text-lg sm:text-xl font-semibold text-slate-100 mb-2"
       data-i18n={positionKey}
