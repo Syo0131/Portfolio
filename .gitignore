@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 
 .vscode/
+
+# herramientas locales (capturas/logs del navegador de Playwright y espacio de trabajo de superpowers)
+.playwright-mcp/
+.superpowers/
