@@ -24,22 +24,22 @@ const big = index === 0;
 // Clases literales (Tailwind no ve clases construidas dinámicamente).
 const gridCols = big
   ? flipped
-    ? "lg:grid-cols-[1fr_1.4fr]"
-    : "lg:grid-cols-[1.4fr_1fr]"
+    ? "md:grid-cols-[1fr_1.1fr] lg:grid-cols-[1fr_1.4fr]"
+    : "md:grid-cols-[1.1fr_1fr] lg:grid-cols-[1.4fr_1fr]"
   : flipped
-    ? "lg:grid-cols-[1fr_1.2fr]"
-    : "lg:grid-cols-[1.2fr_1fr]";
+    ? "md:grid-cols-[1fr_1.1fr] lg:grid-cols-[1fr_1.2fr]"
+    : "md:grid-cols-[1.1fr_1fr] lg:grid-cols-[1.2fr_1fr]";
 ---
 
 <article
   class:list={[
-    "project-case animate-on-scroll grid grid-cols-1 items-center gap-8 lg:gap-14",
+    "project-case animate-on-scroll grid grid-cols-1 items-center gap-8 md:gap-10 lg:gap-14",
     gridCols,
   ]}
   data-project-id={project.id}
 >
   <!-- Captura en marco de navegador -->
-  <div class:list={["browser-frame", flipped && "lg:order-2"]}>
+  <div class:list={["browser-frame", flipped && "md:order-2"]}>
     <div
       class="overflow-hidden rounded-xl border border-slate-800 bg-slate-900 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)] transition-colors duration-300 hover:border-shakespeare-500/40"
     >
@@ -92,7 +92,7 @@ const gridCols = big
   </div>
 
   <!-- Información -->
-  <div class="flex flex-col gap-5">
+  <div class="flex flex-col gap-5 md:gap-4 xl:gap-5">
     <div class="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.15em]">
       <span class="text-slate-400">
         {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
@@ -105,19 +105,19 @@ const gridCols = big
     <h3
       class:list={[
         "font-display font-bold tracking-tight text-slate-100 text-balance",
-        big ? "text-3xl sm:text-4xl" : "text-2xl sm:text-3xl",
+        big ? "text-2xl md:text-3xl xl:text-4xl" : "text-2xl xl:text-3xl",
       ]}
     >
       {project.name}
     </h3>
 
-    <p class="max-w-[52ch] text-base leading-relaxed text-slate-300" data-i18n={project.pitchKey}>
+    <p class="max-w-[52ch] text-base md:text-sm xl:text-base leading-relaxed text-slate-300" data-i18n={project.pitchKey}>
       {t(project.pitchKey)}
     </p>
 
     {
       facts.length > 0 && (
-        <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-1 md:gap-3 xl:grid-cols-3 xl:gap-4">
           {facts.map((fact) => (
             <div class="border-l-2 border-shakespeare-500/60 pl-3">
               <dt
