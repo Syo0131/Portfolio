@@ -1,8 +1,11 @@
 import type { ImageMetadata } from "astro";
 import type { TranslationKey } from "../i18n/translations";
 
-import cifmecPlaceholder from "../assets/projects/cifmec/placeholder.png";
-import galanPlaceholder from "../assets/projects/galansorteos/placeholder.png";
+import cifmecHome from "../assets/projects/cifmec/home.png";
+import cifmecPrograms from "../assets/projects/cifmec/programs.png";
+import galanHome from "../assets/projects/galansorteos/home.png";
+import galanHowItWorks from "../assets/projects/galansorteos/funcion.png";
+import galanAdmin from "../assets/projects/galansorteos/paneladmin.png";
 import tograbaoHero from "../assets/projects/tograbao/hero.png";
 import tograbaoAbout from "../assets/projects/tograbao/aboutus.png";
 import tograbaoProperties from "../assets/projects/tograbao/properties.png";
@@ -54,9 +57,10 @@ export const projects: Project[] = [
     ],
     stack: ["Next.js", "Docker", "Dokploy"],
     stackFull: ["Next.js", "Docker", "Dokploy", "VPS"],
-    // TODO: captura real (reemplazar el placeholder y quitar `placeholder: true`)
-    images: [{ src: cifmecPlaceholder, altKey: "projects.cifmec.img1" }],
-    placeholder: true,
+    images: [
+      { src: cifmecHome, altKey: "projects.cifmec.img1" },
+      { src: cifmecPrograms, altKey: "projects.cifmec.img2" },
+    ],
     urlDemo: "https://cifmec.edu.do",
     urlDemoLabel: "cifmec.edu.do",
     featured: true,
@@ -144,9 +148,11 @@ export const projects: Project[] = [
     ],
     stack: ["Next.js", "Payload CMS", "PostgreSQL"],
     stackFull: ["Next.js", "Payload CMS", "PostgreSQL", "Docker", "Dokploy", "VPS"],
-    // TODO: captura real (reemplazar el placeholder y quitar `placeholder: true`)
-    images: [{ src: galanPlaceholder, altKey: "projects.galansorteos.img1" }],
-    placeholder: true,
+    images: [
+      { src: galanHome, altKey: "projects.galansorteos.img1" },
+      { src: galanHowItWorks, altKey: "projects.galansorteos.img2" },
+      { src: galanAdmin, altKey: "projects.galansorteos.img3" },
+    ],
     urlDemo: "https://galansorteos.com",
     urlDemoLabel: "galansorteos.com",
   },
