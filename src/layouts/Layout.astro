@@ -193,13 +193,16 @@ const ogImage = new URL(image, Astro.site);
 
     <slot name="header" />
     <main
-      class="text-shakespeare-300 pt-14 sm:pt-16 md:pt-18 lg:pt-0 relative z-0"
+      class="text-shakespeare-300 pt-14 sm:pt-16 md:pt-18 lg:pt-0 lg:pr-[104px] xl:pr-[124px] relative z-0"
     >
       <SpeedInsights />
       <Analytics />
       <slot />
     </main>
-    <slot name="footer" />
+    <!-- El contenido reserva el ancho del menú lateral fijo (lg: 60 + 24 px, xl: 72 + 32 px, + aire) -->
+    <div class="lg:pr-[104px] xl:pr-[124px]">
+      <slot name="footer" />
+    </div>
   </body>
 </html>
 
